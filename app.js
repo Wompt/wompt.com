@@ -1,13 +1,15 @@
 var http   = require("http"),
     url    = require("url"),
     wompt  = require("./includes"),
-    logger = wompt.logger;
+    logger = wompt.logger,
+    node_static = require('node-static');
 		
 
 function App(options){
 	this.channels = {};
 	this.sessions = {};
 	this.config = options.config;
+	this.static_server = new node_static.Server('./public');	
 }
 
 App.prototype = {
@@ -20,13 +22,16 @@ App.prototype = {
 	
 	request_processor: function(request, response){
 		if(request.method === "GET" || request.method === "HEAD"){
-			if(request.url.match(/^\/chat\//)) this.chat_request({req: request, res: response});
+			if(request.url.match(/^\/chat\//))
+				this.chat_request({req: request, res: response});
+			else
+        this.static_server.serve(request, response);
 		}
 	},
 	
 	chat_request: function(con){
-		var parts = con.req.url.split('/', 3);
-		var channel = this.get_channel(parts[2]);
+		con.req.parts = con.req.url.split('/');
+		var channel = this.get_channel(con.req.parts[2]);
 		
 		con.res.json = this.simple_json;
 		if(channel)
