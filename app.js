@@ -28,6 +28,7 @@ App.prototype = {
 		var parts = con.req.url.split('/', 3);
 		var channel = this.get_channel(parts[2]);
 		
+		con.res.json = this.simple_json;
 		if(channel)
 			channel.process_request(con);
 	},
@@ -42,6 +43,15 @@ App.prototype = {
 		var channel = new wompt.Channel({name: name});
 		this.channels[name] = channel;
 		return channel;
+	},
+	
+	simple_json: function (code, obj) {
+		var body = JSON.stringify(obj);
+		this.writeHead(code, {
+			"Content-Type": "text/json",
+		  "Content-Length": body.length
+		});
+		this.end(body);
 	}
 }
 
