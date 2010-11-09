@@ -10,7 +10,7 @@ Channel.prototype = {
 	process_request: function(con){
 		var action = con.req.parts[3].split('?', 2);
 		con.action = action[0];
-		con.query = action[1];
+		con.req.query = action[1];
 		this.action_responders[con.action].call(this, con);
 	},
 	
