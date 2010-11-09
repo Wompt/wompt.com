@@ -1,51 +1,32 @@
 $(document).ready(function(){
 	$('#message').keydown(function(e){
-		if(e.keyCode == 13)
-			send_message($(this).val());
+		if(e.keyCode == 13){
+			var el = $(this);
+			socket.send({chan: channel, action:'post', msg:el.val()});
+			el.val('');
+		}
 	});
 	
-	var comet = new Comet('/chat/room1/recv', function(data){
-		var line = $('<div>')
-		line.append(data.msg);
-		$('#messages').append(line);	
-	});
 	
-	comet.start();
+	socket = new io.Socket(window.location.hostname);
+	socket.connect();
+	socket.send({chan: channel, action: 'join'});
+	socket.on('message', function(data){
+		append_message(data.msg);
+	});
 });
 
-function send_message(msg){
-	$.get('/chat/room1/post',{msg: msg});
+function append_message(msg){
+	var line = $('<div>')
+	line.append(msg);
+	$('#messages').append(line);		
 }
 
-function Comet(url, handler){
-	this.go = false;
-	
-	this.start = function(){
-		this.go = true;
-		this.send_request();
-	}
-	
-	this.send_request = function(){
-		if(this.go == false) return;
-		var me = this;
-		$.ajax({
-			cache:false,
-			type: 'GET',
-			url: url,
-			data: {id:me.id},
-			dataType: 'json',
-			success: function(data, status, xhr){
-				if(data.id && !me.id) me.id = data.id;
-				handler.call(me, data);
-			},
-			complete: function(xhr, status){
-				me.send_request();
-			}
-		});
-	}
-	
-	this.stop = function(){
-		this.go = false;
-	}
+function which_channel(){
+	if(window.location.search && window.location.search.length > 0)
+		return window.location.search;
+	else
+		return "default";
 }
 
+var channel = which_channel();

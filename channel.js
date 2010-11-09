@@ -4,6 +4,7 @@ function Channel(config){
 	this.name = config.name;
 	this.messages = new wompt.MessageList();
 	this.sessions = {};
+	this.clients = {};
 }
 
 Channel.prototype = {
@@ -14,36 +15,31 @@ Channel.prototype = {
 		this.action_responders[con.action].call(this, con);
 	},
 	
+	receive_message: function(data, client){
+		this.action_responders[data.action].call(this, data, client);
+	},
+	
 	action_responders: {
-		recv: function(con){
-			var session = this.create_session(con.res);
-			this.sessions[session.id] = session;
+		join: function(data, client){
+			this.clients[client.sessionId] = client;
 		},
 		
-		post: function(con){
-			var msg = con.req.query.split('=',2)[1];
-			this.push_message(msg)
-			con.res.json(200, {})
+		post: function(data, client){
+			this.send_message(data.msg, client)
 		}
 	},
 	
-	push_message: function(msg){
-		this.messages.add_message(msg);
-		this.inform_sessions(msg);
+	send_message: function(msg, client){
+		this.inform_clients(msg, client);
 	},
 	
-	inform_sessions: function(msg){
-		for(var id in this.sessions){
-			var session = this.sessions[id];
+	inform_clients: function(msg){
+		for(var id in this.clients){
+			var client = this.clients[id];
 			wompt.logger.log("Sending " + msg + " to client " + id);
-			session.push_message(msg);
+			client.send({msg: msg});
 		}
-		this.sessions = {};
 	},
-	
-	create_session: function(res){
-		return new wompt.Session(null, this, res);
-	}
 }
 
 exports.Channel = Channel;
