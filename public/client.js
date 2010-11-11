@@ -7,12 +7,22 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#stats').click(function(e){
+		socket.send({chan: channel, action:'stats'});
+	});
+	
 	
 	socket = new io.Socket(window.location.hostname);
 	socket.connect();
 	socket.send({chan: channel, action: 'join'});
 	socket.on('message', function(data){
-		append_message(data.msg);
+		switch(data.action){
+			case 'stats':
+				append_message("Clients: " + data.clients);
+				break;
+			default:
+				append_message(data.msg);
+		}
 	});
 });
 
