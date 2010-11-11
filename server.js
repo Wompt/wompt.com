@@ -15,10 +15,6 @@ var sys       = require("sys"),
 		User
 		 - has many sessions
 
-		Session
-		 - belongs to user, channel
-		 
-		 
 */
 
 var app = new wompt.App({
