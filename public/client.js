@@ -21,7 +21,7 @@ $(document).ready(function(){
 				append_message("Clients: " + data.clients);
 				break;
 			default:
-				append_message(data.msg);
+				append_message(data.from.name + " - " + data.msg);
 		}
 	});
 });
