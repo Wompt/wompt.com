@@ -8,12 +8,10 @@ var sys       = require("sys"),
 	Objects:
 		App
 		 - has many channels
+		 - has many clients
 
 		Channel
-		 - has many sessions
-
-		User
-		 - has many sessions
+		 - has many clients
 
 */
 
