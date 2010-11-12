@@ -18,7 +18,7 @@ $(document).ready(function(){
 	socket.on('message', function(data){
 		switch(data.action){
 			case 'stats':
-				append_message("Clients: " + data.clients);
+				append_message("Clients: " + JSON.stringify(data.clients));
 				break;
 			default:
 				append_message(data.from.name + " - " + data.msg);
