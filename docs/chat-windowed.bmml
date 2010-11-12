@@ -2,7 +2,7 @@
   <controls>
     <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="333" y="63" w="671" h="570" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Wompt.com%0Ahttp%3A//wompt.com/chatroom5000</text>
+        <text>Wompt.com%0Ahttp%3A//wompt.com/</text>
       </controlProperties>
     </control>
     <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="348" y="149" w="73" h="75" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
