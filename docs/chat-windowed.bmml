@@ -1,0 +1,106 @@
+<mockup version="1.0" skin="sketch" measuredW="1014" measuredH="643" mockupW="671" mockupH="570">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="333" y="63" w="671" h="570" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Wompt.com%0Ahttp%3A//wompt.com/chatroom5000</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="348" y="149" w="73" h="75" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::LinkBar" x="667" y="149" w="-1" h="-1" measuredW="318" measuredH="25" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Home%2C%20Account%2C%20About%2C%20Sign%20Up%2C%20Sign%20In</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="__group__" x="358" y="248" w="-1" h="-1" measuredW="279" measuredH="174" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="279" h="174" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>%23chatroom5000</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="145" w="205" h="-1" measuredW="69" measuredH="29" zOrder="1" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>blah%20blah</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="205" y="145" w="74" h="28" measuredW="55" measuredH="28" zOrder="2" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>Send</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="15" w="191" h="130" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>Blah%20Blah%0ABlah%20Blah%0ABlah%20Blah%0ABlah%20Blah%0ABlah%20Blah</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::List" x="0" y="15" w="88" h="130" measuredW="100" measuredH="126" zOrder="4" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>User%201%0AUser%202%0AUser%203%0AUser%204</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="15" controlTypeID="__group__" x="652" y="210" w="279" h="174" measuredW="279" measuredH="174" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="279" h="174" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>%23wompt.com</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="145" w="205" h="-1" measuredW="69" measuredH="29" zOrder="1" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>blah%20blah</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="205" y="145" w="74" h="28" measuredW="55" measuredH="28" zOrder="2" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Send</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="15" w="191" h="130" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Blah%20Blah%0ABlah%20Blah%0ABlah%20Blah%0ABlah%20Blah%0ABlah%20Blah</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::List" x="0" y="15" w="88" h="130" measuredW="100" measuredH="126" zOrder="4" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>User%201%0AUser%202%0AUser%203%0AUser%204</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="16" controlTypeID="__group__" x="652" y="399" w="279" h="174" measuredW="279" measuredH="174" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="279" h="174" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="16">
+          <controlProperties>
+            <text>%23ubuntu</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="145" w="205" h="-1" measuredW="69" measuredH="29" zOrder="1" locked="false" isInGroup="16">
+          <controlProperties>
+            <text>blah%20blah</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="205" y="145" w="74" h="28" measuredW="55" measuredH="28" zOrder="2" locked="false" isInGroup="16">
+          <controlProperties>
+            <text>Send</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="15" w="191" h="130" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="16">
+          <controlProperties>
+            <text>Blah%20Blah%0ABlah%20Blah%0ABlah%20Blah%0ABlah%20Blah%0ABlah%20Blah</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::List" x="0" y="15" w="88" h="130" measuredW="100" measuredH="126" zOrder="4" locked="false" isInGroup="16">
+          <controlProperties>
+            <text>User%201%0AUser%202%0AUser%203%0AUser%204</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
