@@ -21,14 +21,25 @@ $(document).ready(function(){
 				append_message("Clients: " + JSON.stringify(data.clients));
 				break;
 			default:
-				append_message(data.from.name + " - " + data.msg);
+				append_message(data);
 		}
 	});
 });
 
-function append_message(msg){
-	var line = $('<div>')
-	line.append(msg);
+function append_message(data){
+	var line = $('<div>'),
+	    nick = $('<div>'),
+			msg  = $('<div>');
+			
+	nick.append(data.from.name);
+	nick.addClass('name');
+	
+	msg.append(data.msg);
+	msg.addClass('msg');
+	
+	line.append(nick, msg);
+	line.addClass('line')
+	
 	$('#messages').append(line);		
 }
 
