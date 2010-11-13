@@ -17,7 +17,8 @@ var sys       = require("sys"),
 
 var app = new wompt.App({
 	config: {
-		port: 8001
+		port: 8001,
+		public_dir: __dirname + '/public'
 	}
 });
 
