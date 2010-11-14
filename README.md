@@ -19,3 +19,4 @@ This is because configure and waf-light both have windows line endings instead o
 		npm install http://github.com/cloudhead/node-static/tarball/master
 		npm install socket.io
 		npm install express
+		npm install mongoose
