@@ -1,9 +1,6 @@
 require.paths.unshift('vendor/mongoose');
 
-var sys       = require("sys"),
-		url       = require("url"),
-		qs        = require("querystring"),
-		wompt     = require("./lib/includes");
+var wompt     = require("./lib/includes");
 
 /*
  

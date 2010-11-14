@@ -1,17 +1,7 @@
-!!!
-html
-  head
-    title Wompt Chat!
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js", type="text/javascript")
-    script(src="http://cdn.socket.io/stable/socket.io.js", type="text/javascript")
-    script(src="/client.js", type="text/javascript")
-		link(href="/base.css", rel="stylesheet", type="text/css")
-
-		:javascript
-			| var channel = '#{channel}';
-  body
-		#messages
-		#input
-			input#message(name='message', type='text', style="width:300px;")
-			br
-			input#stats(type='button', value="Stats")
+:javascript
+	| var channel = '#{channel}';
+#messages
+#input
+	input#message(name='message', type='text', style="width:300px;")
+	br
+	input#stats(type='button', value="Stats")
