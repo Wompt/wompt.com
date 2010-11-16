@@ -1,8 +1,6 @@
-var sys       = require("sys"),
-		url       = require("url"),
-		qs        = require("querystring"),
-		env       = require("./environment"),
-		wompt     = require("./lib/includes");
+require.paths.unshift('vendor/mongoose');
+
+var wompt     = require("./lib/includes");
 
 /*
  
@@ -17,7 +15,7 @@ var sys       = require("sys"),
 */
 
 var app = new wompt.App({
-	config: env
+	config: wompt.env
 });
 
 app.start_server();
