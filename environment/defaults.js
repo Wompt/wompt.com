@@ -5,4 +5,5 @@ module.exports = {
 	  port: 8001
 	, public_dir: root + '/public'
 	, db_name: 'wompt_dev'
+	, root: root
 }
