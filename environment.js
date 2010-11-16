@@ -9,4 +9,7 @@ for(var key in specified_env){
 	final_env[key] = specified_env[key];
 };
 
+console.log("Using environment: " + environment);
+final_env.name = environment;
+
 module.exports = final_env;
