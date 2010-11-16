@@ -1,0 +1,8 @@
+body{
+	font-family: arial;
+}
+.line .name {
+	float:left;
+	padding-right: 10px;
+	color: #bbb;
+}
