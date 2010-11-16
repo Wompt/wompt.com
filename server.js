@@ -1,5 +1,3 @@
-require.paths.unshift('vendor/mongoose');
-
 var wompt     = require("./lib/includes");
 
 /*
