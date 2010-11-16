@@ -1,6 +1,7 @@
 var sys       = require("sys"),
 		url       = require("url"),
 		qs        = require("querystring"),
+		env       = require("./environment"),
 		wompt     = require("./lib/includes");
 
 /*
@@ -16,10 +17,7 @@ var sys       = require("sys"),
 */
 
 var app = new wompt.App({
-	config: {
-		port: 8001,
-		public_dir: __dirname + '/public'
-	}
+	config: env
 });
 
 app.start_server();
