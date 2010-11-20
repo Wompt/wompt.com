@@ -27,7 +27,6 @@ h3{font-size:1.3em;margin:0 0 10px; padding:0;}
 #logocenter{width: 230px; margin: 50px auto 50px auto; }
 
 #indexmain {width: 300px; margin: 20px auto 50px auto; text-align:center;}
-#indexmain form {border: 0px solid #777; padding: 20px;}
 #indexmain label {display:block;  color: #000000; font-size: 1.4em; padding-top: .7em;}
 #indexmain input[type=text] {display:block; width:100%; font-size: 1.3em; padding: 4px 0px; border:1px solid #777;}
 #indexmain input[type=submit] {margin:1em 0; font-size: 1.1em; padding: 2px 10px 2px 10px; margin: 10px;}
