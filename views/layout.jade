@@ -25,13 +25,13 @@ html
 	body
 		#toplinks
 			p
-				a(href="/users/login", title="Go to login page") Log in
+				a(href="/users/sign_in", title="Go to Sign-in page") Sign In
 				&middot;
-				a(href="/users/logout", title="Logout of Wompt") Log out
+				a(href="/users/sign_out", title="Logout of Wompt") Sign Out
 				&middot;
 				a(href="/users/new", title="Go to sign up page") Register
 				&middot;
-				a(href="/contactus", title="Go to contact and support page") Contact us
+				a(href="/support", title="Go to contact and support page") Support
 		br
 		- if (typeof url != "undefined" && url == "/")
 			#logocenter
@@ -48,7 +48,7 @@ html
 			p
 				a(href="/terms", title="View terms of use") Terms of Use
 				&middot;
-				a(href="/privacy", "View privacy policy") Privacy
+				a(href="/privacy", title="View privacy policy") Privacy
 				&middot;
 				Copyright &copy; 2010 Wompt, Inc.
 
