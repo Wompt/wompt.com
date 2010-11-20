@@ -1,53 +1,63 @@
 $(document).ready(function(){
+	IO = new IO();
+	IO.connect();
+	
+	UI = new UI();
+	
 	$('#message').keydown(function(e){
 		if(e.keyCode == 13){
 			var el = $(this);
-			socket.send({chan: channel, action:'post', msg:el.val()});
+			IO.socket.send({chan: channel, action:'post', msg:el.val()});
 			el.val('');
 		}
 	});
 	
 	$('#stats').click(function(e){
-		socket.send({chan: channel, action:'stats'});
+		IO.socket.send({chan: channel, action:'stats'});
 	});
-	
-	
-	socket = new io.Socket(window.location.hostname);
-	socket.connect();
-	socket.send({chan: channel, action: 'join'});
+
+});
+
+
+function IO(){
+	var socket = this.socket = new io.Socket(window.location.hostname);
+
 	socket.on('message', function(data){
 		switch(data.action){
 			case 'stats':
-				append_message("Clients: " + JSON.stringify(data.clients));
+				UI.append_message("Clients: " + JSON.stringify(data.clients));
 				break;
 			default:
-				append_message(data);
+				UI.append_message(data);
 		}
 	});
-});
 
-function append_message(data){
-	var line = $('<div>'),
-	    nick = $('<div>'),
-			msg  = $('<div>');
-			
-	nick.append(data.from.name);
-	nick.addClass('name');
-	
-	msg.append(data.msg);
-	msg.addClass('msg');
-	
-	line.append(nick, msg);
-	line.addClass('line')
-	
-	$('#messages').append(line);		
+	this.connect = function(){
+		socket.connect();
+		socket.send({chan: channel, action: 'join'});
+	}
 }
 
-function which_channel(){
-	if(window.location.search && window.location.search.length > 0)
-		return window.location.search;
-	else
-		return "default";
-}
 
-var channel = which_channel();
+function UI(){
+	IO.socket.on('connect', function(){
+		$('#message').attr('disabled', false).focus();
+	});
+	
+	this.append_message = function(data){
+		var line = $('<div>'),
+				nick = $('<div>'),
+				msg  = $('<div>');
+				
+		nick.append(data.from.name);
+		nick.addClass('name');
+		
+		msg.append(data.msg);
+		msg.addClass('msg');
+		
+		line.append(nick, msg);
+		line.addClass('line')
+		
+		$('#messages').append(line);		
+	}	
+}
