@@ -23,13 +23,13 @@ html
 				&middot;
 				a(href="/support", title="Go to contact and support page") Support
 		br
-		- if (typeof url != "undefined" && url == "/")
-			#logocenter
+		- if (w.url == "/")
+			#logo.center
 				h1
 					a(href="/", title="Wompt.com")
 						img(src=assets.path("/wompt_logo_230.png"))
 		- else
-			#logotopleft
+			#logo.top_left
 				h1
 					a(href="/", title="Wompt.com")
 						img(src=assets.path("/wompt_logo_230.png"))
