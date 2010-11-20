@@ -1,0 +1,7 @@
+check host wompt with address 127.0.0.1
+	start "/sbin/start wompt"
+	stop "/sbin/stop wompt"
+	if failed port 16867 protocol HTTP
+		request /ok
+		with timeout 5 seconds
+		then restart
