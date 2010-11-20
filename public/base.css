@@ -47,7 +47,7 @@ h3{
 	margin:0 15px 0 0;
 }
 
-#toplinks p {
+#toplinks {
 	text-align:right;
 }
 
@@ -155,7 +155,7 @@ h3{
 	color: #eee;
 }
 
-#footer p {
+#footer {
 	font-size: 0.9em;
 	font-weight: 700;
 	margin: 0;
