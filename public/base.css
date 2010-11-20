@@ -5,7 +5,8 @@
 
 body{
 	font-family: arial;
-	background: #EDF3FE;
+	background: #eee;
+	background: url(/noisy_grey.gif) repeat;
 	color: #000;
 	font-family: tahoma, verdana, sans-serif;
 	margin-top:10px
