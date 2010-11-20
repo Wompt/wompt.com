@@ -29,13 +29,20 @@ html
 				&middot;
 				a(href="/users/logout", title="Logout of Wompt") Log out
 				&middot;
-				a(href="/users/register", title="Go to sign up page") Register
+				a(href="/users/new", title="Go to sign up page") Register
 				&middot;
 				a(href="/contactus", title="Go to contact and support page") Contact us
-		#logo
-			h1
-				a(hef="/", title="Wompt.com") WOMPT.COM
-			p A Place for Chat.
+		br
+		- if (typeof url != "undefined" && url == "/")
+			#logocenter
+				h1
+					a(hef="/", title="Wompt.com")
+						img(src="/wompt_logo_230.png")
+		- else
+			#logotopleft
+				h1
+					a(hef="/", title="Wompt.com")
+						img(src="/wompt_logo_230.png")
 		#{body}
 		#footer
 			p
