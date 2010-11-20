@@ -23,7 +23,13 @@ html
 			| 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			| })();
 	body
+		#toplinks
+			p
+				a(href="/users/login", title="Go to login page") Log in
+				&middot;
+				a(href="/users/logout", title="Logout of Wompt") Log out
+				&middot;
+				a(href="/users/register", title="Go to sign up page") Register
+				&middot;
+				a(href="/contactus", title="Go to contact and support page") Contact us
 		#{body}
-		
-		
-

@@ -6,3 +6,9 @@ body{
 	padding-right: 10px;
 	color: #bbb;
 }
+
+a{color:#286ea0;text-decoration:none;}
+a:hover{text-decoration:underline;}
+#toplinks {width:400px; float:right;margin:0 15px 0 0;}
+#toplinks p {text-align:right;}
+
