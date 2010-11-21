@@ -1,14 +1,17 @@
-*{
-	margin:0;
-	padding:0;
+div {
+	margin:0px;
+	padding:0px;
 }
 
 body{
 	font-family: arial;
-	background: #EDF3FE;
+	background: #eee;
+	background: url(/noisy_grey.gif) repeat;
 	color: #000;
 	font-family: tahoma, verdana, sans-serif;
-	margin-top:10px
+	margin: 0px;
+	padding-top:10px;
+	min-height: 100%;
 }
 
 a{
@@ -46,19 +49,25 @@ h3{
 	margin:0 15px 0 0;
 }
 
-#toplinks p {
+#toplinks {
 	text-align:right;
 }
 
-#logotopleft {
-	width: 230px;
+#logo.top_left {
+	width: 200px;
 	margin: 0 0;
 }
 
-#logocenter{
-	width: 230px;
+#logo.center{
+	width:200px;
 	margin: 50px auto 50px auto;
 }
+
+/* compensate for off-center logo */
+#logo.center img{
+	margin-left:10px;
+}
+
 
 #leftbar {
 	width: 230px;
@@ -141,21 +150,18 @@ h3{
 
 /* === Footer === */
 #footer {
-	background: #555;
-	clear: both;
-	color: #eee;
-	margin: 10px 0 0;
-	padding: 15px;
+	border-top: solid 1px #e6e6e6;
+	border-bottom: solid 1px #f0f0f0;
+	width: 100%;
+	margin-top:20px;
+	font-size: 0.9em;
+	font-weight: 700;
+	background: rgba(230,230,230,0.2);
+	color: #555;
+	padding: 15px 0px;
 	text-align: center;
 }
 
 #footer a {
-	color: #eee;
+	color: #555;
 }
-
-#footer p {
-	font-size: 0.9em;
-	font-weight: 700;
-	margin: 0;
-}
-
