@@ -6,9 +6,15 @@ $(document).ready(function(){
 	
 	$('#message').keydown(function(e){
 		if(e.keyCode == 13){
-			var el = $(this);
-			IO.socket.send({chan: channel, action:'post', msg:el.val()});
-			el.val('');
+			var el = $(this),
+			    message = $.trim(el.val());
+					
+			if(message.length > 0){
+				IO.socket.send({chan: channel, action:'post', msg:message});
+				el.val('');
+			}
+			
+			e.preventDefault();
 		}
 	});
 	
