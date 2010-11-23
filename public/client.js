@@ -40,7 +40,7 @@ function IO(){
 
 	this.connect = function(){
 		socket.connect();
-		socket.send({channel: channel, action: 'join'});
+		socket.send({channel: channel, action: 'join', session_id: session_id});
 	}
 }
 
