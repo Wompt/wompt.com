@@ -3,8 +3,12 @@ var messageList,
 
 $(document).ready(function(){
 	IO = new IO();
+
+	messageList = new MessageList();
 	UI = new UI();
 	UI.systemMessage("Connecting");
+	
+	IO.addMessageHandler(messageList);
 	IO.connect();
 	
 	$('#message').keydown(function(e){
@@ -41,18 +45,19 @@ function IO(){
 	});
 	
 	socket.on('message', function(data){
-		switch(data.action){
-			case 'stats':
-				UI.append_message("Clients: " + JSON.stringify(data.clients));
-				break;
-			default:
-				UI.append_message(data);
+		for(var i=0, len=messageHandlers.length; i<len; i++){
+			var handler = messageHandlers[i];
+			if(handler.newMessage(data)) break;
 		}
 	});
 
 	this.connect = function(){
 		socket.connect();
 		socket.send({channel: channel, action: 'join', session_id: session_id});
+	}
+	
+	this.addMessageHandler = function(handler){
+		messageHandlers.push(handler);
 	}
 }
 
@@ -83,3 +88,15 @@ function UI(){
 		this.appendMessage({from:{name: "System"}, msg:msg});		
 	}
 }
+
+function MessageList(){
+	this.list = [];
+}
+
+MessageList.prototype.newMessage = function(msg){
+	if(msg.action == 'message'){
+		UI.appendMessage(msg);
+		return true;
+	}
+}
+
