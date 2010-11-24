@@ -16,26 +16,30 @@ This is because configure and waf-light both have windows line endings instead o
 		curl http://npmjs.org/install.sh | sudo sh
 
 ### Install packages ###
-		npm install http://github.com/cloudhead/node-static/tarball/master
-		npm install socket.io
 		npm install express
-		npm install mongoose
+		npm install jade
 		
 ### Deploying ###
 
 #### Start / Stop ####
 We have an upstart script called "wompt"
-so, all of these actions can done easily
+so, all of these actions can done easily on the server
+    # while logged into the server ...
 		sudo start wompt
 		sudo stop wompt
+		
+But starting and stoping can be done from your dev machine with
+the following commands.  These can be executed from anywhere inside the app
+root directory i.e. it works in /wompt/app just as well as in /wompt
+		cap production deploy:restart
 
 #### Pushing changes ####
 You'll either need to SSH into the EC2 instance, or you'll need Capistrano (a ruby gem) locally for deploying.
-Locally:
+Locally: (within any subdirectory of the application)
 		cap production deploy
-		# see a list of commands
+		# see a list of all commands
 		cap -T
 
 On Box:
 		cd /ubuntu/www/wompt/current
-		cap production deploy
+		cap production deploy  #cap does sudo for you, no need for it here
