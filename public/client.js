@@ -1,8 +1,11 @@
+var messageList,
+    userList;
+
 $(document).ready(function(){
 	IO = new IO();
-	IO.connect();
-	
 	UI = new UI();
+	UI.systemMessage("Connecting");
+	IO.connect();
 	
 	$('#message').keydown(function(e){
 		if(e.keyCode == 13){
@@ -27,7 +30,16 @@ $(document).ready(function(){
 
 function IO(){
 	var socket = this.socket = new io.Socket(window.location.hostname);
+	var messageHandlers = [];
 
+	socket.on('connect', function(){
+		UI.systemMessage("Connected!");
+	});
+	
+	socket.on('disconnect', function(){
+		UI.systemMessage("Disconnected!");
+	});
+	
 	socket.on('message', function(data){
 		switch(data.action){
 			case 'stats':
@@ -50,7 +62,7 @@ function UI(){
 		$('#message').attr('disabled', false).focus();
 	});
 	
-	this.append_message = function(data){
+	this.appendMessage = function(data){
 		var line = $('<div>'),
 				nick = $('<div>'),
 				msg  = $('<div>');
@@ -65,5 +77,9 @@ function UI(){
 		line.addClass('line')
 		
 		$('#messages').append(line);		
-	}	
+	}
+	
+	this.systemMessage = function(msg){
+		this.appendMessage({from:{name: "System"}, msg:msg});		
+	}
 }
