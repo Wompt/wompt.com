@@ -161,6 +161,7 @@ function UserListUI(ul, container){
 	function addUser(name){
 		var name_div = $('<div>');
 		name_div.append(name);
+		name_div.addClass('user');
 		container.append(name_div);
 		user_divs[name] = name_div;
 	}
