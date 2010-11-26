@@ -1,0 +1,193 @@
+<mockup version="1.0" skin="sketch" measuredW="1222" measuredH="680" mockupW="800" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="412" y="70" w="800" h="600" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Wompt%20is%20chat.%0Ahttp%3A//wompt.com/</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="427" y="150" w="-1" h="-1" measuredW="28" measuredH="30" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <filter>true</filter>
+        <src>http%3A//wompt.com%3A16867/logo_white.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="421" y="144" w="785" h="53" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>rectangle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="__group__" x="917" y="146" w="-1" h="-1" measuredW="289" measuredH="53" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="117" h="-1" measuredW="45" measuredH="29" zOrder="0" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Email</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="117" y="0" w="117" h="-1" measuredW="68" measuredH="29" zOrder="1" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Password</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="234" y="0" w="-1" h="-1" measuredW="55" measuredH="28" zOrder="2" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Login</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="28" w="136" h="22" measuredW="136" measuredH="22" zOrder="3" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Keep%20me%20logged%20in</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Link" x="146" y="28" w="-1" h="-1" measuredW="143" measuredH="25" zOrder="4" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Forgot%20your%20password%3F</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Label" x="455" y="150" w="-1" h="-1" measuredW="53" measuredH="26" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>14</size>
+        <text>Wompt</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::RoundButton" x="421" y="608" w="785" h="32" measuredW="32" measuredH="32" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15790322</color>
+        <shape>rectangle</shape>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="__group__" x="472" y="244" w="-1" h="-1" measuredW="231" measuredH="146" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="57" y="0" w="-1" h="-1" measuredW="118" measuredH="29" zOrder="0" locked="false" isInGroup="45">
+          <controlProperties>
+            <size>16</size>
+            <text>Wompt%20is%20Chat</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="31" w="-1" h="-1" measuredW="231" measuredH="26" zOrder="1" locked="false" isInGroup="45">
+          <controlProperties>
+            <size>14</size>
+            <text>Try%20it%20free%2C%20no%20account%20required.</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="42" y="85" w="148" h="-1" measuredW="102" measuredH="29" zOrder="2" locked="false" isInGroup="45">
+          <controlProperties>
+            <text>Enter%20a%20topic.</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="74" y="118" w="-1" h="-1" measuredW="83" measuredH="28" zOrder="3" locked="false" isInGroup="45">
+          <controlProperties>
+            <text>Join%20Chat</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="46" controlTypeID="__group__" x="864" y="244" w="-1" h="-1" measuredW="284" measuredH="261" zOrder="6" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="65" measuredH="29" zOrder="0" locked="false" isInGroup="46">
+          <controlProperties>
+            <size>16</size>
+            <text>Sign%20Up</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="23" w="-1" h="-1" measuredW="232" measuredH="26" zOrder="1" locked="false" isInGroup="46">
+          <controlProperties>
+            <size>14</size>
+            <text>Wompt%20is%20free%2C%20now%20and%20forever.</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="94" y="53" w="190" h="-1" measuredW="79" measuredH="29" zOrder="2" locked="false" isInGroup="46">
+          <controlProperties>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="94" y="84" w="190" h="-1" measuredW="79" measuredH="29" zOrder="3" locked="false" isInGroup="46">
+          <controlProperties>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="94" y="114" w="190" h="-1" measuredW="79" measuredH="29" zOrder="4" locked="false" isInGroup="46">
+          <controlProperties>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="25" y="53" w="-1" h="-1" measuredW="66" measuredH="25" zOrder="5" locked="false" isInGroup="46">
+          <controlProperties>
+            <align>right</align>
+            <text>Username</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="53" y="84" w="-1" h="-1" measuredW="38" measuredH="25" zOrder="6" locked="false" isInGroup="46">
+          <controlProperties>
+            <align>right</align>
+            <text>Email</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="0" y="114" w="-1" h="-1" measuredW="92" measuredH="25" zOrder="7" locked="false" isInGroup="46">
+          <controlProperties>
+            <align>right</align>
+            <text>Confirm%20Email</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="30" y="143" w="-1" h="-1" measuredW="62" measuredH="25" zOrder="8" locked="false" isInGroup="46">
+          <controlProperties>
+            <align>right</align>
+            <text>Password</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::TextInput" x="94" y="143" w="188" h="-1" measuredW="79" measuredH="29" zOrder="9" locked="false" isInGroup="46">
+          <controlProperties>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="33" y="174" w="-1" h="-1" measuredW="59" measuredH="25" zOrder="10" locked="false" isInGroup="46">
+          <controlProperties>
+            <align>right</align>
+            <text>Birthday</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::ComboBox" x="96" y="173" w="-1" h="-1" measuredW="70" measuredH="25" zOrder="11" locked="false" isInGroup="46">
+          <controlProperties>
+            <text>Month</text>
+          </controlProperties>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::ComboBox" x="166" y="174" w="-1" h="-1" measuredW="56" measuredH="25" zOrder="12" locked="false" isInGroup="46">
+          <controlProperties>
+            <text>Day</text>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="com.balsamiq.mockups::ComboBox" x="222" y="174" w="-1" h="-1" measuredW="62" measuredH="25" zOrder="13" locked="false" isInGroup="46">
+          <controlProperties>
+            <text>Year</text>
+          </controlProperties>
+        </control>
+        <control controlID="14" controlTypeID="com.balsamiq.mockups::Link" x="96" y="199" w="-1" h="-1" measuredW="144" measuredH="25" zOrder="14" locked="false" isInGroup="46">
+          <controlProperties>
+            <text>Why%20do%20we%20need%20this%3F</text>
+          </controlProperties>
+        </control>
+        <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="94" y="224" w="87" h="37" measuredW="73" measuredH="28" zOrder="15" locked="false" isInGroup="46">
+          <controlProperties>
+            <text>Sign%20Up</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::LinkBar" x="955" y="612" w="-1" h="-1" measuredW="246" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Terms%2C%20Privacy%2C%20About%2C%20Support</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Label" x="427" y="612" w="-1" h="-1" measuredW="106" measuredH="25" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Wompt%20%A9%202010%20</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
