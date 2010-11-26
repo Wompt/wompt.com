@@ -36,12 +36,13 @@ html
 			.clear
 		#main
 			#{body}
-		#footer
-			a(href="/terms", title="View terms of use") Terms of Use
-			&middot;
-			a(href="/privacy", title="View privacy policy") Privacy
-			&middot;
-			Copyright &copy; 2010 Wompt, Inc.
+		- if (w.footer)
+			#footer
+				a(href="/terms", title="View terms of use") Terms of Use
+				&middot;
+				a(href="/privacy", title="View privacy policy") Privacy
+				&middot;
+				Copyright &copy; 2010 Wompt, Inc.
 		:javascript
 			| var _gaq = _gaq || [];
 			| _gaq.push(['_setAccount', 'UA-19794419-1']);
