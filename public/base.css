@@ -66,7 +66,7 @@ h3{
 	color:white;
 }
 
-#logo{
+#top #logo{
 	float: left;
 	margin-right:20px;
 	color: rgba(255,255,255,0.8);
@@ -87,7 +87,7 @@ h3{
 
 #logo.center{
 	width:200px;
-	margin: 50px auto 50px auto;
+	margin: 0px auto;
 }
 
 /* compensate for off-center logo */
@@ -111,7 +111,7 @@ h3{
 
 #indexmain {
 	width: 300px;
-	margin: 20px auto 50px auto;
+	margin: 0px auto 20px auto;
 	text-align:center;
 }
 

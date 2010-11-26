@@ -23,18 +23,19 @@ html
 				a(href="/users/new", title="Go to sign up page") register
 				!= " &middot; "
 				a(href="/support", title="Go to contact and support page") support
+			#logo.top_left
+				a(href="/", title="Wompt.com")
+					img(src=assets.path("/logo_white.png"))
+					| Wompt
+				- if(w.channel)
+					| : #{w.channel}
+			.clear
+		.main
 			- if (w.url == "/")
 				#logo.center
 					a(href="/", title="Wompt.com")
 						img(src=assets.path("/wompt_logo_200.png"))
-			- else
-				#logo.top_left
-					a(href="/", title="Wompt.com")
-						img(src=assets.path("/logo_white.png"))
-						| Wompt
-					| : #{channel}
-			.clear
-		.main
+		
 			#{body}
 		- if (w.footer)
 			#footer
