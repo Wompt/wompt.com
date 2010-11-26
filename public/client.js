@@ -71,11 +71,11 @@ function UI(){
 		var line = $('<div>'),
 				nick = $('<div>'),
 				msg  = $('<div>');
-				
-		nick.append(data.from.name);
+		
+		nick.text(data.from.name);
 		nick.addClass('name');
 		
-		msg.append(data.msg);
+		msg.text(data.msg);
 		msg.addClass('msg');
 		
 		line.append(nick, msg);
