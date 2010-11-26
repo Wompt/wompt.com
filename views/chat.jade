@@ -2,8 +2,9 @@
 	| var channel     = '#{channel}',
 	|     session_id  = '#{session_id}';
 #user_list
+	.title Users
 #messages
+.clear
 #input
-	input#message(name='message', type='text', style="width:300px;", disabled='true')
-	br
-	input#stats(type='button', value="Stats")
+	.container
+		input#message(name='message', type='text', disabled='true')
