@@ -137,17 +137,21 @@ function UserListUI(ul, container){
 	var user_divs = {};
 	
 	ul.on('join', function(users){
-		$.each(users, function(i, name){
-			addUser(name);
+		var names=[];
+		$.each(users, function(i, user){
+			addUser(user);
+			names.push(user.name);
 		});
-		UI.systemMessage("Joined: " + users.join(', '));
+		UI.systemMessage("Joined: " + names.join(', '));
 	});
 
 	ul.on('part', function(users){
-		$.each(users, function(i, name){
-			removeUser(name);
+		var names=[];
+		$.each(users, function(i, user){
+			removeUser(user);
+			names.push(user.name);
 		});		
-		UI.systemMessage("Left: " + users.join(', '));
+		UI.systemMessage("Left: " + names.join(', '));
 	});
 	
 	ul.on('who', function(users){
@@ -155,21 +159,21 @@ function UserListUI(ul, container){
 		$.each(users, function(i, user){
 			addUser(user);
 		});
-		UI.systemMessage("In the room: " + users.join(', '));
 	});
 	
-	function addUser(name){
+	function addUser(user){
 		var name_div = $('<div>');
-		name_div.append(name);
+		name_div.attr('id', 'user_' + user.id);
+		name_div.append(user.name);
 		name_div.addClass('user');
 		container.append(name_div);
-		user_divs[name] = name_div;
+		user_divs[user.id] = name_div;
 	}
 	
-	function removeUser(name){
-		if(user_divs[name]){
-			user_divs[name].remove();
-			delete user_divs[name];
+	function removeUser(user){
+		if(user_divs[user.id]){
+			user_divs[user.id].remove();
+			delete user_divs[user.id];
 		}
 	}
 	
