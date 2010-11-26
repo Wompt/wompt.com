@@ -10,7 +10,6 @@ body{
 	color: #000;
 	font-family: tahoma, verdana, sans-serif;
 	margin: 0px;
-	padding-top:10px;
 	min-height: 100%;
 }
 
@@ -23,9 +22,7 @@ a:hover{
 	text-decoration:underline;
 }
 
-a img{
-	border:0;
-}
+
 
 h2{
 	font-size:1.6em;
@@ -44,18 +41,40 @@ h3{
 	color: #bbb;
 }
 
-#toplinks {
-	float:right;
-	margin:0 15px 0 0;
+.clear{ clear:both; }
+
+#top{
+	border-bottom: solid 1px rgba(220, 220, 220, 0.5);
+	background-color: rgba(230,230,230,0.4);
+	padding:5px;
 }
 
 #toplinks {
+	float:right;
+	margin:5px 15px 0 0;
 	text-align:right;
 }
 
-#logo.top_left {
-	width: 200px;
-	margin: 0 0;
+#logo{
+	float: left;
+	margin-right:20px;
+}
+
+
+#logo{
+	font-size:1.3em;
+	font-weight:700;
+}
+
+#logo a{
+	text-decoration:none;
+	color: black;
+}
+
+#logo a img{
+	border:0;
+	vertical-align: middle;
+	margin-right:10px;
 }
 
 #logo.center{
@@ -66,6 +85,14 @@ h3{
 /* compensate for off-center logo */
 #logo.center img{
 	margin-left:10px;
+}
+
+#top .room_name{
+	font-size: 1.3em;
+}
+
+#main{
+	padding:10px 0px 10px 10px;
 }
 
 
