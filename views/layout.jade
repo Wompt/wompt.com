@@ -15,31 +15,36 @@ html
 		meta(name="keywords", content="chat,irc,webchat,chatroom,chat room")
 		meta(name="author", content="Wompt, Inc.")
 	body
-		#toplinks
-			a(href="/users/sign_in", title="Go to Sign-in page") Sign In
-			&middot;
-			a(href="/users/sign_out", title="Logout of Wompt") Sign Out
-			&middot;
-			a(href="/users/new", title="Go to sign up page") Register
-			&middot;
-			a(href="/support", title="Go to contact and support page") Support
-		- if (w.url == "/")
-			#logo.center
-				h1
-					a(href="/", title="Wompt.com")
-						img(src=assets.path("/wompt_logo_200.png"))
-		- else
+		#top
+			#toplinks
+				a(href="/users/sign_in", title="Go to Sign-in page") sign in
+				!= " &middot; "
+				a(href="/users/sign_out", title="Logout of Wompt") sign out
+				!= " &middot; "
+				a(href="/users/new", title="Go to sign up page") register
+				!= " &middot; "
+				a(href="/support", title="Go to contact and support page") support
 			#logo.top_left
-				h1
+				a(href="/", title="Wompt.com")
+					img(src=assets.path("/logo_white.png"))
+					| Wompt
+				- if(w.channel)
+					| : #{w.channel}
+			.clear
+		.main
+			- if (w.url == "/")
+				#logo.center
 					a(href="/", title="Wompt.com")
 						img(src=assets.path("/wompt_logo_200.png"))
-		#{body}
-		#footer
-			a(href="/terms", title="View terms of use") Terms of Use
-			&middot;
-			a(href="/privacy", title="View privacy policy") Privacy
-			&middot;
-			Copyright &copy; 2010 Wompt, Inc.
+		
+			#{body}
+		- if (w.footer)
+			#footer
+				a(href="/terms", title="View terms of use") Terms of Use
+				&middot;
+				a(href="/privacy", title="View privacy policy") Privacy
+				&middot;
+				Copyright &copy; 2010 Wompt, Inc.
 		:javascript
 			| var _gaq = _gaq || [];
 			| _gaq.push(['_setAccount', 'UA-19794419-1']);

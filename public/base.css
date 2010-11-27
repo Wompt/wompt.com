@@ -4,13 +4,12 @@ div {
 }
 
 body{
-	font-family: arial;
 	background: #eee;
 	background: url(/noisy_grey.gif) repeat;
 	color: #000;
-	font-family: tahoma, verdana, sans-serif;
+	font-family: helvetica, arial, freesans, clean, sans-serif;
+	font-size:1em;
 	margin: 0px;
-	padding-top:10px;
 	min-height: 100%;
 }
 
@@ -23,9 +22,7 @@ a:hover{
 	text-decoration:underline;
 }
 
-a img{
-	border:0;
-}
+
 
 h2{
 	font-size:1.6em;
@@ -44,23 +41,53 @@ h3{
 	color: #bbb;
 }
 
+.clear{ clear:both; }
+
+#top{
+	background:url(top_back.png) repeat-x top left;
+	height:45px;
+	padding:5px;
+	position:fixed;
+	top:0px;
+	right:0px;
+	left:0px;
+}
+
 #toplinks {
 	float:right;
-	margin:0 15px 0 0;
-}
-
-#toplinks {
+	margin:5px 15px 0 0;
 	text-align:right;
+	color:#e94;
+	font-size:0.9em;
 }
 
-#logo.top_left {
-	width: 200px;
-	margin: 0 0;
+#toplinks a{
+	color:#ffcbb1;
+	color:white;
+}
+
+#top #logo{
+	float: left;
+	margin-right:20px;
+	color: rgba(255,255,255,0.8);
+	font-size:1.3em;
+	font-weight:700;
+}
+
+#logo a{
+	text-decoration:none;
+	color: rgba(255,255,255,0.5);	
+}
+
+#logo a img{
+	border:0;
+	vertical-align: middle;
+	margin-right:10px;
 }
 
 #logo.center{
 	width:200px;
-	margin: 50px auto 50px auto;
+	margin: 0px auto;
 }
 
 /* compensate for off-center logo */
@@ -68,6 +95,13 @@ h3{
 	margin-left:10px;
 }
 
+#top .room_name{
+	font-size: 1.3em;
+}
+
+.main {
+	margin-top:45px;	
+}
 
 #leftbar {
 	width: 230px;
@@ -77,7 +111,7 @@ h3{
 
 #indexmain {
 	width: 300px;
-	margin: 20px auto 50px auto;
+	margin: 0px auto 20px auto;
 	text-align:center;
 }
 
@@ -103,7 +137,36 @@ h3{
 	padding: 2px 10px 2px 10px;
 }
 
+/* ---  Chat Page ---*/
+.main #input{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	border-top: solid 1px #b63f1b;
+	background-color:#ef6f2f;
+	height:3em;
+}
 
+.main #input .container{
+}
+
+.main #input #message{
+	position:absolute;
+	border:1px solid #000;
+	color: #300;
+	padding: 0px 5px;
+	right:0.2em;
+	left:0.2em;
+	bottom:0.2em;
+	top:0.2em;
+	font-size:1.5em;
+}
+
+.main #messages{
+	padding-bottom:50px;
+	margin-right:100px;
+}
 
 #formmain {
 	float: left;
@@ -146,6 +209,25 @@ h3{
 	height: 12em;
 	padding: 4px 2px;
 	width: 100%;
+}
+
+#user_list{
+	position:fixed;
+	right:0px;
+	top:45px;
+	width:100px;
+	min-height: 110px;
+}
+
+#user_list .title{
+	text-align:center;
+	padding:2px;
+	color:#999;
+	border-bottom:solid 1px #ccc;
+}
+
+#user_list .user{
+	padding:4px 10px 1px 10px;	
 }
 
 /* === Footer === */
