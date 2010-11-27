@@ -85,56 +85,19 @@ h3{
 	margin-right:10px;
 }
 
-#logo.center{
-	width:200px;
-	margin: 0px auto;
-}
-
-/* compensate for off-center logo */
-#logo.center img{
-	margin-left:10px;
-}
 
 #top .room_name{
 	font-size: 1.3em;
 }
 
 .main {
-	margin-top:45px;	
+	margin-top:55px;	
 }
 
 #leftbar {
 	width: 230px;
 	margin: 0 0;
 	float:left;
-}
-
-#indexmain {
-	width: 300px;
-	margin: 0px auto 20px auto;
-	text-align:center;
-}
-
-#indexmain label {
-	color: #000000;
-	display: block;
-	font-size: 1.4em;
-	padding-top: .7em;
-}
-
-#indexmain input[type=text] {
-	border: 1px solid #777;
-	display: block;
-	font-size: 1.3em;
-	padding: 4px 0px;
-	width: 100%;
-}
-
-#indexmain input[type=submit] {
-	font-size: 1.1em;
-	margin: 10px;
-	margin: 1em 0;
-	padding: 2px 10px 2px 10px;
 }
 
 /* ---  Chat Page ---*/
@@ -168,48 +131,6 @@ h3{
 	margin-right:100px;
 }
 
-#formmain {
-	float: left;
-	margin: 0 0 10px 15px;
-	padding: 0;
-	width: 650px;
-}
-
-#formmain h2.border {
-	border-bottom: 1px solid #ccc;
-	font-size: 1.6em;
-	margin: 0 0 12px;
-	padding: 0;
-}
-
-#formmain label {
-	color: #000000;
-	display: block;
-	font-size: 1.4em;
-	padding-top: .7em;
-}
-
-#formmain input[type=text],
-#formmain input[type=password] {
-	border: 1px solid #777;
-	display: block;
-	font-size: 1.3em;
-	padding: 4px 0px;
-	width: 100%;
-}
-
-#formmain input[type=submit] {
-	font-size: 1.1em;
-	margin: 1em 0;
-	padding: 2px 10px 2px 10px;
-}
-
-#formmain textarea {
-	display: block;
-	height: 12em;
-	padding: 4px 2px;
-	width: 100%;
-}
 
 #user_list{
 	position:fixed;

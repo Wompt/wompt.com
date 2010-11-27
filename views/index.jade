@@ -1,4 +1,34 @@
-#indexmain
-	form(method='post')
-		input#channel(name='channel', type='text', style="width:300px;")
-		input#join(type='submit', value="Join Chat")
+#landing
+	.left
+		h2 Wompt is Chat
+		.subtitle Try it free, no account required.
+		form(method='post')
+			input.text.big#channel(name='channel', type='text')
+			input.submit#join(type='submit', value="Join Chat")
+	.right
+		form(method='post', action='/users/new')
+			table
+				tr.title
+					td(colspan='2')
+						h2 Sign Up
+						.subtitle Wompt is free, now and forever.
+				tr
+					th
+						label Name
+					td
+						input.text(name='name', type='text')
+				tr
+					th
+						label Email
+					td
+						input.text(name="email", type='text')
+				tr
+					th
+						label Password
+					td
+						input.text(name="password", type="password")
+				tr
+					td
+					td
+						input.submit(type='submit', value="Sign Up")
+	.clear
