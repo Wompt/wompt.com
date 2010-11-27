@@ -5,7 +5,7 @@ div {
 
 body{
 	background: #eee;
-	background: url(/noisy_grey.gif) repeat;
+	background: url(/images/structure/noisy_grey.gif) repeat;
 	color: #000;
 	font-family: helvetica, arial, freesans, clean, sans-serif;
 	font-size:1em;
@@ -44,7 +44,7 @@ h3{
 .clear{ clear:both; }
 
 #top{
-	background:url(top_back.png) repeat-x top left;
+	background:url(/images/structure/top_back.png) repeat-x top left;
 	height:45px;
 	padding:5px;
 	position:fixed;

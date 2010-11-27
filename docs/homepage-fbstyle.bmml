@@ -8,7 +8,7 @@
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="427" y="150" w="-1" h="-1" measuredW="28" measuredH="30" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <filter>true</filter>
-        <src>http%3A//wompt.com%3A16867/logo_white.png</src>
+        <src>http%3A//wompt.com%3A16867/images/logo/white_30.png</src>
         <text/>
       </controlProperties>
     </control>
