@@ -33,7 +33,8 @@ h2{
 h3{
 	font-size:1.3em;
 	margin:0 0 10px;
-	padding:0;}
+	padding:0;
+}
 
 .line .name {
 	float:left;
@@ -41,12 +42,15 @@ h3{
 	color: #bbb;
 }
 
+.line .own.name {
+	color: #a53;
+}
+
 .clear{ clear:both; }
 
 #top{
 	background:url(/images/structure/top_back.png) repeat-x top left;
 	height:45px;
-	padding:5px;
 	position:fixed;
 	top:0px;
 	right:0px;
@@ -55,10 +59,14 @@ h3{
 
 #toplinks {
 	float:right;
-	margin:5px 15px 0 0;
-	text-align:right;
-	color:#e94;
-	font-size:0.9em;
+	margin:0 5px 0 0;
+	text-align:left;
+	color:white;
+	font-size:0.7em;
+}
+
+#toplinks .second_line{
+	margin-top:1px;
 }
 
 #toplinks a{
@@ -66,9 +74,30 @@ h3{
 	color:white;
 }
 
+
+#toplinks form input.checkbox{
+	margin: 0px 3px 0px 0px;
+	vertical-align:top;
+}
+
+
+#toplinks form input{
+	margin: 2px 0.3em 0px 0px;
+	font-size: 12px;
+}
+
+#toplinks input.name{
+	width:200px;
+}
+
+#toplinks input.password{
+	width:100px;
+}
+
+
 #top #logo{
 	float: left;
-	margin-right:20px;
+	margin:5px 20px 0px 5px;
 	color: rgba(255,255,255,0.8);
 	font-size:1.3em;
 	font-weight:700;
@@ -112,18 +141,22 @@ h3{
 }
 
 .main #input .container{
+	position:absolute;
+	right:0.2em;
+	left:0.2em;
+	bottom:0.2em;
+	top:0.2em;
+	font-size:1.5em;	
 }
 
 .main #input #message{
 	position:absolute;
 	border:1px solid #000;
 	color: #300;
-	padding: 0px 5px;
-	right:0.2em;
-	left:0.2em;
-	bottom:0.2em;
-	top:0.2em;
-	font-size:1.5em;
+	padding:0px;
+	width:100%;
+	height:100%;
+	font-size:1.5em;		
 }
 
 .main #messages{
@@ -159,7 +192,7 @@ h3{
 	margin-top:20px;
 	font-size: 0.9em;
 	font-weight: 700;
-	background: rgba(230,230,230,0.2);
+	background: rgba(230,230,230,0.4);
 	color: #555;
 	padding: 15px 0px;
 	text-align: center;
