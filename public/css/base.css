@@ -51,6 +51,8 @@ input.intra-field-label {
 	font-style:italic;
 }
 
+.left { float:left;  }
+.right{ float:right; }
 .clear{ clear:both; }
 
 #top{
@@ -200,16 +202,18 @@ input.intra-field-label {
 #footer {
 	border-top: solid 1px #e6e6e6;
 	border-bottom: solid 1px #f0f0f0;
-	width: 100%;
 	margin-top:20px;
 	font-size: 0.9em;
 	font-weight: 700;
+	background-color: rgb(235,235,235);
 	background: rgba(230,230,230,0.4);
 	color: #555;
-	padding: 15px 0px;
+	padding: 15px;
 	text-align: center;
 }
 
-#footer a {
+
+#footer a{
+	margin: 0px 5px;
 	color: #555;
 }

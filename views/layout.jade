@@ -45,11 +45,12 @@ html
 			#{body}
 		- if (w.footer)
 			#footer
-				a(href="/terms", title="View terms of use") Terms of Use
-				&middot;
-				a(href="/privacy", title="View privacy policy") Privacy
-				&middot;
-				Copyright &copy; 2010 Wompt, Inc.
+				.left Wompt &nbsp;&copy;&nbsp; 2010
+				.right
+					a(href="/terms", title="View terms of use") Terms
+					=" | "
+					a(href="/privacy", title="View privacy policy") Privacy
+				.clear
 		:javascript
 			| var _gaq = _gaq || [];
 			| _gaq.push(['_setAccount', 'UA-19794419-1']);
