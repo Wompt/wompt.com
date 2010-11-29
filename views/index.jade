@@ -28,6 +28,22 @@
 					td
 						input.text(id='sign_up_password', name="password", type="password")
 				tr
+					th
+						label(for='sign_up_confirm_password') Confirm Password
+					td
+						input.text(id='sign_up_confirm_password', name="confirm_password", type="password")
+				tr
+					th
+						label(for='sign_up_birth_day') Birthday (numbers)
+					td
+						input.text.inline_label.day(id='sign_up_birth_day', name="birth_day", title="day", type="text")
+						input.text.inline_label.month(id='sign_up_birth_month', name="birth_month", title="month", type="text")
+						input.text.inline_label.year(id='sign_up_birth_year', name="birth_year", title="year", type="text")
+				tr
+					th
+					td
+						a(href='/') Why do we need this?
+				tr
 					td
 					td
 						input.submit(type='submit', value="Sign Up")

@@ -66,6 +66,7 @@
 
 #landing .right table{
 	margin:0em auto;
+	border-collapse:collapse;
 }
 
 #landing .right th{
@@ -73,7 +74,18 @@
 	color:#888;
 	text-align:right;
 	padding-bottom:0.2em;
+	padding-right:0.5em;
 }
+
+#landing .right .day,
+#landing .right .month,
+#landing .right .year{
+	width:57px;
+	float:left;
+	margin-right:8px;
+	padding-left:3px;
+}
+
 
 #landing .right input.submit {
 	margin:0.2em 0px;
