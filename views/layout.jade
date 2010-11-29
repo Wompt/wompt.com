@@ -4,6 +4,7 @@ html
 		title Wompt Chat!
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js", type="text/javascript")
 		script(src=assets.path("/external/events.js"), type="text/javascript")
+		script(src=assets.path("/external/inlineFieldLabel.js"), type="text/javascript")
 		- if(w.channel)
 			script(src="http://cdn.socket.io/stable/socket.io.js", type="text/javascript")
 			script(src=assets.path("/js/client.js"), type="text/javascript")
@@ -23,8 +24,8 @@ html
 					a(href="/users/sign_out", title="Logout of Wompt") sign out
 				- else
 					form(action='/users/sign_in', method='post')
-						input.small.email(type='text', name='email')
-						input.small.password(type='password', name='password')
+						input.small.email.inline_label(type='text', name='email', title="email")
+						input.small.password.inline_label(type='password', name='password', title="password")
 						input.submit.small(type='submit', value='sign in')
 						.second_line
 							label 

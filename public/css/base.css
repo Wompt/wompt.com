@@ -46,6 +46,11 @@ h3{
 	color: #a53;
 }
 
+input.intra-field-label {
+	color:#aaa;
+	font-style:italic;
+}
+
 .clear{ clear:both; }
 
 #top{
@@ -60,7 +65,6 @@ h3{
 #toplinks {
 	float:right;
 	margin:0 5px 0 0;
-	text-align:left;
 	color:white;
 	font-size:0.7em;
 }
@@ -86,12 +90,16 @@ h3{
 	font-size: 12px;
 }
 
-#toplinks input.name{
-	width:200px;
+#toplinks input.email{
+	width:150px;
 }
 
 #toplinks input.password{
 	width:100px;
+}
+
+#toplinks input.submit{
+	padding-top:0px;
 }
 
 
