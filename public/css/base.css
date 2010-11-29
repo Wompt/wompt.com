@@ -81,6 +81,7 @@ input.intra-field-label {
 
 #toplinks form input.checkbox{
 	margin: 0px 3px 0px 0px;
+	padding:0px;
 	vertical-align:top;
 }
 
@@ -106,19 +107,22 @@ input.intra-field-label {
 #top #logo{
 	float: left;
 	margin:5px 20px 0px 5px;
-	color: rgba(255,255,255,0.8);
-	font-size:1.3em;
+	color: #fff;
+	_color: rgba(255,255,255,0.8);
+	font-size:1.6em;
 	font-weight:700;
 }
 
 #logo a{
 	text-decoration:none;
-	color: rgba(255,255,255,0.5);	
+	color: white;
+	_color: rgba(255,255,255,0.5);	
 }
+
 
 #logo a img{
 	border:0;
-	vertical-align: middle;
+	vertical-align: top;
 	margin-right:10px;
 }
 
