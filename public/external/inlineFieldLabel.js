@@ -6,6 +6,7 @@
  * and GPL (GPL-LICENSE.txt) licenses.
  *
  * Date: 2010-09-4 12:22:17 +0200 (Fri, 24 May 2008)
+ * From: http://plugins.jquery.com/project/inlineFieldLabel
  
  <strong>This plugin allows to input a default text label inside  an input text element or a text area.<strong>
 
@@ -48,10 +49,8 @@
         var opts = $.extend({}, $.fn.inlineFieldLabel.defaults, options);
         // Only textarea ant input text
         this.each(function(){
-          $this = $(this);
-          var o = $.metadata ? $.extend({}, opts, $this.metadata({type:opts.metadataType, name:opts.metadataName})) : opts;
-          innerFunction($this,  o.label);
-            
+          var $this = $(this);
+          innerFunction($this, $this.attr('title'));
         });
         // Chain:
         return this;
@@ -61,15 +60,13 @@
     $.fn.inlineFieldLabel.defaults = {
       label : 'some placeholder',
       metadataType: 'class',
-      metadataName: 'metadata',
+      metadataName: 'metadata'
     };
     
     //private function
     function innerFunction(jqElement, fieldLabel) {
        var textInput = null;
         var clonedTextInput = null;
-        var strBefore = "";
-        var strAfter = "";
         var counter = 0;
         textInput = jqElement;
 
@@ -77,13 +74,13 @@
        
        
        if (textInput.attr('type') == 'password') {
-         clonedTextInput = textInput.clone();
-         strBefore = clonedTextInput.append(textInput.clone()).html();
-         strAfter = strBefore.replace('type="password"', 'type="text"');;
-         strAfter.replace('type="password"', 'type="text"');
-         textInput.after(strAfter);
-         clonedTextInput = textInput.next();
-         clonedTextInput.addClass("intra-field-label").val(fieldLabel);
+        var new_input = $('<input type="text">');
+         new_input.attr('name', textInput.attr('name'));
+         new_input.attr('class', textInput.attr('class'));
+         new_input.attr('id', textInput.attr('id'));
+         textInput.after(new_input);
+         new_input.addClass("intra-field-label").val(fieldLabel);
+         clonedTextInput = new_input;
          textInput.hide();
        } else {
          textInput.addClass("intra-field-label").val(fieldLabel);
@@ -148,6 +145,6 @@
     
 })(jQuery);
 
-
-
-
+$(document).ready(function(){
+  $('input.inline_label').inlineFieldLabel();
+});
