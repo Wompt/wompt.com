@@ -14,7 +14,7 @@ namespace :deploy do
 
   desc "Create a symlinks in /etc/monit to the monit files in the deployed app"
   task "symlink_monit_config" do
-    run "#{try_sudo :as => 'root'} ln -f -s #{current_path}/config/monit/* /etc/monit/"
+    run "#{try_sudo :as => 'root'} ln -f -s #{current_path}/nodejs/config/monit/* /etc/monit/"
   end
 
   desc "save the local version of the upstart script to the server"
@@ -28,9 +28,9 @@ stop on shutdown
 
 script
     # Node needs HOME to be set
-    export HOME="#{current_path}"
+    export HOME="#{current_path}/nodejs"
     
-    exec sudo -u nodejs /usr/local/bin/node #{current_path}/server.js production 2>>/var/log/wompt.error.log >>/var/log/wompt.log
+    exec sudo -u nodejs /usr/local/bin/node #{current_path}/nodejs/server.js production 2>>/var/log/wompt.error.log >>/var/log/wompt.log
 end script
 UPSTART
     put upstart_file, remote_tempfile
