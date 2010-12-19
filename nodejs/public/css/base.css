@@ -66,9 +66,9 @@ input.intra-field-label {
 
 #toplinks {
 	float:right;
-	margin:0 5px 0 0;
+	margin:5px 5px 0 0;
 	color:white;
-	font-size:1em;
+	font-size:0.9em;
 }
 
 #toplinks a{
