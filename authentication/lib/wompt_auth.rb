@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'openid/store/filesystem'
-require 'models/user'
+require 'lib/models/user'
 
 Mongomatic.db = Mongo::Connection.new.db("wompt_dev")
 
