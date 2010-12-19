@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'bundler'
+require 'ftools'
 
 Bundler.require
 
-Dir.mkdir('tmp')
+File.makedirs('tmp')
 File.open('tmp/wompt_auth.pid', 'w') { |f| f.write(Process.pid) }
 
 require './wompt_auth'
