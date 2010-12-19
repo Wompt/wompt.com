@@ -25,13 +25,7 @@
 #landing .right{
 	float:right;
 	width:40%;
-	opacity:0.2;
 }
-
-#landing .right:hover{
-	opacity:1;
-}
-
 
 #landing .left input.text {
 	margin-left: auto;
