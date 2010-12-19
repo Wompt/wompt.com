@@ -59,23 +59,21 @@ App.prototype = {
 			wompt.Auth.get_or_set_token(req, res);
 
 			me.user_sessions.add({id:session_id, user:user.wrap(), t: new Date()});
+			var locals = me.standard_page_vars(req, {
+				channel: req.params.channel,
+				session_id: session_id,
+				url: req.url
+			});
+			
 			res.render('chat', {
-				locals:{
-					w:{
-						channel: req.params.channel,
-						session_id: session_id,
-						url: req.url
-					}
-				}
+				locals:locals
 			});
 		});
 		
 		exp.get("/", function(req, res, params){
 			wompt.Auth.get_or_set_token(req, res);
-			me.standard_page_vars(req, function(vars){
-				res.render('index', {
-					locals: vars
-				});
+			res.render('index', {
+				locals: me.standard_page_vars(req)
 			});
 		});
 
@@ -122,14 +120,21 @@ App.prototype = {
 		return exp;
 	},
 	
-	standard_page_vars: function(req, callback){
-		callback(
-			{w:{
-				url: req.url,
-				user: req.user,
-				footer: true
-			}}
-		)
+	standard_page_vars: function(req, custom_vars){
+		var vars = {
+			url: req.url,
+			user: req.user,
+			footer: true
+		};
+		
+		if(custom_vars){
+			for(var k in custom_vars){
+				vars[k] = custom_vars[k];
+			}
+		}
+		return {
+			w:vars
+		};
 	},
 	
 	start_server: function(){
@@ -187,11 +192,9 @@ App.prototype = {
 		urls.forEach(function(url){
 			var view = url.substr(1);
 			exp.get(url, function(req, res, params){
-				me.standard_page_vars(req, function(vars){
-					res.render(view, {
-						locals: vars
+				res.render(view, {
+						locals: me.standard_page_vars(req)
 					});
-				});
 			});			
 		});
 	},
