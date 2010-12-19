@@ -3,6 +3,7 @@ var wompt = require("./includes")
 function Auth(config){
 	config = config || {};
 	this.COOKIE_KEY = config.cookie_key || '_wompt_auth';
+	this.ONE_TIME_TOKEN_COOKIE_KEY = config.one_time_token_cookie_key || 'wompt_auth_one_time_token';
 	this.TOKEN_VALID_DURATION = (14 * 24 * 60 * 60 * 1000);
 		
 	this.authenticate_request = function(req, callbacks){
@@ -18,9 +19,43 @@ function Auth(config){
 	}
 	
 	this.get_user_from_token = function(token, callback){
-		wompt.User.find({sessions: {token: token}}).first(function(doc){
-			callback(token, doc);
-		});
+		wompt.User.find({sessions: {token: token}}).first(callback);
+	}
+	
+	this.one_time_token_middleware = function(){
+		var me = this;
+		return function(req, res, next){
+			var token = req.cookies[me.ONE_TIME_TOKEN_COOKIE_KEY];
+			res.clearCookie(me.ONE_TIME_TOKEN_COOKIE_KEY);
+			if(token){
+				wompt.User.find({one_time_token: token}).first(function(user){
+					if(user){
+						delete user.one_time_token;
+						// start_session calls user.save
+						me.start_session(res, user);
+						req.user = user;
+					}
+					next();
+				});
+			} else
+				next();
+		}
+	}
+	
+	this.lookup_user_middleware = function(){
+		var me = this;
+		return function(req, res, next){
+			if(req.user) next();
+			else{
+				var token = me.get_token(req);
+				if(token){
+					me.get_user_from_token(token, function(user){
+						if(user) req.user = user;
+						next();
+					});
+				} else next();
+			}
+		}
 	}
 	
 	this.sign_in_user = function(params, callbacks){
@@ -41,8 +76,8 @@ function Auth(config){
 	
 	this.sign_out_user = function(req, res, callbacks){
 		var me = this;
-		this.authenticate_client({request:req, response:res}, {
-			authenticated: function(client, doc, token){
+		this.authenticate_request(req, {
+			authenticated: function(doc, token){
 				me.clear_token(res);
 				doc.sessions.forEach(function(session, index){
 					if(session.token == token)

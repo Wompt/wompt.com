@@ -11,17 +11,27 @@ wompt.mongoose.model('User',{
 	collection : 'users',
 
 	properties: [
+		//simple attributes
 		 'name'
 		,'email'
 		,'password'
-		,{'sessions': [
+		,'one_time_token'
+		
+		// embedded documents
+		,{
+		'sessions': [
 			['token', 'last_ip', 'session_id', 'last_used']
-		]}
+		]
+		,'authentications': [
+			['provider','uid']
+		]
+		}
 	],
 	
 	indexes : [
 		 'email'
-		,'sessions.token'
+		,'sessions.token',
+		,'authentications'
 	],
 	
 	methods: {
@@ -30,7 +40,7 @@ wompt.mongoose.model('User',{
 		},
 		
 		signed_up: function(){
-			return !!this.email;
+			return !!this.email || !!this.name;
 		}
 	}
 });

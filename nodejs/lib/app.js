@@ -32,6 +32,8 @@ App.prototype = {
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(express.cookieDecoder());
 			exp.use(express.staticProvider(config.public_dir));
+			exp.use(wompt.Auth.one_time_token_middleware());
+			exp.use(wompt.Auth.lookup_user_middleware());
 		});
 		
 		exp.helpers({
@@ -135,15 +137,14 @@ App.prototype = {
 	},
 	
 	standard_page_vars: function(req, callback){
-		wompt.Auth.get_user_from_token(wompt.Auth.get_token(req), function(token, doc){
-			callback(
-				{w:{
-					url: req.url,
-					user: doc,
-					footer: true
-				}}
-		)}
-	)},
+		callback(
+			{w:{
+				url: req.url,
+				user: req.user,
+				footer: true
+			}}
+		)
+	},
 	
 	start_server: function(){
 		this.express.listen(this.config.port, this.config.host);

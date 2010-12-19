@@ -21,9 +21,12 @@ html
 		#top
 			#toplinks
 				- if(w.user && w.user.signed_up())
+					span #{w.user.email || w.user.name}
+					| |
 					a(href="/users/sign_out", title="Logout of Wompt") sign out
 				- else
-					form(action='/users/sign_in', method='post')
+					a(href="http://localhost:9292/auth/google", title="Sign in using Google") Google sign in
+					form(action='/users/sign_in', method='post', style='display:none')
 						input.small.email.inline_label(type='text', name='email', title="email")
 						input.small.password.inline_label(type='password', name='password', title="password")
 						input.submit.small(type='submit', value='sign in')
