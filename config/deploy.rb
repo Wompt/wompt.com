@@ -23,3 +23,4 @@ task :production do
 end
 
 load 'config/tasks'
+load 'config/config_files'

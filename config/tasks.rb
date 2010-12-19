@@ -12,31 +12,6 @@ namespace :deploy do
     run "#{try_sudo :as => 'root'} restart #{application} || #{try_sudo :as => 'root'} start #{application}"
   end
 
-  desc "Create a symlinks in /etc/monit to the monit files in the deployed app"
-  task "symlink_monit_config" do
-    run "#{try_sudo :as => 'root'} ln -f -s #{current_path}/nodejs/config/monit/* /etc/monit/"
-  end
-
-  desc "save the local version of the upstart script to the server"
-  task :send_upstart_script, :roles => :app do
-    remote_tempfile = "/tmp/#{application}_upstart.conf"
-    upstart_file = <<UPSTART
-description "#{application}"
-
-start on startup
-stop on shutdown
-
-script
-    # Node needs HOME to be set
-    export HOME="#{current_path}/nodejs"
-    
-    exec sudo -u nodejs /usr/local/bin/node #{current_path}/nodejs/server.js production 2>>/var/log/wompt.error.log >>/var/log/wompt.log
-end script
-UPSTART
-    put upstart_file, remote_tempfile
-    run "#{try_sudo :as => 'root'} mv #{remote_tempfile} /etc/init/#{application}.conf"
-  end
-  
   desc "Update git submodules for the cached copy (Cpaistrano 2.5.20 will do this automatically)"
   task "update_submodules_recursive" do
     run "cd #{shared_path}/cached-copy && git submodule update --init --recursive"
@@ -50,6 +25,3 @@ UPSTART
     puts "    not doing finalize_update because not a Rails application."
   end
 end
-
-after 'deploy:setup', 'deploy:send_upstart_script'
-after 'deploy:cold', 'deploy:symlink_monit_config'
