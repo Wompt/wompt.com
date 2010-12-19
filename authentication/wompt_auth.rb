@@ -49,7 +49,7 @@ class WomptAuth < Sinatra::Base
       user['name'] = info['name'] if info['name']
     end
     
-    user['one_time_token'] = "token!!" #generate_token
+    user['one_time_token'] = generate_token
     user.save!
     return user
   end
