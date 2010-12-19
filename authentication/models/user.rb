@@ -7,4 +7,8 @@ class User < Mongomatic::Base
     auths = (self['authentications'] ||= [])
     auths << hash
   end
+  
+  def save!
+    self.is_new? ? insert! : update!
+  end
 end

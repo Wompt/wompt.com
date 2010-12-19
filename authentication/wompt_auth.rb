@@ -4,6 +4,8 @@ require 'models/user'
 
 Mongomatic.db = Mongo::Connection.new.db("wompt_dev")
 
+ONE_TIME_TOKEN_COOKIE = 'wompt_auth_one_time_token'
+
 class OmniAuth::Strategies::OAuth2
   def full_host
     uri = URI.parse(request.url.gsub('|','%7C'))
@@ -23,8 +25,10 @@ class WomptAuth < Sinatra::Base
   
   post '/auth/:name/callback' do |name|
     auth = request.env['omniauth.auth']
-    user = find_or_create_user(auth)    
-    "#{name} told us that you are legit:<br/> #{auth.inspect}<br/>#{user.inspect}" 
+    host = request.env['HTTP_HOST'].match(/^([^:]+)(?:\:\d+)$/)[1]
+    user = find_or_create_user(auth)
+    response.set_cookie(ONE_TIME_TOKEN_COOKIE, :value => user['one_time_token'], :path => '/')
+    haml :redirect, :locals => {:to => "http://#{host}:8001/"}
   end
   
   def find_or_create_user auth
@@ -32,18 +36,22 @@ class WomptAuth < Sinatra::Base
     if user = User.find_one('authentications' => {'provider' => auth['provider'], 'uid' => auth['uid']})
       puts "Found User by auth"
       return user
-    elsif email = info['email'] && user = User.find_one('email' => email)
+    elsif (email = info['email']) && (user = User.find_one('email' => email))
       puts "Found User by email"
       user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'])
-      user.update!
-      return user
     else
       puts "Creating User"
       user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
       user['email'] = info['email'] if info['email']
       user['name'] = info['name'] if info['name']
-      user.insert!
-      return user
     end
+    
+    user['one_time_token'] = "token!!" #generate_token
+    user.save!
+    return user
+  end
+  
+  def generate_token
+    ActiveSupport::SecureRandom.base64(16)
   end
 end
