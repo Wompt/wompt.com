@@ -53,32 +53,18 @@ App.prototype = {
 		
 		exp.get("/chat/:channel", function(req, res, params){
 			var session_id = wompt.Auth.generate_token(),
-			    user;
+			    user = req.user || new wompt.User();
 					
 			wompt.Auth.get_or_set_token(req, res);
-			wompt.Auth.authenticate_request(req, {
-				
-				authenticated:function(in_user){
-					user = in_user;
-					logger.log("Authenticated as user: " + user.name);
-				},
-				
-				anonymous:function(){
-					user = new wompt.User();
-				},
-				
-				after: function(){
-					user = user.wrap();
-					me.user_sessions.add({id:session_id, user:user, t: new Date()});
-					res.render('chat', {
-						locals:{
-							w:{
-								channel: req.params.channel,
-								session_id: session_id,
-								url: req.url
-							}
-						}
-					});
+
+			me.user_sessions.add({id:session_id, user:user.wrap(), t: new Date()});
+			res.render('chat', {
+				locals:{
+					w:{
+						channel: req.params.channel,
+						session_id: session_id,
+						url: req.url
+					}
 				}
 			});
 		});

@@ -6,17 +6,6 @@ function Auth(config){
 	this.ONE_TIME_TOKEN_COOKIE_KEY = config.one_time_token_cookie_key || 'wompt_auth_one_time_token';
 	this.TOKEN_VALID_DURATION = (14 * 24 * 60 * 60 * 1000);
 		
-	this.authenticate_request = function(req, callbacks){
-		var token = this.get_token(req);
-		wompt.User.find({sessions: {token: token}}).first(function(doc){
-			if(doc)
-				callbacks.authenticated(doc, token);
-			else
-				callbacks.anonymous();
-
-			if(callbacks.after) callbacks.after(doc);
-		});
-	}
 	
 	this.get_user_from_token = function(token, callback){
 		wompt.User.find({sessions: {token: token}}).first(callback);
@@ -75,19 +64,14 @@ function Auth(config){
 	}
 	
 	this.sign_out_user = function(req, res, callbacks){
-		var me = this;
-		this.authenticate_request(req, {
-			authenticated: function(doc, token){
-				me.clear_token(res);
-				doc.sessions.forEach(function(session, index){
-					if(session.token == token)
-					delete doc.sessions[index];
-				});
-				doc.save();
-				if(callbacks && callbacks.success) callbacks.success(doc);
-			},
-			anonymous:callbacks && callbacks.success
+		var token = this.get_token(req);
+		var user = req.user;
+		this.clear_token(res);		
+		user.sessions.forEach(function(session, index){
+			if(session.token == token)
+				delete user.sessions[index];
 		});
+		user.save();
 	}
 		
 		
