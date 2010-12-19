@@ -16,13 +16,16 @@ class OmniAuth::Strategies::OAuth2
 end
 
 class WomptAuth < Sinatra::Base
+  use Rack::Session::Pool,
+    :path => '/auth',
+    :expire_after => 60, # In seconds
+    :secret => 'C6xyESB0FdkabrhtBxOlPikZTS0jKnQRq1vMfluX'
+  
   use OmniAuth::Builder do
     #provider :facebook , '181725458505189' , '5afa28d747aabd3d1a6ce71d26933c14', :scope => 'email'
     provider :open_id, nil, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :scope => 'email'
   end
 
-  enable :sessions
-  
   post '/auth/:name/callback' do |name|
     auth = request.env['omniauth.auth']
     host = request.env['HTTP_HOST'].match(/^([^:]+)(?:\:\d+)$/)[1]
