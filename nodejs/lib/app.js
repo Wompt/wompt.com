@@ -124,7 +124,8 @@ App.prototype = {
 		var vars = {
 			url: req.url,
 			user: req.user,
-			footer: true
+			footer: true,
+			host: req.headers.host.split(':')[0]
 		};
 		
 		if(custom_vars){

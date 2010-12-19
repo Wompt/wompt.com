@@ -68,41 +68,12 @@ input.intra-field-label {
 	float:right;
 	margin:0 5px 0 0;
 	color:white;
-	font-size:0.7em;
-}
-
-#toplinks .second_line{
-	margin-top:1px;
+	font-size:1em;
 }
 
 #toplinks a{
 	color:#ffcbb1;
 	color:white;
-}
-
-
-#toplinks form input.checkbox{
-	margin: 0px 3px 0px 0px;
-	padding:0px;
-	vertical-align:top;
-}
-
-
-#toplinks form input{
-	margin: 2px 0.3em 0px 0px;
-	font-size: 12px;
-}
-
-#toplinks input.email{
-	width:150px;
-}
-
-#toplinks input.password{
-	width:100px;
-}
-
-#toplinks input.submit{
-	padding-top:0px;
 }
 
 
