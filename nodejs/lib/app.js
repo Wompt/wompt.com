@@ -115,9 +115,8 @@ App.prototype = {
 		});
 
 		exp.get("/users/sign_out", function(req, res, params){
-			wompt.Auth.sign_out_user(req, res, {success:function(user){
-				res.redirect('/');				
-			}});
+			wompt.Auth.sign_out_user(req, res);
+			res.redirect('/');
 		});
 
 		return exp;
