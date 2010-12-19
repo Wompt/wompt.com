@@ -30,8 +30,9 @@ App.prototype = {
 		exp.configure(function(){
 			exp.use(me.statusMiddleware());			
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
-			exp.use(express.cookieDecoder());
 			exp.use(express.staticProvider(config.public_dir));
+			exp.use(express.cookieDecoder());
+			exp.use(express.bodyDecoder());
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.Auth.lookup_user_middleware());
 		});
@@ -79,13 +80,13 @@ App.prototype = {
 		});
 
 		
-		exp.post("/", express.bodyDecoder(), function(req, res, params){
+		exp.post("/", function(req, res, params){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + req.body.channel);
 		});
 		
 		
-		exp.post("/users/new", express.bodyDecoder(), function(req, res, params){
+		exp.post("/users/new", function(req, res, params){
 			b = req.body;
 			wompt.User.find({$or: [{name: b.name} , {email: b.email}]}).first(function(doc){
 				if(doc == null){
@@ -106,7 +107,7 @@ App.prototype = {
 		});
 
 
-		exp.post("/users/sign_in", express.bodyDecoder(), function(req, res, params){
+		exp.post("/users/sign_in", function(req, res, params){
 			wompt.Auth.sign_in_user(req.body, {success:function(user){
 				wompt.Auth.start_session(res, user);
 				res.redirect('/chat/room1');
