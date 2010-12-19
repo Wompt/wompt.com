@@ -3,3 +3,7 @@ source "http://rubygems.org"
 gem "sinatra"
 gem "omniauth"
 gem "json"
+gem "mongomatic"
+
+# required by one of the above, though not sure why, it's not listed as a dependency in any of the specs
+gem "i18n"

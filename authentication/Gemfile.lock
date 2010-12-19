@@ -1,13 +1,22 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.3)
     addressable (2.2.2)
+    bson (1.1.5)
     faraday (0.5.3)
       addressable (~> 2.2.2)
       multipart-post (~> 1.0.1)
       rack (>= 1.1.0, < 2)
+    i18n (0.4.1)
     json (1.4.6-x86-mingw32)
     mime-types (1.16)
+    mongo (1.1.5)
+      bson (>= 1.1.5)
+    mongomatic (0.7.3)
+      activesupport (>= 2.3.5)
+      bson (~> 1.1)
+      mongo (~> 1.1)
     multi_json (0.0.5)
     multipart-post (1.0.1)
     net-ldap (0.1.1)
@@ -65,6 +74,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  i18n
   json
+  mongomatic
   omniauth
   sinatra
