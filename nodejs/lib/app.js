@@ -28,7 +28,8 @@ App.prototype = {
 		var me = this;
 		
 		exp.configure(function(){
-			exp.use(me.statusMiddleware());			
+			exp.use(me.statusMiddleware());
+			exp.use(wompt.Auth.forward_to_auth_app_middleware());
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(express.staticProvider(config.public_dir));
 			exp.use(express.cookieDecoder());

@@ -26,7 +26,7 @@ html
 					a(href="/users/sign_out", title="Logout of Wompt") sign out
 				- else
 					| Sign in using: 
-					a(href="http://" + w.host + ":9292/auth/google", title="Sign in using Google") Google
+					a(href="/auth/google", title="Sign in using Google") Google
 			#logo.top_left
 				a(href="/", title="Wompt.com")
 					img(src=assets.path("/images/logo/white_30.png"))

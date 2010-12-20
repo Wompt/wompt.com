@@ -1,4 +1,5 @@
-var wompt = require("./includes")
+var wompt = require("./includes"),
+    httpProxy = require('http-proxy');
 
 function Auth(config){
 	config = config || {};
@@ -9,6 +10,17 @@ function Auth(config){
 	
 	this.get_user_from_token = function(token, callback){
 		wompt.User.find({sessions: {token: token}}).first(callback);
+	}
+	
+	this.forward_to_auth_app_middleware = function(){
+		return function(req,res,next){
+			if (req.url.match(/^\/auth/)) {
+				var proxy = new httpProxy.HttpProxy(req, res);
+				proxy.proxyRequest(9292, 'localhost');
+			}else{
+				next();
+			}
+		}
 	}
 	
 	this.one_time_token_middleware = function(){
