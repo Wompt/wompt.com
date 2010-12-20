@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'openid/store/filesystem'
 require 'lib/models/user'
 
-Mongomatic.db = Mongo::Connection.new.db("wompt_dev")
+Mongomatic.db = Mongo::Connection.new.db(CONFIG[:database])
 
 ONE_TIME_TOKEN_COOKIE = 'wompt_auth_one_time_token'
 
