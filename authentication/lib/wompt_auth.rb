@@ -39,7 +39,6 @@ class WomptAuth < Sinatra::Base
     info = auth['user_info']
     if user = User.find_one('authentications' => {'provider' => auth['provider'], 'uid' => auth['uid']})
       puts "Found User by auth"
-      return user
     elsif (email = info['email']) && (user = User.find_one('email' => email))
       puts "Found User by email"
       user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'])

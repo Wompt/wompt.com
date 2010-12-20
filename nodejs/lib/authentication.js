@@ -27,8 +27,8 @@ function Auth(config){
 		var me = this;
 		return function(req, res, next){
 			var token = req.cookies[me.ONE_TIME_TOKEN_COOKIE_KEY];
-			res.clearCookie(me.ONE_TIME_TOKEN_COOKIE_KEY);
 			if(token){
+				res.clearCookie(me.ONE_TIME_TOKEN_COOKIE_KEY);
 				wompt.User.find({one_time_token: token}).first(function(user){
 					if(user){
 						user.one_time_token = null;
