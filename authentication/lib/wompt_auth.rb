@@ -25,7 +25,7 @@ class WomptAuth < Sinatra::Base
 
   get_or_post '/auth/:name/callback' do |name|
     auth = request.env['omniauth.auth']
-    host = request.env['HTTP_HOST'].match(/^([^:]+)(?:\:\d+)$/)[1]
+    host = request.env['HTTP_HOST'].split(':')[0]
     user = find_or_create_user(auth)
     response.set_cookie(ONE_TIME_TOKEN_COOKIE, :value => user['one_time_token'], :path => '/')
     haml :redirect, :locals => {:to => "/"}
@@ -40,7 +40,6 @@ class WomptAuth < Sinatra::Base
         user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'])
       else
         puts "Creating User"
-        puts info.inspect
         user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
         user['email'] = info['email'] if info['email']
         user['name'] = info['name'] if info['name']
