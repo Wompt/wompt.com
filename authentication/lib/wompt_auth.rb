@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'openid/store/filesystem'
 require 'lib/models/user'
+require 'lib/config'
 
 Mongomatic.db = Mongo::Connection.new.db(CONFIG[:database])
 
