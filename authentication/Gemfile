@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "sinatra"
-gem "omniauth"
+gem "omniauth", ">= 0.2.0.beta1"
 gem "json"
 gem "mongomatic"
 gem "haml"
