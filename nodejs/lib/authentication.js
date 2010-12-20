@@ -78,12 +78,14 @@ function Auth(config){
 	this.sign_out_user = function(req, res, callbacks){
 		var token = this.get_token(req);
 		var user = req.user;
-		this.clear_token(res);		
-		user.sessions.forEach(function(session, index){
-			if(session.token == token)
-				delete user.sessions[index];
-		});
-		user.save();
+		this.clear_token(res);
+		if(user){
+			user.sessions.forEach(function(session, index){
+				if(session.token == token)
+					delete user.sessions[index];
+			});
+			user.save();
+		}
 	}
 		
 		
