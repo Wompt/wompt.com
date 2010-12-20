@@ -31,7 +31,7 @@ class WomptAuth < Sinatra::Base
     host = request.env['HTTP_HOST'].match(/^([^:]+)(?:\:\d+)$/)[1]
     user = find_or_create_user(auth)
     response.set_cookie(ONE_TIME_TOKEN_COOKIE, :value => user['one_time_token'], :path => '/')
-    haml :redirect, :locals => {:to => "http://#{host}:8001/"}
+    haml :redirect, :locals => {:to => "/"}
   end
   
   def find_or_create_user auth
