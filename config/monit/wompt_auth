@@ -1,0 +1,4 @@
+check process wompt_auth
+	with pidfile <%= current_path %>/authentication/tmp/wompt_auth.pid
+	start "/sbin/start wompt_auth"
+	stop "/sbin/stop wompt_auth"
