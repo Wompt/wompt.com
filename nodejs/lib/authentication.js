@@ -31,7 +31,7 @@ function Auth(config){
 			if(token){
 				wompt.User.find({one_time_token: token}).first(function(user){
 					if(user){
-						delete user.one_time_token;
+						user.one_time_token = null;
 						// start_session calls user.save
 						me.start_session(res, user);
 						req.user = user;
