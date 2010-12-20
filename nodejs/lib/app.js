@@ -53,15 +53,16 @@ App.prototype = {
 			,'/privacy'
 		]);
 		
-		exp.get("/chat/:channel", function(req, res, params){
+		exp.get(/\/chat\/(.+)/, function(req, res, params){
 			var session_id = wompt.Auth.generate_token(),
-			    user = req.user || new wompt.User();
+			    user = req.user || new wompt.User(),
+					channel = req.params[0];
 					
 			wompt.Auth.get_or_set_token(req, res);
 
 			me.user_sessions.add({id:session_id, user:user.wrap(), t: new Date()});
 			var locals = me.standard_page_vars(req, {
-				channel: req.params.channel,
+				channel: channel,
 				session_id: session_id,
 				url: req.url
 			});
