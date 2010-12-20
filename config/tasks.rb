@@ -1,15 +1,23 @@
 namespace :deploy do
+  set :apps, [application, 'wompt_auth']
+  
   desc "Start the server"
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo :as => 'root'} start #{application}"
+    apps.each do |app_name|
+      run "#{try_sudo :as => 'root'} start #{app_name}"
+    end
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo :as => 'root'} stop #{application}"
+    apps.each do |app_name|
+      run "#{try_sudo :as => 'root'} stop #{app_name}"
+    end
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo :as => 'root'} restart #{application} || #{try_sudo :as => 'root'} start #{application}"
+    apps.each do |app_name|
+      run "#{try_sudo :as => 'root'} restart #{app_name} || #{try_sudo :as => 'root'} start #{app_name}"
+    end
   end
 
   desc "Update git submodules for the cached copy (Cpaistrano 2.5.20 will do this automatically)"
