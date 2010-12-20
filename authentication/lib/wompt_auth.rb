@@ -14,6 +14,11 @@ class WomptAuth < Sinatra::Base
     :secret => 'C6xyESB0FdkabrhtBxOlPikZTS0jKnQRq1vMfluX'
   
   use OmniAuth::Builder do
+    if settings.environment == :production
+      provider :github , '39af35ac1c5189438931' , 'eff1d530e71b571ca58f787a95c62900fa5623c6', :scope => nil
+    else
+      provider :github , '60ae284d5c81eceaebe1' , '2bac1bc17e414ad15eee27403c6cd900623ae9b4', :scope => nil
+    end
     provider :facebook , '181725458505189' , '5afa28d747aabd3d1a6ce71d26933c14', :scope => 'email'
     provider :open_id, nil, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :scope => 'email'
   end
