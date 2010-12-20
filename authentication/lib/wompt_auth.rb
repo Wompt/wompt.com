@@ -37,16 +37,18 @@ class WomptAuth < Sinatra::Base
   
   def find_or_create_user auth
     info = auth['user_info']
-    if user = User.find_one('authentications' => {'provider' => auth['provider'], 'uid' => auth['uid']})
-      puts "Found User by auth"
-    elsif (email = info['email']) && (user = User.find_one('email' => email))
-      puts "Found User by email"
-      user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'])
-    else
-      puts "Creating User"
-      user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
-      user['email'] = info['email'] if info['email']
-      user['name'] = info['name'] if info['name']
+    user = User.find_one('authentications' => {'provider' => auth['provider'], 'uid' => auth['uid']})
+    
+    if !user
+      if (email = info['email']) && (user = User.find_one('email' => email))
+        user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'])
+      else
+        puts "Creating User"
+        puts info.inspect
+        user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
+        user['email'] = info['email'] if info['email']
+        user['name'] = info['name'] if info['name']
+      end
     end
     
     user['one_time_token'] = generate_token
@@ -55,6 +57,6 @@ class WomptAuth < Sinatra::Base
   end
   
   def generate_token
-    ActiveSupport::SecureRandom.base64(16)
+    ActiveSupport::SecureRandom.base64(20)
   end
 end
