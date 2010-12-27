@@ -1,11 +1,9 @@
 var http   = require("http"),
     url    = require("url"),
     wompt  = require("./includes"),
-    io     = require("socket.io"),
     logger = wompt.logger,
-    mongodb = wompt.db,
+    SocketIO= wompt.socketIO,
     express = require("express");
-
 
 function App(options){
 	this.channels = new wompt.ChannelManager();
@@ -32,6 +30,7 @@ App.prototype = {
 			exp.use(wompt.Auth.forward_to_auth_app_middleware());
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(express.staticProvider(config.public_dir));
+			exp.use(express.staticProvider(config.root + '/vendor/Socket.IO/'));
 			exp.use(express.cookieDecoder());
 			exp.use(express.bodyDecoder());
 			exp.use(wompt.Auth.one_time_token_middleware());
@@ -151,7 +150,7 @@ App.prototype = {
 		if(this.socket) return;
 		var app = this;
 		
-		this.socket = io.listen(this.express);
+		this.socket = SocketIO.listen(this.express);
 		this.socket.on('connection', function(client){
 			app.new_connection(client);
 		}); 		
