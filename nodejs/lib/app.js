@@ -128,7 +128,7 @@ App.prototype = {
 	standard_page_vars: function(req, custom_vars){
 		var vars = {
 			url: req.url,
-			user: req.user,
+			user: req.meta_user,
 			footer: true,
 			host: req.headers.host.split(':')[0]
 		};
