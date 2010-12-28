@@ -11,7 +11,7 @@
 
 var fs = require('fs'),
     Path = require('path'),
-    utils = require('../utils'),
+    utils = require('connect/utils'),
     Buffer = require('buffer').Buffer,
     parseUrl = require('url').parse,
     queryString = require('querystring');
@@ -56,6 +56,7 @@ module.exports = function staticProvider(options){
         maxAge = options.maxAge;
         root = process.connectEnv.staticRoot || options.root || process.cwd();
         cache = options.cache;
+        matcher = options.match;
         if (cache && !maxAge) maxAge = cache;
         maxAge = maxAge || MAX_AGE;
     }
@@ -71,6 +72,8 @@ module.exports = function staticProvider(options){
         if (~url.pathname.indexOf('..')) {
             return forbidden(res);
         }
+
+        if(matcher && !url.pathname.match(matcher)) return next();
 
         // Absolute path
         filename = Path.join(root, queryString.unescape(url.pathname));
