@@ -39,6 +39,7 @@ App.prototype = {
 			exp.use(express.bodyDecoder());
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.Auth.lookup_user_middleware());
+			exp.use(wompt.Auth.meta_user_middleware);
 		});
 		
 		exp.helpers({

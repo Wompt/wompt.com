@@ -35,7 +35,6 @@ function Auth(config){
 						// start_session calls user.save
 						me.start_session(res, user);
 						req.user = user;
-						req.meta_user = user.wrap();
 					}
 					next();
 				});
@@ -45,22 +44,21 @@ function Auth(config){
 	}
 	
 	this.lookup_user_middleware = function(){
-		var me = this;
+		var token, me = this;
 		return function(req, res, next){
 			if(req.user) next();
-			else{
-				var token = me.get_token(req);
-				if(token){
-					me.get_user_from_token(token, function(user){
-						if(user){
-							req.user = user;
-							req.meta_user = user.wrap();
-						}
-						next();
-					});
-				} else next();
-			}
+			else if(token = me.get_token(req)){
+				me.get_user_from_token(token, function(user){
+					if(user) req.user = user;
+					next();
+				});
+			} else next();
 		}
+	}
+	
+	this.meta_user_middleware = function(req, res, next){
+		req.meta_user = req.meta_user || (req.user ? req.user.wrap() : new wompt.MetaUser());
+		next();
 	}
 	
 	this.sign_in_user = function(params, callbacks){
