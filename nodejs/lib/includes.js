@@ -1,19 +1,19 @@
-var env = exports.env = require("../environment");
+var e = module.exports;
+var env = e.env = require("../environment");
 require.paths.unshift(env.root + '/vendor');
 
-
-exports.logger    = require("./logger");
-exports.Channel   = require("./channel").Channel;
-exports.ClientPool  = require("./client_pool").ClientPool;
-exports.MessageList = require("./message_list").MessageList;
-exports.Auth        = require("./authentication").Auth;
-exports.mongoose    = require('mongoose/mongoose').Mongoose;
-exports.db          = require('./db').db;
-exports.User        = require("./user");
-exports.UserSessions= require("./user_sessions");
-exports.ChannelManager = require('./channel_manager');
-exports.socketIO    = require("Socket.IO-node/index");
-exports.Helpers     = {
-	Assets:             require('./helpers/assets')
-}
-exports.App       = require("./app");
+e.logger         = require("./logger");
+e.Channel        = require("./channel").Channel;
+e.ClientPool     = require("./client_pool").ClientPool;
+e.MessageList    = require("./message_list").MessageList;
+e.Auth           = require("./authentication").Auth;
+e.mongoose       = require('mongoose/mongoose').Mongoose;
+e.db             = require('./db').db;
+e.User           = require("./user");
+e.UserSessions   = require("./user_sessions");
+e.ChannelManager = require('./channel_manager');
+e.socketIO       = require("Socket.IO-node/index");
+e.Helpers        = {
+	Assets:          require('./helpers/assets')
+};
+e.App            = require("./app");
