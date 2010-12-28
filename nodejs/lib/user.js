@@ -45,5 +45,8 @@ wompt.mongoose.model('User',{
 	}
 });
 
-module.exports = db.model('User');
+module.exports = {
+	User: db.model('User'),
+	MetaUser: MetaUser
+};
 
