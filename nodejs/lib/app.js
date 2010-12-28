@@ -58,12 +58,12 @@ App.prototype = {
 		
 		exp.get(/\/chat\/(.+)/, function(req, res, params){
 			var session_id = wompt.Auth.generate_token(),
-			    user = req.user || new wompt.User(),
+			    meta_user = req.meta_user,
 					channel = req.params[0];
 					
 			wompt.Auth.get_or_set_token(req, res);
 
-			me.user_sessions.add({id:session_id, user:user.wrap(), t: new Date()});
+			me.user_sessions.add({id:session_id, meta_user:meta_user, t: new Date()});
 			var locals = me.standard_page_vars(req, {
 				channel: channel,
 				session_id: session_id,
@@ -168,10 +168,10 @@ App.prototype = {
 
 		client.once('message', function(data){
 			if(data && data.action == 'join'){
-				var session = app.user_sessions.get(data.session_id);
-				client.user = session.user;
-				client.anonymous = session.user.isNew;
-				session.user.clients.add(client);
+				var session = app.user_sessions.get(data.session_id),
+				    user    = session.meta_user || new wompt.MetaUser();
+				client.user = user;
+				user.clients.add(client);
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = app.channels.get(data.channel);

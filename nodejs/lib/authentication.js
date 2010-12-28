@@ -35,6 +35,7 @@ function Auth(config){
 						// start_session calls user.save
 						me.start_session(res, user);
 						req.user = user;
+						req.meta_user = user.wrap();
 					}
 					next();
 				});
@@ -51,7 +52,10 @@ function Auth(config){
 				var token = me.get_token(req);
 				if(token){
 					me.get_user_from_token(token, function(user){
-						if(user) req.user = user;
+						if(user){
+							req.user = user;
+							req.meta_user = user.wrap();
+						}
 						next();
 					});
 				} else next();
