@@ -16,26 +16,29 @@ function Channel(config){
 	
 	this._client_disconnected = function(){
 		var client = this;
-		channel.broadcast_user_list_change({
-			part: [{
-				name: client.user ? client.user.doc.name : 'anonymous',
-				id: client.user.doc._id
-			}]
-		});
+		if(client.user.visible){
+			channel.broadcast_user_list_change({
+				part: [{
+					name: client.user.doc ? client.user.doc.name : 'anonymous',
+					id: client.user.doc._id
+				}]
+			});
+		}
 	}
 }
 
 Channel.prototype = {
 	add_client: function(client){
 		this.clients.add(client);
-		
-		this.broadcast_user_list_change({
-			join: [{
-				name: client.user ? client.user.doc.name : 'anonymous',
-				id: client.user.doc._id
-			}],
-			except: client
-		});
+		if(client.user.visible){
+			this.broadcast_user_list_change({
+				join: [{
+					name: client.user.doc ? client.user.doc.name : 'anonymous',
+					id: client.user.doc._id
+				}],
+				except: client
+			});
+		}
 		
 		this.send_user_list(client);
 		
@@ -76,7 +79,7 @@ Channel.prototype = {
 		var users = [], list = this.clients.list;
 		for(var id in list){
 			var cl = list[id];
-			if(cl.user.doc)
+			if(cl.user.visible && cl.user.doc)
 				users.push({
 					name: cl.user.doc.name || 'anonymous',
 					id: cl.user.doc._id

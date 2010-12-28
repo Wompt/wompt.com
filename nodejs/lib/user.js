@@ -4,6 +4,7 @@ var wompt = require("./includes"),
 MetaUser = function(doc){
 	this.clients = new wompt.ClientPool();
 	this.doc = doc;
+	this.visible = !!doc;
 	this.readonly = !doc;
 };
 
