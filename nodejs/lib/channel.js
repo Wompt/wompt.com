@@ -49,6 +49,7 @@ Channel.prototype = {
 	
 	action_responders: {
 		post: function(data){
+			if(data.from_client.user.readonly) return;
 			this.broadcast_message({
 				action: 'message',
 				msg: data.msg,

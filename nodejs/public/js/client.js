@@ -16,20 +16,24 @@ $(document).ready(function(){
 
 	IO.connect();
 	
-	$('#message').keydown(function(e){
-		if(e.keyCode == 13){
-			var el = $(this),
-			    message = $.trim(el.val());
-					
-			if(message.length > 0){
-				IO.socket.send({chan: channel, action:'post', msg:message});
-				el.val('');
+	if(!readonly){
+		$('#message').keydown(function(e){
+			if(e.keyCode == 13){
+				var el = $(this),
+						message = $.trim(el.val());
+						
+				if(message.length > 0){
+					IO.socket.send({chan: channel, action:'post', msg:message});
+					el.val('');
+				}
+				
+				e.preventDefault();
 			}
-			
-			e.preventDefault();
-		}
-	});
-	
+		});
+	}else {
+		$('#message').val('Sign in to send messages');
+		$('#message').attr('disabled', 'disabled');
+	}
 	$('#stats').click(function(e){
 		IO.socket.send({chan: channel, action:'stats'});
 	});
@@ -68,9 +72,11 @@ function IO(){
 
 
 function UI(){
-	IO.socket.on('connect', function(){
-		$('#message').attr('disabled', false).focus();
-	});
+	if(!readonly){
+		IO.socket.on('connect', function(){
+			$('#message').attr('disabled', false).focus();
+		});
+	}
 	
 	this.appendMessage = function(data){
 		var line = $('<div>'),

@@ -3,7 +3,8 @@ var wompt = require("./includes"),
 
 MetaUser = function(doc){
 	this.clients = new wompt.ClientPool();
-	this.doc = doc
+	this.doc = doc;
+	this.readonly = !doc;
 };
 
 wompt.mongoose.model('User',{

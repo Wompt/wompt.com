@@ -131,7 +131,8 @@ App.prototype = {
 			url: req.url,
 			user: req.meta_user,
 			footer: true,
-			host: req.headers.host.split(':')[0]
+			host: req.headers.host.split(':')[0],
+			config: this.config
 		};
 		
 		if(custom_vars){
