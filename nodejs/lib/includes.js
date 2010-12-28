@@ -17,3 +17,6 @@ e.Helpers        = {
 	Assets:          require('./helpers/assets')
 };
 e.App            = require("./app");
+e.middleware     = {
+	staticProvider:  require('./middleware/staticProvider')
+};
