@@ -79,7 +79,9 @@ App.prototype = {
 		exp.get("/", function(req, res, params){
 			wompt.Auth.get_or_set_token(req, res);
 			res.render('index', {
-				locals: me.standard_page_vars(req)
+				locals: me.standard_page_vars(req, {
+					subtitle: me.choose_subtitle()
+				})
 			});
 		});
 
@@ -147,6 +149,14 @@ App.prototype = {
 		return {
 			w:vars
 		};
+	},
+	
+	choose_subtitle: function(){
+		var subtitles = [
+			 "Try it free, no signup required"
+			,"Always free, sign in using Facebook"
+		];
+		return subtitles[Math.floor(Math.random() * subtitles.length)];
 	},
 	
 	start_server: function(){
