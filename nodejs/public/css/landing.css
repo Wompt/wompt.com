@@ -10,24 +10,12 @@
 	margin-bottom:0.7em;
 }
 
-#landing .left,
-#landing .right {
-	width:50%;
-	padding:0px;
-}
-
-#landing .left{
-	float:left;
-	margin-left:10%;
+#landing .channel_selector{
+	margin:5em auto;
 	text-align:center;
 }
 
-#landing .right{
-	float:right;
-	width:40%;
-}
-
-#landing .left input.text {
+#landing .channel_selector input.text {
 	margin-left: auto;
 	margin-right: auto;
 	border:5px solid #ef6f2f;
@@ -42,7 +30,7 @@
 }
 
 
-#landing .left input.text.big {
+#landing .channel_selector input.text.big {
 	font-size: 1.3em;
 	width: 300px;
 }
@@ -51,41 +39,4 @@
 	font-size: 1.1em;
 	margin: 1em 0.5em;
 	padding: 2px 10px 2px 10px;
-}
-
-
-#landing .right {
-	font-size:1em;
-}
-
-#landing .right table{
-	margin:0em auto;
-	border-collapse:collapse;
-}
-
-#landing .right th{
-	font-size:0.8em;
-	color:#888;
-	text-align:right;
-	padding-bottom:0.2em;
-	padding-right:0.5em;
-}
-
-#landing .right .day,
-#landing .right .month,
-#landing .right .year{
-	width:57px;
-	float:left;
-	margin-right:8px;
-	padding-left:3px;
-}
-
-
-#landing .right input.submit {
-	margin:0.2em 0px;
-}
-
-#landing .right label {
-	display: block;
-	padding-top: .7em;
 }
