@@ -3,6 +3,6 @@
 		h1.title Wompt is Chat
 		.subtitle #{w.subtitle}
 		form(method='post')
-			input.text.big#channel(name='channel', type='text')
+			input.text.big.inline_label#channel(name='channel', title="Chat topic", type='text')
 			input.submit#join(type='submit', value="Join Chat Channel")
 	.clear
