@@ -50,8 +50,6 @@ App.prototype = {
 		exp.set('view engine', 'jade');
 		
 		this.plain_routes(exp, [
-			 '/users/new'
-			,'/users/sign_in'
 			,'/support'
 			,'/terms'
 			,'/privacy'
@@ -85,33 +83,11 @@ App.prototype = {
 			});
 		});
 
-		
 		exp.post("/", function(req, res, params){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + req.body.channel);
 		});
 		
-		
-		exp.post("/users/new", function(req, res, params){
-			b = req.body;
-			wompt.User.find({$or: [{name: b.name} , {email: b.email}]}).first(function(doc){
-				if(doc == null){
-					//todo sanity check user input
-					var user = new wompt.User({
-						name: b.name,
-						email: b.email,
-						password: b.password
-					});
-					user.save();
-					wompt.Auth.start_session(res, user);
-					res.redirect('/');	
-				}
-				else {
-					res.redirect("/users/new");
-				}
-			});
-		});
-
 		if(wompt.env.force_sign_in){
 			exp.get("/users/force_sign_in/:num", function(req, res, params){
 				var num = parseInt(req.params.num);
