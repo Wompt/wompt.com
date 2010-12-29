@@ -110,13 +110,17 @@ App.prototype = {
 			});
 		});
 
-
-		exp.post("/users/sign_in", function(req, res, params){
-			wompt.Auth.sign_in_user(req.body, {success:function(user){
-				wompt.Auth.start_session(res, user);
-				res.redirect('/chat/room1');
-			}});
-		});
+		if(wompt.env.force_sign_in){
+			exp.get("/users/force_sign_in/:num", function(req, res, params){
+				var num = parseInt(req.params.num);
+				wompt.User.find().skip(num-1).first(function(user){
+					if(user){
+						wompt.Auth.start_session(res, user);
+					}
+					res.redirect('/');
+				});
+			});
+		}
 
 		exp.get("/users/sign_out", function(req, res, params){
 			wompt.Auth.sign_out_user(req, res);

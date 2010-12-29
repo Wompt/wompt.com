@@ -33,6 +33,11 @@ html
 					a(href="/auth/facebook", title="Sign in using Facebook") Facebook
 					|, 
 					a(href="/auth/github", title="Sign in using Github") Github
+					- if(w.config.force_sign_in)
+						|, 
+						a(href="/users/sign_in/1", title="Force sign in as the first user") User 1
+						|, 
+						a(href="/users/sign_in/2", title="Force Sign in as the second user") User 2
 			#logo.top_left
 				a(href="/", title="Wompt.com")
 					img(src=assets.path("/images/logo/white_30.png"))

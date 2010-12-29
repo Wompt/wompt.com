@@ -57,7 +57,7 @@ Channel.prototype = {
 				action: 'message',
 				msg: data.msg,
 				from:{
-					name: data.from_client.user.doc.name || 'anonymous',
+					name: data.from_client.user.doc.name,
 					id: data.from_client.user.doc._id
 				}
 			});
