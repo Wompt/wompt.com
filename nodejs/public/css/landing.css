@@ -2,12 +2,15 @@
 	margin-top:1em;
 }
 
-#landing h2{
+#landing .title{
 	margin-bottom:0.2em;
+	color: #555;
 }
 
 #landing .subtitle{
 	margin-bottom:0.7em;
+	font-size:1.2em;
+	color:#777;
 }
 
 #landing .channel_selector{
