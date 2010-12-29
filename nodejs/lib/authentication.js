@@ -61,16 +61,6 @@ function Auth(config){
 		next();
 	}
 	
-	this.sign_in_user = function(params, callbacks){
-		wompt.User.find({name: params.name}).first(function(doc){
-			if(doc){
-				callbacks.success && callbacks.success(doc);
-			}else if(callbacks.failure) {
-				callbacks.failure && callbacks.failure();
-			}
-		});
-	}
-	
 	this.start_session = function(res, user){
 		var token = this.set_token(res);
 		user.sessions = [{token: token}];
