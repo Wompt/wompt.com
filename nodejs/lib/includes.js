@@ -13,6 +13,7 @@ e.User           = require("./user").User;
 e.MetaUser       = require("./user").MetaUser;
 e.UserSessions   = require("./user_sessions");
 e.ChannelManager = require('./channel_manager');
+e.Expirer        = require('./expirer');
 e.socketIO       = require("Socket.IO-node/index");
 e.Helpers        = {
 	Assets:          require('./helpers/assets')
