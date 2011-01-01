@@ -37,7 +37,6 @@ $(document).ready(function(){
 	$('#stats').click(function(e){
 		IO.socket.send({chan: channel, action:'stats'});
 	});
-
 });
 
 
@@ -62,7 +61,7 @@ function IO(){
 
 	this.connect = function(){
 		socket.connect();
-		socket.send({channel: channel, action: 'join', session_id: session_id});
+		socket.send({channel: channel, action: 'join', connector_id: connector_id});
 	}
 	
 	this.addMessageHandler = function(handler){

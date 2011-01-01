@@ -11,7 +11,7 @@ function App(options){
 	this.pretty_print_config();
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
-	this.user_sessions = new wompt.UserSessions();
+	this.client_connectors = new wompt.ClientConnectors();
 }
 
 App.prototype = {
@@ -56,16 +56,15 @@ App.prototype = {
 		]);
 		
 		exp.get(/\/chat\/(.+)/, function(req, res, params){
-			var session_id = wompt.Auth.generate_token(),
-			    meta_user = req.meta_user,
+			var meta_user = req.meta_user,
 					channel = req.params[0];
 					
 			wompt.Auth.get_or_set_token(req, res);
 
-			me.user_sessions.add({id:session_id, meta_user:meta_user, t: new Date()});
+			var connector = me.client_connectors.add({meta_user:meta_user});
 			var locals = me.standard_page_vars(req, {
 				channel: channel,
-				session_id: session_id,
+				connector_id: connector.id,
 				url: req.url
 			});
 			
@@ -160,8 +159,8 @@ App.prototype = {
 
 		client.once('message', function(data){
 			if(data && data.action == 'join'){
-				var session = app.user_sessions.get(data.session_id),
-				    user    = session.meta_user || new wompt.MetaUser();
+				var connector = app.client_connectors.get(data.connector_id),
+				    user      = connector.meta_user || new wompt.MetaUser();
 				client.user = user;
 				user.clients.add(client);
 				
