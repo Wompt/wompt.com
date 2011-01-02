@@ -56,9 +56,27 @@ function Auth(config){
 		}
 	}
 	
-	this.meta_user_middleware = function(req, res, next){
-		req.meta_user = req.meta_user || (req.user ? req.user.wrap() : new wompt.MetaUser());
-		next();
+	this.meta_user_middleware = function(collection){
+		return function(req, res, next){
+			var mu;
+			if(req.meta_user)
+				mu = req.meta_user;
+			else if(req.user){
+				var lookup = collection[req.user._id.id];
+				if(lookup){
+					mu = lookup;
+					console.log("Found meta user: " + req.user._id.id);
+				} else {
+					mu = collection[req.user._id.id] = req.user.wrap();
+					console.log("Creating meta user: " + req.user._id.id);
+				}
+			}	else {
+				mu = new wompt.MetaUser();
+			}
+			req.meta_user = mu;
+			
+			next();
+		}
 	}
 	
 	this.start_session = function(res, user){

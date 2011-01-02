@@ -6,6 +6,7 @@ var http   = require("http"),
     express = require("express");
 
 function App(options){
+	this.meta_users = {};
 	this.channels = new wompt.ChannelManager();
 	this.config = options.config;
 	this.pretty_print_config();
@@ -39,7 +40,7 @@ App.prototype = {
 			exp.use(express.bodyDecoder());
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.Auth.lookup_user_middleware());
-			exp.use(wompt.Auth.meta_user_middleware);
+			exp.use(wompt.Auth.meta_user_middleware(me.meta_users));
 		});
 		
 		exp.helpers({
