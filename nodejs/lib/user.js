@@ -1,12 +1,5 @@
 var wompt = require("./includes"),
-    db = wompt.db,
-
-MetaUser = function(doc){
-	this.clients = new wompt.ClientPool();
-	this.doc = doc;
-	this.visible = !!doc;
-	this.readonly = !doc;
-};
+    db = wompt.db;
 
 wompt.mongoose.model('User',{
 
@@ -38,7 +31,7 @@ wompt.mongoose.model('User',{
 	
 	methods: {
 		wrap: function(){
-			return new MetaUser(this);
+			return new wompt.MetaUser(this);
 		},
 		
 		signed_up: function(){
@@ -47,8 +40,5 @@ wompt.mongoose.model('User',{
 	}
 });
 
-module.exports = {
-	User: db.model('User'),
-	MetaUser: MetaUser
-};
+module.exports = db.model('User');
 
