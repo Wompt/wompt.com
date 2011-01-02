@@ -62,13 +62,12 @@ function Auth(config){
 			if(req.meta_user)
 				mu = req.meta_user;
 			else if(req.user){
-				var lookup = collection[req.user._id.id];
+				var lookup = collection.get(req.user._id.id);
 				if(lookup){
 					mu = lookup;
-					console.log("Found meta user: " + req.user._id.id);
 				} else {
-					mu = collection[req.user._id.id] = req.user.wrap();
-					console.log("Creating meta user: " + req.user._id.id);
+					mu = req.user.wrap();
+					collection.set(req.user._id.id, mu);
 				}
 			}	else {
 				mu = new wompt.MetaUser();

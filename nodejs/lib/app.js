@@ -6,7 +6,7 @@ var http   = require("http"),
     express = require("express");
 
 function App(options){
-	this.meta_users = {};
+	this.meta_users = new wompt.MetaUserManager();
 	this.channels = new wompt.ChannelManager();
 	this.config = options.config;
 	this.pretty_print_config();

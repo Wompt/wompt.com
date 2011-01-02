@@ -10,6 +10,7 @@ e.Auth           = require("./authentication").Auth;
 e.mongoose       = require('mongoose/mongoose').Mongoose;
 e.db             = require('./db').db;
 e.MetaUser       = require("./meta_user");
+e.MetaUserManager= require("./meta_user_manager");
 e.User           = require("./user");
 e.ClientConnectors=require("./client_connectors");
 e.ChannelManager = require('./channel_manager');

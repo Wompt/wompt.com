@@ -13,10 +13,12 @@ function Expirer(collection, options){
 	function check_expiration(){
 		var i = 0,
 		    expire_time = new Date() - options.expire_after_ms,
-				time_attr = options.time_attribute;
+				time_attr = options.time_attribute,
+				keep_if = options.keep_if;
 		
 		for(var k in collection){
-			if(collection[k][time_attr] < expire_time){
+			var obj = collection[k];
+			if(obj[time_attr] < expire_time && (!keep_if || keep_if(obj))){
 				delete collection[k]
 			}
 		}
