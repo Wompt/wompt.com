@@ -3,6 +3,7 @@ var wompt = require("./includes"),
 
 function Auth(config){
 	config = config || {};
+	var me = this;
 	this.COOKIE_KEY = config.cookie_key || '_wompt_auth';
 	this.ONE_TIME_TOKEN_COOKIE_KEY = config.one_time_token_cookie_key || 'wompt_auth_one_time_token';
 	this.TOKEN_VALID_DURATION = (14 * 24 * 60 * 60 * 1000);
@@ -24,7 +25,6 @@ function Auth(config){
 	}
 	
 	this.one_time_token_middleware = function(){
-		var me = this;
 		return function(req, res, next){
 			var token = req.cookies[me.ONE_TIME_TOKEN_COOKIE_KEY];
 			if(token){
@@ -44,7 +44,7 @@ function Auth(config){
 	}
 	
 	this.lookup_user_middleware = function(){
-		var token, me = this;
+		var token;
 		return function(req, res, next){
 			if(req.user) next();
 			else if(token = me.get_token(req)){
