@@ -8,7 +8,7 @@ function Expirer(collection, options){
 		timer;
 		
 	options = utils.merge(defaults, options || {});
-	options.cleanup_interval = options.check_interval || options.expire_ms;
+	options.cleanup_interval = options.check_interval || options.expire_after_ms;
 	
 	function check_expiration(){
 		var i = 0,
@@ -18,8 +18,8 @@ function Expirer(collection, options){
 		
 		for(var k in collection){
 			var obj = collection[k];
-			if(obj[time_attr] < expire_time && (!keep_if || keep_if(obj))){
-				delete collection[k]
+			if(obj[time_attr] < expire_time && !(keep_if && keep_if(obj))){
+				delete collection[k];
 			}
 		}
 	}
