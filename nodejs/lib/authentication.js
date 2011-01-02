@@ -72,6 +72,7 @@ function Auth(config){
 			}	else {
 				mu = new wompt.MetaUser();
 			}
+			mu.touch();
 			req.meta_user = mu;
 			
 			next();

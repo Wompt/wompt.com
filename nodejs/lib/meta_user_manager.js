@@ -6,7 +6,7 @@ function MetaUserManager(){
 		keep_if: function(mu){
 			return mu.clients.count > 0;
 		},
-		time_attribute:'t'
+		time_attribute:'touched'
 	});
 }
 
@@ -18,6 +18,5 @@ p.get = function(id){
 p.set = function(id, mu){
 	this.meta_users[id] = mu;
 }
-
 
 module.exports = MetaUserManager;

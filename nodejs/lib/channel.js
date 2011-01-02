@@ -11,6 +11,7 @@ function Channel(config){
 	// Called from the context of the client
 	this._message_from_client = function(msg){
 		msg.from_client = this;
+		this.user.touch();
 		channel.receive_message(msg);
 	}
 	
