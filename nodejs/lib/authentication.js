@@ -70,7 +70,14 @@ function Auth(config){
 					collection.set(req.user._id.id, mu);
 				}
 			}	else {
-				mu = new wompt.MetaUser();
+				var token = me.get_token(req),
+				    lookup = collection.get(token);
+				if(lookup){
+					mu = lookup;
+				} else {
+					mu = new wompt.MetaUser();
+					collection.set(token, mu);
+				}
 			}
 			mu.touch();
 			req.meta_user = mu;
