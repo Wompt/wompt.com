@@ -29,7 +29,7 @@ function Expirer(collection, options){
 	}
 	
 	this.start = function(){
-		if(!timer) timer = setInterval(check_expiration, options.check_interval);	
+		if(!timer) timer = setInterval(check_expiration, options.cleanup_interval);	
 	}
 
 	this.start();
