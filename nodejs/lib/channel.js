@@ -105,16 +105,7 @@ Channel.prototype = {
 	},
 	
 	broadcast_message: function(msg, except){
-		this.broadcast(msg, except);
-	},
-	
-	broadcast: function(msg, except){
-		var list = this.clients.list;
-		for(var id in list){
-			var client = list[id];
-			if(except == client) continue;
-			client.send(msg);
-		}
+		this.clients.broadcast(msg, except);
 	}
 }
 

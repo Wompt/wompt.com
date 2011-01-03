@@ -24,4 +24,13 @@ proto.remove = function(client){
 	this.count--;
 };
 
+proto.broadcast = function(msg, except){
+	var list = this.list;
+	for(var id in list){
+		var client = list[id];
+		if(except == client) continue;
+		client.send(msg);
+	}
+};
+
 exports.ClientPool = ClientPool;
