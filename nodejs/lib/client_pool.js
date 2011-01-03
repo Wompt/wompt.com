@@ -11,17 +11,17 @@ function ClientPool(){
 	}
 }
 
-ClientPool.prototype = {
-	add: function(client){
-		this.list[client.sessionId] = client;
-		this.count++;
-		client.on('disconnect', this._on_client_disconnect);
-	},
+var proto = ClientPool.prototype;
+
+proto.add = function(client){
+	this.list[client.sessionId] = client;
+	this.count++;
+	client.on('disconnect', this._on_client_disconnect);
+};
 	
-	remove: function(client){
-		delete this.list[client.sessionId];
-		this.count--;
-	},
-}
+proto.remove = function(client){
+	delete this.list[client.sessionId];
+	this.count--;
+};
 
 exports.ClientPool = ClientPool;
