@@ -163,13 +163,13 @@ App.prototype = {
 				var connector = app.client_connectors.get(data.connector_id),
 				    user      = connector.meta_user || new wompt.MetaUser();
 				client.user = user;
-				user.clients.add(client);
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = app.channels.get(data.channel);
 				if(channel){
 					channel.add_client(client);
 				}
+				user.clients.add(client);
 			}
 		});
 	},

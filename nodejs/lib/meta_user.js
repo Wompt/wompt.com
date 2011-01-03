@@ -7,6 +7,13 @@ function MetaUser(doc){
 	this.visible = !!doc;
 	this.readonly = !doc;
 	this.touch();
+	
+	this.clients.on('added', function(client){
+		me.clients.broadcast({
+			action: 'new_client',
+			channel: client.meta_data.channel.name
+		},client);
+	});	
 };
 
 

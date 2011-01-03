@@ -30,7 +30,12 @@ function Channel(config){
 
 Channel.prototype = {
 	add_client: function(client){
+		client.meta_data = {
+			channel:this
+		};
+
 		this.clients.add(client);
+
 		if(client.user.visible){
 			this.broadcast_user_list_change({
 				join: [{

@@ -1,3 +1,4 @@
+var EventEmitter = require('events').EventEmitter;
 
 function ClientPool(){
 	var list = {};
@@ -11,11 +12,12 @@ function ClientPool(){
 	}
 }
 
-var proto = ClientPool.prototype;
+var proto = ClientPool.prototype = new EventEmitter();;
 
 proto.add = function(client){
 	this.list[client.sessionId] = client;
 	this.count++;
+	this.emit('added', client);
 	client.on('disconnect', this._on_client_disconnect);
 };
 	
