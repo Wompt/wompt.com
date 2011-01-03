@@ -33,8 +33,9 @@ function Auth(config){
 					if(user){
 						user.one_time_token = null;
 						// start_session calls user.save
-						me.start_session(res, user);
+						var session = me.start_session(res, user);
 						req.user = user;
+						res.new_session = session;
 					}
 					next();
 				});
@@ -80,6 +81,7 @@ function Auth(config){
 				}
 			}
 			mu.touch();
+			if(res.new_session) mu.new_session(res.new_session);
 			req.meta_user = mu;
 			
 			next();
