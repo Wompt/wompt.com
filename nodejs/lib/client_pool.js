@@ -26,6 +26,14 @@ proto.remove = function(client){
 	this.count--;
 };
 
+proto.each = function(iter){
+	var list = this.list;
+	for(var id in list){
+		iter(list[id], id);
+	}
+}
+
+
 proto.broadcast = function(msg, options){
 	var except_client, only;
 	if(options){
