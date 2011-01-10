@@ -26,11 +26,19 @@ proto.remove = function(client){
 	this.count--;
 };
 
-proto.broadcast = function(msg, except){
+proto.broadcast = function(msg, options){
+	var except_client, only;
+	if(options){
+		if(options.meta_data)
+			except_client = options;
+		else
+			only = options.only;
+	}
 	var list = this.list;
 	for(var id in list){
 		var client = list[id];
-		if(except == client) continue;
+		if(except_client && (except_client == client)) continue;
+		if(only && !only(client)) continue;
 		client.send(msg);
 	}
 };
