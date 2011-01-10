@@ -103,8 +103,10 @@ function Auth(config){
 		this.clear_token(res);
 		if(user){
 			user.sessions.forEach(function(session, index){
-				if(session.token == token)
+				if(session.token == token){
 					delete user.sessions[index];
+					req.meta_user.end_session(session);
+				}
 			});
 			user.save();
 		}

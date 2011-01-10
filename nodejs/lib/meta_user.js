@@ -27,4 +27,10 @@ MetaUser.prototype.new_session = function(session){
 	});
 }
 
+MetaUser.prototype.end_session = function(session){
+	this.clients.broadcast({
+		action: 'end_session'
+	});
+}
+
 module.exports = MetaUser
