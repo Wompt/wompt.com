@@ -60,9 +60,13 @@ App.prototype = {
 			var meta_user = req.meta_user,
 					channel = req.params[0];
 					
-			wompt.Auth.get_or_set_token(req, res);
+			var token = wompt.Auth.get_or_set_token(req, res);
 
-			var connector = me.client_connectors.add({meta_user:meta_user});
+			var connector = me.client_connectors.add({
+				meta_user:meta_user,
+				token: token
+			});
+			
 			var locals = me.standard_page_vars(req, {
 				channel: channel,
 				connector_id: connector.id,
@@ -167,7 +171,7 @@ App.prototype = {
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = app.channels.get(data.channel);
 				if(channel){
-					channel.add_client(client);
+					channel.add_client(client, connector.token);
 				}
 				user.clients.add(client);
 			}

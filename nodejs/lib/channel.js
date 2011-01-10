@@ -29,9 +29,10 @@ function Channel(config){
 }
 
 Channel.prototype = {
-	add_client: function(client){
+	add_client: function(client, token){
 		client.meta_data = {
-			channel:this
+			channel: this,
+			token: token
 		};
 
 		this.clients.add(client);
