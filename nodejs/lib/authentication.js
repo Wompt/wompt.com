@@ -91,7 +91,8 @@ function Auth(config){
 	this.start_session = function(res, user){
 		var token = this.set_token(res),
 		    new_session = {token: token};
-		user.sessions = [new_session];
+		user.sessions = user.sessions || [];
+		user.sessions.push(new_session);
 		user.save();
 		return new_session;
 	}
