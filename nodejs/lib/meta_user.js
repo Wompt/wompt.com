@@ -31,6 +31,10 @@ MetaUser.prototype.end_session = function(session){
 	this.clients.broadcast({
 		action: 'end_session'
 	});
+	this.clients.each(function(client, index){
+		if(client.meta_data && client.meta_data.token == session.token)
+			client._onDisconnect();
+	});
 }
 
 module.exports = MetaUser
