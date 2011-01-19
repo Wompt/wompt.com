@@ -117,7 +117,7 @@ input.intra-field-label {
 /* ---  Chat Page ---*/
 .main #input{
 	position:fixed;
-	bottom:0px;
+	bottom:2em;
 	left:0px;
 	right:0px;
 	border-top: solid 1px #b63f1b;
@@ -171,20 +171,25 @@ input.intra-field-label {
 
 /* === Footer === */
 #footer {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	height:1.5em;
 	border-top: solid 1px #e6e6e6;
 	border-bottom: solid 1px #f0f0f0;
-	margin-top:20px;
 	font-size: 0.9em;
 	font-weight: 700;
 	background-color: rgb(235,235,235);
-	background: rgba(230,230,230,0.4);
+	background: rgba(230,235,230,0.4);
 	color: #555;
-	padding: 15px;
 	text-align: center;
 }
-
 
 #footer a{
 	margin: 0px 5px;
 	color: #555;
 }
+
+
+
