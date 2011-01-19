@@ -171,7 +171,6 @@ input.intra-field-label {
 	background-color:#eee;
 	font-size: 1.1em;
 	font-weight: 700;
-
 }
 
 #user_list .user{
@@ -184,7 +183,8 @@ input.intra-field-label {
 	bottom:0px;
 	left:0px;
 	right:0px;
-	height:1.5em;
+	height:1.2em;
+	padding:0.4em 1em;
 	border-top: solid 1px #e6e6e6;
 	border-bottom: solid 1px #f0f0f0;
 	font-size: 0.9em;
