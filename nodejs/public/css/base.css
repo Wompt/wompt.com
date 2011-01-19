@@ -159,9 +159,17 @@ input.intra-field-label {
 	min-height: 110px;
 	background-color:#fff;
 	border-left:solid 1px #ccc;
+}
+
+#user_list .users{
 	overflow-x:hidden;
 	overflow-y:auto;
 	white-space:nowrap;
+	position:absolute;
+	bottom:0px;
+	top:2em;
+	left:0px;
+	right:0px;
 }
 
 #user_list .title{

@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 	messageList = new MessageList();
 	userList = new UserList();
-	uli = new UserListUI(userList, $('#user_list'));
+	uli = new UserListUI(userList, $('#user_list .users'));
 
 	UI = new UI();
 	UI.systemMessage("Connecting");
