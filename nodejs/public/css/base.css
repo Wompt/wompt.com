@@ -147,6 +147,12 @@ input.intra-field-label {
 .main #messages{
 	padding-bottom:50px;
 	margin-right:180px;
+	overflow-y: scroll;
+	position:absolute;
+	top:45px;
+	left:0px;
+	right:0px;
+	bottom:5.2em;
 }
 
 
