@@ -165,13 +165,13 @@ App.prototype = {
 		client.once('message', function(data){
 			if(data && data.action == 'join'){
 				var connector = app.client_connectors.get(data.connector_id),
-				    user      = connector.meta_user || new wompt.MetaUser();
+				    user      = (connector && connector.meta_user) || new wompt.MetaUser();
 				client.user = user;
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = app.channels.get(data.channel);
 				if(channel){
-					channel.add_client(client, connector.token);
+					channel.add_client(client, connector && connector.token);
 				}
 				user.clients.add(client);
 			}
