@@ -4,7 +4,7 @@ function ClientConnectors(){
 	
 	var connectors = this.connectors = {};
 	var expirer = new wompt.Expirer(connectors, {
-		expire_after_ms: 10 * 1000
+		expire_after_ms: 60 * 1000
 	});
 }
 
