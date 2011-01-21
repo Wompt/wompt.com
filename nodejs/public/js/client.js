@@ -79,16 +79,25 @@ function UI(){
 	
 	this.appendMessage = function(data){
 		var line = $('<div>'),
+				timestamp = $('<div>'),
 				nick = $('<div>'),
 				msg  = $('<div>');
 		
 		nick.text(data.from.name);
 		nick.addClass('name');
 		
+		var time = new Date();
+		/*timestamp.text("(" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + ")");*/
+		timestamp.append("(", 
+			time.getHours() < 10 ? "0" + time.getHours() : time.getHours(), ":", 
+			time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes(), ":", 
+			time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds(), ")");
+		timestamp.addClass('timestamp');		
+
 		msg.text(data.msg);
 		msg.addClass('msg');
 		
-		line.append(nick, msg);
+		line.append(timestamp, nick, msg);
 		line.addClass('line')
 		
 		$('#messages').append(line);		

@@ -42,6 +42,12 @@ h3{
 	color: #bbb;
 }
 
+.line .timestamp {
+	float:left;
+	padding-right: 10px;
+	color: #bbb;
+}
+
 .line .own.name {
 	color: #a53;
 }
