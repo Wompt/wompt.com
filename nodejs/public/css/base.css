@@ -51,7 +51,7 @@ h3{
 .line .timestamp {
 	float:left;
 	padding-right: 10px;
-	color: #eee;
+	color: #222;
 }
 
 .line .own.name {
@@ -59,11 +59,11 @@ h3{
 }
 
 .line0 {
-	background-color: #81BAF5;
+	background-color: #c8c8c8;
 }
 
 .line1 {
-	background-color: #A0CAF5;
+	background-color: #dfdfdf;
 }
 
 input.intra-field-label {
