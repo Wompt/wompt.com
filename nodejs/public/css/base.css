@@ -36,20 +36,34 @@ h3{
 	padding:0;
 }
 
+.line {
+	padding-top: .2em;
+	padding-bottom: .2em;
+}
+
 .line .name {
 	float:left;
 	padding-right: 10px;
-	color: #bbb;
+	color: black;
+	font-weight:bold;
 }
 
 .line .timestamp {
 	float:left;
 	padding-right: 10px;
-	color: #bbb;
+	color: #eee;
 }
 
 .line .own.name {
 	color: #a53;
+}
+
+.line0 {
+	background-color: #81BAF5;
+}
+
+.line1 {
+	background-color: #A0CAF5;
 }
 
 input.intra-field-label {

@@ -1,5 +1,7 @@
 var messageList,
     userList;
+    
+var msgcolor = 0;
 
 $(document).ready(function(){
 	IO = new IO();
@@ -98,7 +100,14 @@ function UI(){
 		msg.addClass('msg');
 		
 		line.append(timestamp, nick, msg);
-		line.addClass('line')
+		line.addClass('line');
+		if(msgcolor == 0){
+			line.addClass('line0');
+			msgcolor = 1;
+		} else {
+			line.addClass('line1');
+			msgcolor = 0;
+		}
 		
 		$('#messages').append(line);		
 	}
