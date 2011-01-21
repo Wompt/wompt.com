@@ -106,6 +106,8 @@ function MessageList(){
 MessageList.prototype.newMessage = function(msg){
 	if(msg.action == 'message'){
 		UI.appendMessage(msg);
+		var msgDiv = document.getElementById("messages");
+		msgDiv.scrollTop = msgDiv.scrollHeight;
 		return true;
 	}
 }
