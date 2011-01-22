@@ -102,14 +102,16 @@ function Auth(config){
 		var user = req.user;
 		this.clear_token(res);
 		if(user){
-			user.sessions.forEach(function(session, index){
-				if(session == null)
-					user.sessions.splice(index, 1);
-				else if(session.token == token){
-					req.meta_user.end_session(session);
-					user.sessions.splice(index, 1);
+			for(var i = 0; i < user.sessions.length; i++)
+				if(user.sessions[i] == null){
+					user.sessions.splice(i, 1);
+					i--;
+				} else if(user.sessions[i].token == token){
+					req.meta_user.end_session(user.sessions[i]);
+					user.sessions.splice(i, 1);
+					i--;
 				}
-			});
+
 			user.save();
 		}
 	}
