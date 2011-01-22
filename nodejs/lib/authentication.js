@@ -103,9 +103,11 @@ function Auth(config){
 		this.clear_token(res);
 		if(user){
 			user.sessions.forEach(function(session, index){
-				if(session.token == token){
-					delete user.sessions[index];
+				if(session == null)
+					user.sessions.splice(index, 1);
+				else if(session.token == token){
 					req.meta_user.end_session(session);
+					user.sessions.splice(index, 1);
 				}
 			});
 			user.save();
