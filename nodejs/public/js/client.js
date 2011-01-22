@@ -96,7 +96,10 @@ function UI(){
 			time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds(), ")");
 		timestamp.addClass('timestamp');		
 
-		msg.text(data.msg);
+		if(this.linkifyTest(data.msg))
+			msg.html(this.linkify(data.msg));
+		else
+			msg.text(data.msg);
 		msg.addClass('msg');
 		
 		line.append(timestamp, nick, msg);
@@ -115,6 +118,30 @@ function UI(){
 	this.systemMessage = function(msg){
 		this.appendMessage({from:{name: "System"}, msg:msg});		
 	}
+	
+	this.linkify = function(inputText){
+		var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+		var replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+		var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+		var replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+		var replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
+		var replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+    return replacedText
+	}
+
+	this.linkifyTest = function(inputText){
+		var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+		if(inputText.match(replacePattern1))
+			return true;
+		var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+		if(inputText.match(replacePattern2))
+			return true;
+		var replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
+		if(inputText.match(replacePattern3))
+			return true;
+    return false;
+	}
+
 }
 
 function MessageList(){
