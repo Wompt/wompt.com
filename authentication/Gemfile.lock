@@ -75,9 +75,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  haml
-  i18n
-  json
-  mongomatic
-  omniauth (>= 0.2.0.beta1)
-  sinatra
+  haml (~> 3.0.25)
+  i18n (~> 0.5.0)
+  json (~> 1.4.6)
+  mongomatic (~> 0.7.3)
+  omniauth (~> 0.2.0.beta1)
+  sinatra (~> 1.1.0)
