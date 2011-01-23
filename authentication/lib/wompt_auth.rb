@@ -56,6 +56,10 @@ class WomptAuth < Sinatra::Base
     return user
   end
   
+  get "/ok" do
+    'OK'
+  end
+  
   def generate_token
     ActiveSupport::SecureRandom.base64(20)
   end
