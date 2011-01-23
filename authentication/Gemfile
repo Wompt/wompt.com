@@ -1,10 +1,10 @@
 source "http://rubygems.org"
 
-gem "sinatra"
-gem "omniauth", ">= 0.2.0.beta1"
-gem "json"
-gem "mongomatic"
-gem "haml"
+gem "sinatra", "~> 1.1.0"
+gem "omniauth", "~> 0.2.0.beta1"
+gem "json", "~> 1.4.6"
+gem "mongomatic", "~> 0.7.3"
+gem "haml", "~> 3.0.25"
 
 # required by one of the above, though not sure why, it's not listed as a dependency in any of the specs
-gem "i18n"
+gem "i18n", "~> 0.5.0"

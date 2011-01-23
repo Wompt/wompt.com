@@ -1,4 +1,13 @@
-check process wompt_auth
+#TODO fill in this process monitor with memory or CPU usage constraints
+check process wompt_auth_process
 	with pidfile <%= current_path %>/authentication/tmp/wompt_auth.pid
 	start "/sbin/start wompt_auth"
 	stop "/sbin/stop wompt_auth"
+
+check host wompt_auth_host with address 127.0.0.1
+	start "/sbin/start wompt_auth"
+	stop "/sbin/stop wompt_auth"
+	if failed port 9292 protocol HTTP
+		request /ok
+		with timeout 5 seconds
+		then restart

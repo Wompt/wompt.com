@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'openid/store/filesystem'
 require 'lib/models/user'
 require 'lib/config'
+require 'lib/referer_saver'
 
 Mongomatic.db = Mongo::Connection.new.db(CONFIG[:database])
 
@@ -12,6 +13,8 @@ class WomptAuth < Sinatra::Base
     :path => '/auth',
     :expire_after => 60, # In seconds
     :secret => 'C6xyESB0FdkabrhtBxOlPikZTS0jKnQRq1vMfluX'
+  
+  use RefererSaver
   
   use OmniAuth::Builder do
     if settings.environment == :production
@@ -33,7 +36,8 @@ class WomptAuth < Sinatra::Base
     host = request.env['HTTP_HOST'].split(':')[0]
     user = find_or_create_user(auth)
     response.set_cookie(ONE_TIME_TOKEN_COOKIE, :value => user['one_time_token'], :path => '/')
-    haml :redirect, :locals => {:to => "/"}
+    back_to = session && session.delete('back_to') || '/'
+    haml :redirect, :locals => {:to => back_to}
   end
   
   def find_or_create_user auth
@@ -54,6 +58,10 @@ class WomptAuth < Sinatra::Base
     user['one_time_token'] = generate_token
     user.save!
     return user
+  end
+  
+  get "/ok" do
+    'OK'
   end
   
   def generate_token
