@@ -60,14 +60,16 @@ Channel.prototype = {
 	action_responders: {
 		post: function(data){
 			if(data.from_client.user.readonly) return;
-			this.broadcast_message({
+			var message = {
 				action: 'message',
 				msg: data.msg,
 				from:{
 					name: data.from_client.user.doc.name,
 					id: data.from_client.user.doc._id
 				}
-			});
+			};
+			this.messages.add(message);
+			this.broadcast_message(message);
 		},
 		
 		stats: function(data){
