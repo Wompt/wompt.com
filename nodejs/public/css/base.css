@@ -58,12 +58,9 @@ h3{
 	color: #a53;
 }
 
-.line0 {
-	background-color: #c8c8c8;
-}
 
 .line1 {
-	background-color: #dfdfdf;
+	background-color: #eee;
 }
 
 input.intra-field-label {
@@ -173,6 +170,7 @@ input.intra-field-label {
 	left:0px;
 	right:0px;
 	bottom:5.2em;
+	background-color:#f7f7f7;
 }
 
 
