@@ -16,6 +16,10 @@ exports.MessageList.prototype = {
 		return messages.slice(i+1);
 	},
 	
+	is_empty: function(){
+		return this.messages.length == 0;
+	},
+	
 	recent: function(count){
 		var msgs = this.messages;
 		count = Math.min(msgs.length, count);
