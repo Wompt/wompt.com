@@ -51,6 +51,8 @@ Channel.prototype = {
 		
 		client.on('message', this._message_from_client);
 		client.on('disconnect', this._client_disconnected);
+		
+		client.send({action: 'previous', messages: this.messages.recent(10)});
 	},
 	
 	receive_message: function(data){
