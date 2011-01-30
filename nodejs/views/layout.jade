@@ -22,6 +22,8 @@ html
 	body
 		#top
 			#toplinks
+				span#connection_status
+				&nbsp;|&nbsp;
 				- if(w.user.doc)
 					span #{w.user.doc.email || w.user.doc.name}
 					| |
