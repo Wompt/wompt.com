@@ -6,4 +6,7 @@ module.exports = {
 	, public_dir: root + '/public'
 	, db_name: 'wompt_dev'
 	, root: root
+	, app_host:  '127.0.0.1'
+	, db_host:   '127.0.0.1'
+	, auth_host: '127.0.0.1'
 }
