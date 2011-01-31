@@ -17,7 +17,7 @@ function Auth(config){
 		return function(req,res,next){
 			if (req.url.match(/^\/auth/)) {
 				var proxy = new httpProxy.HttpProxy(req, res);
-				proxy.proxyRequest(9292, 'localhost');
+				proxy.proxyRequest(9292, wompt.env.auth_host);
 			}else{
 				next();
 			}
