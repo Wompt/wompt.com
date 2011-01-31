@@ -232,5 +232,10 @@ input.intra-field-label {
 	color: #555;
 }
 
-
+#supportcontent {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10em;
+	width: 600px;
+}
 
