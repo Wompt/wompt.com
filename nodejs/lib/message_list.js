@@ -34,6 +34,11 @@ proto.recent = function(count){
 	return msgs.slice(msgs.length-count);
 }
 
+proto.is_empty = function(){
+	return this.messages.length == 0;
+}
+
+
 //Constants
 proto.MAX_MESSAGES = 10
 proto.DOWNSIZE_RATIO = 0.5;
