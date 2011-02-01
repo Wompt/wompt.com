@@ -79,6 +79,13 @@ function UI(){
 		});
 	}
 	
+	this.appendMessages = function(data){
+		var messages = data.messages;
+		for(var i=0; i<messages.length; i++){
+			this.appendMessage(messages[i]);
+		}
+	}
+	
 	this.appendMessage = function(data){
 		var line = $('<div>'),
 				timestamp = $('<div>'),
@@ -151,6 +158,11 @@ function MessageList(){
 MessageList.prototype.newMessage = function(msg){
 	if(msg.action == 'message'){
 		UI.appendMessage(msg);
+		var msgDiv = document.getElementById("messages");
+		msgDiv.scrollTop = msgDiv.scrollHeight;
+		return true;
+	}else if(msg.action == 'previous'){
+		UI.appendMessages(msg);
 		var msgDiv = document.getElementById("messages");
 		msgDiv.scrollTop = msgDiv.scrollHeight;
 		return true;

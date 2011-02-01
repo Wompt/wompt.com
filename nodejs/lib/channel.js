@@ -47,10 +47,19 @@ Channel.prototype = {
 			});
 		}
 		
-		this.send_user_list(client);
-		
 		client.on('message', this._message_from_client);
 		client.on('disconnect', this._client_disconnected);
+		
+		this.send_initial_data(client);
+	},
+	
+	send_initial_data: function(client){
+		client.buffer_messages();
+		if(!this.messages.is_empty())
+			client.send({action: 'previous', messages: this.messages.recent(10)});
+		
+		client.send({action: 'who',	users: this.get_user_list(client)});
+		client.flush();
 	},
 	
 	receive_message: function(data){
@@ -60,14 +69,16 @@ Channel.prototype = {
 	action_responders: {
 		post: function(data){
 			if(data.from_client.user.readonly) return;
-			this.broadcast_message({
+			var message = {
 				action: 'message',
 				msg: data.msg,
 				from:{
 					name: data.from_client.user.doc.name,
 					id: data.from_client.user.doc._id
 				}
-			});
+			};
+			this.messages.add(message);
+			this.broadcast_message(message);
 		},
 		
 		stats: function(data){
@@ -82,7 +93,7 @@ Channel.prototype = {
 		}
 	},
 	
-	send_user_list: function(client){
+	get_user_list: function(client){
 		var users = [], list = this.clients.list;
 		for(var id in list){
 			var cl = list[id];
@@ -92,10 +103,7 @@ Channel.prototype = {
 					id: cl.user.doc._id
 				});
 		}
-		client.send({
-			action: 'who',
-			users: users
-		});
+		return users;
 	},
 	
 	broadcast_user_list_change: function(opt){
