@@ -11,7 +11,6 @@ $(document).ready(function(){
 	uli = new UserListUI(userList, $('#user_list .users'));
 
 	UI = new UI();
-	UI.systemMessage("Connecting");
 	
 	IO.addMessageHandler(messageList);
 	IO.addMessageHandler(userList);
@@ -47,11 +46,11 @@ function IO(){
 	var messageHandlers = [];
 
 	socket.on('connect', function(){
-		UI.systemMessage("Connected!");
+		UI.update_connection_status('Connected');
 	});
 	
 	socket.on('disconnect', function(){
-		UI.systemMessage("Disconnected!");
+		UI.update_connection_status('Not Connected');
 	});
 	
 	socket.on('message', function(data){
@@ -62,6 +61,7 @@ function IO(){
 	});
 
 	this.connect = function(){
+		UI.update_connection_status('Connecting');
 		socket.connect();
 		socket.send({channel: channel, action: 'join', connector_id: connector_id});
 	}
@@ -85,6 +85,10 @@ function UI(){
 			this.appendMessage(messages[i]);
 		}
 	}
+
+	this.update_connection_status = function(text){
+		$('#connection_status').text(text);
+	};
 	
 	this.appendMessage = function(data){
 		var line = $('<div>'),
