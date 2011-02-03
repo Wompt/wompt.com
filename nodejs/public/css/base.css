@@ -104,6 +104,8 @@ input.intra-field-label {
 }
 
 #logo a{
+	background: data-url(/images/logo/white_30.png) no-repeat center left;
+	padding-left: 38px;
 	text-decoration:none;
 	color: white;
 	_color: rgba(255,255,255,0.5);	
