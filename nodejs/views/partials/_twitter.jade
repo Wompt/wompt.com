@@ -1,0 +1,34 @@
+#twitter_bar
+	<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+	:javascript
+		|	new TWTR.Widget({
+		|		version: 2,
+		|		type: 'search',
+		|		search: 'rainbow',
+		|		interval: 6000,
+		|		title: 'Around the Web',
+		|		subject: '',
+		|		width: 200,
+		|		height: 1000,
+		|		theme: {
+		|			shell: {
+		|				background: '#eeeeee',
+		|				color: '#444444'
+		|			},
+		|			tweets: {
+		|				background: '#ffffff',
+		|				color: '#444444',
+		|				links: '#1985b5'
+		|			}
+		|		},
+		|		features: {
+		|			scrollbar: false,
+		|			loop: true,
+		|			live: true,
+		|			hashtags: true,
+		|			timestamp: true,
+		|			avatars: false,
+		|			toptweets: true,
+		|			behavior: 'default'
+		|		}
+		|	}).render().start();

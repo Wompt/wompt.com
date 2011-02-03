@@ -1,0 +1,29 @@
+#twitter_bar {
+	position:fixed;
+	right:180px;
+	bottom:5em;
+	top:45px;
+	width:200px;
+	padding:0;
+	margin-bottom:1px;
+	overflow:hidden;
+}
+
+#twitter_bar .twtr-widget {
+	height:100%;
+}
+
+#twitter_bar .twtr-timeline {
+	border:none;
+	border-radius:0px;
+}
+
+#twitter_bar .twtr-doc {
+	border:none;
+	border-radius:0px;	
+}
+
+
+#twitter_bar .twtr-widget h3{
+	font-size:16px;
+}

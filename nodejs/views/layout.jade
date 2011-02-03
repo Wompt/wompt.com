@@ -11,6 +11,8 @@ html
 			script(src=assets.path("/external/json2.js"), type="text/javascript")
 		link(href=assets.path("/css/base.css"), rel="stylesheet", type="text/css", media="screen,projection")
 		link(href=assets.path("/css/landing.css"), rel="stylesheet", type="text/css", media="screen,projection")
+		- if(w.channel)
+			link(href=assets.path("/css/twitter.css"), rel="stylesheet", type="text/css", media="screen,projection")
 		link(href=assets.path("/favicon.ico"), rel="shortcut icon", type="image/x-icon")
 		link(href=assets.path("/apple-itouch-icon.png"), rel="apple-touch-icon")
 		meta(http-equiv="content-type", content="text/html; charset=utf-8")
