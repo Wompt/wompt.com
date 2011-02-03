@@ -9,6 +9,16 @@
 	overflow:hidden;
 }
 
+#twitter_bar > .title{
+	text-align:center;
+	padding:2px;
+	color:#000;
+	border-bottom:solid 1px #ccc;
+	background-color:#eee;
+	font-size: 1.1em;
+	font-weight: 700;
+}
+
 #twitter_bar .twtr-widget {
 	height:100%;
 }
@@ -23,6 +33,10 @@
 	border-radius:0px;	
 }
 
+.twtr-hd,
+.twtr-ft {
+	display:none;
+}
 
 #twitter_bar .twtr-widget h3{
 	font-size:16px;

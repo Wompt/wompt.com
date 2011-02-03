@@ -1,23 +1,23 @@
 #twitter_bar
+	.title Around The Web
 	<script src="http://widgets.twimg.com/j/2/widget.js"></script>
 	:javascript
 		|	new TWTR.Widget({
 		|		version: 2,
 		|		type: 'search',
-		|		search: 'rainbow',
+		|		search: '#{w.channel}',
 		|		interval: 6000,
-		|		title: 'Around the Web',
 		|		subject: '',
 		|		width: 200,
 		|		height: 1000,
 		|		theme: {
 		|			shell: {
 		|				background: '#eeeeee',
-		|				color: '#444444'
+		|				color: '#777777'
 		|			},
 		|			tweets: {
 		|				background: '#ffffff',
-		|				color: '#444444',
+		|				color: '#777777',
 		|				links: '#1985b5'
 		|			}
 		|		},
