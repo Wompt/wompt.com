@@ -3,6 +3,7 @@ var http   = require("http"),
     wompt  = require("./includes"),
     logger = wompt.logger,
     SocketIO= wompt.socketIO,
+    assetManager = require('./asset_manager'),
     express = require("express");
 
 function App(options){
@@ -30,6 +31,7 @@ App.prototype = {
 			exp.use(me.statusMiddleware());
 			exp.use(wompt.Auth.forward_to_auth_app_middleware());
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
+			exp.use(assetManager.middleware);
 			exp.use(express.staticProvider({root:config.public_dir, cache: config.perform_caching}));
 			exp.use('/js', wompt.middleware.staticProvider({
 				root:config.root + '/vendor/Socket.IO/',
@@ -44,7 +46,8 @@ App.prototype = {
 		});
 		
 		exp.helpers({
-			assets: new wompt.Helpers.Assets(this.config.root + '/public')
+			assets: new wompt.Helpers.Assets(this.config.root + '/public'),
+			cacheTimeStamps: assetManager.middleware.cacheTimestamps
 		});
 
 		exp.set('views', wompt.env.root + '/views');		

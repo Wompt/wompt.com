@@ -5,7 +5,7 @@ div {
 
 body{
 	background: #eee;
-	background: url(/images/structure/noisy_grey.gif) repeat;
+	background: data-url(/images/structure/noisy_grey.gif) repeat;
 	color: #000;
 	font-family: helvetica, arial, freesans, clean, sans-serif;
 	font-size:1em;
@@ -73,7 +73,7 @@ input.intra-field-label {
 .clear{ clear:both; }
 
 #top{
-	background:url(/images/structure/top_back.png) repeat-x top left;
+	background:data-url(/images/structure/top_back.png) repeat-x top left;
 	height:45px;
 	position:fixed;
 	top:0px;
@@ -104,6 +104,8 @@ input.intra-field-label {
 }
 
 #logo a{
+	background: data-url(/images/logo/white_30.png) no-repeat center left;
+	padding-left: 38px;
 	text-decoration:none;
 	color: white;
 	_color: rgba(255,255,255,0.5);	
