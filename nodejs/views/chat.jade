@@ -4,7 +4,7 @@
 #user_list
 	.title Users
 	.users
-!= partial('_twitter')
+!= partial('_twitter', {locals: {w:w}})
 #messages
 .clear
 #input
