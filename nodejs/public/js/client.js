@@ -107,8 +107,11 @@ function UI(){
 			time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds(), ")");
 		timestamp.addClass('timestamp');		
 
-		if(this.linkifyTest(data.msg))
+		if(this.linkifyTest(data.msg)){
+			//escape <,> so we don't include any nasty html tags
+			data.msg = data.msg.replace(/</g, '&lt;').replace(/>/g,'&gt;');
 			msg.html(this.linkify(data.msg));
+		}
 		else
 			msg.text(data.msg);
 		msg.addClass('msg');
