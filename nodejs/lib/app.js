@@ -113,6 +113,13 @@ App.prototype = {
 			wompt.Auth.sign_out_user(req, res);
 			res.redirect('/');
 		});
+		
+		exp.get("/admin/stats", function(req, res, params){
+			res.render('admin/stats', {
+				locals: {w: me},
+				layout: 'admin/layout'
+			});
+		});
 
 		return exp;
 	},
