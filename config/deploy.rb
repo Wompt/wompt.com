@@ -24,3 +24,4 @@ end
 
 load 'config/tasks'
 load 'config/config_files'
+load 'config/deploy_tags'
