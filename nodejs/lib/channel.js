@@ -1,4 +1,5 @@
-var wompt  = require("./includes");
+var wompt  = require("./includes"),
+    constants = wompt.env.constants;
 var logger = wompt.logger;
 
 function Channel(config){
@@ -69,6 +70,7 @@ Channel.prototype = {
 	action_responders: {
 		post: function(data){
 			if(data.from_client.user.readonly) return;
+			if(data.msg && data.msg.length > constants.messages.max_length) return;
 			var message = {
 				action: 'message',
 				msg: data.msg,

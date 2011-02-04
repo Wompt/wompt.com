@@ -22,8 +22,10 @@ $(document).ready(function(){
 			if(e.keyCode == 13){
 				var el = $(this),
 						message = $.trim(el.val());
-						
-				if(message.length > 0){
+				
+				if(message.length > WOMPT.messages.max_length){
+					alert("Messages are limited to "+ WOMPT.messages.max_length + " characters.");
+				}else	if(message.length > 0){
 					IO.socket.send({chan: channel, action:'post', msg:message});
 					el.val('');
 				}

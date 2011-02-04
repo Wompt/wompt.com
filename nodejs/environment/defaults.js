@@ -9,4 +9,11 @@ module.exports = {
 	, app_host:  '127.0.0.1'
 	, db_host:   '127.0.0.1'
 	, auth_host: '127.0.0.1'
+	
+	
+	, constants: {
+		messages: {
+				max_length: 256 * 16
+		}
+	}
 }
