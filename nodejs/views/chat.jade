@@ -1,6 +1,7 @@
 :javascript
 	| var channel     = '#{w.channel}',
-	|     connector_id  = '#{w.connector_id}';
+	|     connector_id  = '#{w.connector_id}',
+	|     WOMPT = #{JSON.stringify(w.config.constants)};
 #user_list
 	.title Users
 	.users

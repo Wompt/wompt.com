@@ -1,4 +1,5 @@
-var wompt  = require("./includes");
+var wompt  = require("./includes"),
+    constants = wompt.env.constants;
 var logger = wompt.logger;
 
 function Channel(config){
