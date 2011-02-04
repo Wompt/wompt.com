@@ -2,6 +2,7 @@ var wompt  = require("./includes");
 
 function ChannelManager(options){
 	this.channels = {};
+	this.count = 0;
 }
 
 ChannelManager.prototype = {
@@ -17,7 +18,17 @@ ChannelManager.prototype = {
 		var channel = new wompt.Channel({name: name});
 		channel.app = this;
 		this.channels[name] = channel;
+		this.count++;
 		return channel;
+	},
+	
+	remove: function(channel){
+		var exists = this.channels[channel.name];
+		if(exists){
+			delete this.channels[channel.name];
+			this.count--;
+		}
+		return exists;
 	}
 }
 
