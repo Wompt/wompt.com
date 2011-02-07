@@ -1,5 +1,5 @@
 namespace :deploy do
-	before "deploy:update_code", "deploy:create_tag"
+	after "deploy", "deploy:create_tag"
 	
 	desc "Automatically create a git tag in the form 'deploy_yyyy_mm_dd_hh_mm'"
 	task :create_tag do
