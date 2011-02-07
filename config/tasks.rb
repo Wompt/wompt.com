@@ -1,23 +1,31 @@
 namespace :deploy do
-  set :apps, [application, 'wompt_auth']
-  
-  desc "Start the server"
+  desc "Start both servers [nodejs, auth]"
   task :start, :roles => :app, :except => { :no_release => true } do
     apps.each do |app_name|
       run "#{try_sudo :as => 'root'} start #{app_name}"
     end
   end
 
+  desc "Stop both servers [nodejs, auth]"
   task :stop, :roles => :app, :except => { :no_release => true } do
     apps.each do |app_name|
       run "#{try_sudo :as => 'root'} stop #{app_name}"
     end
   end
 
+  desc "Restart both servers [nodejs, auth]"
   task :restart, :roles => :app, :except => { :no_release => true } do
     apps.each do |app_name|
       run "#{try_sudo :as => 'root'} restart #{app_name} || #{try_sudo :as => 'root'} start #{app_name}"
     end
+  end
+  
+  def apps
+    ["#{env_prefix}wompt", "#{env_prefix}wompt_auth"]
+  end
+  
+  def env_prefix
+    prefix = deployment == 'production' ? '' : (deployment + '_')
   end
 
   desc "Update git submodules for the cached copy (Cpaistrano 2.5.20 will do this automatically)"
