@@ -37,6 +37,6 @@ namespace :deploy do
   end
 end
 
-after 'deploy', 'deploy:update_monit_config'
+after 'deploy:update', 'deploy:update_monit_config'
 after 'deploy:update', 'deploy:send_run_scripts'
 after 'deploy:cold', 'deploy:symlink_monit_config'
