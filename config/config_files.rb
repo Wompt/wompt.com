@@ -8,12 +8,21 @@ namespace :deploy do
   
   desc "Create a symlinks in /etc/monit to the monit files in the deployed app"
   task "symlink_monit_config" do
-    run "#{try_sudo :as => 'root'} ln -f -s #{current_path}/config/monit/* /etc/monit/"
+    if deployment == 'production'
+      run "#{try_sudo :as => 'root'} ln -f -s #{current_path}/config/monit/* /etc/monit/"
+    else
+      logger.info "Skipping monit config because this is not the live production app"
+    end
   end
 
   desc "Process the monit config files and send them to the server"
   task :update_monit_config, :roles => :app do
-    process_erb_file_and_upload('config/monit/wompt_auth')
+    if deployment == 'production'
+      process_erb_file_and_upload('config/monit/wompt')
+      process_erb_file_and_upload('config/monit/wompt_auth')
+    else
+      logger.info "Skipping monit config because this is not the live production app"      
+    end
   end
   
   def process_erb_file_and_upload filepath, opt={}
