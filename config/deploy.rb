@@ -18,8 +18,12 @@ set :normalize_asset_timestamps, false
 default_run_options[:pty] = true
 
 task :production do
+  # :deployment variable should match task name
+  set :deployment, 'production'
   set :deploy_to, "/home/ubuntu/www/#{application}"
-  set :branch, "master"  
+  set :branch, "master"
+  # environment string that is passed to the nodejs and auth apps at startup
+  set :application_environment, 'production'
 end
 
 load 'config/tasks'
