@@ -19,6 +19,7 @@ var assetManagerGroups = {
 		'route': /\/js\/channel_[\d]+.js/
 		, 'path': root
 		, 'dataType': 'javascript'
+		, 'debug': !wompt.env.minify_assets
 		, 'files': [
 			'/public/external/events.js'
 			, '/vendor/Socket.IO/socket.io.js'
@@ -33,6 +34,7 @@ var assetManagerGroups = {
 		'route': /\/css\/all_[0-9]+\.css/
 		, 'path': pub + '/css'
 		, 'dataType': 'css'
+		, 'debug': !wompt.env.minify_assets
 		, 'files': [
 			'/base.css'
 			, '/landing.css'

@@ -10,6 +10,7 @@ module.exports = {
 	, db_host:   '127.0.0.1'
 	, auth_host: '127.0.0.1'
 	
+	, minify_assets: false
 	
 	, constants: {
 		messages: {
