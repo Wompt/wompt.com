@@ -37,9 +37,9 @@ root directory i.e. it works in /wompt/app just as well as in /wompt
 
 #### Pushing changes ####
 You'll either need to SSH into the EC2 instance, or you'll need Capistrano (a ruby gem) locally for deploying.
-The deploy command also creates a git tag `deploy_yyyy_mm_dd...` and pushes it to origin
+The deploy command also creates a git tag `deploy_yyyy_mm_dd...` and pushes it to origin  (this can be skipped by adding the skip_tag option)
 Locally: (within any subdirectory of the application)
-		cap production deploy
+		cap production [skip_tag] deploy
 		# see a list of all commands
 		cap -T
 

@@ -26,6 +26,10 @@ task :production do
   set :application_environment, 'production'
 end
 
+task :skip_tag do
+  set :skip_tag, true
+end
+
 load 'config/tasks'
 load 'config/config_files'
 load 'config/deploy_tags'
