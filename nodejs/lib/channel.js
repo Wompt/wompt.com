@@ -96,14 +96,17 @@ Channel.prototype = {
 	},
 	
 	get_user_list: function(client){
-		var users = [], list = this.clients.list;
+		var users = {}, list = this.clients.list;
+		
 		for(var id in list){
-			var cl = list[id];
-			if(cl.user.visible && cl.user.doc)
-				users.push({
-					name: cl.user.doc.name || 'anonymous',
-					id: cl.user.doc._id
-				});
+			var cl = list[id],
+			    doc = cl.user.doc,
+			    uid = doc && doc._id;
+			
+			if(cl.user.visible && doc && !users[uid])
+				users[uid]={
+					name: doc.name || 'anonymous'
+				};
 		}
 		return users;
 	},
