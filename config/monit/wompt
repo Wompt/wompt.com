@@ -1,4 +1,5 @@
 check host wompt with address 127.0.0.1
+	with pidfile <%= shared_path %>/pids/wompt.pid
 	start "/sbin/start wompt"
 	stop "/sbin/stop wompt"
 	if failed port 16867 protocol HTTP
