@@ -1,0 +1,20 @@
+#!/bin/sh
+# Wompt (<%= deployment %> server running in <%= application_environment %> mode)
+<%
+server_js = "#{current_path}/nodejs/server.js"
+env = application_environment
+log_file = "#{shared_path}/log/wompt"
+%>
+
+case $1 in
+	start)
+		# Node needs HOME to be set
+		HOME="<%=current_path %>/nodejs"
+		sudo echo $$ > <%=shared_path%>/pids/wompt.pid;
+		exec sudo -u nodejs /usr/local/bin/node <%=server_js%> <%=env%> 2>><%=log_file%>.error.log >><%=log_file%>.log
+		 ;;
+	 stop)  
+		 kill `cat <%=shared_path%>/pids/wompt.pid` ;;
+	 *)  
+		 echo "usage: wompt {start|stop}" ;;
+esac

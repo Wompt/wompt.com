@@ -22,11 +22,13 @@ This is because configure and waf-light both have windows line endings instead o
 ### Deploying ###
 
 #### Start / Stop ####
-We have an upstart script called "wompt"
-so, all of these actions can done easily on the server
+We have run scripts in the capistrano shared directory called `wompt` and `wompt_auth`
+These can both be run like this `wompt start` and `wompt_auth start`
+We have monit setup to monitor both processes, so the easiest way is:
     # while logged into the server ...
-		sudo start wompt
-		sudo stop wompt
+		sudo monit restart wompt
+		sudo monit stop wompt
+		sudo monit start wompt
 		
 But starting and stoping can be done from your dev machine with
 the following commands.  These can be executed from anywhere inside the app
@@ -35,6 +37,7 @@ root directory i.e. it works in /wompt/app just as well as in /wompt
 
 #### Pushing changes ####
 You'll either need to SSH into the EC2 instance, or you'll need Capistrano (a ruby gem) locally for deploying.
+The deploy command also creates a git tag `deploy_yyyy_mm_dd...` and pushes it to origin
 Locally: (within any subdirectory of the application)
 		cap production deploy
 		# see a list of all commands

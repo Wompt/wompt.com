@@ -2,21 +2,21 @@ namespace :deploy do
   desc "Start both servers [nodejs, auth]"
   task :start, :roles => :app, :except => { :no_release => true } do
     apps.each do |app_name|
-      run "#{try_sudo :as => 'root'} start #{app_name}"
+      run "#{try_sudo :as => 'root'} monit start #{app_name}"
     end
   end
 
   desc "Stop both servers [nodejs, auth]"
   task :stop, :roles => :app, :except => { :no_release => true } do
     apps.each do |app_name|
-      run "#{try_sudo :as => 'root'} stop #{app_name}"
+      run "#{try_sudo :as => 'root'} monit stop #{app_name}"
     end
   end
 
   desc "Restart both servers [nodejs, auth]"
   task :restart, :roles => :app, :except => { :no_release => true } do
     apps.each do |app_name|
-      run "#{try_sudo :as => 'root'} restart #{app_name} || #{try_sudo :as => 'root'} start #{app_name}"
+      run "#{try_sudo :as => 'root'} monit restart #{app_name}"
     end
   end
   

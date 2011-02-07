@@ -1,12 +1,14 @@
 namespace :deploy do
-  desc "save the local version of the upstart script to the server"
-  task :send_upstart_scripts, :roles => :app do
-    Dir.glob('config/upstart/*.conf').each do |file|
-      process_erb_file_and_upload file, :destination => "/etc/init/#{env_prefix}#{File.basename(file)}"
+  desc "save the local version of the run scripts to the server"
+  task :send_run_scripts, :roles => :app do
+    Dir.glob('config/run_scripts/*').each do |file|
+      dest = "#{shared_path}/#{File.basename(file)}"
+      process_erb_file_and_upload file, :destination => dest
+      run "chmod a+x #{dest}"
     end
   end
   
-  desc "Create a symlinks in /etc/monit to the monit files in the deployed app"
+  desc "Create symlinks in /etc/monit to the monit files in the deployed app"
   task "symlink_monit_config" do
     if deployment == 'production'
       run "#{try_sudo :as => 'root'} ln -f -s #{current_path}/config/monit/* /etc/monit/"
@@ -36,5 +38,5 @@ namespace :deploy do
 end
 
 after 'deploy', 'deploy:update_monit_config'
-after 'deploy:update', 'deploy:send_upstart_scripts'
+after 'deploy:update', 'deploy:send_run_scripts'
 after 'deploy:cold', 'deploy:symlink_monit_config'

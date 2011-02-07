@@ -1,9 +1,9 @@
 #TODO fill in this process monitor with memory or CPU usage constraints
-check process wompt_auth_process
+check process wompt_auth
 	with pidfile <%= shared_path %>/pids/wompt_auth.pid
-	start "/sbin/start wompt_auth"
-	stop "/sbin/stop wompt_auth"
-	if host 127.0.0.1 failed port 9292 protocol HTTP
+	start "<%= shared_path %>/wompt_auth start"
+	stop "<%= shared_path %>/wompt_auth stop"
+	if failed host 127.0.0.1 port 9292 protocol HTTP
 		request /ok
 		with timeout 5 seconds
 		then restart

@@ -1,0 +1,23 @@
+#!/bin/sh
+# Wompt Authentication (<%= deployment %> server running in <%= application_environment %> mode)
+<%
+server_js = "#{current_path}/nodejs/server.js"
+env = application_environment
+log_file = "#{shared_path}/log/wompt"
+%>
+
+case $1 in
+	start)
+    cd <%=current_path%>/authentication
+    <%
+    env = application_environment
+    log_file = "#{shared_path}/log/wompt_auth"
+    %>
+    sudo echo $$ > <%=shared_path%>/pids/wompt_auth.pid;
+    exec sudo -u ubuntu rackup --env <%=env%> 2>><%=log_file%>.error.log 1>><%=log_file%>.log
+		 ;;
+	 stop)  
+		 kill `cat <%=shared_path%>/pids/wompt_auth.pid` ;;
+	 *)  
+		 echo "usage: wompt_auth {start|stop}" ;;
+esac
