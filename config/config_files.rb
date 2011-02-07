@@ -2,7 +2,7 @@ namespace :deploy do
   desc "save the local version of the upstart script to the server"
   task :send_upstart_scripts, :roles => :app do
     Dir.glob('config/upstart/*.conf').each do |file|
-      process_erb_file_and_upload file, :destination => "/etc/init/#{File.basename(file)}"
+      process_erb_file_and_upload file, :destination => "/etc/init/#{env_prefix}#{File.basename(file)}"
     end
   end
   
