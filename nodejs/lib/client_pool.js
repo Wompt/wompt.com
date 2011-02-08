@@ -1,9 +1,8 @@
 var EventEmitter = require('events').EventEmitter;
 
 function ClientPool(){
-	var list = {};
 	var client_pool = this;
-	this.list = list;
+	this.list = {};
 	this.count = 0;
 	
 	//called in the context of the client (this = client)
@@ -33,11 +32,19 @@ proto.each = function(iter){
 	}
 }
 
+proto.other_clients_from_same_user = function(except){
+	var result = [];
+	this.each(function(client){
+		if(client.user == except.user && except != client)
+			result.push(client);
+	});
+	return result;
+}
 
 proto.broadcast = function(msg, options){
 	var except_client, only;
 	if(options){
-		if(options.meta_data)
+		if(options.meta_data) // options is a Client to except
 			except_client = options;
 		else
 			only = options.only;

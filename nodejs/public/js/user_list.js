@@ -7,16 +7,17 @@ UserList.prototype = new EventEmitter();
 UserList.prototype.newMessage = function(msg){
 	switch(msg.action){
 		case "join":
-			this.list = this.list.concat(msg.users);
+			$.extend(this.users, msg.users);
 			this.emit('join', msg.users);
 			break;
 		case "part":
-			this.list = this.list.concat(msg.users);			
+			var users = this.users;
+			$.each(msg.users, function(id, user){delete users[id]});
 			this.emit('part', msg.users);
 			break;
 		case "who":
-			this.list = msg.users;
-			this.emit('who', this.list);
+			this.users = msg.users || {};
+			this.emit('who', this.users);
 		default:
 			return false;
 	}
@@ -31,7 +32,8 @@ function UserListUI(ul, container){
 	
 	ul.on('join', function(users){
 		var names=[];
-		$.each(users, function(i, user){
+		$.each(users, function(id, user){
+			user.id = id;
 			addUser(user);
 			names.push(user.name);
 		});
@@ -40,7 +42,8 @@ function UserListUI(ul, container){
 
 	ul.on('part', function(users){
 		var names=[];
-		$.each(users, function(i, user){
+		$.each(users, function(id, user){
+			user.id = id;
 			removeUser(user);
 			names.push(user.name);
 		});		
@@ -49,7 +52,8 @@ function UserListUI(ul, container){
 	
 	ul.on('who', function(users){
 		clearUserList();
-		$.each(users, function(i, user){
+		$.each(users, function(id, user){
+			user.id = id;
 			addUser(user);
 		});
 	});

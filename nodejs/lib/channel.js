@@ -19,12 +19,8 @@ function Channel(config){
 	this._client_disconnected = function(){
 		var client = this;
 		if(client.user.visible){
-			channel.broadcast_user_list_change({
-				part: [{
-					name: client.user.doc ? client.user.doc.name : 'anonymous',
-					id: client.user.doc._id
-				}]
-			});
+			if(channel.clients.other_clients_from_same_user(client).length == 0)
+				channel.broadcast_user_list_change({'part': client.user});
 		}
 	}
 }
@@ -39,13 +35,11 @@ Channel.prototype = {
 		this.clients.add(client);
 
 		if(client.user.visible){
-			this.broadcast_user_list_change({
-				join: [{
-					name: client.user.doc ? client.user.doc.name : 'anonymous',
-					id: client.user.doc._id
-				}],
-				except: client
-			});
+			if(this.clients.other_clients_from_same_user(client).length == 0)
+				this.broadcast_user_list_change({
+					join: client.user,
+					except: client
+				});
 		}
 		
 		client.on('message', this._message_from_client);
@@ -117,9 +111,14 @@ Channel.prototype = {
 		if(opt.part) action='part';
 		else if(opt.join) action='join';
 		
+		var users = {}, user = opt.part || opt.join;
+		users[user.doc._id] = {
+			'name': user.doc.name
+		} 
+		
 		this.broadcast_message({
 			action:action,
-			users: opt.part || opt.join
+			users: users
 		}, opt.except);
 	},
 	
