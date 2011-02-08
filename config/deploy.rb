@@ -24,10 +24,7 @@ task :production do
   set :branch, "master"
   # environment string that is passed to the nodejs and auth apps at startup
   set :application_environment, 'production'
-end
-
-task :skip_tag do
-  set :skip_tag, true
+  find_and_execute_task("deploy:tags:schedule_creation")
 end
 
 load 'config/tasks'
