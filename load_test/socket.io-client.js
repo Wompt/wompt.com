@@ -3,12 +3,12 @@ var config = {
 	host: 'localhost:8001'
 };
 
-var SERVER, WebSocket, client, ioutils, response, sys;
 
-sys = require('sys');
-ioutils = require('../nodejs/vendor/Socket.IO-node/lib/socket.io/utils.js');
+var SERVER = config.host || 'localhost:80'
+  , WebSocket = require('websocket-client').WebSocket
+  , ioutils = require('../nodejs/vendor/Socket.IO-node/lib/socket.io/utils.js')
+  , sys = require('sys');
 
-WebSocket = require('websocket-client').WebSocket;
 WebSocket.prototype.send_socketio = function(msg){
 	if (Object.prototype.toString.call(msg) == '[object Object]'){
 		msg = '~j~' + JSON.stringify(msg);
@@ -16,19 +16,16 @@ WebSocket.prototype.send_socketio = function(msg){
 		msg = String(msg);
 	}		
 	
-	return client.send(ioutils.encode(msg));
+	return this.send(ioutils.encode(msg));
 }
-
-SERVER = config.host || 'localhost:80';
 
 if (SERVER.search(':') === -1) {
 	SERVER += ':80';
 }
 
-
-(function() {
+function mockClient() {
 	
-  client = new WebSocket("ws://" + (SERVER) + "/socket.io/websocket");
+  var client = this.client = new WebSocket("ws://" + (SERVER) + "/socket.io/websocket");
 	
   client.onmessage = function(m) {
     var _result, currMsg, heartbeat;
@@ -37,7 +34,7 @@ if (SERVER.search(':') === -1) {
     _result = [];
     while (currMsg = m.pop()) {
       _result.push((function() {
-        console.log("Got message: " + (sys.inspect(currMsg)));
+        //console.log("Got message: " + (sys.inspect(currMsg)));
         return currMsg.substr(0, 3) === heartbeat ? client.send_socketio(heartbeat + currMsg.substr(3)) : null;
       })());
     }
@@ -49,6 +46,10 @@ if (SERVER.search(':') === -1) {
 	
   setTimeout(function() {
     client.send_socketio({channel: channel, action: 'join', connector_id: null});
-  }, 0);
-	
-}).call(this);
+  }, 100);
+}
+
+var clients = [];
+for(var i=0; i<1000; i++){
+	clients.push(new mockClient());
+}
