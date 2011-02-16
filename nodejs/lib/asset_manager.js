@@ -32,13 +32,14 @@ var assetManagerGroups = {
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
-		, 'path': pub + '/css'
+		, 'path': pub + '/css/'
 		, 'dataType': 'css'
 		, 'debug': !wompt.env.minify_assets
 		, 'files': [
-			'/base.css'
-			, '/landing.css'
-			, '/twitter.css'
+			  'reset.css'
+			, 'base.css'
+			, 'landing.css'
+			, 'twitter.css'
 		]
 		, 'preManipulate': {
 			// Regexp to match user-agents including MSIE.
