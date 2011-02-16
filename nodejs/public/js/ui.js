@@ -1,4 +1,6 @@
 function UI(){
+	var last_line = null;
+	
 	if(!readonly){
 		IO.socket.on('connect', function(){
 			$('#message').attr('disabled', false).focus();
@@ -17,42 +19,28 @@ function UI(){
 	};
 	
 	this.appendMessage = function(data){
-		var line = $('<div>'),
-				timestamp = $('<div>'),
-				nick = $('<div>'),
-				msg  = $('<div>');
+		if(last_line && last_line.from.id == data.from.id){
+			this.appendMessageText(data.msg, last_line.msg_container)
+			
+		}else{
+			var line = $('<tr>'),
+			    nick = $('<td>'),
+			    msg_container  = $('<td>');
 		
-		nick.text(data.from.name);
-		nick.addClass('name');
-		
-		var time = new Date();
-		/*timestamp.text("(" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + ")");*/
-		timestamp.append("(", 
-			time.getHours() < 10 ? "0" + time.getHours() : time.getHours(), ":", 
-			time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes(), ":", 
-			time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds(), ")");
-		timestamp.addClass('timestamp');		
+			nick.text(data.from.name);
+			nick.addClass('name');
+			
+			this.appendMessageText(data.msg, msg_container)
 
-		if(this.linkifyTest(data.msg)){
-			//escape <,> so we don't include any nasty html tags
-			data.msg = data.msg.replace(/</g, '&lt;').replace(/>/g,'&gt;');
-			msg.html(this.linkify(data.msg));
+			line.append(nick, msg_container);
+			line.addClass('line');
+
+			data.line = line;		
+			data.msg_container = msg_container;
+			last_line = data;
+	
+			$('#message_list').append(line);
 		}
-		else
-			msg.text(data.msg);
-		msg.addClass('msg');
-		
-		line.append(timestamp, nick, msg);
-		line.addClass('line');
-		if(msgcolor == 0){
-			line.addClass('line0');
-			msgcolor = 1;
-		} else {
-			line.addClass('line1');
-			msgcolor = 0;
-		}
-		
-		$('#messages').append(line);		
 	}
 	
 	this.systemMessage = function(msg){
@@ -82,4 +70,23 @@ function UI(){
     return false;
 	}
 
+
+	this.appendMessageText = function(text, to_container){
+		var msg = $('<div>');
+		this.prepareMessageText(msg, text);
+		to_container.append(msg);
+	}
+
+	this.prepareMessageText = function(el, text){
+		if(this.linkifyTest(text)){
+			//escape <,> so we don't include any nasty html tags
+			text = text.replace(/</g, '&lt;').replace(/>/g,'&gt;');
+			el.html(this.linkify(text));
+		}
+		else
+			el.text(text);
+		
+		el.addClass('msg');
+		return el;
+	}	
 }

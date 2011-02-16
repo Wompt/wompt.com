@@ -7,7 +7,7 @@
 	.users
 != partial('_twitter', {locals: {w:w}})
 #messages
-.clear
+	table#message_list
 #input
 	.container
 		input#message(name='message', type='text', disabled='true')
