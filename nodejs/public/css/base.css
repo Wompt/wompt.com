@@ -16,20 +16,38 @@ a:hover{
 	text-decoration:underline;
 }
 
+h1 { font-size:1.8em; }
+h2 { font-size:1.5em; }
+h3 { font-size:1.3em; }
 
-h2{
-	font-size:1.6em;
-	margin: 0 0 12px 0;
+h1, h2, h3, h4 {
+	margin: .2em 0 .5em 0;
+	font-weight: bold; 	
 }
 
-h3{
-	font-size:1.3em;
-	margin: 0 0 10px 0;
+b { font-weight:bold; }
+
+p {
+	margin-top: .5em;
+	margin-bottom: .5em;
 }
+
+ul, ol {
+	margin-left:2em;
+}
+
+li, ul, ol{
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+}
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
 
 .left { float:left;  }
 .right{ float:right; }
 .clear{ clear:both; }
+
 
 .main {
 	margin-top:55px;	
