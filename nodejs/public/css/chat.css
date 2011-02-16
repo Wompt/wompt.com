@@ -11,10 +11,11 @@
 
 .main #input .container{
 	position:absolute;
-	right:1.1em;
+	right:1.5em;
 	left:0.4em;
 	bottom:0.3em;
 	top:0.4em;
+	overflow:visible;
 }
 
 .main #input #message{
@@ -30,7 +31,7 @@
 
 .main #messages{
 	padding-bottom:0px;
-	margin-right:380px;
+	margin-right:381px;
 	overflow-y: scroll;
 	position:absolute;
 	top:45px;

@@ -1,15 +1,16 @@
-#footer {
+#footer_container {
 	position:fixed;
 	bottom:0px;
 	left:0px;
 	right:0px;
-	height:1.2em;
-	padding:0.4em 1em;
-	border-top: solid 1px #e6e6e6;
-	border-bottom: solid 1px #f0f0f0;
+	height:2em;
+	background-color: rgb(235,235,235);
+}
+
+#footer {
+	padding:0.6em 1em;
 	font-size: 0.9em;
 	font-weight: 700;
-	background-color: rgb(235,235,235);
 	color: #555;
 	text-align: center;
 }

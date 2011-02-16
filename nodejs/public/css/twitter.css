@@ -1,11 +1,9 @@
 #twitter_bar {
 	position:fixed;
 	right:180px;
-	bottom:1.2em;
+	bottom:2em;
 	top:45px;
 	width:200px;
-	padding:0;
-	margin-bottom:1px;
 	overflow:hidden;
 	border-left:solid 1px #ccc;
 	border-bottom:solid 1px #ccc;
