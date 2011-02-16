@@ -1,6 +1,5 @@
 body{
-	background: #eee;
-	background: data-url(/images/structure/noisy_grey.gif) repeat;
+	background-color: #eee;
 	color: #000;
 	font-family: helvetica, arial, freesans, clean, sans-serif;
 	font-size:1em;
