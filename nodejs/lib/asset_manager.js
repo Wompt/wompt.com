@@ -40,6 +40,11 @@ var assetManagerGroups = {
 			, 'base.css'
 			, 'landing.css'
 			, 'twitter.css'
+			, 'header.css'
+			, 'footer.css'
+			, 'chat.css'
+			, 'user_list.css'
+			, 'support_pages.css'
 		]
 		, 'preManipulate': {
 			// Regexp to match user-agents including MSIE.

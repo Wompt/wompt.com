@@ -1,0 +1,35 @@
+#user_list{
+	position:fixed;
+	right:0px;
+	top:45px;
+	bottom:5em;
+	width:180px;
+	min-height: 110px;
+	background-color:#fff;
+	border-left:solid 1px #ccc;
+}
+
+#user_list .users{
+	overflow-x:hidden;
+	overflow-y:auto;
+	white-space:nowrap;
+	position:absolute;
+	bottom:0px;
+	top:2em;
+	left:0px;
+	right:0px;
+}
+
+#user_list .title{
+	text-align:center;
+	padding:2px;
+	color:#000;
+	border-bottom:solid 1px #ccc;
+	background-color:#eee;
+	font-size: 1.1em;
+	font-weight: 700;
+}
+
+#user_list .user{
+	padding:4px 10px 1px 10px;	
+}

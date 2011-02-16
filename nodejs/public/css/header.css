@@ -1,0 +1,50 @@
+#top{
+	background:data-url(/images/structure/top_back.png) repeat-x top left;
+	height:45px;
+	position:fixed;
+	top:0px;
+	right:0px;
+	left:0px;
+}
+
+#toplinks {
+	float:right;
+	margin:5px 5px 0 0;
+	color:rgba(255,255,255,0.7);
+	margin-top:10px;
+	font-size:0.9em;
+}
+
+#toplinks a{
+	color:white;
+}
+
+
+#top #logo{
+	float: left;
+	margin:5px 20px 0px 5px;
+	color: #fff;
+	_color: rgba(255,255,255,0.8);
+	font-size:1.6em;
+	font-weight:700;
+}
+
+#logo a{
+	background: data-url(/images/logo/white_30.png) no-repeat center left;
+	padding-left: 38px;
+	text-decoration:none;
+	color: white;
+	_color: rgba(255,255,255,0.5);	
+}
+
+
+#logo a img{
+	border:0;
+	vertical-align: top;
+	margin-right:10px;
+}
+
+
+#top .room_name{
+	font-size: 1.3em;
+}
