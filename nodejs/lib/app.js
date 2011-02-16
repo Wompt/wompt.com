@@ -5,6 +5,8 @@ var http   = require("http"),
     SocketIO= wompt.socketIO,
     assetManager = require('./asset_manager'),
     express = require("express");
+		
+var memories = [];
 
 function App(options){
 	this.meta_users = new wompt.MetaUserManager();
@@ -14,12 +16,24 @@ function App(options){
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
 	this.client_connectors = new wompt.ClientConnectors();
+	
+	setTimeout(this.printMemory(), 100);
+	setTimeout(function(){
+		console.log("Diff:" + ((memories[memories.length-1].rss - memories[0].rss)/1024));
+	}, 10000);
+	
 }
 
 App.prototype = {
 	pretty_print_config: function(){
 		logger.log("Wompt.com started with config: ");
 		logger.dir(this.config);
+	},
+	
+	printMemory: function(){
+		var mem = process.memoryUsage()
+		memories.push(mem);
+		logger.log("Memory usage: " + Math.round(mem.rss / 1024) + "kb");
 	},
 
 	create_express_server:function(){
@@ -161,11 +175,13 @@ App.prototype = {
 	
 	new_connection: function(client){
 		logger.log("Connection from: " + client.sessionId);
+		
 		var app = this;
 		
 		this.clients.add(client);
 
 		client.once('message', function(data){
+			console.log(data);
 			if(data && data.action == 'join'){
 				var connector = app.client_connectors.get(data.connector_id),
 				    user      = (connector && connector.meta_user) || new wompt.MetaUser();
@@ -177,6 +193,8 @@ App.prototype = {
 					channel.add_client(client, connector && connector.token);
 				}
 				user.clients.add(client);
+				
+				app.printMemory();
 			}
 		});
 	},

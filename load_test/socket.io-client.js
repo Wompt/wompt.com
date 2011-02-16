@@ -34,7 +34,6 @@ function mockClient() {
     _result = [];
     while (currMsg = m.pop()) {
       _result.push((function() {
-        //console.log("Got message: " + (sys.inspect(currMsg)));
         return currMsg.substr(0, 3) === heartbeat ? client.send_socketio(heartbeat + currMsg.substr(3)) : null;
       })());
     }
