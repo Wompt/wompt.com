@@ -11,21 +11,27 @@
 
 .main #input .container{
 	position:absolute;
-	right:1.5em;
-	left:0.4em;
+	right:1.7em;
+	left:10.4em;
 	bottom:0.3em;
 	top:0.4em;
 	overflow:visible;
+}
+
+.main #input #own_name {
+	position:absolute;
+	width:9.5em;
+	padding:.9em .4em 0 .4em;
+	opacity:0.5;
 }
 
 .main #input #message{
 	position:absolute;
 	border:2px solid #ef6f2f;
 	border-radius:10px;
-	color:#300;
-	padding:.1em .3em;
+	padding:.3em .5em;
+	font-size:1em;
 	width:100%;
-	font-size:1.3em;
 	background-color:#fff;
 }
 
