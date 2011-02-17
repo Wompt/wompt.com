@@ -73,7 +73,8 @@ App.prototype = {
 			var locals = me.standard_page_vars(req, {
 				channel: channel,
 				connector_id: connector.id,
-				url: req.url
+				url: req.url,
+				page_js: 'channel'
 			});
 			
 			res.render('chat', {
@@ -85,7 +86,8 @@ App.prototype = {
 			wompt.Auth.get_or_set_token(req, res);
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
-					subtitle: me.choose_subtitle()
+					subtitle: me.choose_subtitle(),
+					page_js: 'landing'
 				})
 			});
 		});

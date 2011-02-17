@@ -3,7 +3,8 @@ html
 	head
 		title Wompt Group Chat!
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js", type="text/javascript", defer='true')
-		script(src="/js/"+(w.channel ? 'channel' : 'landing')+"_"+cacheTimeStamps.landing_js+".js", type="text/javascript", defer='true')
+		- if(w.page_js)
+			script(src="/js/" + w.page_js + "_" + cacheTimeStamps[w.page_js + "_js"] + ".js", type="text/javascript", defer='true')
 		link(href="/css/all_"+cacheTimeStamps.all_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
 		link(href=assets.path("/favicon.ico"), rel="shortcut icon", type="image/x-icon")
 		link(href=assets.path("/apple-itouch-icon.png"), rel="apple-touch-icon")
