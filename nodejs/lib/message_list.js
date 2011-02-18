@@ -40,7 +40,7 @@ proto.is_empty = function(){
 
 
 //Constants
-proto.MAX_MESSAGES = 10
+proto.MAX_MESSAGES = 100
 proto.DOWNSIZE_RATIO = 0.5;
 
 exports.MessageList = MessageList;
