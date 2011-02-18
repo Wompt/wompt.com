@@ -62,6 +62,7 @@ function UserListUI(ul, container){
 		var name_div = $('<div>');
 		name_div.attr('id', 'user_' + user.id);
 		name_div.attr('title', user.name);
+		name_div.css('color', UI.getColorDispensor('users').colorFor(user.id))
 		name_div.append(user.name);
 		name_div.addClass('user');
 		container.append(name_div);

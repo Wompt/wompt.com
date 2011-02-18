@@ -1,4 +1,12 @@
 function UI(){
+	var colorDispensors = {}
+	this.getColorDispensor = function(context){
+		if(!colorDispensors[context]){
+			colorDispensors[context] = new colorDispensor();
+		}
+		return colorDispensors[context];
+	}
+	
 	var last_line = null;
 	
 	if(!readonly){
@@ -29,6 +37,7 @@ function UI(){
 		
 			nick.text(data.from.name);
 			nick.addClass('name');
+			nick.css('color', UI.getColorDispensor('users').colorFor(data.from.id))
 			
 			this.appendMessageText(data.msg, msg_container)
 
