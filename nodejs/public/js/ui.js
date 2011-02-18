@@ -29,7 +29,6 @@ function UI(){
 	this.appendMessage = function(data){
 		if(last_line && last_line.from.id == data.from.id){
 			this.appendMessageText(data.msg, last_line.msg_container)
-			
 		}else{
 			var line = $('<tr>'),
 			    nick = $('<td>'),
@@ -49,6 +48,11 @@ function UI(){
 			last_line = data;
 	
 			$('#message_list').append(line);
+		}
+		var message_list = $('#message_list');
+		
+		if(message_list.height() > message_list.parent().height()){
+			message_list.css({'position':'static'})
 		}
 	}
 	
