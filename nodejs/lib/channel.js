@@ -70,7 +70,7 @@ Channel.prototype = {
 				msg: data.msg,
 				from:{
 					name: data.from_client.user.doc.name,
-					id: data.from_client.user.doc._id
+					id: data.from_client.user.id()
 				}
 			};
 			this.messages.add(message);
@@ -95,7 +95,7 @@ Channel.prototype = {
 		for(var id in list){
 			var cl = list[id],
 			    doc = cl.user.doc,
-			    uid = doc && doc._id;
+			    uid = cl.user.id();
 			
 			if(cl.user.visible && doc && !users[uid])
 				users[uid]={
@@ -112,7 +112,7 @@ Channel.prototype = {
 		else if(opt.join) action='join';
 		
 		var users = {}, user = opt.part || opt.join;
-		users[user.doc._id] = {
+		users[user.id()] = {
 			'name': user.doc.name
 		} 
 		

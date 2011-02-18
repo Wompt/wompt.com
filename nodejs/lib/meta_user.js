@@ -17,6 +17,10 @@ function MetaUser(doc){
 };
 
 
+MetaUser.prototype.id = function(){
+	return this.doc._id.toString();
+}
+
 MetaUser.prototype.touch = function(){
 	this.touched = new Date();
 }
