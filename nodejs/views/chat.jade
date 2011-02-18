@@ -9,6 +9,6 @@
 #messages
 	table#message_list
 #input
-	.name#own_name #{w.user ? w.user.doc.name : "Anonymous"}
+	.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
 	.container
 		input#message(name='message', type='text', disabled='true')
