@@ -9,6 +9,14 @@ function UI(){
 	
 	var last_line = null;
 	
+	$(document).ready(function(){
+		var resize_timer;
+		$(window).resize(function(){
+			if(resize_timer) clearTimeout(resize_timer);
+			resize_timer = setTimeout(UI.positionMessageList, 100);
+		});
+	});	
+	
 	if(!readonly){
 		IO.socket.on('connect', function(){
 			$('#message').attr('disabled', false).focus();
@@ -49,15 +57,19 @@ function UI(){
 	
 			$('#message_list').append(line);
 		}
-		var message_list = $('#message_list');
 		
-		if(message_list.height() > message_list.parent().height()){
-			message_list.css({'position':'static'})
-		}
+		this.positionMessageList();
 	}
 	
 	this.systemMessage = function(msg){
 		this.appendMessage({from:{name: "System"}, msg:msg});		
+	}
+	
+	this.positionMessageList = function(){
+		var message_list = $('#message_list');
+		var taller = message_list.height() > message_list.parent().height();
+		
+		message_list.css({'position':(taller ? 'static' : 'absolute')})
 	}
 	
 	this.linkify = function(inputText){
