@@ -5,6 +5,7 @@ var logger = wompt.logger;
 function Channel(config){
 	var channel = this;
 	
+	this.last_activity = new Date();
 	this.name = config.name;
 	this.messages = new wompt.MessageList();
 	this.clients = new wompt.ClientPool();
@@ -18,6 +19,8 @@ function Channel(config){
 	
 	this._client_disconnected = function(){
 		var client = this;
+		channel.touch();
+		delete client.meta_data;
 		if(client.user.visible){
 			if(channel.clients.other_clients_from_same_user(client).length == 0)
 				channel.broadcast_user_list_change({'part': client.user});
@@ -27,6 +30,7 @@ function Channel(config){
 
 Channel.prototype = {
 	add_client: function(client, token){
+		this.touch();
 		client.meta_data = {
 			channel: this,
 			token: token
@@ -48,6 +52,10 @@ Channel.prototype = {
 		this.send_initial_data(client);
 	},
 	
+	touch: function(type){
+		this.touched = new Date();
+	},
+	
 	send_initial_data: function(client){
 		client.buffer_sends(function(){
 			if(!this.messages.is_empty())
@@ -58,6 +66,7 @@ Channel.prototype = {
 	},
 	
 	receive_message: function(data){
+		this.touch();
 		this.action_responders[data.action].call(this, data);
 	},
 	
@@ -124,6 +133,11 @@ Channel.prototype = {
 	
 	broadcast_message: function(msg, except){
 		this.clients.broadcast(msg, except);
+	},
+	
+	clean_up: function(){
+		delete this.messages;
+		delete this.clients;
 	}
 }
 

@@ -1,8 +1,20 @@
 var wompt  = require("./includes");
 
 function ChannelManager(options){
+	var me = this;
 	this.channels = {};
 	this.count = 0;
+	this.expirer = new wompt.Expirer(this.channels, {
+		expire_after_ms: 60 * 60 * 1000, // 1 hour
+		keep_if: function(channel){
+			return channel.clients.count > 0;
+		},
+		time_attribute:'touched'
+	});
+	this.expirer.on('expired', function(channel){
+		channel.clean_up();
+		me.count--;
+	});
 }
 
 ChannelManager.prototype = {
