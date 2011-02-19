@@ -1,13 +1,16 @@
-var utils = require('connect/utils');
-
+var connect_utils = require('connect/utils'),
+    util = require("util"),
+    events = require("events");
+		
 function Expirer(collection, options){
 	var defaults = {
-	    expire_after_ms: 10 * 60 * 1000,
+			expire_after_ms: 10 * 60 * 1000,
 			time_attribute: 'touched'
 		},
+		me = this,
 		timer;
 		
-	options = utils.merge(defaults, options || {});
+	options = connect_utils.merge(defaults, options || {});
 	options.cleanup_interval = options.check_interval || options.expire_after_ms;
 	
 	function check_expiration(){
@@ -19,6 +22,7 @@ function Expirer(collection, options){
 		for(var k in collection){
 			var obj = collection[k];
 			if(obj[time_attr] < expire_time && !(keep_if && keep_if(obj))){
+				me.emit('expired', obj);
 				delete collection[k];
 			}
 		}
@@ -35,6 +39,7 @@ function Expirer(collection, options){
 	this.start();
 }
 
+util.inherits(Expirer, events.EventEmitter);
 
 
 module.exports = Expirer;
