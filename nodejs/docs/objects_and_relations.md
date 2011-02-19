@@ -16,8 +16,9 @@
 - `doc`: Mongoose doc (DB document, will be null with anonymous users)
 - `touched`: (last access time)
 - `touch()`: updates touched property
-- `readonly`: does this user have permission to send messages (anonymous users DONT)
-- `visible`: Should this use show up on the user list of each channel? (anonymous users DONT)
+- `id()`: returns unique string for this user (currently _id property of mongoDB document) or null if user is anonymous
+- `readonly`: does this user have permission to send messages (false for anonymous users)
+- `visible`: Should this user show up on the user list of each channel? (false for anonymous users)
 - Also broadcasts a message to clients when one is added.
 - `new_session()`: broadcasts a message announcing a new login session has been created on another device
 - `end_session()`: broadcasts a message announcing that a session has ended (should also pass some session info like token or browser type or IP)
