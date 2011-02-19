@@ -36,6 +36,13 @@ wompt.mongoose.model('User',{
 		
 		signed_up: function(){
 			return !!this.email || !!this.name;
+		},
+		
+		is_admin: function(){
+			return (this.email in {
+				'dbeardsl@gmail.com': true,
+				'abtinf@gmail.com': true
+			});
 		}
 	}
 });
