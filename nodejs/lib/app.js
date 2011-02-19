@@ -114,7 +114,7 @@ App.prototype = {
 			res.redirect('/');
 		});
 		
-		exp.get("/admin/stats", function(req, res, params){
+		exp.get("/admin/stats", wompt.Auth.adminMiddleware, function(req, res, params){
 			res.render('admin/stats', {
 				locals: {w: me},
 				layout: 'admin/layout'
