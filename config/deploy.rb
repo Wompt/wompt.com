@@ -15,6 +15,8 @@ role :app, host
 set :use_sudo, true
 set :admin_runner, 'ubuntu'
 set :normalize_asset_timestamps, false
+set :copy_exclude, [".git"]
+
 default_run_options[:pty] = true
 
 task :production do
