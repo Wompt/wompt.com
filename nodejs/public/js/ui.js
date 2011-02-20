@@ -34,9 +34,10 @@ function UI(){
 		$('#connection_status').text(text);
 	};
 	
+	this.messages = [];
 	this.appendMessage = function(data){
 		if(last_line && last_line.from.id == data.from.id){
-			this.appendMessageText(data.msg, last_line.msg_container)
+			this.appendMessageText(data, last_line.msg_container);
 		}else{
 			var line = $('<tr>'),
 			    nick = $('<td>'),
@@ -46,16 +47,30 @@ function UI(){
 			nick.addClass('name');
 			nick.css('color', UI.getColorDispensor('users').colorFor(data.from.id))
 			
-			this.appendMessageText(data.msg, msg_container)
-
+			this.appendMessageText(data, msg_container);
+			
 			line.append(nick, msg_container);
 			line.addClass('line');
 
+			data.first_in_group = true;
 			data.line = line;		
 			data.msg_container = msg_container;
 			last_line = data;
 	
 			$('#message_list').append(line);
+		}
+		
+		this.messages.push(data);
+		var num_to_remove = this.messages.length - WOMPT.messages.max_shown;
+		for(var i=0; i<num_to_remove; i++){
+			this.messages[0].ui_div.remove();			
+			if(this.messages[1].first_in_group){
+				this.messages[0].line.remove();
+				this.messages.shift();
+			}else{
+				this.messages[1].first_in_group = true;
+				this.messages.shift();
+			}
 		}
 		
 		this.positionMessageList();
@@ -96,10 +111,12 @@ function UI(){
 	}
 
 
-	this.appendMessageText = function(text, to_container){
-		var msg = $('<div>');
+	this.appendMessageText = function(data, to_container){
+		var text = data.msg;
+		var msg = data.ui_div = $('<div>');
 		this.prepareMessageText(msg, text);
 		to_container.append(msg);
+		return msg;
 	}
 
 	this.prepareMessageText = function(el, text){

@@ -14,7 +14,8 @@ module.exports = {
 	
 	, constants: {
 		messages: {
-				max_length: 256 * 16
+				max_length: 256 * 16,
+				max_shown: 10
 		}
 	}
 }
