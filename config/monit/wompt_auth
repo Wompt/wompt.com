@@ -1,8 +1,8 @@
 #TODO fill in this process monitor with memory or CPU usage constraints
 check process wompt_auth
 	with pidfile <%= shared_path %>/pids/wompt_auth.pid
-	start "<%= shared_path %>/wompt_auth start"
-	stop "<%= shared_path %>/wompt_auth stop"
+	start "<%= shared_path %>/wompt_auth start" with timeout 10 seconds  # gives it 10 sec to start up
+	stop "<%= shared_path %>/wompt_auth stop" with timeout 2 seconds  # gives it 3 sec to shut down
 	if failed host 127.0.0.1 port 9292 protocol HTTP
 		request /ok
 		with timeout 5 seconds
