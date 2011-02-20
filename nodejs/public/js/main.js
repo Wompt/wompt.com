@@ -16,7 +16,7 @@ $(document).ready(function(){
 	
 	if(!readonly){
 		$('#message').keydown(function(e){
-			if(e.keyCode == 13){
+			if(IO.socket.connected && e.keyCode == 13){
 				var el = $(this),
 						message = $.trim(el.val());
 				
