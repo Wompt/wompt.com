@@ -79,4 +79,6 @@ UI.once('init', function(){
 			this.appendMessage({from:{name: "System", id:'system'}, msg:msg});		
 		}		
 	}
+	
+	messages.on('appended', UI.Messages.append);
 });

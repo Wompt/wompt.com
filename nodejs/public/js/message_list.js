@@ -1,22 +1,29 @@
 function MessageList(){
 	this.list = [];
-}
 
-MessageList.prototype.newMessage = function(msg){
-	if(msg.action == 'message'){
-		this.list.push(msg);
-		UI.Messages.append(msg);
-		var msgDiv = document.getElementById("messages");
-		msgDiv.scrollTop = msgDiv.scrollHeight;
-		return true;
-	}else if(msg.action == 'previous'){
-		var list = this.list;
-		$.each(msg.messages, function(i, m){
-			list.push(m);
-			UI.Messages.append(m);		
-		});
-		var msgDiv = document.getElementById("messages");
-		msgDiv.scrollTop = msgDiv.scrollHeight;
-		return true;
+	function scrollParent(){
+		var msgDiv = $("#messages");
+		msgDiv.scrollTop(msgDiv.get(0).scrollHeight);
+	}
+	
+	// message handler for our IO class
+	this.newMessage = function(msg){
+		if(msg.action == 'message'){
+			this.list.push(msg);
+			this.emit('appended', msg);
+			scrollParent()
+			return true;
+		}else if(msg.action == 'previous'){
+			var me = this;
+			$.each(msg.messages, function(i, m){
+				me.list.push(m);
+				me.emit('appended', m);	
+			});
+			scrollParent();
+			return true;
+		}
+		return false;
 	}
 }
+
+MessageList.prototype = new EventEmitter();
