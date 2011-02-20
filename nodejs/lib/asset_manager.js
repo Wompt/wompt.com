@@ -24,12 +24,13 @@ var assetManagerGroups = {
 			'/public/external/events.js'
 			, '/vendor/Socket.IO/socket.io.js'
 			, '/public/external/json2.js'
-			, '/public/js/color_dispensor.js'
+			, '/public/js/main.js'
 			, '/public/js/io.js'
 			, '/public/js/ui.js'
+			, '/public/js/color_dispensor.js'
 			, '/public/js/message_list.js'
 			, '/public/js/user_list.js'
-			, '/public/js/main.js'
+			, '/public/js/util.js'			
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/

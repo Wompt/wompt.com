@@ -1,18 +1,15 @@
-var messageList,
-    userList;
-    
-var msgcolor = 0;
+var userList
+  , Util = {};
 
 $(document).ready(function(){
 	IO = new IO();
 
-	messageList = new MessageList();
 	userList = new UserList();
 	uli = new UserListUI(userList, $('#user_list .users'));
 
-	UI = new UI();
+	UI.emit('init');
 	
-	IO.addMessageHandler(messageList);
+	IO.addMessageHandler(UI.Messages.list);
 	IO.addMessageHandler(userList);
 
 	IO.connect();

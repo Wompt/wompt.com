@@ -1,134 +1,134 @@
-function UI(){
-	var colorDispensors = {}
-	this.getColorDispensor = function(context){
-		if(!colorDispensors[context]){
-			colorDispensors[context] = new colorDispensor();
-		}
-		return colorDispensors[context];
+
+// UI is a singleton with events
+function UI(){};
+UI.prototype = new EventEmitter();
+UI = new UI();
+
+// fires a custom event after the user has finished resizing the window
+UI.once('init', function(){
+	var UI = this
+	  , settle_time = 100 // ms to wait before firing our event
+	  , resize_timer;
+	
+	function emitResized(){
+		UI.emit('resized');
+		resize_timer = null;
 	}
 	
-	var last_line = null;
-	
-	$(document).ready(function(){
-		var resize_timer;
-		$(window).resize(function(){
-			if(resize_timer) clearTimeout(resize_timer);
-			resize_timer = setTimeout(UI.positionMessageList, 100);
-		});
+	$(window).resize(function(){
+		if(resize_timer) clearTimeout(resize_timer);
+		resize_timer = setTimeout(emitResized, settle_time);
 	});	
-	
-	if(!readonly){
-		IO.socket.on('connect', function(){
-			$('#message').attr('disabled', false).focus();
-		});
-	}
-	
-	this.appendMessages = function(data){
-		var messages = data.messages;
-		for(var i=0; i<messages.length; i++){
-			this.appendMessage(messages[i]);
-		}
-	}
+});
 
-	this.update_connection_status = function(text){
-		$('#connection_status').text(text);
-	};
-	
-	this.messages = [];
-	this.appendMessage = function(data){
-		if(last_line && last_line.from.id == data.from.id){
-			this.appendMessageText(data, last_line.msg_container);
-		}else{
-			var line = $('<tr>'),
-			    nick = $('<td>'),
-			    msg_container  = $('<td>');
-		
-			nick.text(data.from.name);
-			nick.addClass('name');
-			nick.css('color', UI.getColorDispensor('users').colorFor(data.from.id))
-			
-			this.appendMessageText(data, msg_container);
-			
-			line.append(nick, msg_container);
-			line.addClass('line');
 
-			data.first_in_group = true;
-			data.line = line;		
-			data.msg_container = msg_container;
-			last_line = data;
-	
-			$('#message_list').append(line);
-		}
-		
-		this.messages.push(data);
-		var num_to_remove = this.messages.length - WOMPT.messages.max_shown;
-		for(var i=0; i<num_to_remove; i++){
-			this.messages[0].ui_div.remove();			
-			if(this.messages[1].first_in_group){
-				this.messages[0].line.remove();
-				this.messages.shift();
-			}else{
-				this.messages[1].first_in_group = true;
-				this.messages.shift();
-			}
-		}
-		
-		this.positionMessageList();
-	}
-	
-	this.systemMessage = function(msg){
-		this.appendMessage({from:{name: "System"}, msg:msg});		
-	}
-	
-	this.positionMessageList = function(){
+// makes sure the message list is bottom aligned when it's smaller than the
+// viewport but still allows the parent to scroll.
+UI.once('init', function(){
+	function positionMessageList(){
 		var message_list = $('#message_list');
 		var taller = message_list.height() > message_list.parent().height();
 		
 		message_list.css({'position':(taller ? 'static' : 'absolute')})
 	}
 	
-	this.linkify = function(inputText){
-		var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-		var replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
-		var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-		var replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
-		var replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
-		var replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
-    return replacedText
+	UI.on('resized', positionMessageList);
+	UI.on('message_appended', positionMessageList);
+});
+
+
+UI.once('init', function(){	
+	if(!readonly){
+		IO.socket.on('connect', function(){
+			$('#message').attr('disabled', false).focus();
+		});
 	}
-
-	this.linkifyTest = function(inputText){
-		var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-		if(inputText.match(replacePattern1))
-			return true;
-		var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-		if(inputText.match(replacePattern2))
-			return true;
-		var replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
-		if(inputText.match(replacePattern3))
-			return true;
-    return false;
-	}
+});
 
 
-	this.appendMessageText = function(data, to_container){
+UI.update_connection_status = function(text){
+	$('#connection_status').text(text);
+};
+
+UI.once('init', function(){
+	var UI = this
+	  , messages = new MessageList()
+	  , last_line = null;
+
+	function appendMessageToElement(data, to_container){
 		var text = data.msg;
 		var msg = data.ui_div = $('<div>');
-		this.prepareMessageText(msg, text);
+		prepareMessageElement(msg, text);
 		to_container.append(msg);
 		return msg;
 	}
 
-	this.prepareMessageText = function(el, text){
-		if(this.linkifyTest(text)){
+	function prepareMessageElement(el, text){
+		if(Util.Text.linkifyTest(text)){
 			//escape <,> so we don't include any nasty html tags
 			text = text.replace(/</g, '&lt;').replace(/>/g,'&gt;');
-			el.html(this.linkify(text));
+			el.html(Util.Text.linkify(text));
 		}
 		else
 			el.text(text);
 		
 		el.addClass('msg');
 		return el;
-	}	
-}
+	}
+	
+	function pruneOldMessages(){
+		var list = messages.list,
+		    num_to_remove = list.length - WOMPT.messages.max_shown;
+		
+		if(num_to_remove <=0) return;
+		
+		for(var i=0; i<num_to_remove; i++){
+			// Remove the message text element
+			list[i].ui_div.remove();
+			
+			// if the next message is it's own message group, this message is the only
+			// one in its group and the whole TR should be removed.
+			if(list[i+1].first_in_group)
+				list[i].line.remove();
+		}
+		list.splice(0,num_to_remove);
+		// The new first message is always the first in it's group
+		list[0].first_in_group = true;
+	}
+
+	UI.Messages = {
+		list:messages,
+		
+		append: function(data){
+			if(last_line && last_line.from.id == data.from.id){
+				appendMessageToElement(data, last_line.msg_container);
+			}else{
+				var line = $('<tr>'),
+						nick = $('<td>'),
+						msg_container  = $('<td>');
+			
+				nick.text(data.from.name);
+				nick.addClass('name');
+				nick.css('color', UI.Colors.forUser(data.from.id));
+				
+				appendMessageToElement(data, msg_container);
+				
+				line.append(nick, msg_container);
+				line.addClass('line');
+	
+				data.first_in_group = true;
+				data.line = line;		
+				data.msg_container = msg_container;
+				last_line = data;
+		
+				$('#message_list').append(line);
+			}
+			pruneOldMessages();
+			UI.emit('message_appended', data);
+		},
+		
+		system: function(msg){
+			this.appendMessage({from:{name: "System", id:'system'}, msg:msg});		
+		}		
+	}
+});
