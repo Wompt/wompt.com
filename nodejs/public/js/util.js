@@ -14,7 +14,7 @@ Util.Text = (function Text(){
 		linkifyTest: function(text){
 			return http_matcher.test(text) ||
 			       www_matcher.test(text) ||
-						 mail_to_matcher.test(text);
+			       mail_to_matcher.test(text);
 		}
 	};
 })()
