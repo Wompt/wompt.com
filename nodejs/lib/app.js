@@ -147,6 +147,7 @@ App.prototype = {
 		var subtitles = [
 			 "Try it free, no signup required"
 			,"Always free, sign in using Facebook"
+			,"Speak <strong><tt>c0d3?</tt></strong> sign in using Github"
 		];
 		return subtitles[Math.floor(Math.random() * subtitles.length)];
 	},

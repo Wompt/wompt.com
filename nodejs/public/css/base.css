@@ -48,7 +48,13 @@ ol { list-style-type: decimal; }
 .right{ float:right; }
 .clear{ clear:both; }
 
-
 .main {
 	margin-top:55px;	
+}
+
+tt{
+	font-family: Consolas, 'Courier New', monospace;
+}
+strong{
+	font-weight:bold;
 }
