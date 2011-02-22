@@ -22,21 +22,6 @@ UI.once('init', function(){
 });
 
 
-// makes sure the message list is bottom aligned when it's smaller than the
-// viewport but still allows the parent to scroll.
-UI.once('init', function(){
-	function positionMessageList(){
-		var message_list = $('#message_list');
-		var taller = message_list.height() > message_list.parent().height();
-		
-		message_list.css({'position':(taller ? 'static' : 'absolute')})
-	}
-	
-	UI.on('resized', positionMessageList);
-	UI.on('message_appended', positionMessageList);
-});
-
-
 UI.once('init', function(){	
 	if(!readonly){
 		IO.socket.on('connect', function(){

@@ -38,7 +38,7 @@
 .main #messages{
 	padding-bottom:0px;
 	margin-right:381px;
-	overflow-y: scroll;
+	overflow: hidden;
 	position:fixed;
 	top:45px;
 	left:0px;
@@ -47,10 +47,16 @@
 	background-color:#f7f7f7;
 }
 
+#messages_scroller{
+	position:absolute;
+	width:100%;
+	max-height:100%;
+	overflow-y:auto;
+	bottom: 0px;
+}
+
 #message_list {
 	width: 100%;
-	position: absolute;
-	bottom: 0px;
 }
 
 .line td{

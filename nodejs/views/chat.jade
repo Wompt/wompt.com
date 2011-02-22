@@ -7,7 +7,8 @@
 	.users
 != partial('_twitter', {locals: {w:w}})
 #messages
-	table#message_list
+	#messages_scroller
+		table#message_list
 #input
 	.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
 	.container

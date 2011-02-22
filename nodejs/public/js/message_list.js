@@ -2,7 +2,7 @@ function MessageList(){
 	this.list = [];
 
 	function scrollParent(){
-		var msgDiv = $("#messages");
+		var msgDiv = $("#messages_scroller");
 		msgDiv.scrollTop(msgDiv.get(0).scrollHeight);
 	}
 	
