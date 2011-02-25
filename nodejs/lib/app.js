@@ -14,6 +14,7 @@ function App(options){
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
 	this.client_connectors = new wompt.ClientConnectors();
+	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
 }
 
 App.prototype = {

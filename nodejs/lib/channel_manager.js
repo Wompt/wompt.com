@@ -41,6 +41,15 @@ ChannelManager.prototype = {
 			this.count--;
 		}
 		return exists;
+	},
+	
+	each: function(callback){
+		var channels = this.channels;
+		for(var k in channels){
+			if(channels.hasOwnProperty(k)){
+				callback(channels[k]);
+			}
+		}
 	}
 }
 

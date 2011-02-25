@@ -23,3 +23,6 @@ e.App            = require("./app");
 e.middleware     = {
 	staticProvider:  require('./middleware/staticProvider')
 };
+e.monitors       = {
+	PopularChannels: require('./monitors/popular_channels.js')
+}
