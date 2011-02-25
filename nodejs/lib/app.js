@@ -87,6 +87,7 @@ App.prototype = {
 			wompt.Auth.get_or_set_token(req, res);
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
+					popular_channels: me.popular_channels,
 					subtitle: me.choose_subtitle(),
 					page_js: 'landing'
 				})

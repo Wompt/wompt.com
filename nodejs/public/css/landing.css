@@ -1,5 +1,14 @@
 #landing {
-	margin-top:1em;
+	margin: 1em auto;
+	display:table;
+}
+
+.row {
+	display:table-row;
+}
+
+.cell {
+	display:table-cell;
 }
 
 #landing .title{
@@ -14,7 +23,6 @@
 }
 
 #landing .channel_selector{
-	margin:5em auto;
 	text-align:center;
 }
 
@@ -42,4 +50,18 @@
 	font-size: 1.1em;
 	margin: 1em 0.5em;
 	padding: 2px 10px 2px 10px;
+}
+
+#landing #left_side {
+	text-align:right;
+	padding-right:5em;
+}
+
+#landing #right_side {
+	padding-left:5em;
+}
+
+
+#landing .side_list {
+	
 }
