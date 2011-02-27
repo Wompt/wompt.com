@@ -56,14 +56,44 @@
 
 #landing #left_side {
 	text-align:right;
-	padding-right:5em;
+	margin-right:3em;
 }
 
 #landing #right_side {
-	padding-left:5em;
+	margin-left:3em;
+}
+
+.left_back,
+.right_back{
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	background: data-url(/images/structure/topic_list_back.png) top no-repeat;
+}
+.left_back{
+	z-index:-10;
+	left:0px;
+	width:60%;
+	background-position:top left;
+	background-color:#f5f5f5;
+}
+.right_back{
+	z-index:-11;
+	right:0px;
+	width:50%;
+	background-position:top right;
 }
 
 
 #landing .side_list {
-	
+	position:relative;
+	min-height:130px;
+	padding:25px 30px 10px 30px;
+}
+
+#landing .side_list h2{
+	font-weight:normal;
+	border-bottom: 2px solid #999;
+	padding-bottom: 0.2em;
+	color:#555;
 }
