@@ -5,8 +5,12 @@
 				.left_back
 				.right_back
 				h2 Twitter Topics
-				- each chan in w.popular_channels.sorted_list
-					div (#{chan.clients.count}) - #{chan.name}
+				table.room_list
+					- each chan in w.popular_channels.sorted_list
+						tr
+							td.count= chan.clients.count
+							td
+								a(href="/chat/" + chan.name)= "#" + chan.name.substring(0,25)
 		.cell.channel_selector
 			h1.title Wompt is Group Chat
 			.subtitle #{w.subtitle}
@@ -18,6 +22,10 @@
 				.left_back
 				.right_back
 				h2 Trending Topics
-				- each chan in w.popular_channels.sorted_list
-					div (#{chan.clients.count}) - #{chan.name}
+				table.room_list
+					- each chan in w.popular_channels.sorted_list
+						tr
+							td
+								a(href="/chat/" + chan.name)= chan.name.substring(0,25)
+							td.count= chan.clients.count
 		.clear

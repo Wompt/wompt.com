@@ -95,5 +95,31 @@
 	font-weight:normal;
 	border-bottom: 2px solid #999;
 	padding-bottom: 0.2em;
+	letter-spacing:120%;
 	color:#555;
+}
+
+.side_list table.room_list {
+	font-size:1.2em;
+	width:95%;
+	margin:0.2em auto;
+}
+
+#right_side table.room_list td.count{
+	text-align:right;
+	padding-left:1em;
+}
+
+
+.side_list td.count{
+	color:#ccc;
+}
+
+#left_side table.room_list {
+	text-align:right;
+}
+
+#left_side table.room_list td.count{
+	text-align:left;
+	padding-right:1em;
 }
