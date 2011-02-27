@@ -1,5 +1,5 @@
 #landing {
-	margin: 1em auto;
+	margin: 6em auto 1em auto;
 	display:table;
 }
 
@@ -24,6 +24,8 @@
 
 #landing .channel_selector{
 	text-align:center;
+	padding:50px;
+	background: data-url(/images/structure/landing_back.png) top center no-repeat;	
 }
 
 #landing .channel_selector input.text {
