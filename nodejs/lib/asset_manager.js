@@ -1,6 +1,7 @@
 var wompt = require('./includes');
 var root = wompt.env.root;
 var pub = wompt.env.public_dir;
+var customHandlers = require('./asset_handlers.js');
 
 
 var assetManager = require('connect-assetmanager');
@@ -55,6 +56,7 @@ var assetManagerGroups = {
 				assetHandler.yuiCssOptimize
 				, assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
+				, customHandlers.replaceRgbaWithRgb
 				, assetHandler.stripDataUrlsPrefix
 			],
 			// Matches all (regex start line)
