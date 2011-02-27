@@ -57,7 +57,7 @@ Channel.prototype = {
 	},
 	
 	send_initial_data: function(client){
-		client.buffer_sends(function(){
+		client.bufferSends(function(){
 			if(!this.messages.is_empty())
 				client.send({action: 'previous', messages: this.messages.recent(100)});
 			
