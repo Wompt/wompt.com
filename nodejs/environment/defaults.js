@@ -18,4 +18,8 @@ module.exports = {
 				max_shown: 500
 		}
 	}
+	
+	, hoptoad: {
+		reportErrors: false
+	}
 }

@@ -4,6 +4,7 @@ var http   = require("http"),
     logger = wompt.logger,
     SocketIO= wompt.socketIO,
     assetManager = require('./asset_manager'),
+    Hoptoad = require('./hoptoad'),
     express = require("express");
 
 function App(options){
@@ -45,6 +46,7 @@ App.prototype = {
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.Auth.lookup_user_middleware());
 			exp.use(wompt.Auth.meta_user_middleware(me.meta_users));
+			exp.error(Hoptoad.expressErrorNotifier);
 		});
 		
 		exp.helpers({
