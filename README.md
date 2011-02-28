@@ -3,9 +3,6 @@
 ## Installation ##
 
 ### Install node.js ###
-
-Note that under ubuntu, configure fails with the current version in git.
-This is because configure and waf-light both have windows line endings instead of unix line endings.
 		git clone https://github.com/ry/node.git
 		cd node
 		./configure
@@ -18,6 +15,7 @@ This is because configure and waf-light both have windows line endings instead o
 ### Install packages ###
 		npm install express
 		npm install jade
+		npm install hoptoad-notifier
 		
 ### Deploying ###
 
@@ -37,9 +35,9 @@ root directory i.e. it works in /wompt/app just as well as in /wompt
 
 #### Pushing changes ####
 You'll either need to SSH into the EC2 instance, or you'll need Capistrano (a ruby gem) locally for deploying.
-The deploy command also creates a git tag `deploy_yyyy_mm_dd...` and pushes it to origin  (this can be skipped by adding the skip_tag option)
+The deploy command also creates a git tag `deploy_yyyy_mm_dd...` and pushes it to origin  (this can be skipped by adding the deploy:tags:skip option)
 Locally: (within any subdirectory of the application)
-		cap production [skip_tag] deploy
+		cap production [deploy:tags:skip] deploy
 		# see a list of all commands
 		cap -T
 
