@@ -12,14 +12,17 @@
 }
 
 #landing .title{
+	font-size: 1.5em;
 	margin-bottom:0.2em;
 	color: #555;
+	text-shadow: rgba(0, 0, 0, 0.2) 0px 1px 5px;
 }
 
 #landing .subtitle{
+	text-shadow: white 0px 0px 3px;
 	margin-bottom:0.7em;
-	font-size:1.2em;
-	color:#777;
+	font-size:1.1em;
+	color:#888;
 }
 
 #landing .channel_selector{
