@@ -9,6 +9,7 @@
 
 .cell {
 	display:table-cell;
+	vertical-align:top;
 }
 
 #landing .title{
@@ -89,6 +90,7 @@
 
 
 #landing .side_list {
+	margin-top:1em;
 	position:relative;
 	min-height:130px;
 	padding:20px 25px 20px 25px;
