@@ -1,6 +1,6 @@
 var default_env = require("./environment/defaults");
 
-var environment = process.argv[2] || 'development';
+var environment = process.env.NODE_ENV || 'development';
 var specified_env = require("./environment/" + environment);
 var final_env = default_env;
 
