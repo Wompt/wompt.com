@@ -10,7 +10,7 @@
 						tr
 							td.count= chan.clients.count
 							td
-								a(href="/chat/" + chan.name)= "#" + chan.name.substring(0,25)
+								a(href="/chat/" + chan.name)= "#" + chan.name.substring(0,20)
 		.cell
 			.channel_selector
 				.right_back.back
@@ -29,6 +29,6 @@
 					- each chan in w.popular_channels.sorted_list
 						tr
 							td
-								a(href="/chat/" + chan.name)= chan.name.substring(0,25)
+								a(href="/chat/" + chan.name)= chan.name.substring(0,20)
 							td.count= chan.clients.count
 		.clear
