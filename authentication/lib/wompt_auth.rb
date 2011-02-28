@@ -3,6 +3,11 @@ require 'openid/store/filesystem'
 require 'lib/models/user'
 require 'lib/config'
 require 'lib/referer_saver'
+require 'hoptoad_notifier'
+
+HoptoadNotifier.configure do |config|
+  config.api_key = CONFIG[:hoptoad][:api_key]
+end
 
 Mongomatic.db = Mongo::Connection.new.db(CONFIG[:database])
 
@@ -13,7 +18,8 @@ class WomptAuth < Sinatra::Base
     :path => '/auth',
     :expire_after => 60, # In seconds
     :secret => 'C6xyESB0FdkabrhtBxOlPikZTS0jKnQRq1vMfluX'
-  
+
+  use HoptoadNotifier::Rack if CONFIG[:hoptoad] && CONFIG[:hoptoad][:report_errors]
   use RefererSaver
   
   use OmniAuth::Builder do

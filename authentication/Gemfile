@@ -5,6 +5,7 @@ gem "omniauth", "~> 0.2.0.beta1"
 gem "json", "~> 1.4.6"
 gem "mongomatic", "~> 0.7.3"
 gem "haml", "~> 3.0.25"
+gem "hoptoad_notifier", "~> 2.4.6"
 
 # C version BSON for Mongodb
 gem "bson_ext", "~> 1.2.0"
