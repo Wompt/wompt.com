@@ -40,22 +40,16 @@
 #landing .channel_selector input.text {
 	margin-left: auto;
 	margin-right: auto;
-	border:5px solid #ef6f2f;
-}
-
-#landing input.text {
-	border: 1px solid #777;
+	border:4px solid #e66d31;
+	-vendor-border-radius:10px;
+	-vendor-box-shadow: rgba(0,0,0,0.25) 0px 0px 5px 1px;
+	color:#555;
+	font-size: 1.2em;
 	width: 250px;	
 	display: block;
-	font-size: 1em;
-	padding: 4px 0px;
-	width: 200px;
+	padding: 7px;
 }
 
-
-#landing .channel_selector input.text.big {
-	font-size: 1.3em;
-}
 
 #landing input.submit {
 	font-size: 1.1em;
