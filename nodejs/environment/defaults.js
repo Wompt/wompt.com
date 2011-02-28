@@ -22,4 +22,6 @@ module.exports = {
 	, hoptoad: {
 		reportErrors: false
 	}
+	
+	, redirectPort80: false
 }
