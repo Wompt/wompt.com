@@ -15,6 +15,7 @@ function App(options){
 	this.express = this.create_express_server();
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
+	this.twitterTopics = new wompt.monitors.TwitterTopics(this.channels);
 }
 
 App.prototype = {
@@ -87,7 +88,7 @@ App.prototype = {
 			wompt.Auth.get_or_set_token(req, res);
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
-					popular_channels: me.popular_channels,
+					app:me,
 					subtitle: me.choose_subtitle(),
 					page_js: 'landing'
 				})

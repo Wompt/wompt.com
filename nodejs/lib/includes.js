@@ -24,5 +24,6 @@ e.middleware     = {
 	staticProvider:  require('./middleware/staticProvider')
 };
 e.monitors       = {
-	PopularChannels: require('./monitors/popular_channels.js')
+	 PopularChannels: require('./monitors/popular_channels.js')
+	,TwitterTopics:   require('./monitors/twitter_topics.js')
 }

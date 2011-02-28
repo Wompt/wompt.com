@@ -6,11 +6,11 @@
 				.right_back
 				h2 Twitter Topics
 				table.room_list
-					- each chan in w.popular_channels.sorted_list
+					- each topic in w.app.twitterTopics.sortedList
 						tr
-							td.count= chan.clients.count
+							td.count= topic.channel ? topic.channel.clients.count : topic.clients
 							td
-								a(href="/chat/" + chan.name)= "#" + chan.name.substring(0,20)
+								a(href="/chat/" + topic.name.replace('#',''))= topic.name.substring(0,20)
 		.cell
 			.channel_selector
 				.right_back.back
@@ -26,7 +26,7 @@
 				.right_back
 				h2 Trending Topics
 				table.room_list
-					- each chan in w.popular_channels.sorted_list
+					- each chan in w.app.popular_channels.sorted_list
 						tr
 							td
 								a(href="/chat/" + chan.name)= chan.name.substring(0,20)
