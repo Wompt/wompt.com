@@ -197,8 +197,8 @@ App.prototype = {
 	statusMiddleware: function(){
 		return function(req, res, next){
 			if(req.url == '/ok'){
-				res.send("OK", 200);
-				res.end();
+				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.end("OK");
 			}else{
 				next();
 			}
