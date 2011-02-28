@@ -27,9 +27,15 @@
 
 #landing .channel_selector{
 	text-align:center;
-	padding:50px;
-	background: data-url(/images/structure/landing_back.png) top center no-repeat;	
+	padding:50px 45px 40px 45px;
+	min-height:250px;
+	position:relative;
 }
+
+.channel_selector .back{
+	background-image:data-url(/images/structure/landing_back.png);
+}
+
 
 #landing .channel_selector input.text {
 	margin-left: auto;
@@ -39,6 +45,7 @@
 
 #landing input.text {
 	border: 1px solid #777;
+	width: 250px;	
 	display: block;
 	font-size: 1em;
 	padding: 4px 0px;
@@ -48,7 +55,6 @@
 
 #landing .channel_selector input.text.big {
 	font-size: 1.3em;
-	width: 300px;
 }
 
 #landing input.submit {
@@ -71,12 +77,12 @@
 	position:absolute;
 	top:0px;
 	bottom:0px;
-	background: data-url(/images/structure/topic_list_back.png) top no-repeat;
+	background:top no-repeat data-url(/images/structure/topic_list_back.png);
 }
 .left_back{
 	z-index:-10;
 	left:0px;
-	width:60%;
+	width:52%;
 	background-position:top left;
 	background-color:#f5f5f5;
 }
