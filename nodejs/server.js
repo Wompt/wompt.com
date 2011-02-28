@@ -1,3 +1,4 @@
+require('./redirector');
 var wompt     = require("./lib/includes");
 
 var app = new wompt.App({
