@@ -19,10 +19,11 @@ function ChannelManager(options){
 
 ChannelManager.prototype = {
 	get: function(name){
-		name = name.toLowerCase();
-		var channel = this.channels[name];
-		if(!channel) channel = this.create(name);
-		return channel;
+		return this.peek(name) || this.create(name);
+	},
+	
+	peek: function(name){
+		return this.channels[name.toLowerCase()];
 	},
 	
 	create: function(name){
@@ -50,6 +51,15 @@ ChannelManager.prototype = {
 				callback(channels[k]);
 			}
 		}
+	},
+
+	toArray: function(){
+		if(this._channelArray)
+		var array = [];
+		this.each(function(channel){
+			array.push(channel);
+		});
+		return array;
 	}
 }
 
