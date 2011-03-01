@@ -37,7 +37,7 @@ function UserListUI(ul, container){
 			addUser(user);
 			names.push(user.name);
 		});
-		UI.systemMessage("Joined: " + names.join(', '));
+		UI.Messages.system("Joined: " + names.join(', '));
 	});
 
 	ul.on('part', function(users){
@@ -47,7 +47,7 @@ function UserListUI(ul, container){
 			removeUser(user);
 			names.push(user.name);
 		});		
-		UI.systemMessage("Left: " + names.join(', '));
+		UI.Messages.system("Left: " + names.join(', '));
 	});
 	
 	ul.on('who', function(users){
