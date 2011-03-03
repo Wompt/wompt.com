@@ -21,6 +21,7 @@ var assetManagerGroups = {
 		, 'path': root
 		, 'dataType': 'javascript'
 		, 'debug': !wompt.env.minify_assets
+		, 'stale': wompt.env.perform_caching		
 		, 'files': [
 			'/public/external/events.js'
 			, '/vendor/Socket.IO/socket.io.js'
@@ -39,6 +40,7 @@ var assetManagerGroups = {
 		, 'path': pub + '/css/'
 		, 'dataType': 'css'
 		, 'debug': !wompt.env.minify_assets
+		, 'stale': wompt.env.perform_caching
 		, 'files': [
 			  'reset.css'
 			, 'base.css'
