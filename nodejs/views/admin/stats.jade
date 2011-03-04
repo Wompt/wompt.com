@@ -5,9 +5,12 @@ table
 	tr
 		th Active Clients
 		td #{w.clients.count}
+	tr
+		th Unique Users
+		td #{w.clients.userCount}		
   tr
 		th Popular Channels
 		td
 			- w.popular_channels.rebuildPopularList()
 			- each chan in w.popular_channels.sorted_list
-				div (#{chan.clients.count}) - #{chan.name}
+				div (#{chan.clients.userCount}) - #{chan.name}
