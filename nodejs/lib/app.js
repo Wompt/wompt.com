@@ -185,6 +185,10 @@ App.prototype = {
 				var connector = app.client_connectors.get(data.connector_id),
 				    user      = (connector && connector.meta_user) || new wompt.MetaUser();
 				client.user = user;
+				//When the user signs out, we can still know the user id while cleaning up the client
+				client.uid = user.id();
+				// Because this client didn't have a uid when it was first added
+				app.clients.inc_user_count(client);
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = app.channels.get(data.channel);
