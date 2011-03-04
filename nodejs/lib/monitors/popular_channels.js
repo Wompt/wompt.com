@@ -20,8 +20,8 @@ PopularChannels.prototype.rebuildPopularList = function(){
 		  , most_clients = 0;
 				
 		this.channels.each(function(channel){
-			if(channel.clients.count >= most_clients && !hash.hasOwnProperty(channel.name)){
-				most_clients = channel.clients.count;
+			if(channel.clients.userCount >= most_clients && !hash.hasOwnProperty(channel.name)){
+				most_clients = channel.clients.userCount;
 				most_clients_channel = channel;
 			}
 		});

@@ -8,7 +8,7 @@
 				table.room_list
 					- each topic in w.app.twitterTopics.sortedList
 						tr
-							td.count= topic.channel ? topic.channel.clients.count : topic.clients
+							td.count= topic.channel ? topic.channel.clients.userCount : topic.clients
 							td
 								a(href="/chat/" + topic.name.replace('#',''))= topic.name.substring(0,20)
 		.cell
@@ -30,5 +30,5 @@
 						tr
 							td
 								a(href="/chat/" + chan.name)= chan.name.substring(0,20)
-							td.count= chan.clients.count
+							td.count= chan.clients.userCount
 		.clear

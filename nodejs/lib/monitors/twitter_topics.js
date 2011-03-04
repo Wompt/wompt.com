@@ -65,7 +65,7 @@ TwitterTopics.prototype._sortList = function(){
 		return {
 			 name: trend
 			,channel: channel
-			,clients: channel ? channel.clients.count : 0
+			,clients: channel ? channel.clients.userCount : 0
 		};
 	}).sort(function(a,b){
 		return b.clients - a.clients;
