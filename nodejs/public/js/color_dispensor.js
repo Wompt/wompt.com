@@ -1,8 +1,27 @@
 UI.once('init', function(){
 	var colors = [
-			  'CC3300'
-			, '0033CC'
-			, '33CC00'
+		'7D2252'
+		, '800517'
+		, '7E3817'
+		, 'C36241'
+		, 'AF7817'
+		, 'A0C544'
+		, '827839'
+		, '348017'
+		, '254117'
+		, '736AFF'
+		, '717D7D'
+		, '566D7E'
+		, '461B7E'
+		, 'D16587'
+		, 'B048B5'
+		, '8D38C9'
+		, '153E7E'
+		, '151B8D'
+		, '25383C'
+		, 'F62817'
+		, 'F87431'
+		, 'F76541'
 	];
 		
 	function colorDispensor(colors){
@@ -26,7 +45,8 @@ UI.once('init', function(){
 	var colorDispensors = {};	
 	function getDispensor(context){
 		if(!colorDispensors[context]){
-			colorDispensors[context] = new colorDispensor(colors);
+			var randomized = colors.sort(function() {return 0.5 - Math.random()});
+			colorDispensors[context] = new colorDispensor(randomized);
 		}
 		return colorDispensors[context];
 	}
