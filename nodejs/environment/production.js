@@ -7,4 +7,5 @@ module.exports = {
 		  apiKey: '2d12a5a4e55714b1d7a3fbae31c5e0ae'
 		, reportErrors: true
 	}
+	, redirectWww	: true
 }

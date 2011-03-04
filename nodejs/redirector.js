@@ -1,11 +1,12 @@
-var http = require('http');
+var http = require('http'),
+    env = require('./environment');
 
 var redirector = http.createServer(function(req,res){
 	res.writeHead(301, {
-		'Location':'http://www.wompt.com:80' + req.url
+		'Location':'https://www.wompt.com' + req.url
 	});
 	res.end();
 });
 
-if(require('./environment').redirectPort80)
-	redirector.listen(80);
+if(env.redirectWww)
+	redirector.listen(env.redirectWwwToPort);

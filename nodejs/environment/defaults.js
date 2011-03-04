@@ -23,5 +23,6 @@ module.exports = {
 		reportErrors: false
 	}
 	
-	, redirectPort80: false
+	, redirectWww: false
+	, redirectWwwToPort: 16880
 }
