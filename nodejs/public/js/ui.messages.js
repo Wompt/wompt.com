@@ -46,8 +46,19 @@ UI.once('init', function(){
 
 	UI.Messages = {
 		list:messages,
-		
 		append: function(data){
+			UI.emit('before_append', data);
+			UI.Messages.appendWithoutEvents(data);
+			UI.emit('after_append', data);			
+		},
+		
+		appendBatch: function(msgs){
+			UI.emit('before_append', msgs);
+			$.each(msgs, function(i,m){UI.Messages.appendWithoutEvents(m)});
+			UI.emit('after_append', msgs);			
+		},
+		
+		appendWithoutEvents: function(data){
 			if(last_line && last_line.from.id == data.from.id){
 				appendMessageToElement(data, last_line.msg_container);
 			}else{
@@ -72,13 +83,13 @@ UI.once('init', function(){
 				$('#message_list').append(line);
 			}
 			pruneOldMessages();
-			UI.emit('message_appended', data);
 		},
 		
 		system: function(msg){
 			UI.Messages.append({from:{name: "System", id:'system'}, msg:msg});		
-		}		
+		}
 	}
 	
 	messages.on('appended', UI.Messages.append);
+	messages.on('batch_appended', UI.Messages.appendBatch);
 });
