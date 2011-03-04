@@ -15,7 +15,7 @@ namespace :deploy do
 			else
 				tag_name = Time.now.strftime("deploy_%Y_%m_%d_%H_%M")
 				
-				system "git tag -a -m 'tagging current code for deployment to staging' #{tag_name}"
+				system "git tag -a -m 'Deployed to #{deployment} using environment #{application_environment}' #{tag_name} #{real_revision}"
 				
 				system "git push origin #{tag_name}"
 				if $? != 0
