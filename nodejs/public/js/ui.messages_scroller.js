@@ -32,9 +32,11 @@ UI.once('init', function(){
 	
 	UI.on('before_append', me.checkShouldSroll);
 	UI.on('after_append', function(data){
-		var old = animateScroll;
-		animateScroll = !$.isArray(data);
-		me.scrollToBottom();
-		animateScroll = old;
+		if(should_scroll){
+			var old = animateScroll;
+			animateScroll = !$.isArray(data);
+			me.scrollToBottom();
+			animateScroll = old;
+		}
 	});
 });
