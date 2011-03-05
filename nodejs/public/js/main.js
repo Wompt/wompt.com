@@ -1,7 +1,7 @@
 var userList
   , Util = {};
 
-$(document).ready(function(){
+jQuery(function(){
 	IO = new IO();
 
 	userList = new UserList();
