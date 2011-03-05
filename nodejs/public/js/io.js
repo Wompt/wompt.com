@@ -1,5 +1,9 @@
 function IO(){
-	var socket = this.socket = new io.Socket(window.location.hostname);
+	var secure = window.location.protocol.match(/https/);
+	var socket = this.socket = new io.Socket(window.location.hostname, {
+			secure: secure,
+			port: secure ? '' : window.location.port
+		});
 	var messageHandlers = [];
 
 	socket.on('connect', function(){
