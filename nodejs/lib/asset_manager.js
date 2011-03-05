@@ -23,7 +23,8 @@ var assetManagerGroups = {
 		, 'debug': !wompt.env.minify_assets
 		, 'stale': wompt.env.perform_caching		
 		, 'files': [
-			'/public/external/events.js'
+			'/public/external/bootstrap.js'
+			, '/public/external/events.js'
 			, '/vendor/Socket.IO/socket.io.js'
 			, '/public/external/json2.js'
 			, '/public/js/main.js'
