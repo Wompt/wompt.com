@@ -10,7 +10,8 @@
 						tr
 							td.count= topic.channel ? topic.channel.clients.userCount : topic.clients
 							td
-								a(href="/chat/" + topic.name.replace('#',''))= topic.name.substring(0,20)
+								- var strip_pound = topic.name.replace("#","")
+								a(href="/chat/" + strip_pound)= topic.name.substring(0,20)
 		.cell
 			.channel_selector
 				.right_back.back
