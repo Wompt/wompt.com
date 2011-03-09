@@ -1,4 +1,4 @@
-var connect_utils = require('connect/utils'),
+var connect_utils = require('connect').utils,
     util = require("util"),
     events = require("events");
 		
