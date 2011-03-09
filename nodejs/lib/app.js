@@ -35,14 +35,9 @@ App.prototype = {
 			exp.use(wompt.Auth.forward_to_auth_app_middleware());
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(assetManager.middleware);
-			exp.use(express.staticProvider({root:config.public_dir, cache: config.perform_caching}));
-			exp.use('/js', wompt.middleware.staticProvider({
-				root:config.root + '/vendor/Socket.IO/',
-				match: /^\/socket\.io\.js$/,
-				cache: config.perform_caching
-			}));
-			exp.use(express.cookieDecoder());
-			exp.use(express.bodyDecoder());
+			exp.use(express.favicon(config.public_dir + 'favicon.ico'));
+			exp.use(express.cookieParser());
+			exp.use(express.bodyParser());
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.Auth.lookup_user_middleware());
 			exp.use(wompt.Auth.meta_user_middleware(me.meta_users));
