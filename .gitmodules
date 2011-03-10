@@ -1,7 +1,3 @@
-[submodule "nodejs/vendor/mongoose"]
-	path = nodejs/vendor/mongoose
-	url = git://github.com/danielbeardsley/mongoose.git
-
 [submodule "nodejs/vendor/Socket.IO"]
 	path = nodejs/vendor/Socket.IO
 	url = git://github.com/danielbeardsley/Socket.IO.git
