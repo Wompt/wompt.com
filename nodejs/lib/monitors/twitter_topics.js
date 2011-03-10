@@ -13,6 +13,7 @@ var requestOptions = {
 
 function TwitterTopics(channels){
 	this.topics = [];
+	this.list = [];
 	this.channelManager = channels;
 
 	this._twitter_timer = setInterval(this.updateTopicList.bind(this), INTERVAL);
@@ -60,6 +61,7 @@ TwitterTopics.prototype._processBody = function(body){
 
 TwitterTopics.prototype._sortList = function(){
 	var me = this;
+	if(!this.list) return;
 	this.sortedList = this.list.map(function(trend){
 		var channel = me.channelManager.peek(trend.replace('#',''));
 		return {
