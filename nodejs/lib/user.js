@@ -1,51 +1,55 @@
 var wompt = require("./includes"),
-    db = wompt.db;
+    db = wompt.db,
+		mongoose = wompt.mongoose;
 
-wompt.mongoose.model('User',{
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
 
-	collection : 'users',
+var Authentication = new Schema({
+	'provider'      : String
+	,'uid'          : String
+});
 
-	properties: [
-		//simple attributes
-		 'name'
-		,'email'
-		,'password'
-		,'one_time_token'
-		
-		// embedded documents
-		,{
-		'sessions': [
-			['token', 'last_ip', 'session_id', 'last_used']
-		]
-		,'authentications': [
-			['provider','uid']
-		]
-		}
-	],
+// number defines index sort order
+Authentication.index({provider: 1, uid:1});
+
+var Session = new Schema({
+	'token'         : {type: String, index:true}
+	,'last_ip'      : String
+	,'session_id'   : String
+	,'last_used'    : Date
+});
+
+
+var User = new Schema({
+	//simple attributes
+	'name'             : String
+	,'email'           : {type: String, index:true}
+	,'one_time_token'  : String
 	
-	indexes : [
-		 'email'
-		,'sessions.token',
-		,'authentications'
-	],
+	// embedded documents
+	,'sessions'        : [Session]
+	,'authentications' : [Authentication]
+});
 	
-	methods: {
-		wrap: function(){
-			return new wompt.MetaUser(this);
-		},
-		
-		signed_up: function(){
-			return !!this.email || !!this.name;
-		},
-		
-		is_admin: function(){
-			return (this.email in {
-				'dbeardsl@gmail.com': true,
-				'abtinf@gmail.com': true
-			});
-		}
+User.method({
+	wrap: function(){
+		return new wompt.MetaUser(this);
+	},
+	
+	signed_up: function(){
+		return !!this.email || !!this.name;
+	},
+	
+	is_admin: function(){
+		return (this.email in {
+			'dbeardsl@gmail.com': true,
+			'abtinf@gmail.com': true
+		});
 	}
 });
 
-module.exports = db.model('User');
+// Model name, Schema, collection name
+mongoose.model('User', User, 'users');
 
+module.exports = db.model('User');
