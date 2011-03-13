@@ -1,6 +1,5 @@
 var wompt = require("./includes"),
-    db = wompt.db,
-		mongoose = wompt.mongoose;
+    mongoose = wompt.mongoose;
 
 var Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId;
@@ -52,4 +51,4 @@ User.method({
 // Model name, Schema, collection name
 mongoose.model('User', User, 'users');
 
-module.exports = db.model('User');
+module.exports = mongoose.model('User');
