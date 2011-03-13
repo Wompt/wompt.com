@@ -1,18 +1,16 @@
 {
   "name": "wompt_dependencies",
-	
-	// Increment this each time you modify the dependecies
   "version": "0.0.1",
   "engines": {
     "node": "0.4.1"
   },
 	"files":[
-		'./dependencies.js'
+		"./dependencies.js"
 	],
 	"main": "./dependencies",
 	"modules": {},
 	"dependencies":{
-		'jade': '~0.8.4',
-		'express': '2.0.0beta2'
+		"jade": "~0.8.4",
+		"express": "2.0.0beta2"
 	}
 }
