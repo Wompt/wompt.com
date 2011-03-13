@@ -5,7 +5,7 @@ var http   = require("http"),
     SocketIO= wompt.socketIO,
     assetManager = require('./asset_manager'),
     Hoptoad = require('./hoptoad'),
-    express = require("express");
+    express = wompt.dependencies.express;
 
 function App(options){
 	this.meta_users = new wompt.MetaUserManager();
@@ -51,6 +51,7 @@ App.prototype = {
 
 		exp.set('views', wompt.env.root + '/views');		
 		exp.set('view engine', 'jade');
+		exp.register('jade', wompt.dependencies.jade);
 		
 		this.plain_routes(exp, [
 			,'/support'
