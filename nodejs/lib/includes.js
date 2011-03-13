@@ -2,6 +2,8 @@ var e = module.exports;
 var env = e.env = require("../environment");
 require.paths.unshift(env.root + '/vendor');
 
+e.dependencies   = require("wompt_dependencies");
+
 e.logger         = require("./logger");
 e.Channel        = require("./channel").Channel;
 e.ClientPool     = require("./client_pool").ClientPool;
