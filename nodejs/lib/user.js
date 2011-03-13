@@ -1,5 +1,4 @@
 var wompt = require("./includes"),
-    db = wompt.db,
     mongoose = wompt.mongoose;
 
 var Schema = mongoose.Schema
@@ -10,7 +9,7 @@ var Authentication = new Schema({
 	,'uid'          : String
 });
 
-// number defines index sort order
+// number defines index sort order (1=asc)
 Authentication.index({provider: 1, uid:1});
 
 var Session = new Schema({
@@ -67,6 +66,7 @@ User.method({
 
 // Model name, Schema, collection name
 mongoose.model('User', User, 'users');
+module.exports = mongoose.model('User');
 
 var providerAuthInfo = {
 	facebook: {
@@ -98,6 +98,4 @@ function get_urls_hash(auth){
 	var i;
 	return (i = auth.info) && (i = i.user_info) && (i = i.urls) || {};
 }
-
-module.exports = db.model('User');
 
