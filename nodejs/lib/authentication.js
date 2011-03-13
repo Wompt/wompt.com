@@ -9,7 +9,7 @@ function Auth(config){
 		
 	
 	this.get_user_from_token = function(token, callback){
-		wompt.User.find({'sessions.token': token}).first(callback);
+		wompt.User.findOne({'sessions.token': token},callback);
 	}
 	
 	this.forward_to_auth_app_middleware = function(){
@@ -28,8 +28,8 @@ function Auth(config){
 			var token = req.cookies[me.ONE_TIME_TOKEN_COOKIE_KEY];
 			if(token){
 				res.clearCookie(me.ONE_TIME_TOKEN_COOKIE_KEY);
-				wompt.User.find({one_time_token: token}).first(function(user){
-					if(user){
+				wompt.User.findOne({one_time_token: token}, function(err, user){
+					if(user && !err){
 						user.one_time_token = null;
 						// start_session calls user.save
 						var session = me.start_session(res, user);
@@ -48,8 +48,8 @@ function Auth(config){
 		return function(req, res, next){
 			if(req.user) next();
 			else if(token = me.get_token(req)){
-				me.get_user_from_token(token, function(user){
-					if(user) req.user = user;
+				me.get_user_from_token(token, function(err, user){
+					if(user && !err) req.user = user;
 					next();
 				});
 			} else next();
@@ -125,7 +125,6 @@ function Auth(config){
 			token: token,
 			created_at: new Date().getTime()
 		};
-		user.sessions = user.sessions || [];
 		user.sessions.push(new_session);
 		user.save();
 		return new_session;
@@ -136,16 +135,12 @@ function Auth(config){
 		var user = req.user;
 		this.clear_token(res);
 		if(user){
-			for(var i = 0; i < user.sessions.length; i++)
-				if(user.sessions[i] == null){
-					user.sessions.splice(i, 1);
-					i--;
-				} else if(user.sessions[i].token == token){
+			for(var i = 0; i < user.sessions.length; i++){
+				if(user.sessions[i].token == token){
 					req.meta_user.end_session(user.sessions[i]);
-					user.sessions.splice(i, 1);
-					i--;
+					user.sessions[i].remove();
 				}
-
+			}
 			user.save();
 		}
 	}

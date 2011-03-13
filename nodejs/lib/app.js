@@ -103,7 +103,7 @@ App.prototype = {
 				profilePage(req, res, req.user);
 			}
 			else{
-				wompt.User.find({_id: req.params.id}).first(function(user){
+				wompt.User.findById(req.params.id, function(err, user){
 					profilePage(req, res, user);
 				});
 			}
@@ -122,11 +122,11 @@ App.prototype = {
 		if(wompt.env.force_sign_in){
 			exp.get("/users/force_sign_in/:num", function(req, res){
 				var num = parseInt(req.params.num);
-				wompt.User.find().skip(num-1).first(function(user){
+				wompt.User.findOne({}, function(user){
 					if(user){
 						wompt.Auth.start_session(res, user);
 					}
-					res.redirect('/');
+					res.redirect(req.headers.referer || '/');
 				});
 			});
 		}
