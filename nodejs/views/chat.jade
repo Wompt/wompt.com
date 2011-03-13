@@ -1,11 +1,11 @@
 script(type='text/javascript')
 	var channel     = '#{w.channel}',
 	connector_id  = '#{w.connector_id}',
-	WOMPT = #{JSON.stringify(w.config.constants)};
+	WOMPT = !{JSON.stringify(w.config.constants)};
 #user_list
 	.title Users
 	.users
-!= partial('_twitter', {locals: {w:w}})
+!= partial('partials/_twitter', {locals: {w:w}})
 #messages
 	#messages_scroller
 		table#message_list
