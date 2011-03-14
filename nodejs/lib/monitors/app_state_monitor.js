@@ -36,7 +36,7 @@ function AppStateMonitor(app, options){
 	
 	var me = this;
 	
-	this.timer = setTimeout(tick, options.interval || DEFAULTS.interval);
+	this.timer = setInterval(tick, options.interval || DEFAULTS.interval);
 	
 	function tick(){
 		me.emit('new_state', appState.prepare());
