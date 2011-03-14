@@ -1,7 +1,7 @@
 var util = require('util');
 
 var DEFAULTS = {
-	 interval: 5 * 60 * 1000
+	 interval: 1 * 60 * 1000
 };
 
 function AppStatePreparer(app){

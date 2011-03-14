@@ -17,7 +17,13 @@ function App(options){
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
 	this.twitterTopics = new wompt.monitors.TwitterTopics(this.channels);
+	
+	
 	this.appStateMonitor = new wompt.monitors.AppState(this);
+	this.appStateLogger = new wompt.monitors.AppStateLogger({
+		path: wompt.env.logs.root + '/app_state.log',
+		monitor: this.appStateMonitor
+	});
 }
 
 App.prototype = {
