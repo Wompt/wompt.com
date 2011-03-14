@@ -5,7 +5,7 @@ function ChannelManager(options){
 	this.channels = {};
 	this.count = 0;
 	this.expirer = new wompt.Expirer(this.channels, {
-		expire_after_ms: 60 * 60 * 1000, // 1 hour
+		expire_after_ms: 24 * 60 * 60 * 1000, // 24 hours
 		keep_if: function(channel){
 			return channel.clients.count > 0;
 		},
