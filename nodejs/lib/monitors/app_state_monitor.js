@@ -1,10 +1,6 @@
 var util = require('util'),
     User = require('../user')
 
-var DEFAULTS = {
-	 interval: 1 * 4 * 1000
-};
-
 function AppStatePreparer(app){
 	
 	this.prepare = function(done){
@@ -61,12 +57,11 @@ function AppStatePreparer(app){
 
 function AppStateMonitor(app, options){
 	var appState = new AppStatePreparer(app);
-	
-	options = options || DEFAULTS;
-	
+
 	var me = this;
 	
-	this.timer = setInterval(tick, options.interval || DEFAULTS.interval);
+	if(!options.disabled)
+		this.timer = setInterval(tick, options.interval);
 	
 	function tick(){
 		appState.prepare(function(result){

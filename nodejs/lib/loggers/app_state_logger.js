@@ -1,6 +1,9 @@
 var fs = require('fs');
 
 function AppStateLogger(options){
+	options = options || {};
+	if(options.disabled) return;
+	
 	var log = fs.createWriteStream(options.path, {flags:'a'});
 	
 	this.connectToMonitor = function(monitor){

@@ -30,3 +30,4 @@ e.monitors       = {
 	,AppState:        require('./monitors/app_state_monitor.js')
 	,AppStateLogger:  require('./loggers/app_state_logger.js')
 }
+e.util           = require('./util');

@@ -19,11 +19,11 @@ function App(options){
 	this.twitterTopics = new wompt.monitors.TwitterTopics(this.channels);
 	
 	
-	this.appStateMonitor = new wompt.monitors.AppState(this);
-	this.appStateLogger = new wompt.monitors.AppStateLogger({
+	this.appStateMonitor = new wompt.monitors.AppState(this, wompt.env.logs.monitor);
+	this.appStateLogger = new wompt.monitors.AppStateLogger(wompt.util.mergeCopy(wompt.env.logs.monitor, {
 		path: wompt.env.logs.root + '/app_state.log',
 		monitor: this.appStateMonitor
-	});
+	}));
 }
 
 App.prototype = {
