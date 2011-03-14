@@ -1,5 +1,7 @@
+var path = require('path');
+
 // strip the last dir...  essentially the same as __dirname/..
-var root = __dirname.replace(/\/[^\/]+\/?$/,'');
+var root = path.dirname(__dirname); //.replace(/\/[^\/]+\/?$/,'');
 
 module.exports = {
 	  port: 8001
@@ -21,6 +23,10 @@ module.exports = {
 	
 	, hoptoad: {
 		reportErrors: false
+	}
+	
+	, logs: {
+		root: root
 	}
 	
 	, redirectWww: false
