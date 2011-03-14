@@ -1,8 +1,8 @@
-var wompt        = require('./includes'),
+var env          = require("../environment"),
     mongoose     = require('mongoose'),
     db           = new (require('events').EventEmitter)();
 
-var db_name = 'mongodb://' + wompt.env.db_host + '/' + wompt.env.db_name;
+var db_name = 'mongodb://' + env.db_host + '/' + env.db_name;
 
 mongoose.connect(db_name, function(err){
 	if(err){
