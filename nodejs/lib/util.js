@@ -1,14 +1,26 @@
-exports.mergeDeep = function(obj1, obj2) {
-  for (var p in obj2) {
-    try {
-      if (obj2[p].constructor==Object) {
-        obj1[p] = mergeRecursive(obj1[p], obj2[p]);
-      } else {
-        obj1[p] = obj2[p];
-      }
-    } catch(e) {
-      obj1[p] = obj2[p];
-    }
-  }
-  return obj1;
+util = exports;
+
+util.mergeDeep = function (A, B, depth) {
+	var forever = depth == null;
+	for (var p in B) {
+		if (B[p] != null && B[p].constructor==Object && (forever || depth > 0)) {
+			A[p] = util.mergeDeep(
+				A.hasOwnProperty(p) ? A[p] : {},
+				B[p],
+				forever ? null : depth-1
+			);
+		} else {
+			A[p] = B[p];
+		}
+	}
+	return A;
+}
+
+util.merge = function(A, B) {
+	return util.mergeDeep(A, B, 0);
+}
+
+util.mergeCopy = function(A, B, depth) {
+	var A_copy = util.mergeDeep({}, A);
+	return util.mergeDeep(A_copy, B, depth);
 }
