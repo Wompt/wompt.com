@@ -1,31 +1,61 @@
-var util = require('util');
+var util = require('util'),
+    User = require('../user')
 
 var DEFAULTS = {
-	 interval: 1 * 60 * 1000
+	 interval: 1 * 4 * 1000
 };
 
 function AppStatePreparer(app){
 	
-	this.prepare = function(){
-		var out = {};
-		for(var key in monitors){
-			out[key] = monitors[key](app);
-		}
-		return out;
+	this.prepare = function(done){
+		var out = {}, left = monitor_names.length;
+		
+		monitor_names.forEach(function(key){
+			monitors[key](function(result){
+				out[key] = result;
+				if(--left <= 0) done(out);
+			});
+		});
 	}
 	
 	var monitors = {
 		clients: clientCounts
+		,users: userCounts
+		,channels: channelCounts
 		,t: timeStamp
-	};
+	}, monitor_names = Object.keys(monitors);
 
-	function clientCounts(){
-		return {
+
+	function clientCounts(done){
+		done({
 			count: app.clients.count
-		}
+		});
 	}
 	
-	function timeStamp(){ return new Date().getTime(); }
+	function userCounts(done){
+		var result = {
+			connected: app.clients.userCount
+		};
+		User.count({},function(value){
+			result.db = value;
+			done(result);
+		});
+	}
+	
+	function channelCounts(done){
+		var inuse=0;
+		
+		app.channels.each(function(chan){
+			if(chan.clients.count > 0) inuse++;
+		});
+
+		done({
+			loaded: app.channels.count
+			,inuse: inuse
+		});
+	}
+	
+	function timeStamp(done){ done(new Date().getTime()); }
 }
 
 
@@ -39,7 +69,9 @@ function AppStateMonitor(app, options){
 	this.timer = setInterval(tick, options.interval || DEFAULTS.interval);
 	
 	function tick(){
-		me.emit('new_state', appState.prepare());
+		appState.prepare(function(result){
+			me.emit('new_state', result);
+		})
 	}
 }
 
