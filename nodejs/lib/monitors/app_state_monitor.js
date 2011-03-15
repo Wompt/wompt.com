@@ -19,6 +19,7 @@ function AppStatePreparer(app){
 		,users: userCounts
 		,channels: channelCounts
 		,t: timeStamp
+		,node: nodeInfo
 	}, monitor_names = Object.keys(monitors);
 
 
@@ -48,6 +49,12 @@ function AppStatePreparer(app){
 		done({
 			loaded: app.channels.count
 			,inuse: inuse
+		});
+	}
+	
+	function nodeInfo(done){
+		done({
+			mem:process.memoryUsage()
 		});
 	}
 	
