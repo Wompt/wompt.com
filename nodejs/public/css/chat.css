@@ -14,7 +14,7 @@
 	right:1.7em;
 	left:10.4em;
 	bottom:0.3em;
-	top:0.4em;
+	top:0.5em;
 	overflow:visible;
 }
 
@@ -30,6 +30,7 @@
 	border:2px solid #ef6f2f;
 	border-radius:10px;
 	padding:.3em .5em;
+	margin:0px;
 	font-size:1em;
 	width:100%;
 	background-color:#fff;

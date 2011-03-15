@@ -25,6 +25,10 @@ MetaUser.prototype.touch = function(){
 	this.touched = new Date();
 }
 
+MetaUser.prototype.authenticated = function(){
+	return !!this.doc;
+}
+
 MetaUser.prototype.new_session = function(session){
 	this.clients.broadcast({
 		action: 'new_session'		

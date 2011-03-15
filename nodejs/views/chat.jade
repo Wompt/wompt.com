@@ -10,6 +10,15 @@ script(type='text/javascript')
 	#messages_scroller
 		table#message_list
 #input
-	.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
-	.container
-		input#message(name='message', type='text', disabled='true')
+	- if(w.user.authenticated())
+		.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
+		.container
+			input#message(name='message', type='text', disabled='true')
+	- else
+		.name#own_name Observing
+		.container
+			#message
+				| sign in to participate:
+				<a href="/auth/google"   title="Sign in using Google">google</a> &nbsp;|&nbsp;
+				<a href="/auth/facebook" title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
+				<a href="/auth/github"   title="Sign in using Github">github</a>
