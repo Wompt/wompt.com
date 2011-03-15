@@ -14,3 +14,7 @@ table
 			- w.popular_channels.rebuildPopularList()
 			- each chan in w.popular_channels.sorted_list
 				div (#{chan.clients.userCount}) - #{chan.name}
+	tr
+		th App State
+		td
+			pre	#{JSON.stringify(w.appStateMonitor.previousState)}

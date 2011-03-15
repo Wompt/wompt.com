@@ -73,6 +73,7 @@ function AppStateMonitor(app, options){
 	function tick(){
 		appState.prepare(function(result){
 			me.emit('new_state', result);
+			me.previousState = result;
 		})
 	}
 }
