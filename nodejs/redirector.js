@@ -2,8 +2,8 @@ var http = require('http'),
     env = require('./environment');
 
 var redirector = http.createServer(function(req,res){
-	res.writeHead(301, {
-		'Location':'https://www.wompt.com' + req.url
+	res.writeHead(302, {
+		'Location':'http://wompt.com' + req.url
 	});
 	res.end();
 });

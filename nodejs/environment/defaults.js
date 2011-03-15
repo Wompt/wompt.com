@@ -30,5 +30,5 @@ module.exports = {
 	}
 	
 	, redirectWww: false
-	, redirectWwwToPort: 16880
+	, redirectWwwToPort: 16867
 }
