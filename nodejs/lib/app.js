@@ -42,6 +42,7 @@ App.prototype = {
 			exp.use(wompt.Auth.forward_to_auth_app_middleware());
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(assetManager.middleware);
+			exp.use(express.static(config.public_dir));
 			// Need to serve up the apple itouch icon too
 			exp.use(express.favicon(config.public_dir + '/favicon.ico'));
 			exp.use(express.cookieParser());
