@@ -68,7 +68,7 @@ App.prototype = {
 			,'/privacy'
 		]);
 		
-		exp.get(/\/chat\/(.+)/, function(req, res, params){
+		exp.get(/\/chat\/(.+)/, function(req, res){
 			var meta_user = req.meta_user,
 					channel = req.params[0];
 					
@@ -91,7 +91,7 @@ App.prototype = {
 			});
 		});
 		
-		exp.get("/", function(req, res, params){
+		exp.get("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
@@ -102,13 +102,13 @@ App.prototype = {
 			});
 		});
 
-		exp.post("/", function(req, res, params){
+		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + req.body.channel);
 		});
 		
 		if(wompt.env.force_sign_in){
-			exp.get("/users/force_sign_in/:num", function(req, res, params){
+			exp.get("/users/force_sign_in/:num", function(req, res){
 				var num = parseInt(req.params.num);
 				wompt.User.find().skip(num-1).first(function(user){
 					if(user){
@@ -119,12 +119,12 @@ App.prototype = {
 			});
 		}
 
-		exp.get("/users/sign_out", function(req, res, params){
+		exp.get("/users/sign_out", function(req, res){
 			wompt.Auth.sign_out_user(req, res);
 			res.redirect('/');
 		});
 		
-		exp.get("/admin/stats", wompt.Auth.adminMiddleware, function(req, res, params){
+		exp.get("/admin/stats", wompt.Auth.adminMiddleware, function(req, res){
 			res.render('admin/stats', {
 				locals: {w: me},
 				layout: 'admin/layout'
@@ -220,7 +220,7 @@ App.prototype = {
 		var me = this;
 		urls.forEach(function(url){
 			var view = url.substr(1);
-			exp.get(url, function(req, res, params){
+			exp.get(url, function(req, res){
 				res.render(view, {
 						locals: me.standard_page_vars(req)
 					});
