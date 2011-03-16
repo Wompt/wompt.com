@@ -1,10 +1,10 @@
-util = exports;
+var Util = exports || {};
 
-util.mergeDeep = function (A, B, depth) {
+Util.mergeDeep = function (A, B, depth) {
 	var forever = depth == null;
 	for (var p in B) {
 		if (B[p] != null && B[p].constructor==Object && (forever || depth > 0)) {
-			A[p] = util.mergeDeep(
+			A[p] = Util.mergeDeep(
 				A.hasOwnProperty(p) ? A[p] : {},
 				B[p],
 				forever ? null : depth-1
@@ -16,11 +16,11 @@ util.mergeDeep = function (A, B, depth) {
 	return A;
 }
 
-util.merge = function(A, B) {
-	return util.mergeDeep(A, B, 0);
+Util.merge = function(A, B) {
+	return Util.mergeDeep(A, B, 0);
 }
 
-util.mergeCopy = function(A, B, depth) {
-	var A_copy = util.mergeDeep({}, A);
-	return util.mergeDeep(A_copy, B, depth);
+Util.mergeCopy = function(A, B, depth) {
+	var A_copy = Util.mergeDeep({}, A);
+	return Util.mergeDeep(A_copy, B, depth);
 }
