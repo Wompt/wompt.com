@@ -12,8 +12,7 @@ var requestOptions = {
 };
 
 function TwitterTopics(channels){
-	this.topics = [];
-	this.list = [];
+	this.list = this.sortedList = [];
 	this.channelManager = channels;
 
 	this._twitter_timer = setInterval(this.updateTopicList.bind(this), INTERVAL);
@@ -62,14 +61,18 @@ TwitterTopics.prototype._processBody = function(body){
 TwitterTopics.prototype._sortList = function(){
 	var me = this;
 	if(!this.list) return;
-	this.sortedList = this.list.map(function(trend){
+	this.sortedList = this.list.filter(function(str){
+		return str && str.length > 0;
+	})
+	.map(function(trend){
 		var channel = me.channelManager.peek(trend.replace('#',''));
 		return {
 			 name: trend
 			,channel: channel
 			,clients: channel ? channel.clients.userCount : 0
 		};
-	}).sort(function(a,b){
+	})
+	.sort(function(a,b){
 		return b.clients - a.clients;
 	});
 }
