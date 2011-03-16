@@ -35,7 +35,8 @@ var assetManagerGroups = {
 			, '/public/js/color_dispensor.js'
 			, '/public/js/message_list.js'
 			, '/public/js/user_list.js'
-			, '/public/js/util.js'			
+			, '/public/js/util.js'
+			, '/public/js/ui.connection_status.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/

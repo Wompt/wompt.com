@@ -12,8 +12,3 @@ UI.once('init', function(){
 	}
 });
 
-
-UI.update_connection_status = function(text){
-	$('#connection_status').text(text);
-};
-

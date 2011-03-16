@@ -91,6 +91,17 @@ App.prototype = {
 			});
 		});
 		
+		exp.get("/re-authenticate", function(req, res, next){
+			if(req.meta_user && req.meta_user.authenticated()){
+				var token = wompt.Auth.get_or_set_token(req, res);
+				var connector = me.client_connectors.add({
+					meta_user:req.meta_user,
+					token: token
+				});
+				res.send({connector_id:connector.id});
+			}else next();
+		});
+		
 		exp.get("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.render('index', {
