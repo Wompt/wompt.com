@@ -23,17 +23,32 @@
 	width:9.5em;
 	padding:.9em .4em 0 .4em;
 	opacity:0.5;
+	color:black;
 }
 
-.main #input #message{
-	position:absolute;
+#input #message{
+	background-color:#fff;
+}
+
+#input #message,
+#input #input_overlay{
+	display:block;
 	border:2px solid #ef6f2f;
 	border-radius:10px;
-	padding:.3em .5em;
-	margin:0px;
+	padding:.3em .5em;	
 	font-size:1em;
-	width:100%;
-	background-color:#fff;
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	margin:0;
+}
+
+#input #input_overlay{
+	padding:.45em .7em;
+	color:#888;
+	background-color: #f0f0f0;
 }
 
 .main #messages{

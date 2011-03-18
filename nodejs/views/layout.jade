@@ -15,7 +15,7 @@ html
 		#top
 			#toplinks
 				- if(w.channel)
-					span#connection_status
+					span.connection_status
 					&nbsp;|
 				- if(w.user.doc)
 					span #{w.user.doc.email || w.user.doc.name}

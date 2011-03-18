@@ -1,13 +1,15 @@
 UI.once('init', function(){
 	var socket = IO.socket,
 	    authenticating = false;
+			
+	connectionStatus('Connecting', true);
 	
 	socket.on('connect', function(){
 		if(!socket.reconnecting) connectionStatus('Connected');
 	});
 	
-	socket.on('disconnect', function(willReconnect){
-		connectionStatus('Not Connected' + (willReconnect? ', trying again soon':''));
+	socket.on('disconnect', function(){
+		connectionStatus('Not Connected' + (socket.options.reconnect ? ', trying again soon':''), true, true);
 	});
 	
 	var reconnectTimer;
@@ -16,13 +18,15 @@ UI.once('init', function(){
 		if(reconnectTimer) clearInterval(reconnectTimer);
 		reconnectTimer = setInterval(function(){
 			connectionStatus('Not Connected, trying again in '
-				+ Math.round((start+delay - new Date().getTime())/1000) + " seconds");
+				+ Math.ceil((start+delay - new Date().getTime())/1000) + " seconds", true, true);
 		}, 100);
 	});
 	
-	socket.on('reconnect', function(){
+	socket.on('reconnect', reauthenticate);
+	
+	function reauthenticate(){
 		if(reconnectTimer) clearInterval(reconnectTimer);
-		connectionStatus('Authenticating');
+		connectionStatus('Authenticating', true);
 		authenticating = true;
 		$.ajax({
 			url: '/re-authenticate',
@@ -36,15 +40,24 @@ UI.once('init', function(){
 			},
 			error: authFailed
 		});
-	});
+	}
 	
 	function authFailed(){
 		authenticating = false;
-		connectionStatus("Can't Reconnect, please refresh the page");
+		connectionStatus("Can't Reconnect, please refresh the page", true);
 	}
 	
-	
-	connectionStatus = function(text){
-		$('#connection_status').text(text);
+	var was_disabled = true;
+	function connectionStatus(text, disable){
+		var overlay = $('#input_overlay');
+		if(disable){
+			overlay.show();
+		}else if(was_disabled){
+			overlay.fadeOut(1000);
+		}
+		was_disabled = disable;
+		
+		$('#message').attr('disabled',disable ? 'disable' : '');
+		$('.connection_status').text(text);
 	};
 });
