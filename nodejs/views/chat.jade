@@ -16,6 +16,8 @@ script(type='text/javascript')
 			input#message(name='message', type='text')
 			#input_overlay
 				span.connection_status
+				| &nbsp;
+				a.try_now(href='#') Try Now
 	- else
 		.name#own_name Observing
 		.container

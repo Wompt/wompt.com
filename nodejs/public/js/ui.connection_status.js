@@ -1,8 +1,15 @@
 UI.once('init', function(){
 	var socket = IO.socket,
-	    authenticating = false;
+	    authenticating = false,
+	    try_now_link = $('.try_now');
 			
 	connectionStatus('Connecting', true);
+	
+	try_now_link.click(function(){
+		if(!socket.connected && !socket.connecting){
+			socket.reconnect();
+		}
+	});
 	
 	socket.on('connect', function(){
 		if(!socket.reconnecting) connectionStatus('Connected');
@@ -25,6 +32,7 @@ UI.once('init', function(){
 	socket.on('reconnect', reauthenticate);
 	
 	function reauthenticate(){
+		if(authenticating) return;
 		if(reconnectTimer) clearInterval(reconnectTimer);
 		connectionStatus('Authenticating', true);
 		authenticating = true;
@@ -48,10 +56,11 @@ UI.once('init', function(){
 	}
 	
 	var was_disabled = true;
-	function connectionStatus(text, disable){
+	function connectionStatus(text, disable, try_now){
 		var overlay = $('#input_overlay');
 		if(disable){
 			overlay.show();
+			try_now_link[try_now ? 'show':'hide']();
 		}else if(was_disabled){
 			overlay.fadeOut(1000);
 		}
