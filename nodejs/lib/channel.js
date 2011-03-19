@@ -1,6 +1,8 @@
-var wompt  = require("./includes"),
-    constants = wompt.env.constants;
-var logger = wompt.logger;
+var wompt  = require("./includes")
+   ,constants = wompt.env.constants
+   ,events = require("events")
+   ,util = require("util")
+   ,logger = wompt.logger;
 
 function Channel(config){
 	var channel = this;
@@ -28,7 +30,7 @@ function Channel(config){
 	}
 }
 
-Channel.prototype = {
+var proto = {
 	add_client: function(client, token){
 		this.touch();
 		client.meta_data = {
@@ -82,8 +84,9 @@ Channel.prototype = {
 					id: data.from_client.user.id()
 				}
 			};
-			this.messages.add(message);
 			this.broadcast_message(message);
+			this.messages.add(message);
+			this.emit('msg', message);
 		},
 		
 		stats: function(data){
@@ -140,5 +143,8 @@ Channel.prototype = {
 		delete this.clients;
 	}
 }
+
+util.inherits(Channel, events.EventEmitter);
+for(var k in proto) Channel.prototype[k] = proto[k];
 
 exports.Channel = Channel;

@@ -26,7 +26,10 @@ module.exports = {
 	}
 	
 	, logs: {
-		root: root
+		root: root,
+		channels: {
+			root: root + '/logs/channels'
+		}
 	}
 	
 	, redirectWww: false

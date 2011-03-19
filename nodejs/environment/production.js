@@ -16,6 +16,9 @@ module.exports = {
 		,monitor:{
 			interval: 1*60*1000
 		}
+		,channels:{
+			root: path.normalize(shared + '/log/channels')
+		}
 	}	
 	, redirectWww	: true
 }

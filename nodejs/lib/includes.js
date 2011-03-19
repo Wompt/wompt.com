@@ -28,6 +28,9 @@ e.monitors       = {
 	 PopularChannels: require('./monitors/popular_channels.js')
 	,TwitterTopics:   require('./monitors/twitter_topics.js')
 	,AppState:        require('./monitors/app_state_monitor.js')
+}
+e.loggers        = {
+	 ChannelLogger:   require('./loggers/channel_logger.js')
 	,AppStateLogger:  require('./loggers/app_state_logger.js')
 }
 e.util           = require('./util');
