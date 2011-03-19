@@ -1,11 +1,9 @@
-var util = require("util"),
-    events = require("events");
+var events = require("events");
 
 function MessageList(){
 	this.messages = [];
 }
 
-util.inherits(MessageList, events.EventEmitter);
 var proto = MessageList.prototype;
 
 proto.add = function(msg){
@@ -15,8 +13,7 @@ proto.add = function(msg){
 
 proto._downsize = function(){
 	var new_size = Math.ceil(this.messages.length * this.DOWNSIZE_RATIO);
-	var trimmed_messages = this.messages.splice(0, this.messages.length - new_size);
-	this.emit('downsize', trimmed_messages);
+	this.messages.splice(0, this.messages.length - new_size);
 }
 
 proto.since = function(time){
@@ -40,7 +37,7 @@ proto.is_empty = function(){
 
 
 //Constants
-proto.MAX_MESSAGES = 100
+proto.MAX_MESSAGES = 200
 proto.DOWNSIZE_RATIO = 0.5;
 
 exports.MessageList = MessageList;
