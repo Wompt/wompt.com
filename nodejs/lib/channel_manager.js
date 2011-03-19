@@ -51,15 +51,6 @@ ChannelManager.prototype = {
 				callback(channels[k]);
 			}
 		}
-	},
-
-	toArray: function(){
-		if(this._channelArray)
-		var array = [];
-		this.each(function(channel){
-			array.push(channel);
-		});
-		return array;
 	}
 }
 
