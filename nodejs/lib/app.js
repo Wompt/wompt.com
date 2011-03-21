@@ -68,6 +68,10 @@ App.prototype = {
 		]);
 		
 		exp.get(/\/chat\/(.+)/, function(req, res){
+			if(req.url.substr(-1,1) == '/'){
+				return res.redirect(wompt.util.chop(req.url));
+			}
+			
 			var meta_user = req.meta_user,
 					channel = req.params[0];
 					

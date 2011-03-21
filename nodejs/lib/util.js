@@ -24,3 +24,9 @@ Util.mergeCopy = function(A, B, depth) {
 	var A_copy = Util.mergeDeep({}, A);
 	return Util.mergeDeep(A_copy, B, depth);
 }
+
+Util.chop = function(str){
+	str = str.toString();
+	if(str.length == 0) return str;
+	return str.substr(0, str.length - 1);
+}
