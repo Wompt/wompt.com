@@ -102,7 +102,7 @@ App.prototype = {
 					meta_user:req.meta_user,
 					token: token
 				});
-				res.send({connector_id:connector.id});
+				res.send({connector_id:connector.id, version_hash:wompt.env.constants.version_hash});
 			}else next();
 		});
 		
