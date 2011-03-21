@@ -77,6 +77,7 @@ var proto = {
 			if(data.from_client.user.readonly) return;
 			if(data.msg && data.msg.length > constants.messages.max_length) return;
 			var message = {
+				t: new Date().getTime(),
 				action: 'message',
 				msg: data.msg,
 				from:{
@@ -149,6 +150,10 @@ for(var k in proto) Channel.prototype[k] = proto[k];
 
 Channel.generalizeName = function(name){
 	return name.toLowerCase();
+}
+
+Channel.hashName = function(name){
+	return wompt.util.md5(name);
 }
 
 exports.Channel = Channel;

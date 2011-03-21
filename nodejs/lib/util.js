@@ -1,4 +1,5 @@
 var Util = exports || {};
+var crypto = require('crypto');
 
 Util.mergeDeep = function (A, B, depth) {
 	var forever = depth == null;
@@ -23,4 +24,8 @@ Util.merge = function(A, B) {
 Util.mergeCopy = function(A, B, depth) {
 	var A_copy = Util.mergeDeep({}, A);
 	return Util.mergeDeep(A_copy, B, depth);
+}
+
+Util.md5 = function(str){
+	return crypto.createHash('md5').update(str).digest("hex");
 }
