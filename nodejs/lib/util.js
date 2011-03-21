@@ -1,5 +1,6 @@
-var Util = exports || {};
-var crypto = require('crypto');
+var Util = exports || {},
+crypto = require('crypto'),
+fs = require('fs');
 
 Util.mergeDeep = function (A, B, depth) {
 	var forever = depth == null;
@@ -29,3 +30,19 @@ Util.mergeCopy = function(A, B, depth) {
 Util.md5 = function(str){
 	return crypto.createHash('md5').update(str).digest("hex");
 }
+
+Util.fs = {
+	fileExists: function(path, callback){
+		fs.stat(path, function(err, stat){
+			var exists = !!err;
+			callback(exists && stat);
+		});
+ 	},
+	
+	readFile: function(path, callback){
+		fs.readFile(path, function(err, data){
+			var exists = !!err;
+			callback(data, exists);
+		});
+ 	}
+};
