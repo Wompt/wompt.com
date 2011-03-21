@@ -1,4 +1,5 @@
 var wompt  = require("./includes")
+   ,Channel = wompt.Channel
    ,events = require("events")
    ,util = require("util");
 
@@ -25,11 +26,11 @@ var proto = {
 	},
 	
 	peek: function(name){
-		return this.channels[name.toLowerCase()];
+		return this.channels[Channel.generalizeName(name)];
 	},
 	
 	create: function(name){
-		name = name.toLowerCase();
+		name = Channel.generalizeName(name);
 		var channel = new wompt.Channel({name: name});
 		channel.app = this;
 		this.channels[name] = channel;

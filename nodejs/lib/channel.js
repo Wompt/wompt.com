@@ -147,4 +147,8 @@ var proto = {
 util.inherits(Channel, events.EventEmitter);
 for(var k in proto) Channel.prototype[k] = proto[k];
 
+Channel.generalizeName = function(name){
+	return name.toLowerCase();
+}
+
 exports.Channel = Channel;
