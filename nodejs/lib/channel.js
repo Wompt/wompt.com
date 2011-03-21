@@ -87,7 +87,6 @@ var proto = {
 			};
 			this.broadcast_message(message);
 			this.messages.add(message);
-			this.emit('msg', message);
 		}
 	},
 	
@@ -118,13 +117,16 @@ var proto = {
 			'name': user.doc.name
 		} 
 		
-		this.broadcast_message({
+		var message = {
+			t: new Date().getTime(),
 			action:action,
 			users: users
-		}, opt.except);
+		};
+		this.broadcast_message(message, opt.except);
 	},
 	
 	broadcast_message: function(msg, except){
+		this.emit('msg', msg);		
 		this.clients.broadcast(msg, except);
 	},
 	
