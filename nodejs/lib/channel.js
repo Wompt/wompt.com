@@ -88,17 +88,6 @@ var proto = {
 			this.broadcast_message(message);
 			this.messages.add(message);
 			this.emit('msg', message);
-		},
-		
-		stats: function(data){
-			data.from_client.send({
-				action: 'stats',
-				clients: {
-					app: this.app.clients.count,
-					channel: this.clients.count,
-					me: data.from_client.user.clients.count
-				}
-			});
 		}
 	},
 	
