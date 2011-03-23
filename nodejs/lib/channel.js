@@ -31,7 +31,7 @@ function Channel(config){
 }
 
 var proto = {
-	add_client: function(client, token){
+	add_client: function(client, token, joinMsg){
 		this.touch();
 		client.meta_data = {
 			channel: this,
@@ -51,19 +51,22 @@ var proto = {
 		client.on('message', this._message_from_client);
 		client.on('disconnect', this._client_disconnected);
 		
-		this.send_initial_data(client);
+		this.send_initial_data(client, joinMsg);
 	},
 	
 	touch: function(type){
 		this.touched = new Date();
 	},
 	
-	send_initial_data: function(client){
+	send_initial_data: function(client, joinMsg){
 		client.bufferSends(function(){
+			var reconnecting = !!joinMsg.last_timestamp;
+			
 			if(!this.messages.is_empty())
 				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
 			
-			client.send({action: 'who',	users: this.get_user_list(client)});
+			if(!reconnecting)
+				client.send({action: 'who',	users: this.get_user_list(client)});
 		}, this);
 	},
 	
