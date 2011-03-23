@@ -3,7 +3,8 @@ UI.once('init', function(){
 		, should_notify = false
 		, notify_cycle = 1
 		, interval_id = null
-		, missed_messages = 0;
+		, missed_messages = 0
+		, standard_title = document.title;
 
 	if(/*@cc_on!@*/false){ // check for Internet Explorer
 		document.onfocusin = function() {should_notify = false;};
@@ -19,10 +20,10 @@ UI.once('init', function(){
 			if(!interval_id){
 				interval_id = setInterval(function(){
 					if(should_notify){
-						document.title = notify_cycle == 1 ? "New Messages: " + missed_messages : "Wompt -  " + channel;
+						document.title = notify_cycle == 1 ? "New Messages: " + missed_messages : standard_title;
 						notify_cycle *= -1;
 					}else{
-						document.title = "Wompt -  " + channel;
+						document.title = standard_title;
 						notify_cycle = 1;
 						missed_messages = 0;
 						clearInterval(interval_id);

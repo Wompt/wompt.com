@@ -1,7 +1,10 @@
 !!!
 html
 	head
-		title Wompt Group Chat!
+		- if(w.channel)
+			title Wompt: #{w.channel}
+		- else
+			title Wompt Group Chat!
 		link(href="/css/all_"+cacheTimeStamps.all_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
 		link(href=assets.path("/favicon.ico"), rel="shortcut icon", type="image/x-icon")
 		link(href=assets.path("/apple-itouch-icon.png"), rel="apple-touch-icon")
