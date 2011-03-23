@@ -34,7 +34,4 @@ jQuery(function(){
 		$('#message').val('Sign in to send messages');
 		$('#message').attr('disabled', 'disabled');
 	}
-	$('#stats').click(function(e){
-		IO.socket.send({chan: channel, action:'stats'});
-	});
 });
