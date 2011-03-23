@@ -17,12 +17,13 @@ proto._downsize = function(){
 }
 
 proto.since = function(time){
+	if(!time) return this.messages;
 	var msgs = this.messages;
 	
 	var i=msgs.length;
-	while(msgs[--i].time > time) {};
+	while(msgs[--i].t > time) {};
 	
-	return messages.slice(i+1);
+	return msgs.slice(i+1);
 }
 	
 proto.recent = function(count){
