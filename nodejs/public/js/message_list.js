@@ -7,7 +7,7 @@ function MessageList(){
 		if(msg.action == 'message'){
 			this.list.push(msg);
 			this.emit('appended', msg);
-		}else if(msg.action == 'previous'){
+		}else if(msg.action == 'batch'){
 			var me = this;
 			$.each(msg.messages, function(i, m){
 				me.list.push(m);

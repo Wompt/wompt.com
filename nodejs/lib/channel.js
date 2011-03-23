@@ -61,7 +61,7 @@ var proto = {
 	send_initial_data: function(client){
 		client.bufferSends(function(){
 			if(!this.messages.is_empty())
-				client.send({action: 'previous', messages: this.messages.recent(100)});
+				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
 			
 			client.send({action: 'who',	users: this.get_user_list(client)});
 		}, this);
