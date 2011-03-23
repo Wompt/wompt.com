@@ -21,7 +21,7 @@ proto.since = function(time){
 	var msgs = this.messages;
 	
 	var i=msgs.length;
-	while(msgs[--i].t > time) {};
+	while(i && msgs[--i].t > time) {};
 	
 	return msgs.slice(i+1);
 }
