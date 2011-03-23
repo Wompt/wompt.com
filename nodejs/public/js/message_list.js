@@ -17,6 +17,15 @@ function MessageList(){
 			return false;
 		return true;
 	}
+	
+	this.last = function(){
+		return this.list[this.list.length-1];
+	}
+	
+	this.lastTimeStamp = function(){
+		var l = this.last();
+		return l && l.t;
+	}
 }
 
 MessageList.prototype = new EventEmitter();
