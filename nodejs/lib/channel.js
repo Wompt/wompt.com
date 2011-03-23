@@ -86,7 +86,6 @@ var proto = {
 				}
 			};
 			this.broadcast_message(message);
-			this.messages.add(message);
 		}
 	},
 	
@@ -126,7 +125,8 @@ var proto = {
 	},
 	
 	broadcast_message: function(msg, except){
-		this.emit('msg', msg);		
+		this.emit('msg', msg);
+		this.messages.add(msg);
 		this.clients.broadcast(msg, except);
 	},
 	
