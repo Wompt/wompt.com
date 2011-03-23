@@ -1,7 +1,7 @@
 UI.once('init', function(){
 	var UI = this
 		, should_notify = false
-		, notify_cycle = 1
+		, notify_cycle = true
 		, interval_id = null
 		, missed_messages = 0
 		, standard_title = document.title;
@@ -20,11 +20,11 @@ UI.once('init', function(){
 			if(!interval_id){
 				interval_id = setInterval(function(){
 					if(should_notify){
-						document.title = notify_cycle == 1 ? missed_messages + " Unread Messages" : standard_title;
-						notify_cycle *= -1;
+						document.title = notify_cycle ? missed_messages + " Unread Messages" : standard_title;
+						notify_cycle = !notify_cycle;
 					}else{
 						document.title = standard_title;
-						notify_cycle = 1;
+						notify_cycle = false;
 						missed_messages = 0;
 						clearInterval(interval_id);
 					}
