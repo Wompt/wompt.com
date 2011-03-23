@@ -20,7 +20,7 @@ UI.once('init', function(){
 			if(!interval_id){
 				interval_id = setInterval(function(){
 					if(should_notify){
-						document.title = notify_cycle == 1 ? "New Messages: " + missed_messages : standard_title;
+						document.title = notify_cycle == 1 ? missed_messages + " Unread Messages" : standard_title;
 						notify_cycle *= -1;
 					}else{
 						document.title = standard_title;
