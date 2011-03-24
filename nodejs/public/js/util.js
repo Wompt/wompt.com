@@ -18,3 +18,23 @@ Util.Text = (function Text(){
 		}
 	};
 })()
+
+
+soundEmbed = null;
+Util.Sound = (function Sound() {
+	return{
+		playSound: function(sound){
+			if(soundEmbed) {
+				document.body.removeChild(soundEmbed);
+				soundEmbed = null;
+			}
+			
+			soundEmbed = document.createElement("embed");
+			soundEmbed.setAttribute("src", "/sounds/"+sound);
+			soundEmbed.setAttribute("hidden", true);
+			soundEmbed.setAttribute("autostart", true);
+
+			document.body.appendChild(soundEmbed);
+		}
+	};
+})()

@@ -4,7 +4,8 @@ UI.once('init', function(){
 		, notify_cycle = true
 		, interval_id = null
 		, missed_messages = 0
-		, standard_title = document.title;
+		, standard_title = document.title
+		, last_sound_time = null;
 	
 	var me = {
 		blurred: function(){
@@ -24,7 +25,7 @@ UI.once('init', function(){
 			document.title = standard_title;
 			notify_cycle = false;
 			missed_messages = 0;
-			if(!interval_id){
+			if(interval_id){
 				clearInterval(interval_id);
 				interval_id = null;
 			}
@@ -44,6 +45,11 @@ UI.once('init', function(){
 	UI.on('after_append', function(data){
 		if(should_notify){
 			missed_messages += $.isArray(data) ? data.length : 1;
+			var now = (new Date()).getTime();
+			if(!last_sound_time || now - last_sound_time >= 3000){
+				last_sound_time = now;
+				Util.Sound.playSound("missed-message.wav");
+			}
 		}
 	});
 });
