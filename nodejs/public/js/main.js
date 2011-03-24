@@ -10,6 +10,7 @@ jQuery(function(){
 	UI.emit('init');
 	
 	IO.addMessageHandler(UI.Messages.list);
+	IO.addMessageHandler(UI.Messages);
 	IO.addMessageHandler(userList);
 
 	IO.connect();
