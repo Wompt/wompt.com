@@ -72,7 +72,11 @@ var proto = {
 	
 	receive_message: function(data){
 		this.touch();
-		this.action_responders[data.action].call(this, data);
+		var responder = this.action_responders[data.action];
+		if(responder)
+			responder.call(this, data);
+		else
+			throw "No such action handler:" + data.action;
 	},
 	
 	action_responders: {
