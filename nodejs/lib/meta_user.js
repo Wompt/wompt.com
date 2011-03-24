@@ -18,7 +18,7 @@ function MetaUser(doc){
 
 
 MetaUser.prototype.id = function(){
-	return this.doc ? this.doc._id.toString() : null;
+	return this.doc ? this.doc._id.toJSON() : null;
 }
 
 MetaUser.prototype.touch = function(){

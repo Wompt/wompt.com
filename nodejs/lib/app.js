@@ -10,6 +10,10 @@ var http   = require("http"),
 function App(options){
 	this.meta_users = new wompt.MetaUserManager();
 	this.channels = new wompt.ChannelManager();
+	this.channels.on('new_channel', function(channel){
+		var logger = new wompt.loggers.ChannelLogger(channel);
+	});
+	
 	this.config = options.config;
 	this.pretty_print_config();
 	this.clients = new wompt.ClientPool();
@@ -20,7 +24,7 @@ function App(options){
 	
 	
 	this.appStateMonitor = new wompt.monitors.AppState(this, wompt.env.logs.monitor);
-	this.appStateLogger = new wompt.monitors.AppStateLogger(wompt.util.mergeCopy(wompt.env.logs.monitor, {
+	this.appStateLogger = new wompt.loggers.AppStateLogger(wompt.util.mergeCopy(wompt.env.logs.monitor, {
 		path: wompt.env.logs.root + '/app_state.log',
 		monitor: this.appStateMonitor
 	}));
@@ -101,7 +105,7 @@ App.prototype = {
 					meta_user:req.meta_user,
 					token: token
 				});
-				res.send({connector_id:connector.id});
+				res.send({connector_id:connector.id, version_hash:wompt.env.constants.version_hash});
 			}else next();
 		});
 		

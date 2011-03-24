@@ -1,4 +1,7 @@
-var wompt  = require("./includes");
+var wompt  = require("./includes")
+   ,Channel = wompt.Channel
+   ,events = require("events")
+   ,util = require("util");
 
 function ChannelManager(options){
 	var me = this;
@@ -17,21 +20,22 @@ function ChannelManager(options){
 	});
 }
 
-ChannelManager.prototype = {
+var proto = {
 	get: function(name){
 		return this.peek(name) || this.create(name);
 	},
 	
 	peek: function(name){
-		return this.channels[name.toLowerCase()];
+		return this.channels[Channel.generalizeName(name)];
 	},
 	
 	create: function(name){
-		name = name.toLowerCase();
+		name = Channel.generalizeName(name);
 		var channel = new wompt.Channel({name: name});
 		channel.app = this;
 		this.channels[name] = channel;
 		this.count++;
+		this.emit('new_channel', channel)
 		return channel;
 	},
 	
@@ -51,16 +55,10 @@ ChannelManager.prototype = {
 				callback(channels[k]);
 			}
 		}
-	},
-
-	toArray: function(){
-		if(this._channelArray)
-		var array = [];
-		this.each(function(channel){
-			array.push(channel);
-		});
-		return array;
 	}
 }
+
+util.inherits(ChannelManager, events.EventEmitter);
+for(var k in proto) ChannelManager.prototype[k] = proto[k];
 
 module.exports = ChannelManager;

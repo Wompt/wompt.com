@@ -16,7 +16,7 @@ UI.once('init', function(){
 	});
 	
 	socket.on('disconnect', function(){
-		connectionStatus('Not Connected' + (socket.options.reconnect ? ', trying again soon':''), true, true);
+		connectionStatus('Not Connected' + (socket.options.reconnect ? ', trying again soon':''), true, socket.options.reconnect);
 	});
 	
 	var reconnectTimer;
@@ -40,7 +40,12 @@ UI.once('init', function(){
 			url: '/re-authenticate',
 			dataType: 'json',
 			success: function(data){
-				if(data.connector_id){
+				if(data.version_hash != WOMPT.version_hash){
+					alert("A new version of Wompt is out! Please reload the page to get the latest version.");
+					socket.options.reconnect = false;
+					socket.disconnect();
+					authFailed();
+				}else	if(data.connector_id){
 					socket.send({channel: channel, action: 'join', connector_id: data.connector_id});
 					connectionStatus('Connected');
 					authenticating = false;
@@ -53,11 +58,15 @@ UI.once('init', function(){
 	function authFailed(){
 		authenticating = false;
 		connectionStatus("Can't Reconnect, please refresh the page", true);
+		updateStatus = false;
 	}
 	
-	var was_disabled = true;
+	var was_disabled = true,
+	    updateStatus = true,
+	    overlay = $('#input_overlay');
+	
 	function connectionStatus(text, disable, try_now){
-		var overlay = $('#input_overlay');
+		if(!updateStatus) return;
 		if(disable){
 			overlay.show();
 			try_now_link[try_now ? 'show':'hide']();
