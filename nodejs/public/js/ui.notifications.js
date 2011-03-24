@@ -24,7 +24,7 @@ UI.once('init', function(){
 			document.title = standard_title;
 			notify_cycle = false;
 			missed_messages = 0;
-			if(!interval_id){
+			if(interval_id){
 				clearInterval(interval_id);
 				interval_id = null;
 			}
