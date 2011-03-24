@@ -44,21 +44,48 @@ UI.once('init', function(){
 		list[0].first_in_group = true;
 	}
 
+	function join_part(text){
+		return function(msg){
+			var names = [];
+			$.each(msg.users, function(id, u){
+				names.push(u.name);
+			});
+			UI.Messages.system(text + names.join(','));
+		}
+	}
+	
 	UI.Messages = {
 		list:messages,
-		append: function(data){
-			UI.emit('before_append', data);
-			UI.Messages.appendWithoutEvents(data);
-			UI.emit('after_append', data);			
+		
+		actions:{
+			join: join_part("Joined: "),
+			part: join_part("Left: "),
+			
+			message: function(data){
+				UI.emit('before_append', data);
+				UI.Messages.appendWithoutEvents(data);
+				UI.emit('after_append', data);			
+			},
+			
+			batch: function(msg){
+				UI.emit('before_append', msg.messages);
+				$.each(msg.messages, function(i,m){
+					if(m.action == 'message')
+						UI.Messages.appendWithoutEvents(m)
+					else
+						UI.Messages.newMessage(m);
+				});
+				UI.emit('after_append', msg.messages);			
+			}
 		},
 		
-		appendBatch: function(msgs){
-			UI.emit('before_append', msgs);
-			$.each(msgs, function(i,m){UI.Messages.appendWithoutEvents(m)});
-			UI.emit('after_append', msgs);			
+		newMessage: function(msg){
+			var action = UI.Messages.actions[msg.action];
+			if(action) action(msg);
 		},
 		
 		appendWithoutEvents: function(data){
+			
 			if(last_line && last_line.from.id == data.from.id){
 				appendMessageToElement(data, last_line.msg_container);
 			}else{
@@ -86,10 +113,7 @@ UI.once('init', function(){
 		},
 		
 		system: function(msg){
-			UI.Messages.append({from:{name: "System", id:'system'}, msg:msg});		
+			UI.Messages.appendWithoutEvents({from:{name: "System", id:'system'}, msg:msg});		
 		}
 	}
-	
-	messages.on('appended', UI.Messages.append);
-	messages.on('batch_appended', UI.Messages.appendBatch);
 });

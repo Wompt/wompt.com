@@ -219,7 +219,7 @@ App.prototype = {
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = app.channels.get(data.channel);
 				if(channel){
-					channel.add_client(client, connector && connector.token);
+					channel.add_client(client, connector && connector.token, data);
 				}
 				user.clients.add(client);
 			}

@@ -45,8 +45,13 @@ UI.once('init', function(){
 					socket.options.reconnect = false;
 					socket.disconnect();
 					authFailed();
-				}else	if(data.connector_id){
-					socket.send({channel: channel, action: 'join', connector_id: data.connector_id});
+				}else if(data.connector_id){
+					socket.send({
+						channel: channel
+						,action: 'join'
+						,connector_id: data.connector_id
+						,last_timestamp: UI.Messages.list.lastTimeStamp()
+					});
 					connectionStatus('Connected');
 					authenticating = false;
 				} else authFailed();

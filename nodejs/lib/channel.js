@@ -31,7 +31,7 @@ function Channel(config){
 }
 
 var proto = {
-	add_client: function(client, token){
+	add_client: function(client, token, joinMsg){
 		this.touch();
 		client.meta_data = {
 			channel: this,
@@ -51,19 +51,22 @@ var proto = {
 		client.on('message', this._message_from_client);
 		client.on('disconnect', this._client_disconnected);
 		
-		this.send_initial_data(client);
+		this.send_initial_data(client, joinMsg);
 	},
 	
 	touch: function(type){
 		this.touched = new Date();
 	},
 	
-	send_initial_data: function(client){
+	send_initial_data: function(client, joinMsg){
 		client.bufferSends(function(){
-			if(!this.messages.is_empty())
-				client.send({action: 'previous', messages: this.messages.recent(100)});
+			var reconnecting = !!joinMsg.last_timestamp;
 			
-			client.send({action: 'who',	users: this.get_user_list(client)});
+			if(!this.messages.is_empty())
+				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
+			
+			if(!reconnecting)
+				client.send({action: 'who',	users: this.get_user_list(client)});
 		}, this);
 	},
 	
@@ -86,19 +89,6 @@ var proto = {
 				}
 			};
 			this.broadcast_message(message);
-			this.messages.add(message);
-			this.emit('msg', message);
-		},
-		
-		stats: function(data){
-			data.from_client.send({
-				action: 'stats',
-				clients: {
-					app: this.app.clients.count,
-					channel: this.clients.count,
-					me: data.from_client.user.clients.count
-				}
-			});
 		}
 	},
 	
@@ -129,13 +119,17 @@ var proto = {
 			'name': user.doc.name
 		} 
 		
-		this.broadcast_message({
+		var message = {
+			t: new Date().getTime(),
 			action:action,
 			users: users
-		}, opt.except);
+		};
+		this.broadcast_message(message, opt.except);
 	},
 	
 	broadcast_message: function(msg, except){
+		this.emit('msg', msg);
+		this.messages.add(msg);
 		this.clients.broadcast(msg, except);
 	},
 	

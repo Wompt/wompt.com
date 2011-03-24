@@ -1,27 +1,32 @@
 function UserList(){
 	this.list = [];
+	this.users = {};
 }
 
 UserList.prototype = new EventEmitter();
 
 UserList.prototype.newMessage = function(msg){
-	switch(msg.action){
-		case "join":
-			$.extend(this.users, msg.users);
-			this.emit('join', msg.users);
-			break;
-		case "part":
-			var users = this.users;
-			$.each(msg.users, function(id, user){delete users[id]});
-			this.emit('part', msg.users);
-			break;
-		case "who":
-			this.users = msg.users || {};
-			this.emit('who', this.users);
-		default:
-			return false;
+	var a = msg.action,
+	me = this;
+	
+	if(a == "join"){
+		$.extend(me.users, msg.users);
+		me.emit('join', msg.users);
+		
+	} else if(a == "part"){
+		var users = me.users;
+		$.each(msg.users, function(id, user){if(users[id]) delete users[id]});
+		me.emit('part', msg.users);
+		
+	} else if(a == "who"){
+		me.users = msg.users || {};
+		me.emit('who', me.users);
+		
+	} else if(a == "batch"){
+		$.each(msg.messages, function(msg){
+			me.newMessage(msg);
+		});
 	}
-	return true;
 }
 
 
@@ -37,7 +42,6 @@ function UserListUI(ul, container){
 			addUser(user);
 			names.push(user.name);
 		});
-		UI.Messages.system("Joined: " + names.join(', '));
 	});
 
 	ul.on('part', function(users){
@@ -47,7 +51,6 @@ function UserListUI(ul, container){
 			removeUser(user);
 			names.push(user.name);
 		});		
-		UI.Messages.system("Left: " + names.join(', '));
 	});
 	
 	ul.on('who', function(users){

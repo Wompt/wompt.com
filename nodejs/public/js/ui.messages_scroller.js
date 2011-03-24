@@ -4,6 +4,8 @@ UI.once('init', function(){
 		, msgDiv = $("#messages_scroller")
 		, scrolling = false
 		, animateScroll = true
+		// When the height of the content scrolled beneath the viewport is greater than this
+		// don't auto-scroll
 		, SCROLL_LIMIT = 30;
 
 	var me = UI.messagesScroller = {				
@@ -25,7 +27,7 @@ UI.once('init', function(){
 		},
 		
 		checkShouldSroll: function(data){
-			//height of content - height of hidden area above viewport - height of viewport
+			// content - hidden area above viewport - viewport = area scrolled below viewport
 			should_scroll = scrolling || (msgDiv.get(0).scrollHeight - msgDiv.scrollTop() - msgDiv.innerHeight()) < SCROLL_LIMIT;
 		}
 	}

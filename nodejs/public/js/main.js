@@ -10,6 +10,7 @@ jQuery(function(){
 	UI.emit('init');
 	
 	IO.addMessageHandler(UI.Messages.list);
+	IO.addMessageHandler(UI.Messages);
 	IO.addMessageHandler(userList);
 
 	IO.connect();
@@ -34,7 +35,4 @@ jQuery(function(){
 		$('#message').val('Sign in to send messages');
 		$('#message').attr('disabled', 'disabled');
 	}
-	$('#stats').click(function(e){
-		IO.socket.send({chan: channel, action:'stats'});
-	});
 });
