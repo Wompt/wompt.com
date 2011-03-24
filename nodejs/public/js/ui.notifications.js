@@ -5,31 +5,45 @@ UI.once('init', function(){
 		, interval_id = null
 		, missed_messages = 0
 		, standard_title = document.title;
-
-	if(/*@cc_on!@*/false){ // check for Internet Explorer
-		document.onfocusin = function() {should_notify = false;};
-		document.onfocusout = function() {should_notify = true;};
+	
+	var me = {
+		blurred: function(){
+			should_notify = true;
+			if(interval_id == null){
+				interval_id = setInterval(function(){
+					if(should_notify && missed_messages > 0){
+						document.title = notify_cycle ? missed_messages + " Unread Messages" : standard_title;
+						notify_cycle = !notify_cycle;
+					}
+				}, 1000);
+			}
+		},
+	
+		focused: function(){
+			should_notify = false;
+			document.title = standard_title;
+			notify_cycle = false;
+			missed_messages = 0;
+			if(!interval_id){
+				clearInterval(interval_id);
+				interval_id = null;
+			}
+		}
+	};
+	
+	if($.browser.msie){
+		document.onfocusin = me.focused;
+		document.onfocusout = me.blurred;
 	}else{
-		window.onfocus = function() {should_notify = false;};
-		window.onblur = function() {should_notify = true;};
+		window.onfocus = me.focused;
+		window.onblur = me.blurred;
 	}
+	
+
 
 	UI.on('after_append', function(data){
 		if(should_notify){
 			missed_messages += $.isArray(data) ? data.length : 1;
-			if(!interval_id){
-				interval_id = setInterval(function(){
-					if(should_notify){
-						document.title = notify_cycle ? missed_messages + " Unread Messages" : standard_title;
-						notify_cycle = !notify_cycle;
-					}else{
-						document.title = standard_title;
-						notify_cycle = false;
-						missed_messages = 0;
-						clearInterval(interval_id);
-					}
-				}, 1000);
-			}
 		}
 	});
 });
