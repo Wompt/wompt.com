@@ -31,6 +31,7 @@ var assetManagerGroups = {
 			, '/public/js/io.js'
 			, '/public/js/ui.js'
 			, '/public/js/ui.messages.js'
+			, '/public/js/ui.input.js'
 			, '/public/js/ui.messages_scroller.js'
 			, '/public/js/ui.notifications.js'
 			, '/public/js/color_dispensor.js'

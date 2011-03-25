@@ -14,22 +14,4 @@ jQuery(function(){
 	IO.addMessageHandler(userList);
 
 	IO.connect();
-	
-	if(!readonly){
-		$('#message').keydown(function(e){
-			if(IO.socket.connected && e.which == 13 && !e.shiftKey){
-				var el = $(this),
-						message = $.trim(el.val());
-				
-				if(message.length > WOMPT.messages.max_length){
-					alert("Messages are limited to "+ WOMPT.messages.max_length + " characters.");
-				}else	if(message.length > 0){
-					IO.socket.send({chan: channel, action:'post', msg:message});
-					el.val('');
-				}
-				
-				e.preventDefault();
-			}
-		});
-	}
 });
