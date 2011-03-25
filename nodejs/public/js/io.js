@@ -9,10 +9,10 @@ function IO(){
 	var messageHandlers = [];
 
 	this.processMessage = function(data){
-		for(var i=0, len=messageHandlers.length; i<len; i++){
-			var handler = messageHandlers[i];
-			if(handler.newMessage(data)) break;
-		}
+		var stop;
+		messageHandlers.forEach(function(handler){
+			if(!stop) stop = handler.newMessage(data);
+		});
 	}
 	
 	this.addMessageHandler = function(handler){
