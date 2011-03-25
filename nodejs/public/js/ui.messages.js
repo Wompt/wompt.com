@@ -113,7 +113,9 @@ UI.once('init', function(){
 		},
 		
 		system: function(msg){
-			UI.Messages.appendWithoutEvents({from:{name: "System", id:'system'}, msg:msg});		
+			UI.emit('before_append', data);
+			UI.Messages.appendWithoutEvents({from:{name: "System", id:'system'}, msg:msg});
+			UI.emit('after_append', data);
 		}
 	}
 });
