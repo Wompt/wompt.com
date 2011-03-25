@@ -1,6 +1,7 @@
 UI.once('init', function(){
 	var UI = this
 	  , messages = new MessageList()
+	  , newline = Util.Text.newlineMatcher
 	  , last_line = null;
 
 	function appendMessageToElement(data, to_container){
@@ -12,6 +13,21 @@ UI.once('init', function(){
 	}
 
 	function prepareMessageElement(el, text){
+		if(newline.test(text)){
+			text
+				.split(newline)
+				.forEach(function(line){
+					el.append(linkifyAndInsert($('<div>'), line));
+				});
+		}else{
+			linkifyAndInsert(el,text);
+		}
+		
+		el.addClass('msg');
+		return el;
+	}
+	
+	function linkifyAndInsert(el, text){
 		if(Util.Text.linkifyTest(text)){
 			//escape <,> so we don't include any nasty html tags
 			text = text.replace(/</g, '&lt;').replace(/>/g,'&gt;');
@@ -19,10 +35,9 @@ UI.once('init', function(){
 		}
 		else
 			el.text(text);
-		
-		el.addClass('msg');
 		return el;
 	}
+	
 	
 	function pruneOldMessages(){
 		var list = messages.list,

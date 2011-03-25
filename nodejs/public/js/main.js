@@ -17,7 +17,7 @@ jQuery(function(){
 	
 	if(!readonly){
 		$('#message').keydown(function(e){
-			if(IO.socket.connected && e.keyCode == 13){
+			if(IO.socket.connected && e.which == 13 && !e.shiftKey){
 				var el = $(this),
 						message = $.trim(el.val());
 				

@@ -4,6 +4,8 @@ Util.Text = (function Text(){
 	var mail_to_matcher = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
 	
 	return {
+		newlineMatcher: /\n|\r\n/gim,
+		
 		linkify: function(text){
 			text = text.replace(http_matcher, '<a href="$1" target="_blank">$1</a>');
 			text = text.replace(www_matcher, '$1<a href="http://$2" target="_blank">$2</a>');
