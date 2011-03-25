@@ -31,8 +31,5 @@ jQuery(function(){
 				e.preventDefault();
 			}
 		});
-	}else {
-		$('#message').val('Sign in to send messages');
-		$('#message').attr('disabled', 'disabled');
 	}
 });
