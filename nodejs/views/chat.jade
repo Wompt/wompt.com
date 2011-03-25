@@ -13,7 +13,7 @@ script(type='text/javascript')
 	- if(w.user.authenticated())
 		.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
 		.container
-			input#message(name='message', type='text')
+			textarea#message(name='message')
 			#input_overlay
 				span.connection_status
 				| &nbsp;
