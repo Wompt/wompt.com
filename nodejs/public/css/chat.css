@@ -5,16 +5,16 @@
 	right:380px;
 	border-top: solid 1px #ccc;
 	border-right: solid 1px #ccc;
-	background-color:#ebebeb;
-	height:3em;
+	background-color:#EF6F2F;
+	height:3.4em;
 }
 
 .main #input .container{
 	position:absolute;
-	right:1.7em;
+	top:4px;
 	left:10.4em;
-	bottom:0.3em;
-	top:0.5em;
+	bottom:12px;
+	right:18px;
 	overflow:visible;
 }
 
@@ -22,8 +22,7 @@
 	position:absolute;
 	width:9.5em;
 	padding:.9em .4em 0 .4em;
-	opacity:0.5;
-	color:black;
+	color:white;
 }
 
 #input #message{
@@ -33,20 +32,17 @@
 #input #message,
 #input #input_overlay{
 	display:block;
-	border:2px solid #ef6f2f;
 	border-radius:10px;
-	padding:.3em .5em;	
+	padding:4px 7px;	
 	font-size:1em;
 	position:absolute;
 	top:0;
-	right:0;
-	bottom:0;
 	left:0;
-	margin:0;
+	height:100%;
+	width:100%;
 }
 
 #input #input_overlay{
-	padding:.45em .7em;
 	color:#888;
 	background-color: #f0f0f0;
 }
