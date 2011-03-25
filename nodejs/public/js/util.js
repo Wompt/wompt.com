@@ -26,6 +26,8 @@ soundEmbed = null;
 Util.Sound = (function Sound() {
 	return{
 		playSound: function(sound){
+			return; // temporarily disable sounds
+		
 			if(soundEmbed) {
 				document.body.removeChild(soundEmbed);
 				soundEmbed = null;
