@@ -42,13 +42,13 @@ UI.once('init', function(){
 	
 
 
-	UI.on('after_append', function(data){
+	UI.on('user_message', function(data){
 		if(should_notify){
 			missed_messages += $.isArray(data) ? data.length : 1;
 			var now = (new Date()).getTime();
 			if(!last_sound_time || now - last_sound_time >= 3000){
 				last_sound_time = now;
-				Util.Sound.playSound("missed-message.wav");
+				document.getElementById("missed_message").play();
 			}
 		}
 	});

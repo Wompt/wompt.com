@@ -64,7 +64,8 @@ UI.once('init', function(){
 			message: function(data){
 				UI.emit('before_append', data);
 				UI.Messages.appendWithoutEvents(data);
-				UI.emit('after_append', data);			
+				UI.emit('after_append', data);
+				UI.emit('user_message', data);
 			},
 			
 			batch: function(msg){
@@ -75,7 +76,8 @@ UI.once('init', function(){
 					else
 						UI.Messages.newMessage(m);
 				});
-				UI.emit('after_append', msg.messages);			
+				UI.emit('after_append', msg.messages);
+				UI.emit('user_message', msg.messages);
 			}
 		},
 		
@@ -116,6 +118,7 @@ UI.once('init', function(){
 			UI.emit('before_append', msg);
 			UI.Messages.appendWithoutEvents({from:{name: "System", id:'system'}, msg:msg});
 			UI.emit('after_append', msg);
+			UI.emit('system_message', msg);
 		}
 	}
 });
