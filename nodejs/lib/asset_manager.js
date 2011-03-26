@@ -39,6 +39,7 @@ var assetManagerGroups = {
 			, '/public/js/user_list.js'
 			, '/public/js/util.js'
 			, '/public/js/ui.connection_status.js'
+			, '/public/js/ui.layout.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
