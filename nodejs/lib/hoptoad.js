@@ -16,4 +16,9 @@ Hoptoad.expressErrorNotifier = function(err,req,res,next){
 	next(err);
 }
 
+Hoptoad.notifyCallback = function(err){
+	if(shouldReport && err)
+		Hoptoad.notify(err, function(){});
+}
+
 module.exports = Hoptoad;

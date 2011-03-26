@@ -6,5 +6,8 @@ module.exports = {
 		monitor:{
 			disabled:true
 		}
+		,channels:{
+			disabled:true
+		}
 	}
 }

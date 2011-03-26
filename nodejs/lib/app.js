@@ -11,7 +11,8 @@ function App(options){
 	this.meta_users = new wompt.MetaUserManager();
 	this.channels = new wompt.ChannelManager();
 	this.channels.on('new_channel', function(channel){
-		var logger = new wompt.loggers.ChannelLogger(channel);
+		if(!wompt.env.logs.channels.disabled)
+			new wompt.loggers.ChannelLogger(channel);
 	});
 	
 	this.config = options.config;

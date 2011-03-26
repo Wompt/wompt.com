@@ -1,6 +1,10 @@
 var fs = require('fs'),
 Channel = require('../channel').Channel,
+Hoptoad = require('../hoptoad'),
 env = require('../../environment');
+
+if(!env.logs.channels.disabled)
+	fs.mkdir(env.logs.channels.root, 0666, Hoptoad.notifyCallback);
 
 function ChannelLogger(channel){
 	this.channel = channel;
