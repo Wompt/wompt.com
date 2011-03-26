@@ -51,7 +51,6 @@ var assetManagerGroups = {
 			  'reset.css'
 			, 'base.css'
 			, 'landing.css'
-			, 'twitter.css'
 			, 'header.css'
 			, 'footer.css'
 			, 'chat.css'

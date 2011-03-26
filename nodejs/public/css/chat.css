@@ -3,18 +3,13 @@
 	top:45px;
 	bottom:2em;
 	left:0px;
-	right:381px;
+	right:181px;
 	overflow: hidden;
 }
 
-.main #content.hide_twitter{
-	right:181px;
-}
-
-.main #content.hide_twitter.hide_userlist{
+.main #content.hide_userlist{
 	right:0;
 }
-
 
 .main #input{
 	position:absolute;
