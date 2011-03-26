@@ -41,14 +41,14 @@ UI.once('init', function(){
 	}
 	
 
-
+	var sound = document.getElementById("missed_message");
 	UI.on('user_message', function(data){
 		if(should_notify){
 			missed_messages += $.isArray(data) ? data.length : 1;
 			var now = (new Date()).getTime();
 			if(!last_sound_time || now - last_sound_time >= 3000){
 				last_sound_time = now;
-				document.getElementById("missed_message").play();
+				if(sound && sound.play) sound.play();
 			}
 		}
 	});
