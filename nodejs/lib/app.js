@@ -1,6 +1,7 @@
 var http   = require("http"),
     url    = require("url"),
     wompt  = require("./includes"),
+    util   = require('util'),
     logger = wompt.logger,
     SocketIO= wompt.socketIO,
     assetManager = require('./asset_manager'),
@@ -162,11 +163,9 @@ App.prototype = {
 			config: this.config
 		};
 		
-		if(custom_vars){
-			for(var k in custom_vars){
-				vars[k] = custom_vars[k];
-			}
-		}
+		if(custom_vars)
+			wompt.util.merge(vars, custom_vars);
+
 		return {
 			w:vars
 		};
