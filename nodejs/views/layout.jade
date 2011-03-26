@@ -50,7 +50,8 @@ html
 						=" | "
 						a(href="/privacy", title="View privacy policy") Privacy
 					.clear
-		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js", type="text/javascript")
+		- if(w.jquery)
+			script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js", type="text/javascript")
 		- if(w.page_js)
 			script(src="/js/" + w.page_js + "_" + cacheTimeStamps[w.page_js + "_js"] + ".js", type="text/javascript")
 		- if (!w.user || !w.user.doc || !w.user.doc.is_admin())

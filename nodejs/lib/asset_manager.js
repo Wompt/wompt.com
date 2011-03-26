@@ -8,14 +8,6 @@ var assetManager = require('connect-assetmanager');
 var assetHandler = require('connect-assetmanager-handlers');
 
 var assetManagerGroups = {
-	'landing_js': {
-		'route': /\/js\/landing_[\d]+.js/
-		, 'path': pub
-		, 'dataType': 'javascript'
-		, 'files': [
-			'/external/events.js'
-		]
-	},		
 	'channel_js': {
 		'route': /\/js\/channel_[\d]+.js/
 		, 'path': root

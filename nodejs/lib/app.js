@@ -92,6 +92,7 @@ App.prototype = {
 				channel: channel,
 				connector_id: connector.id,
 				url: req.url,
+				jquery: true,
 				page_js: 'channel'
 			});
 			
@@ -116,8 +117,7 @@ App.prototype = {
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
 					app:me,
-					subtitle: me.choose_subtitle(),
-					page_js: 'landing'
+					subtitle: me.choose_subtitle()
 				})
 			});
 		});
@@ -156,6 +156,7 @@ App.prototype = {
 	
 	standard_page_vars: function(req, custom_vars){
 		var vars = {
+			jquery: false,
 			url: req.url,
 			user: req.meta_user,
 			footer: true,
