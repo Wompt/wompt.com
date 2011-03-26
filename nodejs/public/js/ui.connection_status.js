@@ -74,10 +74,10 @@ UI.once('init', function(){
 		if(!updateStatus) return;
 		if(disable){
 			overlay.show();
-			try_now_link[try_now ? 'show':'hide']();
 		}else if(was_disabled){
 			overlay.fadeOut(1000);
 		}
+		try_now_link[try_now ? 'show':'hide']();
 		was_disabled = disable;
 		
 		$('#message').attr('disabled',disable ? 'disable' : '');
