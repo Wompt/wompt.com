@@ -24,10 +24,20 @@ UI.once('init', function(){
 		var start = new Date().getTime();
 		if(reconnectTimer) clearInterval(reconnectTimer);
 		reconnectTimer = setInterval(function(){
-			connectionStatus('Not Connected, trying again in '
-				+ Math.ceil((start+delay - new Date().getTime())/1000) + " seconds", true, true);
+			connectionStatus('Not Connected, trying again '
+				+ timeDistance(start,delay), true, true);
 		}, 100);
 	});
+	
+	function timeDistance(start, delay){
+		var since = new Date().getTime() - start,
+		left = delay-since;
+		if(left < 0) return " soon";
+		if(left > 90000)
+			return "in " + Math.floor(left / 60000) + ' minutes';
+		else
+			return "in " + Math.ceil(left / 1000) +  ' seconds';
+	}
 	
 	socket.on('reconnect', reauthenticate);
 	
