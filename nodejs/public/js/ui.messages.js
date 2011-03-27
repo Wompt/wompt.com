@@ -85,11 +85,13 @@ UI.once('init', function(){
 			
 			batch: function(msg){
 				UI.emit('before_append', msg.messages);
-				$.each(msg.messages, function(i,m){
-					if(m.action == 'message')
-						UI.Messages.appendWithoutEvents(m)
-					else
-						UI.Messages.newMessage(m);
+				UI.muteEvents(function(){
+					$.each(msg.messages, function(i,m){
+						if(m.action == 'message')
+							UI.Messages.appendWithoutEvents(m)
+						else
+							UI.Messages.newMessage(m);
+					});
 				});
 				UI.emit('after_append', msg.messages);
 				UI.emit('user_message', msg.messages);

@@ -21,3 +21,11 @@ Util.Text = (function Text(){
 	};
 })()
 
+EventEmitter.prototype.muteEvents = function(fn){
+	var e = this._events;
+	this._events = null;
+
+	fn();
+	
+	this._events = e;
+}
