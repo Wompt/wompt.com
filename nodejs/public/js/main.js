@@ -14,4 +14,6 @@ jQuery(function(){
 	IO.addMessageHandler(userList);
 
 	IO.connect();
+	
+	document.getElementById("message").focus();
 });
