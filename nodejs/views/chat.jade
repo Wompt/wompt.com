@@ -5,27 +5,27 @@ script(type='text/javascript')
 #user_list
 	.title Users
 	.users
-!= partial('partials/_twitter', {locals: {w:w}})
-#messages
-	#messages_scroller
-		table#message_list
-#input
-	- if(w.user.authenticated())
-		.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
-		.container
-			textarea#message(name='message')
-			#input_overlay
-				span.connection_status
-				| &nbsp;
-				a.try_now(href='#') Try Now
-	- else
-		.name#own_name Observing
-		.container
-			#message
-				| sign in to participate:
-				<a href="/auth/google"   title="Sign in using Google">google</a> &nbsp;|&nbsp;
-				<a href="/auth/facebook" title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
-				<a href="/auth/github"   title="Sign in using Github">github</a>
+#content
+	#messages
+		#messages_scroller
+			table#message_list
+	#input
+		- if(w.user.authenticated())
+			.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
+			.container
+				textarea#message(name='message')
+				#input_overlay
+					span.connection_status
+					| &nbsp;
+					a.try_now(href='#') Try Now
+		- else
+			.name#own_name Observing
+			.container
+				#message
+					| sign in to participate:
+					<a href="/auth/google"   title="Sign in using Google">google</a> &nbsp;|&nbsp;
+					<a href="/auth/facebook" title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
+					<a href="/auth/github"   title="Sign in using Github">github</a>
 #audio_notifications
 	audio#missed_message(src="/sounds/missed-message.wav", preload="auto")
 

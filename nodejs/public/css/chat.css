@@ -1,8 +1,21 @@
-.main #input{
+.main #content{
 	position:fixed;
+	top:45px;
 	bottom:2em;
 	left:0px;
-	right:380px;
+	right:181px;
+	overflow: hidden;
+}
+
+.main #content.hide_userlist{
+	right:0;
+}
+
+.main #input{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
 	border-top: solid 1px #ccc;
 	border-right: solid 1px #ccc;
 	background-color:#EF6F2F;
@@ -53,13 +66,12 @@ a.try_now{
 
 .main #messages{
 	padding-bottom:0px;
-	margin-right:381px;
 	overflow: hidden;
-	position:fixed;
-	top:45px;
-	left:0px;
+	position:absolute;
+	top:0;
+	left:0;
 	right:0px;
-	bottom:5.2em;
+	bottom:3.4em;
 	background-color:#f7f7f7;
 }
 

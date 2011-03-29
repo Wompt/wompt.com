@@ -31,6 +31,7 @@ var assetManagerGroups = {
 			, '/public/js/user_list.js'
 			, '/public/js/util.js'
 			, '/public/js/ui.connection_status.js'
+			, '/public/js/ui.layout.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
@@ -42,7 +43,6 @@ var assetManagerGroups = {
 			  'reset.css'
 			, 'base.css'
 			, 'landing.css'
-			, 'twitter.css'
 			, 'header.css'
 			, 'footer.css'
 			, 'chat.css'
