@@ -66,6 +66,7 @@ App.prototype = {
 		exp.set('views', wompt.env.root + '/views');		
 		exp.set('view engine', 'jade');
 		exp.register('jade', wompt.dependencies.jade);
+		exp.register('html', wompt.dependencies.jade);
 		
 		this.plain_routes(exp, [
 			,'/support'

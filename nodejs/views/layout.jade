@@ -12,6 +12,8 @@ html
 		meta(meta name="description", content="Wompt is chat.")
 		meta(name="keywords", content="chat,irc,webchat,chatroom,chat room")
 		meta(name="author", content="Wompt, Inc.")
+		meta(property="db:app_id", content="181725458505189")
+		meta(property="og:site_name", content="Wompt")
 		script(type='text/javascript')
 			var readonly = #{w.user.readonly};
 	body
@@ -45,6 +47,7 @@ html
 			#footer_container
 				#footer
 					.left Wompt &nbsp;&copy;&nbsp; #{(new Date()).getFullYear()}
+					!= partial('partials/_fb_like.html')
 					.right
 						a(href="/terms", title="View terms of use") Terms
 						=" | "
