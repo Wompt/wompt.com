@@ -87,14 +87,14 @@ UI.once('init', function(){
 				UI.emit('before_append', msg.messages);
 				UI.muteEvents(function(){
 					$.each(msg.messages, function(i,m){
-						if(m.action == 'message')
-							UI.Messages.appendWithoutEvents(m)
-						else
+						if(m.action == 'message'){
+							UI.Messages.appendWithoutEvents(m);
+							UI.emit('user_message', m);
+						} else
 							UI.Messages.newMessage(m);
 					});
 				});
 				UI.emit('after_append', msg.messages);
-				UI.emit('user_message', msg.messages);
 			}
 		},
 		
