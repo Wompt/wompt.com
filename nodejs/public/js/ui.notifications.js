@@ -1,54 +1,74 @@
 UI.once('init', function(){
 	var UI = this
-		, should_notify = false
-		, notify_cycle = true
-		, interval_id = null
-		, missed_messages = 0
-		, standard_title = document.title
-		, last_sound_time = null;
+	,   user = {}
+	,   delay = 1500
+	,   missed_messages = 0
+	,   standard_title = document.title
+	,   last_sound_time = 0;
 	
-	var me = {
-		blurred: function(){
-			should_notify = true;
-			if(interval_id == null){
-				interval_id = setInterval(function(){
-					if(should_notify && missed_messages > 0){
-						document.title = notify_cycle ? missed_messages + " Unread Messages" : standard_title;
-						notify_cycle = !notify_cycle;
-					}
-				}, 1000);
-			}
+	var titleAlternator = {
+		start: function(){
+			if(this.timer) return;
+			this.show_standard = false
+			this.timer = setInterval(this.alternate.bind(this), delay);
+			this.alternate();
 		},
-	
-		focused: function(){
-			should_notify = false;
-			document.title = standard_title;
-			notify_cycle = false;
-			missed_messages = 0;
-			clearInterval(interval_id);
-			interval_id = null;
+		
+		stop: function(){
+			clearInterval(this.timer);
+			this.timer = null;
+			/* Changing the title within the onFocus event doesn't seem to have any effect */
+			setTimeout(this.alternate.bind(this), 100);
+		},
+		
+		alternate: function(){
+			document.title = !this.timer || this.show_standard ? standard_title : (missed_messages + " Unread Messages");
+			this.show_standard = !this.show_standard;
 		}
-	};
-	
-	if($.browser.msie){
-		document.onfocusin = me.focused;
-		document.onfocusout = me.blurred;
-	}else{
-		window.onfocus = me.focused;
-		window.onblur = me.blurred;
 	}
 	
-
-	var sound = document.getElementById("missed_message");
 	UI.on('user_message', function(data){
-		if(should_notify){
-			missed_messages += $.isArray(data) ? data.length : 1;
-			var now = (new Date()).getTime();
-			if(!last_sound_time || now - last_sound_time >= 3000){
-				last_sound_time = now;
-				if(sound && sound.play) sound.play();
-			}
+		missed_messages += $.isArray(data) ? data.length : 1;
+		if(user.away)	titleAlternator.start();
+	});	
+	
+	function onBlur(){
+		user.away = true;
+	}
+	
+	function onFocus(){
+		user.away = false;
+		titleAlternator.stop();
+		missed_messages = 0;
+	}
+	
+	if($.browser.msie){
+		document.onfocusin = onFocus;
+		document.onfocusout = onBlur;
+	}else{
+		window.onfocus = onFocus;
+		window.onblur = onBlur;
+	}
+	
+	
+	if(window.Audio){
+		var sound;
+		function ding(){
+			if(!sound) sound = new Audio("/sounds/missed-message.wav");
+			sound.play();
 		}
-	});
+		
+		UI.on('user_message', function(data){
+			if(user.away){
+				var now = (new Date()).getTime();
+				if(now - last_sound_time >= 3000){
+					last_sound_time = now;
+					ding();
+					/* This seems to fix the issues we were having with Chrome */
+					setTimeout(function(){sound.pause(); sound.currentTime =0;}, 2000)
+				}
+			}
+		});
+	}
 });
 
