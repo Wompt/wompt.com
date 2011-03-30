@@ -55,6 +55,7 @@ var assetManagerGroups = {
 			, '/public/js/util.js'
 			, '/public/js/ui.connection_status.js'
 			, '/public/js/ui.layout.js'
+			, '/public/js/ui.lightbox.js'			
 			, '/public/js/ui.fb.share.js'
 			, '/public/js/sign_in.js'
 			, '/public/js/links_in_new_tab.js'
@@ -94,6 +95,7 @@ var assetManagerGroups = {
 			, 'user_list.css'
 			, 'support_pages.css'
 			, 'share_links.css'
+			, 'lightbox.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{

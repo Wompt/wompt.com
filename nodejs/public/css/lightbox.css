@@ -1,0 +1,55 @@
+#lb_overlay.shown{
+	display:block;
+}
+
+#lb_overlay{
+	display:none;	
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	z-index:100;
+	background: data-url(/images/structure/overlay.png) repeat;
+}
+
+#lb_center{
+	top:10%;
+	left:0;
+	right:0;
+	position:absolute;
+}
+
+#lb_content{
+	position:relative;
+	margin: 0 auto;
+	padding:1em;
+	width:400px;
+	height:300px;
+	background-color:white;
+	border:10px solid #e8e8e8;
+	border-radius:20px;
+	box-shadow:10px 10px 10px rgba(0,0,0,0.25);
+}
+
+#lb_content .title{
+	margin: 0.2em 1em;
+	text-align:center;
+	padding-bottom:0.5em;
+	border-bottom:2px solid #e8e8e8;
+}
+
+#lb_content .rest{
+	margin:0.75em 2em;
+	padding-bottom:0.5em;
+	color:#444;
+}
+
+#lb_content .done{
+	position:absolute;
+	bottom:1em;
+	right:1em;
+	background:#ddd;
+	border-radius:5px;
+	padding:0.3em 0.8em;
+}
