@@ -34,12 +34,12 @@ UI.once('init', function(){
 	
 	function onBlur(){
 		user.away = true;
+		missed_messages = 0;
 	}
 	
 	function onFocus(){
 		user.away = false;
 		titleAlternator.stop();
-		missed_messages = 0;
 	}
 	
 	if($.browser.msie){
