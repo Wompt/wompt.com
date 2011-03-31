@@ -32,5 +32,6 @@ e.loggers        = {
 	,AppStateLogger:  require('./loggers/app_state_logger.js')
 	,LoggerCreator:   require('./loggers/logger_creator.js')
 }
+e.NameRequestor  = require('./name_requester');
 e.util           = require('./util');
 e.fail           = function(msg){throw msg};

@@ -20,6 +20,7 @@ jQuery(function(){
 	IO.addMessageHandler(UI.Messages.list);
 	IO.addMessageHandler(UI.Messages);
 	IO.addMessageHandler(userList);
+	IO.addMessageHandler(UI.Popup);
 
 	IO.connect();
 	
