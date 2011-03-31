@@ -92,7 +92,7 @@ var proto = {
 					id: data.from_client.user.id()
 				}
 			};
-			this.broadcast_message(message);
+			this.broadcast_message(message, {first:data.from_client});
 		}
 	},
 	

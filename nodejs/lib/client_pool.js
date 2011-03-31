@@ -78,8 +78,13 @@ proto.broadcast = function(msg, options){
 	if(options){
 		if(options.meta_data) // options is a Client to except
 			except_client = options;
-		else
+		else{
 			only = options.only;
+			if(options.first){
+				options.first.send(msg);
+				except_client = options.first;
+			}
+		}
 	}
 	var list = this.list;
 	for(var id in list){
