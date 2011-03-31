@@ -39,6 +39,7 @@ UI.once('init', function(){
 	
 	function onFocus(){
 		user.away = false;
+		missed_messages = 0;
 		titleAlternator.stop();
 	}
 	
