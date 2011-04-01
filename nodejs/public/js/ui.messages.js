@@ -5,7 +5,8 @@ UI.once('init', function(){
 	  , last_line = null
 	  , msgs = [];
 
-	function prepareMessageElement(el, text){
+	function prepareMessageElement(el, data){
+		var text = data.msg;
 		if(newline.test(text)){
 			text
 				.split(newline)
@@ -17,6 +18,7 @@ UI.once('init', function(){
 		}
 		
 		el.addClass('msg');
+		el.append(timestamp(data));
 		return el;
 	}
 	
@@ -31,6 +33,19 @@ UI.once('init', function(){
 		return el;
 	}
 	
+	function timestamp(data){
+		if(!data.t) return;
+		
+		var ts = $('<div>'),
+		    t = new Date(data.t),
+		    H = t.getHours(),
+		    h = H % 12,
+		    m = t.getMinutes();
+		
+		ts.addClass('ts');
+		ts.text((h==0 ? 12 : h) + ":" + (m < 10 ? '0' + m : m) + (H > 11 ? 'pm' : 'am'));
+		return ts;
+	}
 	
 	function pruneOldMessages(){
 		var num_to_remove = msgs.length - WOMPT.messages.max_shown;
@@ -99,7 +114,7 @@ UI.once('init', function(){
 				line.addClass('system');
 				
 			line.addClass('line');
-			prepareMessageElement(msg_container, data.msg);
+			prepareMessageElement(msg_container, data);
 			line.append(nick, msg_container);
 
 			if(Util.Text.mentionMatcher(data.msg)){
