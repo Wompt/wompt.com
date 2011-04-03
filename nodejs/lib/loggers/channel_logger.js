@@ -1,7 +1,10 @@
 var fs = require('fs'),
 Channel = require('../channel').Channel,
 Hoptoad = require('../hoptoad'),
+
 env = require('../../environment');
+
+var MAX_PRELOAD_BYTES = 1024 * 8;
 
 if(!env.logs.channels.disabled)
 	fs.mkdir(env.logs.channels.root, 0666, Hoptoad.notifyCallback);
@@ -25,6 +28,34 @@ proto._onNewFile = function(){
 	this.log.write("//" + JSON.stringify(info) + "\n");
 }
 
+proto._onExistingFile = function(size){
+	var read_size = Math.min(size, MAX_PRELOAD_BYTES),
+	    self = this,
+	    buf;
+
+	fs.open(this.filePath, 'r', null, opened);
+	
+	function opened(err, fd){
+		if(err) return;
+		buf = new Buffer(read_size);
+		fs.read(fd, buf, 0, read_size, size - read_size, done_reading);
+	}
+	
+	function done_reading(err, bytesRead){
+		if(err) return;
+		lines = buf.toString('utf8').split("\n");
+		// We read the file in an arbitrary spot, so the first line is likely only half there
+		lines.shift();
+		msgs = lines.map(function(line){
+			var p = line.indexOf(':');
+			if(p > 0) return JSON.parse(line.substr(p+1));
+			else return null;
+		}).filter(function(m){return m != null});
+		
+		self.channel.messages.prepend(msgs);
+	}
+}
+
 proto._onLoad = function(){
 	var log = this.log;
 	this.buffer.forEach(function(line){
@@ -43,6 +74,7 @@ proto.openFile = function(){
 
 	fs.stat(this.filePath, function(err, stat){
 		if(err || stat.size == 0) self._onNewFile();
+		else self._onExistingFile(stat.size);
 		self._onLoad();
 	});
 }
