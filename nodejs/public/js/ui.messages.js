@@ -115,6 +115,10 @@ UI.once('init', function(){
 			prepareMessageElement(msg_container, data.msg);
 			line.append(nick, msg_container);
 
+			if(Util.Text.mentionMatcher(data.msg)){
+				line.addClass('mention');
+			}
+
 			data.line = line;
 			data.nick = nick;
 			last_line = data;

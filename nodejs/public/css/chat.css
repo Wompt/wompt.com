@@ -107,6 +107,9 @@ tr.first td {
 	padding-top:0.7em;
 }
 
+.line.mention{
+	background-color: #ffb;
+}
 td.name {
 	width: 10em;
 	padding-right: 10px;

@@ -1,7 +1,8 @@
 script(type='text/javascript')
 	var channel     = '#{w.channel}',
 	connector_id  = '#{w.connector_id}',
-	WOMPT = !{JSON.stringify(w.config.constants)};
+	WOMPT = !{JSON.stringify(w.config.constants)},
+	Me = {name: '#{w.user.doc ? w.user.doc.name || w.user.doc.email : ''}'};
 #user_list
 	.title Users
 	.users
