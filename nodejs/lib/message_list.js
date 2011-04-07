@@ -36,6 +36,10 @@ proto.is_empty = function(){
 	return this.messages.length == 0;
 }
 
+proto.prepend = function(msgs){
+	this.messages = msgs.concat(this.messages);
+}
+
 
 //Constants
 proto.MAX_MESSAGES = 200
