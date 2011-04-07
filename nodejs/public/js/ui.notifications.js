@@ -62,7 +62,7 @@ UI.once('init', function(){
 		UI.on('user_message', function(data){
 			if(user.away){
 				var now = (new Date()).getTime();
-				if(now - last_sound_time >= 3000){
+				if(now - last_sound_time >= 60000){
 					last_sound_time = now;
 					ding();
 					/* This seems to fix the issues we were having with Chrome */
