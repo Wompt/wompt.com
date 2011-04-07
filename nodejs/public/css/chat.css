@@ -88,6 +88,10 @@ a.try_now{
 	margin-bottom:0.2em;
 }
 
+#message_list.hide_system .line.system {
+	display:none;
+}
+
 .line td{
 	padding-top:0;
 	padding-bottom:.2em;

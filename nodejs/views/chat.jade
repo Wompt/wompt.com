@@ -8,7 +8,7 @@ script(type='text/javascript')
 #content
 	#messages
 		#messages_scroller
-			table#message_list
+			table#message_list.hide_system
 	#input
 		- if(w.user.authenticated())
 			.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}

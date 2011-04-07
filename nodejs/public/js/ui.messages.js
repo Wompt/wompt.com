@@ -108,6 +108,9 @@ UI.once('init', function(){
 				nick = $('<td>'),
 				msg_container  = $('<td>');
 
+			if(data.from.id == 'system')
+				line.addClass('system');
+				
 			line.addClass('line');
 			prepareMessageElement(msg_container, data.msg);
 			line.append(nick, msg_container);
