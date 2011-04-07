@@ -120,7 +120,7 @@ var proto = {
 		
 		var users = {}, user = opt.part || opt.join;
 		users[user.id()] = {
-			'name': user.doc.name
+			'name': user.doc.name || user.doc.email
 		} 
 		
 		var message = {
