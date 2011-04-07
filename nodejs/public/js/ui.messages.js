@@ -2,15 +2,8 @@ UI.once('init', function(){
 	var UI = this
 	  , messages = new MessageList()
 	  , newline = Util.Text.newlineMatcher
-	  , last_line = null;
-
-	function appendMessageToElement(data, to_container){
-		var text = data.msg;
-		var msg = data.ui_div = $('<div>');
-		prepareMessageElement(msg, text);
-		to_container.append(msg);
-		return msg;
-	}
+	  , last_line = null
+	  , msgs = [];
 
 	function prepareMessageElement(el, text){
 		if(newline.test(text)){
@@ -40,23 +33,29 @@ UI.once('init', function(){
 	
 	
 	function pruneOldMessages(){
-		var list = messages.list,
-		    num_to_remove = list.length - WOMPT.messages.max_shown;
+		var num_to_remove = msgs.length - WOMPT.messages.max_shown;
 		
 		if(num_to_remove <=0) return;
-		
-		for(var i=0; i<num_to_remove; i++){
-			// Remove the message text element
-			list[i].ui_div.remove();
-			
-			// if the next message is it's own message group, this message is the only
-			// one in its group and the whole TR should be removed.
-			if(list[i+1].first_in_group)
-				list[i].line.remove();
+
+		for(var i=0; i < num_to_remove; i++){
+			var msg = msgs[i], next = msgs[i+1];
+			if(msg.from.id == next.from.id){
+				next.nick.text(next.from.name);
+				next.nick.css('color', UI.Colors.forUser(next.from.id));
+				next.nick.addClass('name');
+				next.line.addClass('first');
+			}
+			msg.line.remove();
 		}
-		list.splice(0,num_to_remove);
-		// The new first message is always the first in it's group
-		list[0].first_in_group = true;
+
+		msgs.splice(0,num_to_remove);
+	}
+	
+	function firstMessageInGroup(msg){
+		msg.nick.text(msg.from.name);
+		msg.nick.css('color', UI.Colors.forUser(msg.from.id));
+		msg.nick.addClass('name');
+		msg.line.addClass('first');
 	}
 
 	function join_part(text){
@@ -104,30 +103,23 @@ UI.once('init', function(){
 		},
 		
 		appendWithoutEvents: function(data){
+			var same_person = last_line && (last_line.from.id == data.from.id),
+				line = $('<tr>'),
+				nick = $('<td>'),
+				msg_container  = $('<td>');
+
+			line.addClass('line');
+			prepareMessageElement(msg_container, data.msg);
+			line.append(nick, msg_container);
+
+			data.line = line;
+			data.nick = nick;
+			last_line = data;
 			
-			if(last_line && last_line.from.id == data.from.id){
-				appendMessageToElement(data, last_line.msg_container);
-			}else{
-				var line = $('<tr>'),
-						nick = $('<td>'),
-						msg_container  = $('<td>');
-			
-				nick.text(data.from.name);
-				nick.addClass('name');
-				nick.css('color', UI.Colors.forUser(data.from.id));
-				
-				appendMessageToElement(data, msg_container);
-				
-				line.append(nick, msg_container);
-				line.addClass('line');
+			if(!same_person) firstMessageInGroup(data);
 	
-				data.first_in_group = true;
-				data.line = line;		
-				data.msg_container = msg_container;
-				last_line = data;
-		
-				$('#message_list').append(line);
-			}
+			$('#message_list').append(line);
+			msgs.push(data);
 			pruneOldMessages();
 		},
 		

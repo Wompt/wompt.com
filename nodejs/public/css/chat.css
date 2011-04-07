@@ -85,18 +85,23 @@ a.try_now{
 
 #message_list {
 	width: 100%;
+	margin-bottom:0.2em;
 }
 
 .line td{
-	padding-top: .5em;
-	padding-bottom: .5em;
+	padding-top:0;
+	padding-bottom:.2em;
 }
 
-tr.line {
-	background: data-url(/images/chat/line_back.png) top left repeat-x;
+tr.first {
+	background: left 0.1em repeat-x data-url(/images/chat/line_back.png);
 }
 
-.name {
+tr.first td {
+	padding-top:0.7em;
+}
+
+td.name {
 	width: 10em;
 	padding-right: 10px;
 	text-align:right;
