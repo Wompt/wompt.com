@@ -46,6 +46,10 @@ class WomptAuth < Sinatra::Base
     haml :redirect, :locals => {:to => back_to}
   end
   
+	get_or_post '/auth/failure' do
+		haml :error, :locals => {:message => params[:message]}
+	end
+  
   def find_or_create_user auth
     info = auth['user_info']
     user = User.find_one('authentications' => {'provider' => auth['provider'], 'uid' => auth['uid']})
@@ -57,7 +61,9 @@ class WomptAuth < Sinatra::Base
         puts "Creating User"
         user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
         user['email'] = info['email'] if info['email']
-        user['name'] = name if(name = (info['name'] || info['nickname']))
+        if(name = (info['name'] || info['nickname']))
+          user['name'] = name
+        end
       end
     end
     
