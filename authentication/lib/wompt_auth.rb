@@ -57,7 +57,7 @@ class WomptAuth < Sinatra::Base
         puts "Creating User"
         user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
         user['email'] = info['email'] if info['email']
-        user['name'] = info['name'] if info['name']
+        user['name'] = name if(name = (info['name'] || info['nickname']))
       end
     end
     
