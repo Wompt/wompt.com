@@ -1,5 +1,4 @@
 function UserList(){
-	this.list = [];
 	this.users = {};
 }
 
@@ -29,6 +28,17 @@ UserList.prototype.newMessage = function(msg){
 	}
 }
 
+UserList.prototype.each = function(f){
+	$.each(this.users,f);	
+}
+
+UserList.prototype.toArray = function(){
+	var array = [];
+	$.each(this.users,function(id,user){
+		array.push(user);
+	});
+	return array;
+}
 
 
 function UserListUI(ul, container){
