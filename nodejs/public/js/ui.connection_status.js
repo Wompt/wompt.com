@@ -52,8 +52,6 @@ UI.once('init', function(){
 			success: function(data){
 				if(data.version_hash != WOMPT.version_hash){
 					alert("A new version of Wompt is out! Please reload the page to get the latest version.");
-					socket.options.reconnect = false;
-					socket.disconnect();
 					authFailed();
 				}else if(data.connector_id){
 					socket.send({
@@ -73,6 +71,8 @@ UI.once('init', function(){
 	function authFailed(){
 		authenticating = false;
 		connectionStatus("Can't Reconnect, please refresh the page", true);
+		socket.options.reconnect = false;
+		socket.disconnect();		
 		updateStatus = false;
 	}
 	
