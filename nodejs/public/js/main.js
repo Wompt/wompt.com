@@ -9,6 +9,14 @@ jQuery(function(){
 
 	UI.emit('init');
 	
+	[
+		UI.input.nameCompletion,
+		UI.input
+	].
+	forEach(function(watcher){
+		watcher.subscribeToEvents();
+	});
+	
 	IO.addMessageHandler(UI.Messages.list);
 	IO.addMessageHandler(UI.Messages);
 	IO.addMessageHandler(userList);

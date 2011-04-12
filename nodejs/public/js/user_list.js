@@ -1,5 +1,4 @@
 function UserList(){
-	this.list = [];
 	this.users = {};
 }
 
@@ -29,7 +28,10 @@ UserList.prototype.newMessage = function(msg){
 	}
 }
 
-
+// iteration must halt when f returns false
+UserList.prototype.each = function(f){
+	$.each(this.users,f);	
+}
 
 function UserListUI(ul, container){
 	if(!ul) return;
