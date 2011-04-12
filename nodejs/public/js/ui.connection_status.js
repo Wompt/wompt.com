@@ -51,8 +51,9 @@ UI.once('init', function(){
 			dataType: 'json',
 			success: function(data){
 				if(data.version_hash != WOMPT.version_hash){
-					alert("A new version of Wompt is out! Please reload the page to get the latest version.");
-					authFailed();
+					authFailed("A new version of Wompt is available, automatically reloading ...");
+					// Spread out reconnection just a bit, so as to not overload the server.
+					setTimeout(function(){window.location.reload();}, Math.random()*5000.0 + 2000.0);
 				}else if(data.connector_id){
 					socket.send({
 						channel: channel
@@ -68,9 +69,9 @@ UI.once('init', function(){
 		});
 	}
 	
-	function authFailed(){
+	function authFailed(text){
 		authenticating = false;
-		connectionStatus("Can't Reconnect, please refresh the page", true);
+		connectionStatus(text || "Can't Reconnect, please refresh the page", true);
 		socket.options.reconnect = false;
 		socket.disconnect();		
 		updateStatus = false;
