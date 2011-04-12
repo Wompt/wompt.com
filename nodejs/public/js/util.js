@@ -21,8 +21,11 @@ Util.Text = (function Text(){
 		},
 		
 		mentionMatcher: function(text){
-			var match = text.match(/@([^\s]+)/);
-			return match && match[1] && match[1].length >= 2 && my_name.indexOf(match[1].toLowerCase()) >= 0;
+			var matches = text.match(/@([^\s]+)/g);
+			return matches && matches.some(function(match){
+				match = match.substr(1);
+				return match.length >= 2 && my_name.indexOf(match.toLowerCase()) >= 0;
+			});
 		}
 	};
 })()
