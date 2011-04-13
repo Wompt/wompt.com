@@ -47,6 +47,7 @@ proto._onLogLoaded = function(msgs){
 
 	delete chan.send_initial_data;
 	delete chan.bufferedParameters;
+	self._onReadyForWriting();	
 }
 
 proto._onNewFile = function(){
@@ -86,7 +87,7 @@ proto._onExistingFile = function(size){
 	}
 }
 
-proto._onLoad = function(){
+proto._onReadyForWriting = function(){
 	var log = this.log;
 	this.buffer.forEach(function(line){
 		log.write(line);
@@ -105,7 +106,6 @@ proto.openFile = function(){
 	fs.stat(this.filePath, function(err, stat){
 		if(err || stat.size == 0) self._onNewFile();
 		else self._onExistingFile(stat.size);
-		self._onLoad();
 	});
 }
 
