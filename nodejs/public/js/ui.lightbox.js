@@ -4,21 +4,26 @@ UI.lightbox = (function(){
 	function setup(){
 		if(overlay) return;
 		var o = overlay = $("<div id='lb_overlay'>")
-			.append($("<div id='lb_center'>")
+			.append(center = $("<div id='lb_center'>")
 			.append(content = $("<div id='lb_content'>")));
-		o.click(function(){
-			if(!opts.forceAction) me.close();
+		
+		o.click(function(e){
+			if(isOutsideLB(e) && !opts.forceAction) me.close();
 		});
 		o.appendTo($('body'));
 	}
 	
+	function isOutsideLB(e){
+		return e.target.id == overlay[0].id || e.target.id == center[0].id;
+	}
+	
 	/*
 		options = {
-			forceAction: bool
+			cancellable: bool
 		} */
 	me.show = function(options){
 		setup();
-		opts = opts || options;
+		opts = options;
 		overlay.addClass('shown');
 		me.visible = true;
 	}
