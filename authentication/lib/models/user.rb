@@ -11,4 +11,10 @@ class User < Mongomatic::Base
   def save!
     self.is_new? ? insert! : update!
   end
+  
+  def get_authentication(provider, uid)
+    (self['authentications'] || []).find do |auth|
+      auth && (auth['provider'] == provider) && (!uid || auth['uid'] == uid)
+    end
+  end
 end

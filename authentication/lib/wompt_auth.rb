@@ -56,10 +56,10 @@ class WomptAuth < Sinatra::Base
     
     if !user
       if (email = info['email']) && (email.length > 3) && (user = User.find_one('email' => email))
-        user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'])
+        user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'], 'info' => auth)
       else
         puts "Creating User"
-        user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid']}])
+        user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid'], 'info' => auth}])
         user['email'] = info['email'] if info['email']
         if(name = (info['name'] || info['nickname']))
           user['name'] = name
@@ -68,6 +68,9 @@ class WomptAuth < Sinatra::Base
     end
     
     user['one_time_token'] = generate_token
+    if(auth_doc = user.get_authentication(auth['provider'], auth['uid']))
+      auth_doc['info'] = auth
+    end
     user.save!
     return user
   end
