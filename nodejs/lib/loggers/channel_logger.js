@@ -30,24 +30,33 @@ proto._suspendChannel = function(){
 	var chan = this.channel;
 	chan.bufferedParameters = [];
 	
+	// Hide the default implementation (which is in Channel.prototype) with this
+	// version that buffers the calls
 	chan.send_initial_data = function(){
 		chan.bufferedParameters.push(Array.prototype.slice.call(arguments));
 	}
 }
 
-proto._onLogLoaded = function(msgs){
+proto._resumeChannel = function(){
 	var chan = this.channel;
-	
-	if(msgs) chan.messages.prepend(msgs);
 	var send = Channel.prototype.send_initial_data;
 
 	chan.bufferedParameters.forEach(function(args){
 		send.apply(chan, args);
 	});
 
+	// This only deletes OUR buffered implementation of send_initial_data,
+	// the real one exists in Channel.prototype
 	delete chan.send_initial_data;
 	delete chan.bufferedParameters;
-	self._onReadyForWriting();	
+}
+
+// Called when the existing log is loaded, if it doesn't exist, this is called
+// without any arguments
+proto._onLogLoaded = function(msgs){
+	if(msgs) this.channel.messages.prepend(msgs);
+	this._resumeChannel();
+	this._onReadyForWriting();
 }
 
 proto._onNewFile = function(){
@@ -73,6 +82,7 @@ proto._onExistingFile = function(size){
 	}
 	
 	function done_reading(err, bytesRead){
+		var msgs;
 		if(!err){
 			lines = buf.toString('utf8').split("\n");
 			// We read the file in an arbitrary spot, so the first line is likely only half there
