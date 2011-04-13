@@ -182,9 +182,16 @@ App.prototype = {
 
 		client.once('message', function(data){
 			if(data && data.action == 'join'){
-				var connector = app.client_connectors.get(data.connector_id),
-				    namespace = connector.namespace || app.namespaces[data.namespace],
-				    user      = (connector && connector.meta_user) || new wompt.MetaUser();
+				var connector = app.client_connectors.get(data.connector_id);
+				
+				if(!connector) {
+					client.send("You must pass your connector_id with the join message");
+					return client._onDisconnect();
+				}
+				
+				var namespace = connector.namespace || app.namespaces[data.namespace],
+				    user      = connector.meta_user || new wompt.MetaUser();
+						
 				client.user = user;
 				
 				if(!client.uid){
