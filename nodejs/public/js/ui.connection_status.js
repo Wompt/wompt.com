@@ -65,7 +65,9 @@ UI.once('init', function(){
 					authenticating = false;
 				} else authFailed();
 			},
-			error: authFailed
+			error: function(){
+				authFailed("Authentication Failed - Try refreshing the page or signing in again");
+			}
 		});
 	}
 	
