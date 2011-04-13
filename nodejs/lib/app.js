@@ -60,6 +60,7 @@ App.prototype = {
 		
 		exp.helpers({
 			assets: new wompt.Helpers.Assets(this.config.root + '/public'),
+			assetHelpers: assetManager.helpers,
 			cacheTimeStamps: assetManager.middleware.cacheTimestamps
 		});
 

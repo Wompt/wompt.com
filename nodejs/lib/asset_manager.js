@@ -67,9 +67,36 @@ var assetManagerGroups = {
 				, assetHandler.replaceImageRefToBase64(pub)
 			]
 		}
+	},
+	'admin_socket_io': { // to support multiple
+		'route': /\/Socket.IO\/socket\.io\.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'debug': true
+		, 'stale': wompt.env.perform_caching		
+		, 'files': [
+			, '/vendor/Socket.IO/socket.io.js'
+		]
+	},
+};
+
+var exporting = {
+	middleware: assetManager(assetManagerGroups),
+	helpers:{
+		assetGroupTag: function(name, user){
+			if(user && user.is_admin()){
+				var group = assetManagerGroups[name+'_js'];
+				return group.files.map(function(file){
+					return exporting.helpers.scriptTag(file.replace(/^\/[^\/]+\//, '/')); // strip the first directory  /public/blah -> /blah
+				}).join();
+			}else
+				return exporting.helpers.scriptTag("/js/" + name + "_" + exporting.middleware.cacheTimestamps[name+'_js'] + ".js");
+		},
+		
+		scriptTag: function(file){
+			return "<script src='" + file + "' type='text/javascript'></script>"
+		}
 	}
 };
 
-module.exports = {
-	middleware: assetManager(assetManagerGroups)
-}
+module.exports = exporting;

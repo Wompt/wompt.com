@@ -60,7 +60,7 @@ html
 		- if(w.jquery)
 			script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js", type="text/javascript")
 		- if(w.page_js)
-			script(src="/js/" + w.page_js + "_" + cacheTimeStamps[w.page_js + "_js"] + ".js", type="text/javascript")
+			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
 		- if (!w.user || !w.user.doc || !w.user.doc.is_admin())
 			script(type='text/javascript')
 				var _gaq = _gaq || [];
