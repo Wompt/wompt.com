@@ -63,12 +63,12 @@ function Auth(config){
 			if(req.meta_user)
 				mu = req.meta_user;
 			else if(req.user){
-				var lookup = collection.get(req.user._id.id);
+				var lookup = collection.get(req.user._id.toJSON());
 				if(lookup){
 					mu = lookup;
 				} else {
 					mu = req.user.wrap();
-					collection.set(req.user._id.id, mu);
+					collection.set(req.user._id.toJSON(), mu);
 				}
 			}	else {
 				var token = me.get_token(req),
