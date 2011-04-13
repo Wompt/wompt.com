@@ -15,18 +15,13 @@ function App(options){
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
 
-	this.namespaces = {};
 	// default namespace
-	this.channels =	this.chatNamespace('chat');
-	this.channels.on('new_channel', function(channel){
-		if(!wompt.env.logs.channels.disabled)
-			new wompt.loggers.ChannelLogger(channel);
-	});
+	this.channels =	this.chatNamespace('chat', {logged: true});
 
 	// other namespaces
-	this.chatNamespace('unlisted');
-
-
+	this.chatNamespace('unlisted', {logged: true});
+	
+	
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
 	this.twitterTopics = new wompt.monitors.TwitterTopics(this.channels);
@@ -219,13 +214,20 @@ App.prototype = {
 		};
 	},
 	
-	chatNamespace: function(namespace){
+	chatNamespace: function(namespace, options){
+		this.namespaces = this.namespaces || {};
+		otions = options || {};
+
 		var me = this,
 		exp = this.express,
 		channelManager = new wompt.ChannelManager();
 		
 		this.namespaces[namespace] = channelManager;
-		 
+		
+		if(options.logged){
+			new wompt.loggers.LoggerCreator(channelManager, namespace);
+		}
+		
 		exp.get(new RegExp("\\/" + namespace + "\\/(.+)"), function(req, res){
 			if(req.url.substr(-1,1) == '/'){
 				return res.redirect(wompt.util.chop(req.url));

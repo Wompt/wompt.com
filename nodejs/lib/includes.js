@@ -32,5 +32,6 @@ e.monitors       = {
 e.loggers        = {
 	 ChannelLogger:   require('./loggers/channel_logger.js')
 	,AppStateLogger:  require('./loggers/app_state_logger.js')
+	,LoggerCreator:   require('./loggers/logger_creator.js')
 }
 e.util           = require('./util');

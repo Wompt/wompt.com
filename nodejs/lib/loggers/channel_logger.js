@@ -11,11 +11,17 @@ if(!env.logs.channels.disabled)
 
 if(!Channel.prototype.send_initial_data) throw "Channel.send_initial_data function no longer exists - need to refactor channel logger!";
 
-function ChannelLogger(channel){
+function ChannelLogger(channel, subdirectory){
 	this.channel = channel;
+	this.subdirectory = subdirectory;
+	
+	if(!env.logs.channels.disabled)
+		fs.mkdir(this.baseDirectory(), 0666, Hoptoad.notifyCallback);
+	
 	this._suspendChannel();
-	var self = this;
 	this.openFile();
+	
+	var self = this;
 	channel.on('msg', function(msg){
 		self.logMessage(msg)
 	});
@@ -108,7 +114,7 @@ proto._onReadyForWriting = function(){
 
 proto.openFile = function(){
 	var self = this;
-	this.filePath = env.logs.channels.root + '/' + this.hashChannelName() + ".log";
+	this.filePath = this.baseDirectory() + '/' + this.hashChannelName() + ".log";
 	this.log = fs.createWriteStream(this.filePath, {flags:'a'});
 	this.loaded = false;
 	this.buffer = [];
@@ -117,6 +123,13 @@ proto.openFile = function(){
 		if(err || stat.size == 0) self._onNewFile();
 		else self._onExistingFile(stat.size);
 	});
+}
+
+proto.baseDirectory = function(){
+	var dir = [env.logs.channels.root];
+	if(this.subdirectory)
+		dir.push(this.subdirectory)
+	return dir.join('/');
 }
 
 proto.hashChannelName = function(){
