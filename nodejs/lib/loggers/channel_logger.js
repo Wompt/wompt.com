@@ -7,7 +7,7 @@ env = require('../../environment');
 var MAX_PRELOAD_BYTES = 1024 * 32;
 
 if(!env.logs.channels.disabled)
-	fs.mkdir(env.logs.channels.root, 0666, Hoptoad.notifyCallback);
+	fs.mkdir(env.logs.channels.root, 0775, Hoptoad.notifyCallback);
 
 if(!Channel.prototype.send_initial_data) throw "Channel.send_initial_data function no longer exists - need to refactor channel logger!";
 
@@ -16,7 +16,7 @@ function ChannelLogger(channel, subdirectory){
 	this.subdirectory = subdirectory;
 	
 	if(!env.logs.channels.disabled)
-		fs.mkdir(this.baseDirectory(), 0666, Hoptoad.notifyCallback);
+		fs.mkdir(this.baseDirectory(), 0775, Hoptoad.notifyCallback);
 	
 	this._suspendChannel();
 	this.openFile();
