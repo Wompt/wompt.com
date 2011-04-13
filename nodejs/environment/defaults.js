@@ -34,6 +34,10 @@ module.exports = {
 		}
 	}
 	
+	, facebook: {
+		showLike: true
+	}
+	
 	, redirectWww: false
 	, redirectWwwToPort: 16867
 }

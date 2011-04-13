@@ -10,4 +10,8 @@ module.exports = {
 			disabled:true
 		}
 	}
+	
+	, facebook: {
+		showLike: false
+	}	
 }
