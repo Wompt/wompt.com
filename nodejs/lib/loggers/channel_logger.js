@@ -19,6 +19,9 @@ function ChannelLogger(channel){
 	channel.on('msg', function(msg){
 		self.logMessage(msg)
 	});
+	channel.on('destroy', function(){
+		self.destroy();
+	});
 }
 
 var proto = ChannelLogger.prototype;
@@ -116,6 +119,13 @@ proto.logMessage = function(msg){
 		this.log.write(line);
 	else
 		this.buffer.push(line);
+}
+
+proto.destroy = function(){
+	if(this.log)
+		this.log.destroySoon();
+	delete this.channel;
+	delete this.log;
 }
 
 module.exports = ChannelLogger;

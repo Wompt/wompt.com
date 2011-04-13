@@ -140,6 +140,7 @@ var proto = {
 	clean_up: function(){
 		delete this.messages;
 		delete this.clients;
+		this.emit('destroy');
 	}
 }
 

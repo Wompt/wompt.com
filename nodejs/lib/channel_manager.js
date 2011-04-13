@@ -15,8 +15,8 @@ function ChannelManager(options){
 		time_attribute:'touched'
 	});
 	this.expirer.on('expired', function(channel){
-		channel.clean_up();
 		me.count--;
+		channel.clean_up();
 	});
 }
 
