@@ -1,5 +1,6 @@
 script(type='text/javascript')
-	var channel     = '#{w.channel}',
+	var channel = '#{w.channel}',
+	namespace = '#{w.namespace}',
 	connector_id  = '#{w.connector_id}',
 	WOMPT = !{JSON.stringify(w.config.constants)},
 	Me = {name: '#{w.user.doc ? w.user.doc.name || w.user.doc.email : ''}'};

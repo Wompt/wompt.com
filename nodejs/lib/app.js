@@ -9,17 +9,19 @@ var http   = require("http"),
     express = wompt.dependencies.express;
 
 function App(options){
-	this.meta_users = new wompt.MetaUserManager();
-	this.channels = new wompt.ChannelManager();
-	this.channels.on('new_channel', function(channel){
-		if(!wompt.env.logs.channels.disabled)
-			new wompt.loggers.ChannelLogger(channel);
-	});
-	
 	this.config = options.config;
 	this.pretty_print_config();
+	this.meta_users = new wompt.MetaUserManager();
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
+
+	// default namespace
+	this.channels =	this.chatNamespace('chat', {logged: true});
+
+	// other namespaces
+	this.chatNamespace('unlisted', {logged: true});
+	
+	
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
 	this.twitterTopics = new wompt.monitors.TwitterTopics(this.channels);
@@ -74,34 +76,6 @@ App.prototype = {
 			,'/terms'
 			,'/privacy'
 		]);
-		
-		exp.get(/\/chat\/(.+)/, function(req, res){
-			if(req.url.substr(-1,1) == '/'){
-				return res.redirect(wompt.util.chop(req.url));
-			}
-			
-			var meta_user = req.meta_user,
-					channel = req.params[0];
-					
-			var token = wompt.Auth.get_or_set_token(req, res);
-
-			var connector = me.client_connectors.add({
-				meta_user:meta_user,
-				token: token
-			});
-			
-			var locals = me.standard_page_vars(req, {
-				channel: channel,
-				connector_id: connector.id,
-				url: req.url,
-				jquery: true,
-				page_js: 'channel'
-			});
-			
-			res.render('chat', {
-				locals:locals
-			});
-		});
 		
 		exp.get("/re-authenticate", function(req, res, next){
 			if(req.meta_user && req.meta_user.authenticated()){
@@ -209,6 +183,7 @@ App.prototype = {
 		client.once('message', function(data){
 			if(data && data.action == 'join'){
 				var connector = app.client_connectors.get(data.connector_id),
+				    namespace = connector.namespace || app.namespaces[data.namespace],
 				    user      = (connector && connector.meta_user) || new wompt.MetaUser();
 				client.user = user;
 				
@@ -220,7 +195,7 @@ App.prototype = {
 				}
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
-				var channel = app.channels.get(data.channel);
+				var channel = namespace.get(data.channel);
 				if(channel){
 					channel.add_client(client, connector && connector.token, data);
 				}
@@ -238,6 +213,53 @@ App.prototype = {
 				next();
 			}
 		};
+	},
+	
+	chatNamespace: function(namespace, options){
+		this.namespaces = this.namespaces || {};
+		otions = options || {};
+
+		var me = this,
+		exp = this.express,
+		channelManager = new wompt.ChannelManager();
+		
+		this.namespaces[namespace] = channelManager;
+		
+		if(options.logged){
+			new wompt.loggers.LoggerCreator(channelManager, namespace);
+		}
+		
+		exp.get(new RegExp("\\/" + namespace + "\\/(.+)"), function(req, res){
+			if(req.url.substr(-1,1) == '/'){
+				return res.redirect(wompt.util.chop(req.url));
+			}
+			
+			var meta_user = req.meta_user,
+					channel = req.params[0];
+					
+			var token = wompt.Auth.get_or_set_token(req, res);
+
+			var connector = me.client_connectors.add({
+				meta_user:meta_user,
+				namespace:channelManager,
+				token: token
+			});
+			
+			var locals = me.standard_page_vars(req, {
+				channel: channel,
+				namespace: namespace,
+				connector_id: connector.id,
+				url: req.url,
+				jquery: true,
+				page_js: 'channel'
+			});
+			
+			res.render('chat', {
+				locals:locals
+			});
+		});
+		
+		return channelManager;
 	},
 	
 	plain_routes: function(exp, urls){
