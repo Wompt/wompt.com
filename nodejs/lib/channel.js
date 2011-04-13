@@ -65,8 +65,7 @@ var proto = {
 			if(!this.messages.is_empty())
 				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
 			
-			if(!reconnecting)
-				client.send({action: 'who',	users: this.get_user_list(client)});
+			client.send({action: 'who',	users: this.get_user_list(client)});
 		}, this);
 	},
 	
