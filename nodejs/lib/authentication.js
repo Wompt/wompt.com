@@ -56,6 +56,30 @@ function Auth(config){
 			} else next();
 		}
 	}
+
+	this.fake_user_middleware = function(){
+		function FakeMetaUser(){
+			var doc = {
+				_id:wompt.Auth.generate_token(),
+				is_admin:function(){return false},
+				signed_up: function(){return true},
+				authentications:[]
+			};			
+			FakeMetaUser.super_.call(this, doc);
+		}
+		require('util').inherits(FakeMetaUser, wompt.MetaUser);
+		
+		FakeMetaUser.prototype.id = function(){
+			return this.doc._id;
+		}
+		
+		return function(req, res, next){
+			req.meta_user = new FakeMetaUser();
+			req.user = req.meta_user.doc;
+			req.user.name = req.query.username || "Anonymous";
+			next();
+		}
+	}
 	
 	this.meta_user_middleware = function(collection){
 		return function(req, res, next){
