@@ -237,7 +237,10 @@ App.prototype = {
 			new wompt.loggers.LoggerCreator(channelManager, namespace);
 		}
 		
-		exp.get(new RegExp("\\/" + namespace + "\\/(.+)"), function(req, res){
+		var argumentsForGet = [new RegExp("\\/" + namespace + "\\/(.+)")];
+		if(options.fakeUsers) argumentsForGet.push(wompt.Auth.fake_user_middleware());
+		
+		function handleChatRoomGet(req, res){
 			if(req.url.substr(-1,1) == '/'){
 				return res.redirect(wompt.util.chop(req.url));
 			}
@@ -272,7 +275,10 @@ App.prototype = {
 			}
 			
 			res.render('chat', opt);
-		});
+		}
+		
+		argumentsForGet.push(handleChatRoomGet);
+		exp.get.apply(exp, argumentsForGet);
 		
 		return channelManager;
 	},
