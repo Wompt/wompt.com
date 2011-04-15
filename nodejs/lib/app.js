@@ -20,7 +20,12 @@ function App(options){
 
 	// other namespaces
 	this.chatNamespace('unlisted', {logged: true});
-	
+	this.chatNamespace('mochigames', {
+		logged: false,
+		fakeUsers: true,
+		allowIframe: true,
+		allowCSS: true
+	});
 	
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
