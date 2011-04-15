@@ -1,0 +1,19 @@
+!!!
+html
+	head
+		!=partial('layouts/_head')
+		link(type='text/css',src=w.css_file)
+		style(type='text/css')
+			.main #content,
+			.main #user_list{
+				top: 0px;
+				bottom:0px;
+			}
+	body.iframe
+		.main
+			!{body}
+		- if(w.jquery)
+			script(src="/external/jquery-1.4.2.js", type="text/javascript")
+		- if(w.page_js)
+			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
+		!=partial('shared/_ga')

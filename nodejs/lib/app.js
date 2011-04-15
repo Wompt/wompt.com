@@ -262,9 +262,15 @@ App.prototype = {
 				page_js: 'channel'
 			});
 			
-			res.render('chat', {
+			var opt = {
 				locals:locals
-			});
+			};
+			
+			if(options.allowIframe && req.query.iframe == '1'){
+				opt.layout = 'layouts/iframe';
+			}
+			
+			res.render('chat', opt);
 		});
 		
 		return channelManager;
