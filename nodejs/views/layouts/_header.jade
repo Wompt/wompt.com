@@ -1,0 +1,24 @@
+#top
+	#toplinks
+		- if(w.channel)
+			span.connection_status
+			&nbsp;|
+		- if(w.user.doc)
+			span #{w.user.doc.email || w.user.doc.name}
+			| &nbsp;|&nbsp;
+			a(href="/users/sign_out", title="Logout of Wompt") sign out
+		- else
+			| &nbsp;sign in using:
+			<a href="/auth/google"   title="Sign in using Google">google</a> &nbsp;|&nbsp;
+			<a href="/auth/facebook" title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
+			<a href="/auth/github"   title="Sign in using Github">github</a>
+			- if(w.config.force_sign_in)
+				= '&nbsp;|&nbsp; '
+				<a href="/users/force_sign_in/1" title="Force sign in as the first user">user 1</a> &nbsp;|&nbsp;
+				<a href="/users/force_sign_in/2" title="Force Sign in as the second user">user 2</a>
+	#logo.top_left
+		a(href="/", title="Wompt.com", target="_blank")
+			| Wompt
+		- if(w.channel)
+			| : #{w.channel}
+	.clear

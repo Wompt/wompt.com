@@ -66,7 +66,8 @@ App.prototype = {
 			cacheTimeStamps: assetManager.middleware.cacheTimestamps
 		});
 
-		exp.set('views', wompt.env.root + '/views');		
+		exp.set('views', wompt.env.root + '/views');
+		exp.set('view options',{layout: 'layouts/standard.jade'});
 		exp.set('view engine', 'jade');
 		exp.register('jade', wompt.dependencies.jade);
 		exp.register('html', require('./templating/raw_html')({stripNewlines: true}));
