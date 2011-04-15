@@ -9,7 +9,6 @@ wompt.mongoose.model('User',{
 		//simple attributes
 		 'name'
 		,'email'
-		,'password'
 		,'one_time_token'
 		
 		// embedded documents
