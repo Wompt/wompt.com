@@ -60,8 +60,6 @@ var proto = {
 	
 	send_initial_data: function(client, joinMsg){
 		client.bufferSends(function(){
-			var reconnecting = !!joinMsg.last_timestamp;
-			
 			if(!this.messages.is_empty())
 				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
 			
