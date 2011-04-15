@@ -268,6 +268,7 @@ App.prototype = {
 			
 			if(options.allowIframe && req.query.iframe == '1'){
 				opt.layout = 'layouts/iframe';
+				if(options.allowCSS) locals.w.css_file = req.query.css_file;
 			}
 			
 			res.render('chat', opt);

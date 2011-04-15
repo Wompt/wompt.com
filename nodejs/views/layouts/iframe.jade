@@ -2,7 +2,8 @@
 html
 	head
 		!=partial('layouts/_head')
-		link(type='text/css',src=w.css_file)
+		-if(w.css_file)
+			link(type='text/css',src=w.css_file)
 		style(type='text/css')
 			.main #content,
 			.main #user_list{
