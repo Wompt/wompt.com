@@ -236,6 +236,7 @@ App.prototype = {
 				    user      = connector.meta_user || new wompt.MetaUser();
 						
 				client.user = user;
+				wompt.NameRequester.checkUser(client);
 				
 				if(!client.uid){
 					//When the user signs out, we can still know the user id while cleaning up the client

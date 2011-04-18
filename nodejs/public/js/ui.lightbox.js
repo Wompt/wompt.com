@@ -24,6 +24,7 @@ UI.lightbox = (function(){
 	me.show = function(options){
 		setup();
 		opts = options;
+		content.html(options.html);
 		overlay.addClass('shown');
 		me.visible = true;
 	}
