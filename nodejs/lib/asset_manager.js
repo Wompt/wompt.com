@@ -33,6 +33,7 @@ var assetManagerGroups = {
 			, '/public/js/util.js'
 			, '/public/js/ui.connection_status.js'
 			, '/public/js/ui.layout.js'
+			, '/public/js/ui.fb.share.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
