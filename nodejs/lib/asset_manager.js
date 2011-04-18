@@ -50,6 +50,7 @@ var assetManagerGroups = {
 			, 'chat.css'
 			, 'user_list.css'
 			, 'support_pages.css'
+			, 'share_links.css'
 		]
 		, 'preManipulate': {
 			// Regexp to match user-agents including MSIE.

@@ -1,0 +1,24 @@
+#share_links a{
+	display:inline-block;
+	height:32px;
+	width:32px;
+	background:transparent center no-repeat;
+	vertical-align:middle;
+	margin-bottom:5px
+}
+
+#share_links > .pad{
+	padding-top:9px;
+	color:white;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+
+#share_links #fb-share{
+	background-image:data-url(/images/external/facebook_32.png);
+}
+
+#share_links #twitter-share{
+	background-image:data-url(/images/external/twitter_32.png);
+}
