@@ -71,7 +71,7 @@ function UserListUI(ul, container){
 		name_div.attr('id', 'user_' + user.id);
 		name_div.attr('title', user.name);
 		name_div.css('color', UI.Colors.forUser(user.id))
-		name_div.append(user.name);
+		name_div.text(user.name);
 		name_div.addClass('user');
 		var insert_after = addToSortedList(user);
 		if(insert_after)
