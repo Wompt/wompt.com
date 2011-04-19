@@ -11,13 +11,21 @@
 	right:0;
 }
 
+.main #share_links{
+	position:absolute;
+	bottom:2em;
+	right:0;
+	width:181px;
+	height:3.4em;
+	background-color:#EF6F2F;
+}
+
 .main #input{
 	position:absolute;
 	bottom:0;
 	left:0;
 	right:0;
 	border-top: solid 1px #ccc;
-	border-right: solid 1px #ccc;
 	background-color:#EF6F2F;
 	height:3.4em;
 }
@@ -36,6 +44,8 @@
 	width:9.5em;
 	padding:.9em .4em 0 .4em;
 	color:white;
+	text-align:right;
+	font-weight:bold;
 }
 
 #input #message{
