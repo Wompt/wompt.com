@@ -21,35 +21,45 @@
 }
 
 #lb_content{
+	font-size:1em;
 	position:relative;
 	margin: 0 auto;
 	padding:1em;
 	width:400px;
 	height:300px;
-	background-color:white;
+	background-color:#f8f8f8;
 	border:10px solid #e8e8e8;
 	border-radius:20px;
 	box-shadow:10px 10px 10px rgba(0,0,0,0.25);
 }
 
 #lb_content .title{
-	margin: 0.2em 1em;
+	margin:0 0 0.7em 0;
 	text-align:center;
-	padding-bottom:0.5em;
+	padding-bottom:0.4em;
 	border-bottom:2px solid #e8e8e8;
 }
 
 #lb_content .rest{
-	margin:0.75em 2em;
+	margin:0 0.2em;
 	padding-bottom:0.5em;
 	color:#444;
 }
 
-#lb_content .done{
+#lb_content .buttons{
 	position:absolute;
 	bottom:1em;
 	right:1em;
-	background:#ddd;
-	border-radius:5px;
-	padding:0.3em 0.8em;
+}
+
+#lb_content button{
+	color:#444;
+	padding:0.3em 1em;
+	margin-left:1em;
+}
+
+
+#lb_content button,
+#lb_content input{
+	font-size:1em;
 }
