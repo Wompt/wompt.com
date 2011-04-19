@@ -72,7 +72,7 @@ UI.once('init', function(){
 				info = {
 					begin:completable[1],
 					middle:completable[2],
-					end:str.substr(pos+1)
+					end:str.substr(pos)
 				};
 				info.match = findMatchingUser(info.middle);
 				completeMatchedName();
