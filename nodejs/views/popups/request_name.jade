@@ -1,3 +1,9 @@
-h3 I need your name B!
-| What do you like to be called?
-input(type='text', length=30, placeholder="enter your name")
+#name_requestor
+	h3.title Your Name
+	.rest
+		p What do you want to be called? (choose wisely)
+		input(type='text', id='new_name', length=40, placeholder="enter your name")
+	.buttons
+		button#done Save
+		button#cancel Cancel
+script(type='text/javascript', src='/js/popup/name_requester.js')

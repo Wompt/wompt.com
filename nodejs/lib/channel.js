@@ -72,8 +72,6 @@ var proto = {
 		var responder = this.action_responders[data.action];
 		if(responder)
 			responder.call(this, data);
-		else
-			throw "No such action handler:" + data.action;
 	},
 	
 	action_responders: {

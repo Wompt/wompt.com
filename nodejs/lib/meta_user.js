@@ -33,6 +33,19 @@ MetaUser.prototype = {
 		return this.doc && this.doc.authenticationFor(provider);
 	},
 	
+	setAndSave: function(attr){
+		if(this.doc){
+			for(var k in attr){
+				this.doc[k] = attr[k];
+			}
+			this.doc.save();
+		}
+	},
+	
+	name: function(){
+		return this.doc && this.doc.name;
+	},
+	
 	new_session: function(session){
 		this.clients.broadcast({
 			action: 'new_session'		
@@ -60,6 +73,5 @@ MetaUser.prototype = {
 		});
 	}
 }
-
 
 module.exports = MetaUser
