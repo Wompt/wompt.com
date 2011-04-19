@@ -8,12 +8,15 @@ e.logger         = require("./logger");
 e.Channel        = require("./channel").Channel;
 e.ClientPool     = require("./client_pool").ClientPool;
 e.MessageList    = require("./message_list").MessageList;
-e.Auth           = require("./authentication").Auth;
 e.mongoose       = require('mongoose/mongoose').Mongoose;
 e.db             = require('./db').db;
+e.Auth           = require("./authentication").Auth;
 e.MetaUser       = require("./meta_user");
 e.MetaUserManager= require("./meta_user_manager");
-e.User           = require("./user");
+e.Models = {
+	User           : require("./models/user"),
+	Channel        : require("./models/user")
+};
 e.ClientConnectors=require("./client_connectors");
 e.ChannelManager = require('./channel_manager');
 e.Expirer        = require('./expirer');

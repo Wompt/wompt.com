@@ -1,5 +1,6 @@
 var wompt = require("./includes"),
-    httpProxy = require('http-proxy');
+    httpProxy = require('http-proxy'),
+    User = require("./models/user");
 
 function Auth(config){
 	config = config || {};
@@ -10,7 +11,7 @@ function Auth(config){
 		
 	
 	this.get_user_from_token = function(token, callback){
-		wompt.User.find({sessions: {token: token}}).first(callback);
+		User.find({sessions: {token: token}}).first(callback);
 	}
 	
 	this.forward_to_auth_app_middleware = function(){
@@ -29,7 +30,7 @@ function Auth(config){
 			var token = req.cookies[me.ONE_TIME_TOKEN_COOKIE_KEY];
 			if(token){
 				res.clearCookie(me.ONE_TIME_TOKEN_COOKIE_KEY);
-				wompt.User.find({one_time_token: token}).first(function(user){
+				User.find({one_time_token: token}).first(function(user){
 					if(user){
 						user.one_time_token = null;
 						// start_session calls user.save

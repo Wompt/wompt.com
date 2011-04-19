@@ -107,7 +107,7 @@ App.prototype = {
 		if(wompt.env.force_sign_in){
 			exp.get("/users/force_sign_in/:num", function(req, res){
 				var num = parseInt(req.params.num);
-				wompt.User.find().skip(num-1).first(function(user){
+				wompt.Models.User.find().skip(num-1).first(function(user){
 					if(user){
 						wompt.Auth.start_session(res, user);
 					}

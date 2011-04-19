@@ -1,4 +1,4 @@
-var wompt = require("./includes"),
+var wompt = require("../includes"),
     db = wompt.db;
 
 wompt.mongoose.model('User',{
