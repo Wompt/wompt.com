@@ -27,7 +27,7 @@ UI.once('init', function(){
 			});
 			
 			input.keyup(function(e){
-				if(e.which == start_key){
+				if(e.which == start_key && e.shiftKey){
 					start();
 				} else if(completing){
 					if(shouldFinish){
