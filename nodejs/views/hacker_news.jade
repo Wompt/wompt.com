@@ -1,0 +1,103 @@
+!!!
+html
+	head
+		meta(http-equiv="content-type", content="text/html; charset=utf-8")
+		style(type='text/css')
+			body{
+				font-family:Verdana;
+				font-size:10px;
+				color:#828282;
+				line-height:2.2em;
+			}
+			
+			#container {
+				margin:0 auto;
+				width:85%;
+				background-color:#f6f6ef;
+				min-height:100%;
+			}
+			
+			table.list{
+				padding-top:10px;
+				border-collapse:collapse;
+				width:100%;
+			}			
+			
+			#logo{
+				width:18px;
+				height:18px;
+				border:1px white solid;
+				vertical-align:middle;
+				margin:1px;
+				margin-right:0.5em;
+			}
+			
+			th{
+				background-color:#f60;
+				color:#222;
+				text-align:left;
+				vertical-align:middle;
+				font-size:13px;
+			}
+			
+			tr.spacer{
+				height:6px;
+			}
+			
+			th a{
+				color:black;
+				font-weight:bold;
+			}
+			
+			td.num,
+			.title {
+				font-size:13px;
+			}
+			
+			td.num {
+				width:2em;
+				text-align:right
+			}
+			
+			td.links{
+				width:5em;
+				text-align:center;
+			}
+			
+			a.title {
+				color:black;
+			}
+			
+			a,
+			a.title:visited{
+				color:#828282;
+				text-decoration:none;
+			}
+			
+			a:hover{
+				text-decoration:underline;
+			}
+			
+			tr:hover{
+				background-color:#f8f8f8;
+			}
+	body
+		#container
+			table.list
+				tr
+					th
+						a(href="http://ycombinator.com")
+							img(src="http://ycombinator.com/images/y18.gif", id='logo')
+					th(colspan=2)
+						a(href="hacker_news") Hacker News (with Wompt)
+				tr.spacer
+				- var i=1;
+				- each item in w.hn_links
+					tr
+						td.num= i++ + '.'
+						td.links
+							a(href='/chat/' + item.link) (chat)
+						td
+							a(href=item.link, class='title')= item.title
+							!= '&nbsp;'
+							span.domain= '(' + item.link.split('/')[2] + ')';

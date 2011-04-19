@@ -127,6 +127,15 @@ App.prototype = {
 				layout: 'admin/layout'
 			});
 		});
+		
+		exp.get('/hacker_news', function(req, res){
+			res.render('hacker_news', {
+				layout: false,
+				locals: me.standard_page_vars(req, {
+					hn_links: require('./monitors/hn.js')
+				})
+			});
+		});			
 
 		return exp;
 	},
