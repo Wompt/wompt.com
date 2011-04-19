@@ -8,7 +8,7 @@ UI.lightbox = (function(){
 			.append(content = $("<div id='lb_content'>")));
 		
 		o.click(function(e){
-			if(isOutsideLB(e) && !opts.forceAction) me.close();
+			if(isOutsideLB(e) && opts.cancellable) me.close();
 		});
 		o.appendTo($('body'));
 	}
