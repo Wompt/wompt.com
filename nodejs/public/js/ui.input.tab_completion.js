@@ -5,7 +5,7 @@ UI.once('init', function(){
 	completionMatcher = /^([\s\S]*@)([^\s@]+)$/, 
 	start_key = 50, // @
 	finish_keys = [39,9,32,13], // right arrow, tab, space, enter
-	cancel_keys = [8,27,46], // backspace, escape, delete
+	cancel_keys = [8,27,46,37], // backspace, escape, delete, left-arrow
 	shouldFinish,
 	info = {},
 	input = $('#message'),
