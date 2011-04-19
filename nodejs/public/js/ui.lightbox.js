@@ -1,5 +1,10 @@
 UI.lightbox = (function(){
-	var overlay, center, content, opts={}, me = {};
+	var overlay,
+	center,
+	content,
+	blocked,
+	opts={},
+	me = {};
 	
 	function setup(){
 		if(overlay) return;
@@ -17,20 +22,35 @@ UI.lightbox = (function(){
 		return e.target.id == overlay[0].id || e.target.id == center[0].id;
 	}
 	
+	
+	function block(){
+		 $('#message').attr('disabled',true);
+		 blocked = true;
+	}
+	
+	function unblock(){
+		if(blocked)
+			$('#message').attr('disabled',null);
+		blocked = false;
+	}
+	
 	/*
 		options = {
-			cancellable: bool
+			cancellable: false,
+			blocking: true
 		} */
 	me.show = function(options){
 		setup();
 		opts = options;
 		content.html(options.html);
 		overlay.addClass('shown');
+		if(options.blocking !== false) block();
 		me.visible = true;
 	}
 	
 	me.close = function(){
 		overlay.removeClass('shown');
+		unblock();
 		me.visible = false;
 	}
 	
