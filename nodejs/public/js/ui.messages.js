@@ -58,23 +58,10 @@ UI.once('init', function(){
 		msg.line.addClass('first');
 	}
 
-	function join_part(text){
-		return function(msg){
-			var names = [];
-			$.each(msg.users, function(id, u){
-				names.push(u.name);
-			});
-			UI.Messages.system(text + names.join(','));
-		}
-	}
-	
 	UI.Messages = {
 		list:messages,
 		
 		actions:{
-			join: join_part("Joined: "),
-			part: join_part("Left: "),
-			
 			message: function(data){
 				UI.emit('before_append', data);
 				UI.Messages.appendWithoutEvents(data);
