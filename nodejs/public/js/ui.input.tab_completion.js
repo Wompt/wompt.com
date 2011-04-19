@@ -15,11 +15,16 @@ UI.once('init', function(){
 		subscribeToEvents:function(){
 			
 			input.keydown(function(e){
-				if(completing){
+				if(shouldStart(e)){
+					start();
+				} else if(completing){
 					if(finish_keys.indexOf(e.which) >= 0){
 						shouldFinish = true;
 						// only prevent the insertion of the pressed key if we found a match
 						if(info.match) e.preventDefault();
+					/* this represents all cursor movement actions (ctrl-a, home, end, ...) */
+					} else if(onlyCursorMoved()){ 
+						accept(true);
 					} else if(cancel_keys.indexOf(e.which) >= 0){
 						cancel();
 					}
@@ -27,7 +32,7 @@ UI.once('init', function(){
 			});
 			
 			input.keyup(function(e){
-				if(e.which == start_key && e.shiftKey){
+				if(shouldStart(e)){
 					start();
 				} else if(completing){
 					if(shouldFinish){
@@ -35,16 +40,34 @@ UI.once('init', function(){
 						// only prevent this keystroke from being handled elsewhere if we found a match
 						if(info.match) e.stopImmediatePropagation();
 						accept();
-					}else	if(!hasSelection()){
+					}else if(onlyCursorMoved()){
+						accept(true);
+					}else if(!hasSelection()){
 						attempt();
 					}
 				}
 			});
+			
+			input.mousedown(function(){
+				if(completing) accept();
+			})
 		}
+	}
+	
+	/* Check if the only thing that's changed in the cursor position */
+	function onlyCursorMoved(){
+		return info &&
+			info.new_text == input.val() &&
+			(info.start_p != start_p() ||
+			info.end_p != end_p())
+	}
+	
+	function shouldStart(e){
+		return e.which == start_key && e.shiftKey;
 	}
 
 	function hasSelection(){
-		return input_el.selectionStart != input_el.selectionEnd;
+		return start_p() != end_p();
 	}
 	
 	function start(){
@@ -55,13 +78,23 @@ UI.once('init', function(){
 		reset(false);
 	}
 	
+	function start_p(v){
+		if(v>=0) return input_el.selectionStart = v;
+		else return input_el.selectionStart;
+	}
+	
+	function end_p(v){
+		if(v>=0) return input_el.selectionEnd = v;
+		else return input_el.selectionEnd;
+	}
+	
 	function reset(going){
 		completing = going;
 		info.match = null;
 	}
 	
 	function attempt(){
-		var pos = input_el.selectionStart,
+		var pos = start_p(),
 		str = input.val();
 		
 		if(pos > 0){
@@ -84,23 +117,24 @@ UI.once('init', function(){
 	function completeMatchedName(){
 		var user = info.match;
 		if(user){
-			var pos = input_el.selectionStart;
+			var pos = start_p();
 			var first = user.name.split(' ')[0];
-			input.val(info.begin + first + info.end);
-			input_el.selectionStart = pos;
-			input_el.selectionEnd = info.begin.length + first.length;
+			info.new_text = info.begin + first + info.end;
+			input.val(info.new_text);
+			info.start_p = start_p(pos);
+			info.end_p = end_p(info.begin.length + first.length);
 			completing = true;
 		} else
 			stop();
 	}
 	
-	function accept(){
+	function accept(skip_replace){
 		var user = info.match;
-		if(user){
+		if(!skip_replace && user){
 			var first = user.name.split(' ')[0];
 			
 			input.val(info.begin + first + ' ' + info.end);
-			input_el.selectionStart = input_el.selectionEnd = info.begin.length + first.length + 1;
+			start_p(end_p(info.begin.length + first.length + 1));
 		}
 		stop();
 	}
@@ -108,7 +142,7 @@ UI.once('init', function(){
 	function cancel(){
 		if(completing){
 			input.val(info.begin + info.middle + info.end);
-			input_el.selectionStart = input_el.selectionEnd = info.begin.length + info.middle.length;
+			start_p(end_p(info.begin.length + info.middle.length));
 			stop();
 		}
 	}	
