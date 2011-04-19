@@ -15,7 +15,7 @@ e.MetaUser       = require("./meta_user");
 e.MetaUserManager= require("./meta_user_manager");
 e.Models = {
 	User           : require("./models/user"),
-	Channel        : require("./models/user")
+	Channel        : require("./models/channel")
 };
 e.ClientConnectors=require("./client_connectors");
 e.ChannelManager = require('./channel_manager');
