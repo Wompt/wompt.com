@@ -132,7 +132,8 @@ App.prototype = {
 			res.render('hacker_news', {
 				layout: false,
 				locals: me.standard_page_vars(req, {
-					hn_links: require('./monitors/hn.js')
+					hn_links: require('./monitors/hn.js'),
+					app: me
 				})
 			});
 		});			
