@@ -34,6 +34,16 @@ var assetManagerGroups = {
 			, '/public/js/ui.connection_status.js'
 			, '/public/js/ui.layout.js'
 			, '/public/js/ui.fb.share.js'
+			, '/public/js/sign_in.js'
+		]
+	},	'landing_js': {
+		'route': /\/js\/landing_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'debug': !wompt.env.minify_assets
+		, 'stale': wompt.env.perform_caching		
+		, 'files': [
+			'/public/js/sign_in.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
@@ -79,7 +89,7 @@ var assetManagerGroups = {
 		, 'files': [
 			, '/vendor/Socket.IO/socket.io.js'
 		]
-	},
+	}
 };
 
 var exporting = {

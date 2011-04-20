@@ -94,6 +94,8 @@ App.prototype = {
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
 					app:me,
+					jquery: true,
+					page_js: 'landing',
 					subtitle: me.choose_subtitle()
 				})
 			});
