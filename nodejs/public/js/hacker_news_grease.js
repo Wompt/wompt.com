@@ -79,12 +79,15 @@ function AddWomptFrame(){
 
 function createWomptFrame(){
 	var frame = document.createElement('iframe');
-	frame.setAttribute('src', urlPrefix + getArticleIdFromUrl(window.location.path));
+	frame.setAttribute('src', urlPrefix + getArticleIdFromUrl(window.location.toString()));
 	frame.setAttribute('height', '600px');
 	frame.setAttribute('width', '100%');
 	frame.setAttribute('style', 'border:none;')
 	return frame;
 }
 
-AddWomptFrame();
-AddLinksToTitles();
+if(!window._wompt_loaded){
+	window._wompt_loaded = true;
+	AddWomptFrame();
+	AddLinksToTitles();
+}
