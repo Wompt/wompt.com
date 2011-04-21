@@ -37,6 +37,16 @@ wompt.mongoose.model('User',{
 			return !!this.email || !!this.name;
 		},
 		
+		authentication_for: function(provider){
+			var auths = this.authentications ;
+			if(!auths) return null;
+			var auth;
+			for(var i=0; auth=auths[i]; i++){
+				if(auth['provider'] == provider) return auth;
+			}
+			return null;
+		},
+		
 		is_admin: function(){
 			return (this.email in {
 				'dbeardsl@gmail.com': true,
