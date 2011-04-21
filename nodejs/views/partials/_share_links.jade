@@ -1,7 +1,7 @@
-<div id='share_links'>
-	<div class='pad'>
-		Share Wompt:
+#share_links
+	.pad
+		| Share Wompt:
 		<a id='twitter-share' href="http://twitter.com/share?text=I'm chatting right now on Wompt. Come join me!&via=WomptChat&related=abtinf:Co-Founder of Wompt" target='_blank'></a>
-		<a id='fb-share' href='#'></a>
-	</div>
-</div>
+		- if(w.user && w.user.authentication_for('facebook'))
+			<a id='fb-share' href='#'></a>
+	
