@@ -2,7 +2,7 @@
 html
 	head
 		!=partial('layouts/_head')
-	body
+	body(id=w.page_name)
 		!=partial('layouts/_header')
 		.main
 			!{body}

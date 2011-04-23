@@ -96,6 +96,7 @@ App.prototype = {
 					app:me,
 					jquery: true,
 					page_js: 'landing',
+					page_name:'landing',
 					subtitle: me.choose_subtitle()
 				})
 			});

@@ -1,6 +1,5 @@
 #top{
-	background:data-url(/images/structure/top_back.png) repeat-x top left;
-	height:45px;
+	height:40px;
 	position:fixed;
 	top:0px;
 	right:0px;
@@ -24,7 +23,6 @@
 #top #logo{
 	float: left;
 	margin:5px 20px 0px 5px;
-	color: rgba(255,255,255,0.8);
 	font-size:1.6em;
 	font-weight:700;
 }
@@ -33,7 +31,7 @@
 	background: data-url(/images/logo/white_30.png) no-repeat center left;
 	padding-left: 38px;
 	text-decoration:none;
-	color: rgba(255,255,255,0.5);	
+	color: rgba(255,255,255,1);	
 }
 
 

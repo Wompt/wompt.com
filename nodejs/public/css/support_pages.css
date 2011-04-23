@@ -2,5 +2,9 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 10em;
-	width: 600px;
+	width:600px;
+	padding:30px 50px 60px 50px;
+	color:#444;
+	background:white;
+	box-shadow:rgba(0,0,0,0.5) 0 0 25px;
 }
