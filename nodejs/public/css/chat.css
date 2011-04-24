@@ -19,6 +19,10 @@
 	padding:0 41px 4px 3px;
 }
 
+#chat #wompt{
+	display:none;
+}
+
 
 .main #share_links{
 	position:absolute;
