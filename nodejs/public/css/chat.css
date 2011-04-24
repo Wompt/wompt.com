@@ -123,8 +123,7 @@ a.try_now{
 }
 
 .line td{
-	padding-top:0;
-	padding-bottom:.2em;
+	padding:.1em;
 	word-break:break-all;
 	word-wrap:break-word;
 }
@@ -134,7 +133,7 @@ tr.first {
 }
 
 tr.first td {
-	padding-top:0.7em;
+	padding-top:0.5em;
 }
 
 .line.mention{
