@@ -1,5 +1,5 @@
 UI.once('init', function(){
-	var c = $('#content'),
+	var c = $('body'),
 	hide_userlist_at = 650,
 	layout_delay = 200,
 	resizeTimer;

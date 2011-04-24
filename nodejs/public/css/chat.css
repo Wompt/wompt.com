@@ -9,10 +9,6 @@
 	color:black;
 }
 
-.main #content.hide_userlist{
-	right:0;
-}
-
 #chat #footer_container{
 	background:none;
 	font-size:12px;
@@ -102,7 +98,13 @@ a.try_now{
 	left:0;
 	right:181px;
 	bottom:0;
+	z-index:1;
 	background-color:#f7f7f7;
+}
+
+
+.hide_userlist .main #messages{
+	right:0;
 }
 
 #messages_scroller{
@@ -112,7 +114,6 @@ a.try_now{
 	overflow-y:auto;
 	bottom: 0px;
 }
-
 #message_list {
 	width: 100%;
 	margin-bottom:0.2em;
