@@ -130,7 +130,7 @@ App.prototype = {
 			});
 		}
 
-		exp.get("/users/sign_out", function(req, res){
+		exp.get("/user/sign_out", function(req, res){
 			wompt.Auth.sign_out_user(req, res);
 			res.redirect('/');
 		});
