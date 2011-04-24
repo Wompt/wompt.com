@@ -66,18 +66,18 @@ var assetManagerGroups = {
 		, 'preManipulate': {
 			// Regexp to match user-agents including MSIE.
 			'MSIE': [
-				assetHandler.yuiCssOptimize
-				, assetHandler.fixVendorPrefixes
+				assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
 				, customHandlers.replaceRgbaWithRgb
 				, assetHandler.stripDataUrlsPrefix
+				, assetHandler.yuiCssOptimize
 			],
 			// Matches all (regex start line)
 			'^': [
-				assetHandler.yuiCssOptimize
-				, assetHandler.fixVendorPrefixes
+				assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
 				, assetHandler.replaceImageRefToBase64(pub)
+				, assetHandler.yuiCssOptimize				
 			]
 		}
 	},
