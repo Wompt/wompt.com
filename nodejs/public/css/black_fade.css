@@ -1,6 +1,8 @@
 #landing .narrow .cell,
 #landing .group,
 #top,
-#footer_container {
+.main #input,
+.main #share_links,
+#footer_container{
 	background: bottom left repeat-x data-url(/images/structure/black_fade.png);	
 }

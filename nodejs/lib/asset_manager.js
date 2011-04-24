@@ -54,6 +54,7 @@ var assetManagerGroups = {
 		, 'files': [
 			  'reset.css'
 			, 'base.css'
+			, 'black_fade.css'
 			, 'landing.css'
 			, 'header.css'
 			, 'footer.css'
@@ -61,7 +62,6 @@ var assetManagerGroups = {
 			, 'user_list.css'
 			, 'support_pages.css'
 			, 'share_links.css'
-			, 'black_fade.css'
 		]
 		, 'preManipulate': {
 			// Regexp to match user-agents including MSIE.

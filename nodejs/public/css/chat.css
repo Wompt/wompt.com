@@ -17,7 +17,6 @@
 	right:0;
 	width:181px;
 	height:3.4em;
-	background-color:#EF6F2F;
 }
 
 .main #input{
@@ -25,16 +24,21 @@
 	bottom:0;
 	left:0;
 	right:0;
+	color:#888;
 	border-top: solid 1px #ccc;
-	background-color:#EF6F2F;
 	height:3.4em;
+}
+
+body .main #share_links,
+.main #content #input{
+	background-position:bottom left;
 }
 
 .main #input .container{
 	position:absolute;
-	top:4px;
+	top:6px;
 	left:10.4em;
-	bottom:12px;
+	bottom:14px;
 	right:18px;
 	overflow:visible;
 }
@@ -55,7 +59,8 @@
 #input #message,
 #input #input_overlay{
 	display:block;
-	border-radius:10px;
+	-vendor-border-radius:5px;
+	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 10px;
 	padding:4px 7px;	
 	font-size:1em;
 	position:absolute;
