@@ -1,14 +1,12 @@
 #user_list{
-	position:fixed;
-	right:0px;
-	top:40px;
-	bottom:5.4em;
+	position:absolute;
+	right:0;
+	top:0;
+	bottom:0;
 	width:180px;
-	min-height: 110px;
 	background-color:#fff;
 	border-left:solid 1px #ccc;
-	border-bottom:solid 1px #ccc;
-	font-weight: bold;	
+	font-weight:bold;	
 }
 
 #user_list .users{

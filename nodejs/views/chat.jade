@@ -4,29 +4,29 @@ script(type='text/javascript')
 	connector_id  = '#{w.connector_id}',
 	WOMPT = !{JSON.stringify(w.config.constants)},
 	Me = {name: '#{w.user.doc ? w.user.doc.name || w.user.doc.email : ''}'};
-#user_list
-	.title Users
-	.users
-!=partial('partials/_share_links.jade')
 #content
 	#messages
 		#messages_scroller
 			table#message_list.hide_system
-	#input
-		- if(w.user.authenticated())
-			.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
-			.container
-				textarea#message(name='message')
-				#input_overlay
-					span.connection_status
-					| &nbsp;
-					a.try_now(href='#') Try Now
-		- else
-			.name#own_name Observing
-			.container
-				#message
-					| sign in to participate:
-					<a href="/auth/google"   class='popup' title="Sign in using Google">google</a> &nbsp;|&nbsp;
-					<a href="/auth/facebook" class='popup' title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
-					<a href="/auth/github"   class='popup' title="Sign in using Github">github</a>
+	#user_list
+		.title Users
+		.users			
+#input
+	- if(w.user.authenticated())
+		.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
+		.container
+			textarea#message(name='message')
+			#input_overlay
+				span.connection_status
+				| &nbsp;
+				a.try_now(href='#') Try Now
+	- else
+		.name#own_name Observing
+		.container
+			#message
+				| sign in to participate:
+				<a href="/auth/google"   class='popup' title="Sign in using Google">google</a> &nbsp;|&nbsp;
+				<a href="/auth/facebook" class='popup' title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
+				<a href="/auth/github"   class='popup' title="Sign in using Github">github</a>
+	!=partial('partials/_share_links.jade')
 script(type='text/javascript', src='http://connect.facebook.net/en_US/all.js',async='true')

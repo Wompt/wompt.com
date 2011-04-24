@@ -1,7 +1,7 @@
 UI.once('init', function(){
 	var previousLines
 	,max_input_height = 6
-	,min_input_height = 2
+	,min_input_height = 1
 	,input = $('#message');
 	
 	function keyDown(e){
@@ -29,7 +29,9 @@ UI.once('init', function(){
 		lines = Math.max(min_input_height, Math.min(lines, max_input_height));
 		if(lines != previousLines){
 			/* at lines = 2 this needs to match the height of #input defined in the CSS */
-			$("#input").height((1 + lines * 1.2).toString() + 'em');
+			var em_height = 1.5 + lines * 1.2;
+			$("#input").height(          lines <= 1 ? '' : em_height + 'em');
+			$("#messages").css('bottom', lines <= 1 ? '' : (em_height - 3.4) + 'em');
 			previousLines = lines;
 		}
 	}

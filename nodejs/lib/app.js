@@ -273,6 +273,7 @@ App.prototype = {
 				connector_id: connector.id,
 				url: req.url,
 				jquery: true,
+				page_name: 'chat',
 				page_js: 'channel'
 			});
 			

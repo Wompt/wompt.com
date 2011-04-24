@@ -1,19 +1,32 @@
 .main #content{
 	position:fixed;
 	top:40px;
-	bottom:2em;
-	left:0px;
-	right:181px;
+	bottom:3.4em;
+	left:0;
+	right:0;
+	z-index:1;
 	overflow: hidden;
+	color:black;
 }
 
 .main #content.hide_userlist{
 	right:0;
 }
 
+#chat #footer_container{
+	background:none;
+	font-size:12px;
+	height:auto;
+}
+
+#chat #footer{
+	padding:0 41px 4px 3px;
+}
+
+
 .main #share_links{
 	position:absolute;
-	bottom:2em;
+	bottom:0;
 	right:0;
 	width:181px;
 	height:3.4em;
@@ -24,8 +37,7 @@
 	bottom:0;
 	left:0;
 	right:0;
-	color:#888;
-	border-top: solid 1px #ccc;
+	color:#444;
 	height:3.4em;
 }
 
@@ -36,10 +48,10 @@ body .main #share_links,
 
 .main #input .container{
 	position:absolute;
-	top:6px;
+	top:7px;
 	left:10.4em;
-	bottom:14px;
-	right:18px;
+	bottom:7px;
+	right:187px;
 	overflow:visible;
 }
 
@@ -60,14 +72,14 @@ body .main #share_links,
 #input #input_overlay{
 	display:block;
 	-vendor-border-radius:5px;
-	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 10px;
+	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 8px;
 	padding:4px 7px;	
 	font-size:1em;
 	position:absolute;
 	top:0;
 	left:0;
-	height:100%;
-	width:100%;
+	bottom:0;
+	right:0;
 }
 
 #input #input_overlay{
@@ -85,8 +97,8 @@ a.try_now{
 	position:absolute;
 	top:0;
 	left:0;
-	right:0px;
-	bottom:3.4em;
+	right:181px;
+	bottom:0;
 	background-color:#f7f7f7;
 }
 
