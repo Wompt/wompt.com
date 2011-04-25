@@ -117,6 +117,11 @@ App.prototype = {
 			res.redirect('/chat/' + req.body.channel);
 		});
 		
+		exp.post("/unlisted/new", function(req, res){
+			var name = wompt.Auth.random_string(10);
+			res.redirect('/unlisted/' + name);
+		});
+		
 		if(wompt.env.force_sign_in){
 			exp.get("/users/force_sign_in/:num", function(req, res){
 				var num = parseInt(req.params.num);
