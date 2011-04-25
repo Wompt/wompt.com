@@ -26,7 +26,6 @@ e.middleware     = {
 };
 e.monitors       = {
 	 PopularChannels: require('./monitors/popular_channels.js')
-	,TwitterTopics:   require('./monitors/twitter_topics.js')
 	,AppState:        require('./monitors/app_state_monitor.js')
 }
 e.loggers        = {
