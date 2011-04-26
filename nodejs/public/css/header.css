@@ -4,7 +4,7 @@
 	top:0px;
 	right:0px;
 	left:0px;
-	z-index:1;
+	z-index:2;
 	background-position:top left;
 }
 
@@ -35,13 +35,24 @@
 	color: rgba(255,255,255,1);	
 }
 
-
 #logo a img{
 	border:0;
 	vertical-align: top;
 	margin-right:10px;
 }
 
+.invite {
+	font-size:14px;
+	vertical-align:middle;
+	margin-left:10px;
+	font-weight:normal;
+}
+
+.invite > .fb{
+	top:2px;
+	vertical-align:middle;
+	height:28px;
+}
 
 #top .room_name{
 	font-size: 1.3em;
