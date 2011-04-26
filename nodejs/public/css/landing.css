@@ -1,10 +1,12 @@
 #landing {
-	margin: 0 auto 1em auto;
-	padding:0 1.5em;
+	margin: 0 auto;
+	padding:0;
 }
 
 #landing .main {
-	margin-top:10px;
+	margin-top:0px;
+	position:relative;
+	min-height:100%;
 }
 
 #landing #top{
@@ -16,7 +18,7 @@
 
 #landing .container{
 	max-width:770px;
-	margin:0 auto 4em auto;
+	margin:0 auto;
 }
 
 #landing .group {
@@ -90,6 +92,15 @@
 	font-weight: bold;
 	text-shadow: rgba(0, 0, 0, 0.6) 0 0 25px;
 	margin: 0 auto;
+}
+
+#landing .narrow .wompt{
+	font-size:30px;
+}
+
+#landing .narrow .wompt > .name,
+#landing .narrow .wompt > .sub{
+	top:45px;
 }
 
 #landing .w {

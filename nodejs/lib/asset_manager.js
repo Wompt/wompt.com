@@ -43,7 +43,12 @@ var assetManagerGroups = {
 		, 'debug': !wompt.env.minify_assets
 		, 'stale': wompt.env.perform_caching		
 		, 'files': [
-			'/public/js/sign_in.js'
+			'/public/external/bootstrap.js'
+			, '/public/external/events.js'
+			, '/public/js/sign_in.js'
+			, '/public/js/ui.js'
+			, '/public/js/ui.layout.js'
+			, '/public/js/landing.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
