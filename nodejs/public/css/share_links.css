@@ -1,14 +1,15 @@
 #share_links a{
 	display:inline-block;
-	height:32px;
-	width:32px;
+	height:28px;
+	width:28px;
 	background:transparent center no-repeat;
 	vertical-align:middle;
-	margin-bottom:5px
+	margin-bottom:5px;
+	margin-right:2px;
 }
 
 #share_links > .pad{
-	padding-top:9px;
+	padding-top:3px;
 	color:white;
 	font-size:12px;
 	font-weight:bold;

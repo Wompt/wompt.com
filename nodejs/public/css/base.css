@@ -1,10 +1,21 @@
 body{
-	background-color: #f5f5f5;
-	color: #444;
+	color: white;
 	font-family: helvetica, arial, freesans, clean, sans-serif;
 	font-size:1em;
 	margin: 0px;
 	min-height: 100%;
+	background: #ff7936 top center repeat;
+}
+
+#bg{
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-image: data-url(/images/structure/striped_179_thick.png), data-url(/images/structure/striped_97_multi.png), data-url(/images/structure/striped_71_thin.png), data-url(/images/structure/striped_61x67_multi.png);
+	z-index:-1;
+	opacity:0.5;
 }
 
 a{

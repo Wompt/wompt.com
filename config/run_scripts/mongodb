@@ -1,0 +1,12 @@
+#!/bin/sh
+# Mongodb
+
+case $1 in
+	start)
+		sudo -u mongodb /usr/bin/mongod --quiet --fork --dbpath /var/lib/mongodb/ --logpath /var/lib/mongodb/mongodb.log --logappend --bind_ip 127.0.0.1
+		 ;;
+	 stop)  
+		 kill `cat /var/lib/mongodb/mongod.lock` ;;
+	 *)  
+		 echo "usage: wompt {start|stop}" ;;
+esac

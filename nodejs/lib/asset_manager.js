@@ -43,7 +43,12 @@ var assetManagerGroups = {
 		, 'debug': !wompt.env.minify_assets
 		, 'stale': wompt.env.perform_caching		
 		, 'files': [
-			'/public/js/sign_in.js'
+			'/public/external/bootstrap.js'
+			, '/public/external/events.js'
+			, '/public/js/sign_in.js'
+			, '/public/js/ui.js'
+			, '/public/js/ui.layout.js'
+			, '/public/js/landing.js'
 		]
 	}, 'all_css': {
 		'route': /\/css\/all_[0-9]+\.css/
@@ -54,6 +59,7 @@ var assetManagerGroups = {
 		, 'files': [
 			  'reset.css'
 			, 'base.css'
+			, 'black_fade.css'
 			, 'landing.css'
 			, 'header.css'
 			, 'footer.css'
@@ -65,18 +71,18 @@ var assetManagerGroups = {
 		, 'preManipulate': {
 			// Regexp to match user-agents including MSIE.
 			'MSIE': [
-				assetHandler.yuiCssOptimize
-				, assetHandler.fixVendorPrefixes
+				assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
 				, customHandlers.replaceRgbaWithRgb
 				, assetHandler.stripDataUrlsPrefix
+				, assetHandler.yuiCssOptimize
 			],
 			// Matches all (regex start line)
 			'^': [
-				assetHandler.yuiCssOptimize
-				, assetHandler.fixVendorPrefixes
+				assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
 				, assetHandler.replaceImageRefToBase64(pub)
+				, assetHandler.yuiCssOptimize				
 			]
 		}
 	},
@@ -100,7 +106,7 @@ var exporting = {
 				var group = assetManagerGroups[name+'_js'];
 				return group.files.map(function(file){
 					return exporting.helpers.scriptTag(file.replace(/^\/[^\/]+\//, '/')); // strip the first directory  /public/blah -> /blah
-				}).join();
+				}).join('');
 			}else
 				return exporting.helpers.scriptTag("/js/" + name + "_" + exporting.middleware.cacheTimestamps[name+'_js'] + ".js");
 		},

@@ -25,7 +25,7 @@ wompt.mongoose.model('User',{
 	indexes : [
 		 'email'
 		,'sessions.token',
-		,'authentications'
+		,{'authentications.uid':1,'authentications.provider':1}
 	],
 	
 	methods: {

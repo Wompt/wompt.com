@@ -13,8 +13,6 @@
 		curl http://npmjs.org/install.sh | sudo sh
 
 ### Install packages ###
-		npm install express
-		npm install jade
 		npm install hoptoad-notifier
 		
 ### Deploying ###
@@ -27,6 +25,10 @@ We have monit setup to monitor both processes, so the easiest way is:
 		sudo monit restart wompt
 		sudo monit stop wompt
 		sudo monit start wompt
+		
+You can also manually start wompt and wompt_auth using the scripts below:
+		~/www/wompt/shared/wompt start|stop
+		~/www/wompt/shared/wompt_auth start|stop
 		
 But starting and stoping can be done from your dev machine with
 the following commands.  These can be executed from anywhere inside the app

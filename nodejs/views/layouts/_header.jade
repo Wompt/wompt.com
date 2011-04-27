@@ -6,7 +6,7 @@
 		- if(w.user.doc)
 			span #{w.user.doc.email || w.user.doc.name}
 			| &nbsp;|&nbsp;
-			a(href="/users/sign_out", title="Logout of Wompt") sign out
+			a(href="/user/sign_out", title="Logout of Wompt") sign out
 		- else
 			| &nbsp;sign in using:
 			<a href="/auth/google"   class='popup' title="Sign in using Google">google</a> &nbsp;|&nbsp;
@@ -18,7 +18,13 @@
 				<a href="/users/force_sign_in/2" title="Force Sign in as the second user">user 2</a>
 	#logo.top_left
 		a(href="/", title="Wompt.com", target="_blank")
-			| Wompt
+			span#wompt Wompt
 		- if(w.channel)
-			| : #{w.channel}
+			- if(w.channel.length > 20)
+				span(title=w.channel)= w.channel.substr(0,20) + '...';
+			- else
+				=w.channel
+			span.invite(title='Invite your friends to this room') Invite people:&nbsp;
+				<fb:send href="http://#{w.host + w.url}" class='fb'></fb:send>
+				<fb:like href="www.facebook.com%2Fapps%2Fapplication.php%3Fid%3D181725458505189" send="false" layout="button_count" class="fb" show_faces="false"></fb:like>
 	.clear

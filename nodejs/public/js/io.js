@@ -2,6 +2,7 @@ function IO(){
 	var secure = window.location.protocol.match(/https/);
 	var socket = this.socket = new io.Socket(window.location.hostname, {
 			secure: secure,
+			transports:['websocket', 'flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling'],
 			reconnectionDelay: 2000 + Math.random() * 2000
 		});
 
