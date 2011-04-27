@@ -19,7 +19,7 @@ function App(options){
 	this.channels =	this.chatNamespace('chat', {logged: true, allowIframe: true});
 
 	// other namespaces
-	this.chatNamespace('unlisted', {logged: true});
+	this.chatNamespace('unlisted', {logged: true, allowIframe: true});
 
 	
 	this.client_connectors = new wompt.ClientConnectors();
