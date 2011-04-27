@@ -30,7 +30,7 @@
 	font-weight:700;
 }
 
-#logo a{
+#logo a.W{
 	background:no-repeat top left data-url(/images/logo/white_30.png);
 	padding-left: 38px;
 	padding-bottom:5px;
