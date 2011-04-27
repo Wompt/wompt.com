@@ -25,7 +25,7 @@ wompt.mongoose.model('User',{
 	indexes : [
 		 'email'
 		,'sessions.token',
-		,'authentications'
+		,{'authentications.uid':1,'authentications.provider':1}
 	],
 	
 	methods: {
@@ -35,6 +35,16 @@ wompt.mongoose.model('User',{
 		
 		signed_up: function(){
 			return !!this.email || !!this.name;
+		},
+		
+		authentication_for: function(provider){
+			var auths = this.authentications ;
+			if(!auths) return null;
+			var auth;
+			for(var i=0; auth=auths[i]; i++){
+				if(auth['provider'] == provider) return auth;
+			}
+			return null;
 		},
 		
 		is_admin: function(){

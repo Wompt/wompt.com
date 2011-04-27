@@ -29,8 +29,7 @@ function App(options){
 	
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
-	this.twitterTopics = new wompt.monitors.TwitterTopics(this.channels);
-	
+
 	
 	this.appStateMonitor = new wompt.monitors.AppState(this, wompt.env.logs.monitor);
 	this.appStateLogger = new wompt.loggers.AppStateLogger(wompt.util.mergeCopy(wompt.env.logs.monitor, {
@@ -99,14 +98,35 @@ App.prototype = {
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
 					app:me,
+					jquery: true,
+					page_js: 'landing',
+					page_name:'landing',
 					subtitle: me.choose_subtitle()
 				})
 			});
 		});
-
+		
+		/*
+		exp.get("/users/:id", function(req, res){
+			wompt.User.find({_id: req.params.id}).first(function(user){
+				if(!user) return res.send("", 404);
+				
+				res.render('profile', {
+					locals: me.standard_page_vars(req, {user:user}),
+					layout: 'layouts/plain'
+				});
+			});
+		});		
+		*/
+		
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + req.body.channel);
+		});
+		
+		exp.get("/unlisted/new", function(req, res){
+			var name = wompt.Auth.random_string(10);
+			res.redirect('/unlisted/' + name);
 		});
 		
 		if(wompt.env.force_sign_in){
@@ -121,7 +141,7 @@ App.prototype = {
 			});
 		}
 
-		exp.get("/users/sign_out", function(req, res){
+		exp.get("/user/sign_out", function(req, res){
 			wompt.Auth.sign_out_user(req, res);
 			res.redirect('/');
 		});
@@ -142,7 +162,7 @@ App.prototype = {
 			url: req.url,
 			user: req.meta_user,
 			footer: true,
-			host: req.headers.host.split(':')[0],
+			host: req.headers.host,
 			config: this.config
 		};
 		
@@ -267,6 +287,7 @@ App.prototype = {
 				connector_id: connector.id,
 				url: req.url,
 				jquery: true,
+				page_name: 'chat',
 				page_js: 'channel'
 			});
 			

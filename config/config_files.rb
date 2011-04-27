@@ -22,6 +22,7 @@ namespace :deploy do
     if deployment == 'production'
       process_erb_file_and_upload('config/monit/wompt')
       process_erb_file_and_upload('config/monit/wompt_auth')
+      process_erb_file_and_upload('config/monit/mongodb')
     else
       logger.info "Skipping monit config because this is not the live production app"      
     end

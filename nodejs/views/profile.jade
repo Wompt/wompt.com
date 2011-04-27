@@ -1,0 +1,8 @@
+.name= w.user.name
+.providers
+	- each provider in ['google', 'facebook']
+		- var auth = w.user.authentication_for(provider);
+		- if(auth)
+			.provider
+				<div class='logo #{provider}'></div>
+				.title= provider

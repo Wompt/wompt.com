@@ -1,0 +1,9 @@
+check process mongodb with pidfile /var/lib/mongodb/mongod.lock 
+	group database 
+	start program = "<%= shared_path %>/mongodb start" with timeout 3 seconds 
+	stop program = "<%= shared_path %>/mongodb stop"  with timeout 5 seconds 
+	if failed host 127.0.0.1 port 28017 protocol http 
+		and request "/"
+		with timeout 5 seconds
+		then restart 
+	if 5 restarts within 5 cycles then timeout

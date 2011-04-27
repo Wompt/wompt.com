@@ -29,6 +29,10 @@ MetaUser.prototype.authenticated = function(){
 	return !!this.doc;
 }
 
+MetaUser.prototype.authentication_for = function(provider){
+	return this.doc && this.doc.authentication_for(provider);
+}
+
 MetaUser.prototype.new_session = function(session){
 	this.clients.broadcast({
 		action: 'new_session'		

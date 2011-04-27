@@ -1,21 +1,21 @@
 #footer_container {
 	position:fixed;
+	z-index:1;
 	bottom:0px;
 	left:0px;
 	right:0px;
 	height:2em;
-	background-color: rgb(235,235,235);
+	background-position:top left;	
 }
 
 #footer {
 	padding:0.6em 1em;
 	font-size: 0.9em;
 	font-weight: 700;
-	color: #555;
-	text-align: center;
+	color: white;
 }
 
 #footer a{
 	margin: 0px 5px;
-	color: #555;
+	color: white;
 }

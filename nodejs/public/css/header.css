@@ -1,15 +1,17 @@
 #top{
-	background:data-url(/images/structure/top_back.png) repeat-x top left;
-	height:45px;
+	height:40px;
 	position:fixed;
 	top:0px;
 	right:0px;
 	left:0px;
-	z-index:1;
+	z-index:2;
+	background-position:top left;
 }
 
 #toplinks {
-	float:right;
+	position:absolute;
+	right:0;
+	top:0;
 	margin:5px 5px 0 0;
 	color:rgba(255,255,255,0.7);
 	margin-top:10px;
@@ -24,18 +26,17 @@
 #top #logo{
 	float: left;
 	margin:5px 20px 0px 5px;
-	color: rgba(255,255,255,0.8);
-	font-size:1.6em;
+	font-size:1.4em;
 	font-weight:700;
 }
 
 #logo a{
-	background: data-url(/images/logo/white_30.png) no-repeat center left;
+	background:no-repeat top left data-url(/images/logo/white_30.png);
 	padding-left: 38px;
+	padding-bottom:5px;
 	text-decoration:none;
-	color: rgba(255,255,255,0.5);	
+	color: rgba(255,255,255,1);	
 }
-
 
 #logo a img{
 	border:0;
@@ -43,6 +44,18 @@
 	margin-right:10px;
 }
 
+.invite {
+	font-size:14px;
+	vertical-align:middle;
+	margin-left:10px;
+	font-weight:normal;
+}
+
+.invite > .fb{
+	top:2px;
+	vertical-align:middle;
+	height:28px;
+}
 
 #top .room_name{
 	font-size: 1.3em;
