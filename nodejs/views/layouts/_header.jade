@@ -24,7 +24,7 @@
 				span(title=w.channel)= w.channel.substr(0,20) + '...';
 			- else
 				=w.channel
-		span.invite(title='Invite your friends to this room') Invite people:&nbsp;
-			<fb:send href="http://#{w.host + w.url}" class='fb'></fb:send>
-			<fb:like href="www.facebook.com%2Fapps%2Fapplication.php%3Fid%3D181725458505189" send="false" layout="button_count" class="fb" show_faces="false"></fb:like>
+			span.invite(title='Invite your friends to this room') Invite people:&nbsp;
+				<fb:send href="http://#{w.host + w.url}" class='fb'></fb:send>
+				<fb:like href="www.facebook.com%2Fapps%2Fapplication.php%3Fid%3D181725458505189" send="false" layout="button_count" class="fb" show_faces="false"></fb:like>
 	.clear
