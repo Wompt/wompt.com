@@ -1,5 +1,6 @@
 check process wompt
 	with pidfile <%= shared_path %>/pids/wompt.pid
+	depends on wompt_auth
 	start "<%= shared_path %>/wompt start" with timeout 3 seconds  # gives it 3 sec to start up
 	stop "<%= shared_path %>/wompt stop" with timeout 1 seconds  # gives it 1 sec to shut down
 	if failed host 127.0.0.1 port 16999 protocol HTTP
