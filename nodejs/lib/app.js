@@ -119,7 +119,7 @@ App.prototype = {
 			res.redirect('/chat/' + req.body.channel);
 		});
 		
-		exp.post("/unlisted/new", function(req, res){
+		exp.get("/unlisted/new", function(req, res){
 			var name = wompt.Auth.random_string(10);
 			res.redirect('/unlisted/' + name);
 		});
