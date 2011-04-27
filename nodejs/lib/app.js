@@ -16,14 +16,11 @@ function App(options){
 	this.express = this.create_express_server();
 
 	// default namespace
-	this.channels =	this.chatNamespace('chat', {logged: true});
+	this.channels =	this.chatNamespace('chat', {logged: true, allowIframe: true});
 
 	// other namespaces
 	this.chatNamespace('unlisted', {logged: true});
-	this.chatNamespace('embedded', {
-		logged: true,
-		allowIframe: true
-	});
+
 	
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
