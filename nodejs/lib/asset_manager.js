@@ -1,19 +1,41 @@
-var wompt = require('./includes');
-var root = wompt.env.root;
-var pub = wompt.env.public_dir;
-var customHandlers = require('./asset_handlers.js');
+var wompt = require('./includes'),
+root = wompt.env.root,
+pub = wompt.env.public_dir,
+customHandlers = require('./asset_handlers.js'),
+assetManager = require('connect-assetmanager'),
+assetHandler = require('connect-assetmanager-handlers'),
+util = require('./util'),
 
+cssPreManipulators = {
+	// Regexp to match user-agents including MSIE.
+	'MSIE': [
+		assetHandler.fixVendorPrefixes
+		, assetHandler.fixGradients
+		, customHandlers.replaceRgbaWithRgb
+		, assetHandler.stripDataUrlsPrefix
+		, assetHandler.yuiCssOptimize
+	],
+	// Matches all (regex start line)
+	'^': [
+		assetHandler.fixVendorPrefixes
+		, assetHandler.fixGradients
+		, assetHandler.replaceImageRefToBase64(pub)
+		, assetHandler.yuiCssOptimize				
+	]
+},
 
-var assetManager = require('connect-assetmanager');
-var assetHandler = require('connect-assetmanager-handlers');
+defaultOptions = 	{
+	'debug': !wompt.env.minify_assets
+	, 'stale': wompt.env.perform_caching
+},
+mc = util.mergeCopy
+;
 
 var assetManagerGroups = {
-	'channel_js': {
+	'channel_js': mc(defaultOptions,{
 		'route': /\/js\/channel_[\d]+.js/
 		, 'path': root
 		, 'dataType': 'javascript'
-		, 'debug': !wompt.env.minify_assets
-		, 'stale': wompt.env.perform_caching		
 		, 'files': [
 			'/public/external/bootstrap.js'
 			, '/public/external/events.js'
@@ -36,12 +58,10 @@ var assetManagerGroups = {
 			, '/public/js/ui.fb.share.js'
 			, '/public/js/sign_in.js'
 		]
-	},	'landing_js': {
+	}),	'landing_js': mc(defaultOptions,{
 		'route': /\/js\/landing_[\d]+.js/
 		, 'path': root
 		, 'dataType': 'javascript'
-		, 'debug': !wompt.env.minify_assets
-		, 'stale': wompt.env.perform_caching		
 		, 'files': [
 			'/public/external/bootstrap.js'
 			, '/public/external/events.js'
@@ -50,12 +70,10 @@ var assetManagerGroups = {
 			, '/public/js/ui.layout.js'
 			, '/public/js/landing.js'
 		]
-	}, 'all_css': {
+	}), 'all_css': mc(defaultOptions,{
 		'route': /\/css\/all_[0-9]+\.css/
 		, 'path': pub + '/css/'
 		, 'dataType': 'css'
-		, 'debug': !wompt.env.minify_assets
-		, 'stale': wompt.env.perform_caching
 		, 'files': [
 			  'reset.css'
 			, 'base.css'
@@ -68,24 +86,7 @@ var assetManagerGroups = {
 			, 'support_pages.css'
 			, 'share_links.css'
 		]
-		, 'preManipulate': {
-			// Regexp to match user-agents including MSIE.
-			'MSIE': [
-				assetHandler.fixVendorPrefixes
-				, assetHandler.fixGradients
-				, customHandlers.replaceRgbaWithRgb
-				, assetHandler.stripDataUrlsPrefix
-				, assetHandler.yuiCssOptimize
-			],
-			// Matches all (regex start line)
-			'^': [
-				assetHandler.fixVendorPrefixes
-				, assetHandler.fixGradients
-				, assetHandler.replaceImageRefToBase64(pub)
-				, assetHandler.yuiCssOptimize				
-			]
-		}
-	},
+		, 'preManipulate': cssPreManipulators
 	'admin_socket_io': { // to support multiple
 		'route': /\/Socket.IO\/socket\.io\.js/
 		, 'path': root
