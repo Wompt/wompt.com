@@ -141,8 +141,10 @@ UI.once('init', function(){
 	
 	function cancel(){
 		if(completing){
-			input.val(info.begin + info.middle + info.end);
-			start_p(end_p(info.begin.length + info.middle.length));
+			if(info.match){ // Only replace text and change selection if there was an actual match
+				input.val(info.begin + info.middle + info.end);
+				start_p(end_p(info.begin.length + info.middle.length));
+			}
 			stop();
 		}
 	}	
