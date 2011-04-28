@@ -34,6 +34,11 @@ module.exports = {
 		}
 	}
 	
+	/* google analytics */
+	, ga: {
+		use: true
+	}
+	
 	, redirectWww: false
 	, redirectWwwToPort: 16867
 }

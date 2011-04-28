@@ -10,4 +10,8 @@ module.exports = {
 			disabled:true
 		}
 	}
+	
+	, ga: {
+		use: false
+	}	
 }
