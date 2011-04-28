@@ -87,6 +87,15 @@ var assetManagerGroups = {
 			, 'share_links.css'
 		]
 		, 'preManipulate': cssPreManipulators
+	}), 'embedd_css': mc(defaultOptions,{
+		'route': /\/css\/embedd_[0-9]+\.css/
+		, 'path': pub + '/css/'
+		, 'dataType': 'css'
+		, 'files': [
+			'embedd.css'
+		]
+		, 'preManipulate': cssPreManipulators
+	}),	
 	'admin_socket_io': { // to support multiple
 		'route': /\/Socket.IO\/socket\.io\.js/
 		, 'path': root

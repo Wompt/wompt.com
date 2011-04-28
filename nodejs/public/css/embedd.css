@@ -1,0 +1,25 @@
+.main #content{
+	top: 0px;
+}
+.main #user_list{
+	top: 40px;
+}
+
+#top{
+	left:auto;
+	width:180px;
+}
+
+#chat #wompt{
+	display:inline;
+}
+
+a.popout{
+	background:center no-repeat data-url(/images/popout.png);
+	height:20px;
+	width:20px;
+	display:block;
+	position:absolute;
+	right:10px;
+	top:7px;
+}
