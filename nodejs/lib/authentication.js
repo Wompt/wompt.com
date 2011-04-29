@@ -6,7 +6,7 @@ function Auth(config){
 	var me = this;
 	this.COOKIE_KEY = config.cookie_key || '_wompt_auth';
 	this.ONE_TIME_TOKEN_COOKIE_KEY = config.one_time_token_cookie_key || 'wompt_auth_one_time_token';
-	this.TOKEN_VALID_DURATION = (14 * 24 * 60 * 60 * 1000);
+	this.TOKEN_VALID_DURATION = (180 * 24 * 60 * 60 * 1000); // ~6 months
 		
 	
 	this.get_user_from_token = function(token, callback){
