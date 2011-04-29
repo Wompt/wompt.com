@@ -39,6 +39,11 @@ module.exports = {
 		use: true
 	}
 	
+	, socketIO: {
+		serverOptions: {
+		}
+	}
+	
 	, redirectWww: false
 	, redirectWwwToPort: 16867
 }
