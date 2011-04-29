@@ -16,37 +16,39 @@ function MetaUser(doc){
 	});	
 };
 
-
-MetaUser.prototype.id = function(){
-	return this.doc ? this.doc._id.toJSON() : null;
+MetaUser.prototype = {
+	id: function(){
+		return this.doc ? this.doc._id.toJSON() : null;
+	},
+	
+	touch: function(){
+		this.touched = new Date();
+	},
+	
+	authenticated: function(){
+		return !!this.doc;
+	},
+	
+	authentication_for: function(provider){
+		return this.doc && this.doc.authenticationFor(provider);
+	},
+	
+	new_session: function(session){
+		this.clients.broadcast({
+			action: 'new_session'		
+		});
+	},
+	
+	end_session: function(session){
+		this.clients.broadcast({
+			action: 'end_session'
+		});
+		this.clients.each(function(client, index){
+			if(client.meta_data && client.meta_data.token == session.token)
+				client._onDisconnect();
+		});
+	}
 }
 
-MetaUser.prototype.touch = function(){
-	this.touched = new Date();
-}
-
-MetaUser.prototype.authenticated = function(){
-	return !!this.doc;
-}
-
-MetaUser.prototype.authentication_for = function(provider){
-	return this.doc && this.doc.authentication_for(provider);
-}
-
-MetaUser.prototype.new_session = function(session){
-	this.clients.broadcast({
-		action: 'new_session'		
-	});
-}
-
-MetaUser.prototype.end_session = function(session){
-	this.clients.broadcast({
-		action: 'end_session'
-	});
-	this.clients.each(function(client, index){
-		if(client.meta_data && client.meta_data.token == session.token)
-			client._onDisconnect();
-	});
-}
 
 module.exports = MetaUser
