@@ -1,8 +1,18 @@
-.name= w.user.name
-.providers
-	- each provider in ['google', 'facebook']
-		- var auth = w.user.authentication_for(provider);
-		- if(auth)
-			.provider
-				<div class='logo #{provider}'></div>
-				.title= provider
+link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", type="text/css", media="screen")
+.profile
+	#name= w.profileUser.name
+	.providers
+		- each provider in ['google', 'facebook', 'github']
+			- var auth = w.profileUser.authentication_for(provider)
+			- if(auth)
+				.provider
+					- var url = w.profileUser.provider_attribute(provider, 'profile')
+					a.link(href=url)
+						.title= provider
+						div(class="logo " + provider)
+			- else if(false /* this is my profile page */)
+				.provider.missing
+					a.link(href='/auth/google', class='popup')
+						.title= "add: " + provider
+						div(class="logo " + provider)						
+		.clear

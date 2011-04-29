@@ -87,6 +87,14 @@ var assetManagerGroups = {
 			, 'share_links.css'
 		]
 		, 'preManipulate': cssPreManipulators
+	}), 'profile_css': mc(defaultOptions,{
+		'route': /\/css\/profile_[0-9]+\.css/
+		, 'path': pub + '/css/'
+		, 'dataType': 'css'
+		, 'files': [
+			'profile.css'
+		]
+		, 'preManipulate': cssPreManipulators
 	}), 'embedd_css': mc(defaultOptions,{
 		'route': /\/css\/embedd_[0-9]+\.css/
 		, 'path': pub + '/css/'

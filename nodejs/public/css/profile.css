@@ -1,0 +1,58 @@
+.profile{
+	margin:20px;
+	background:rgba(255,255,255,0.8);
+	padding:10px;
+	text-align:center;
+	-vendor-border-radius:20px;	
+}
+
+.provider{
+	margin:10px;
+	-vendor-border-radius:20px;
+	float:left;
+	text-align:center;
+	-vendor-transition:background-color 0.3s ease;
+}
+
+.provider:hover{
+	background-color:rgba(0,0,0,0.1);
+}
+
+.profile #name{
+	font-size:1.5em;
+	color:black;
+}
+
+.profile .providers{
+	margin-top:20px;
+}
+
+.provider a.link{
+	color:black;
+	font-size:20px;
+	text-decoration:none;
+	padding:15px;
+	display:block;
+}
+
+.provider .logo{
+	background-position:center;
+	background-repeat:no-repeat;
+	width:128px;
+	height:128px;
+	margin:0 auto;
+}
+
+.provider.missing{
+	opacity:0.3;
+}
+
+.logo.google{
+	background-image:url(/images/external/google_128.png);
+}
+.logo.facebook{
+	background-image:url(/images/external/facebook_128.png);
+}
+.logo.github{
+	background-image:url(/images/external/github_128.png);
+}

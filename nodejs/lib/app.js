@@ -101,18 +101,11 @@ App.prototype = {
 			});
 		});
 		
-		/*
 		exp.get("/users/:id", function(req, res){
 			wompt.User.find({_id: req.params.id}).first(function(user){
-				if(!user) return res.send("", 404);
-				
-				res.render('profile', {
-					locals: me.standard_page_vars(req, {user:user}),
-					layout: 'layouts/plain'
-				});
+				profilePage(req, res, user);
 			});
 		});		
-		*/
 		
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
@@ -147,6 +140,17 @@ App.prototype = {
 				layout: 'admin/layout'
 			});
 		});
+		
+		function profilePage(req, res, user){
+			if(!user) return res.send("", 404);
+			
+			res.render('profile', {
+				locals: me.standard_page_vars(req, {
+					app:me,
+					profileUser: user
+				})
+			});
+		}
 
 		return exp;
 	},
