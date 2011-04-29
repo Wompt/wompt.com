@@ -39,6 +39,10 @@ MetaUser.prototype = {
 		});
 	},
 	
+	profile_url: function(){
+		return "/users/" + this.id();
+	},
+	
 	end_session: function(session){
 		this.clients.broadcast({
 			action: 'end_session'

@@ -88,17 +88,13 @@ App.prototype = {
 			}else next();
 		});
 		
-		exp.get("/", function(req, res){
-			wompt.Auth.get_or_set_token(req, res);
-			res.render('index', {
-				locals: me.standard_page_vars(req, {
-					app:me,
-					jquery: true,
-					page_js: 'landing',
-					page_name:'landing',
-					subtitle: me.choose_subtitle()
-				})
-			});
+		exp.get("/", landingPage);
+
+		exp.get("/profile", function(req, res){
+			if(req.meta_user && req.meta_user.authenticated())
+				res.redirect('/users/' + req.meta_user.id())
+			else
+				res.redirect('/');
 		});
 		
 		exp.get("/users/:id", function(req, res){
@@ -140,6 +136,19 @@ App.prototype = {
 				layout: 'admin/layout'
 			});
 		});
+		
+		function landingPage(req, res){
+			wompt.Auth.get_or_set_token(req, res);
+			res.render('index', {
+				locals: me.standard_page_vars(req, {
+					app:me,
+					jquery: true,
+					page_js: 'landing',
+					page_name:'landing',
+					subtitle: me.choose_subtitle()
+				})
+			});
+		}
 		
 		function profilePage(req, res, user){
 			if(!user) return res.send("", 404);
