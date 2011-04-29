@@ -98,9 +98,15 @@ App.prototype = {
 		});
 		
 		exp.get("/users/:id", function(req, res){
-			wompt.User.find({_id: req.params.id}).first(function(user){
-				profilePage(req, res, user);
-			});
+			if(req.params.id && req.user && req.meta_user.id() == req.params.id){
+				//User record is already loaded but auth middleware, no need to load again
+				profilePage(req, res, req.user);
+			}
+			else{
+				wompt.User.find({_id: req.params.id}).first(function(user){
+					profilePage(req, res, user);
+				});
+			}
 		});		
 		
 		exp.post("/", function(req, res){
