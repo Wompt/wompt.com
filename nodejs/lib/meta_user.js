@@ -43,6 +43,13 @@ MetaUser.prototype = {
 		return "/users/" + this.id();
 	},
 	
+	same_user: function(u){
+		if(u.id == MetaUser.prototype.id) // Check if this is a MetaUser
+			return u == this || (this.authenticated() && u.id() == this.id());
+		else
+			return this.doc && this.doc.same_user(u);
+	},
+	
 	end_session: function(session){
 		this.clients.broadcast({
 			action: 'end_session'

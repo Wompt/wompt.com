@@ -1,5 +1,9 @@
+.buffer{
+	padding:20px;
+}
+
 .profile{
-	margin:20px auto;
+	margin:0px auto 30px auto;
 	padding:20px;
 	text-align:left;
 	color:black;
@@ -24,17 +28,18 @@
 
 .profile,
 .profile .provider{
-	-vendor-border-radius:20px;
+	-vendor-border-radius:10px;
 }
 .provider{
 	margin-right:10px;
 	float:left;
 	text-align:center;
-	-vendor-transition:background-color 0.3s ease;
+	-vendor-transition: 0.3s ease;
+	transition-property:background-color opacity;
 }
 
 .provider:hover{
-	background-color:rgba(0,0,0,0.1);
+	background-color:#f3f3f3;
 }
 
 .provider a.link{
@@ -53,9 +58,23 @@
 }
 
 .provider.missing{
+	-vendor-box-shadow: rgb(100,100,100) 0 0 10px;
 	opacity:0.3;
 }
+.provider.missing .title{
+	color:black;
+}
 
+.provider.missing:hover{
+	opacity:1;
+	background-color:white;
+}
+
+.logo.missing{
+	font-size:110px;
+	color:#fff;
+	text-shadow: rgb(0,0,0) 0 0 15px;
+}
 .logo.google{
 	background-image:url(/images/external/google_128.png);
 }

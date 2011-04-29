@@ -50,6 +50,10 @@ wompt.mongoose.model('User',{
 			return attr_getter && attr_getter.call(info);
 		},
 		
+		same_user: function(u){
+			return u && (u == this || this._id.id == u._id.id);
+		},
+		
 		is_admin: function(){
 			return (this.email in {
 				'dbeardsl@gmail.com': true,
