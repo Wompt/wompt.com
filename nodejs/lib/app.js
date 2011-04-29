@@ -189,7 +189,7 @@ App.prototype = {
 		if(this.socket) return;
 		var app = this;
 		
-		this.socket = SocketIO.listen(this.express);
+		this.socket = SocketIO.listen(this.express, this.config.socketIO.serverOptions);
 		this.socket.on('connection', function(client){
 			app.new_connection(client);
 		}); 		

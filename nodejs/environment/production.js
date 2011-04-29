@@ -19,6 +19,13 @@ module.exports = {
 		,channels:{
 			root: path.normalize(shared + '/log/channels')
 		}
-	}	
+	}
+	
+	, socketIO: {
+		serverOptions: {
+			// Port to serve the flash policy doc from, iptables maps port 843 -> 16843
+			flashPolicyPort: 16843
+		}
+	}
 	, redirectWww	: true
 }
