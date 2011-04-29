@@ -47,6 +47,13 @@ wompt.mongoose.model('User',{
 			return null;
 		},
 		
+		provider_attribute: function(provider, attr){
+			var info       = this.authentication_for(provider),
+			provider_info  = info          && providerAuthInfo[provider],
+			attr_getter    = provider_info && provider_info[attr];
+			return attr_getter && attr_getter.call(info);
+		},
+		
 		is_admin: function(){
 			return (this.email in {
 				'dbeardsl@gmail.com': true,
@@ -58,3 +65,22 @@ wompt.mongoose.model('User',{
 
 module.exports = db.model('User');
 
+var providerAuthInfo = {
+	facebook: {
+		profile: function(){
+			return get_urls_hash(this).Facebook || "http://facebook.com/profile.php?id=" + this.uid;
+		}
+	},
+	
+	github: {
+		profile: function(){
+			var url = get_urls_hash(this).GitHub;
+			return url || "http://facebook.com/profile.php?id=" + this.uid;
+		}
+	}
+}
+
+function get_urls_hash(auth){
+	var i;
+	return (i = auth.info) && (i = i.user_info) && (i = i.urls) || {};
+}
