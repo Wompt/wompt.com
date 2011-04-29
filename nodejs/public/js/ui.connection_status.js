@@ -71,6 +71,25 @@ UI.once('init', function(){
 			}
 		});
 	}
+		
+	function reauthenticate(){
+		if(authenticating) return;
+		if(reconnectTimer) clearInterval(reconnectTimer);
+		connectionStatus('Authenticating', true);
+		authenticating = true;
+		var token = Util.cookies.get('wompt_auth')
+		if(token){
+			socket.send({
+				channel: channel
+				,namespace: namespace
+				,action: 'join'
+				,token: token
+				,last_timestamp: UI.Messages.list.lastTimeStamp()
+			});
+			connectionStatus('Connected');
+			authenticating = false;
+		} else authFailed();
+	}
 	
 	function authFailed(text){
 		authenticating = false;

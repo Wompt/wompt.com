@@ -31,10 +31,16 @@ Util.Text = (function Text(){
 })()
 
 EventEmitter.prototype.muteEvents = function(fn){
-	var e = this._events;
-	this._events = null;
+	this.emit = function(){};
 
 	fn();
 	
-	this._events = e;
+	delete this.emit;
 }
+
+Util.cookie = {
+	get: function(name){
+		var val;
+		return (val = new RegExp('(?:^|; )' + encodeURIComponent(name) + '=([^;]*)').exec(document.cookie)) ? decodeURIComponent(val[1]) : null;
+	}
+};
