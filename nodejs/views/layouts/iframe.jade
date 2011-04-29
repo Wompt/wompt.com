@@ -5,7 +5,7 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 		
 		-if(w.css_file)
 			link(type='text/css',src=w.css_file)
-		link(href="/css/all_"+cacheTimeStamps.all_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
+		link(href="/css/embedd_"+cacheTimeStamps.embedd_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
 	body(id=w.page_name)
 		#fb-root
 		!=partial('layouts/_mini_header')
