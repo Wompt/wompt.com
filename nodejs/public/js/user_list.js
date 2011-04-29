@@ -67,12 +67,17 @@ function UserListUI(ul, container){
 	function addUser(user){
 		if(user_divs[user.id]) return;
 		
-		var name_div = user.el = $('<div>');
-		name_div.attr('id', 'user_' + user.id);
-		name_div.attr('title', user.name);
-		name_div.css('color', UI.Colors.forUser(user.id))
+		var name_div = user.el = $('<a>');
+		name_div.attr({
+			id:'user_' + user.id,
+			title: user.name,
+			href: '/users/' + user.id,
+			target: "_blank",
+			style: 'color:' + UI.Colors.forUser(user.id) + ';',
+			class: 'user'
+		});
 		name_div.text(user.name);
-		name_div.addClass('user');
+
 		var insert_after = addToSortedList(user);
 		if(insert_after)
 			insert_after.el.after(name_div);
