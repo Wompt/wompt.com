@@ -1,8 +1,11 @@
-#supportcontent {
+.plainpage {
 	margin:5em auto;
-	width:600px;
+	max-width:800px;
 	padding:30px 50px 60px 50px;
 	color:#444;
 	background:white;
 	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 25px;
+}
+#supportcontent{
+	max-width:600px;
 }
