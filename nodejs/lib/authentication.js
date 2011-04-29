@@ -62,7 +62,6 @@ function Auth(config){
 			var doc = {
 				_id:wompt.Auth.generate_token(),
 				is_admin:function(){return false},
-				signed_up: function(){return true},
 				authentications:[]
 			};			
 			FakeMetaUser.super_.call(this, doc);

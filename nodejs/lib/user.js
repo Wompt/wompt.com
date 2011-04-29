@@ -33,10 +33,6 @@ wompt.mongoose.model('User',{
 			return new wompt.MetaUser(this);
 		},
 		
-		signed_up: function(){
-			return !!this.email || !!this.name;
-		},
-		
 		authentication_for: function(provider){
 			var auths = this.authentications ;
 			if(!auths) return null;
