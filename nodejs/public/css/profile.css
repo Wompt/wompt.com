@@ -1,14 +1,33 @@
 .profile{
-	margin:20px;
-	background:rgba(255,255,255,0.8);
-	padding:10px;
-	text-align:center;
-	-vendor-border-radius:20px;	
+	margin:20px auto;
+	padding:20px;
+	text-align:left;
+	color:black;
 }
 
-.provider{
-	margin:10px;
+.profile #name{
+	font-size:2em;
+	color:black;
+}
+
+.profile .providers{
+	margin-top:30px;
+	font-size:1.2em;
+}
+
+.profile .providers > .title{
+	font-size:1.2em;
+	padding:0.3em;
+	border-bottom:2px solid #ddd;
+	margin-bottom:0.5em;
+}
+
+.profile,
+.profile .provider{
 	-vendor-border-radius:20px;
+}
+.provider{
+	margin-right:10px;
 	float:left;
 	text-align:center;
 	-vendor-transition:background-color 0.3s ease;
@@ -18,18 +37,8 @@
 	background-color:rgba(0,0,0,0.1);
 }
 
-.profile #name{
-	font-size:1.5em;
-	color:black;
-}
-
-.profile .providers{
-	margin-top:20px;
-}
-
 .provider a.link{
 	color:black;
-	font-size:20px;
 	text-decoration:none;
 	padding:15px;
 	display:block;

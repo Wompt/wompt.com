@@ -1,7 +1,8 @@
 link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", type="text/css", media="screen")
-.profile
+.profile.plainpage
 	#name= w.profileUser.name
 	.providers
+		.title Public Profiles
 		- each provider in ['google', 'facebook', 'github']
 			- var auth = w.profileUser.authentication_for(provider)
 			- if(auth)
