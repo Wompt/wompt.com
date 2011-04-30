@@ -10,14 +10,14 @@ link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", 
 				- if(auth)
 					.provider
 						- var url = w.profileUser.provider_attribute(provider, 'profile')
-						a.link(href=url)
+						a.link(href=(url||'#'))
 							.title= provider
 							div(class="logo " + provider)
 				- else missing_providers.push(provider)
 			-if(w.user.same_user(w.profileUser))
 				- each provider in missing_providers
 					.provider.missing
-						a.link(href='/auth/' + provider)
+						a.link(href='/auth/' + provider, class='popout')
 							.title= provider
 							div(class="logo missing " + provider) ?
 			.clear

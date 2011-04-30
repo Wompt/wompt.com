@@ -71,6 +71,14 @@ var assetManagerGroups = {
 			, '/public/js/ui.layout.js'
 			, '/public/js/landing.js'
 		]
+	}), 'profile_js': mc(defaultOptions,{
+		'route': /\/js\/profile_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/public/external/bootstrap.js'
+			, '/public/js/sign_in.js'
+		]
 	}), 'all_css': mc(defaultOptions,{
 		'route': /\/css\/all_[0-9]+\.css/
 		, 'path': pub + '/css/'

@@ -162,7 +162,9 @@ App.prototype = {
 			res.render('profile', {
 				locals: me.standard_page_vars(req, {
 					app:me,
-					profileUser: user
+					profileUser: user,
+					jquery: true,
+					page_js: 'profile'
 				})
 			});
 		}
