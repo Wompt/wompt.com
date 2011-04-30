@@ -17,7 +17,7 @@ link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", 
 			-if(w.user.same_user(w.profileUser))
 				- each provider in missing_providers
 					.provider.missing
-						a.link(href='/auth/' + provider, class='popout')
+						a.link(href='/auth/' + provider, class='popup', title="Add a " + provider + " account")
 							.title= provider
 							div(class="logo missing " + provider) ?
 			.clear
