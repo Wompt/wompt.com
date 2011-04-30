@@ -30,5 +30,6 @@
 }
 
 #user_list .user{
-	padding:4px 10px 1px 10px;	
+	padding:4px 10px 1px 10px;
+	display:block;
 }
