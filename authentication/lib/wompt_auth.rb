@@ -53,7 +53,7 @@ class WomptAuth < Sinatra::Base
   
   def find_or_create_user auth
     info = auth['user_info']
-    user = User.find_one('authentications' => {'provider' => auth['provider'], 'uid' => auth['uid']})
+    user = User.find_one('authentications.provider' => auth['provider'], 'authentications.uid' => auth['uid'])
     
     if !user
       if (email = info['email']) && (email.length > 3) && (user = User.find_one('email' => email))

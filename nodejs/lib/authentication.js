@@ -9,7 +9,7 @@ function Auth(config){
 		
 	
 	this.get_user_from_token = function(token, callback){
-		wompt.User.find({sessions: {token: token}}).first(callback);
+		wompt.User.find({'sessions.token': token}).first(callback);
 	}
 	
 	this.forward_to_auth_app_middleware = function(){
@@ -121,7 +121,10 @@ function Auth(config){
 	
 	this.start_session = function(res, user){
 		var token = this.set_token(res),
-		    new_session = {token: token};
+		new_session = {
+			token: token,
+			created_at: new Date().getTime()
+		};
 		user.sessions = user.sessions || [];
 		user.sessions.push(new_session);
 		user.save();

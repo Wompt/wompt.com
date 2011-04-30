@@ -14,7 +14,7 @@ wompt.mongoose.model('User',{
 		// embedded documents
 		,{
 		'sessions': [
-			['token', 'last_ip', 'session_id', 'last_used']
+			['token', 'last_ip', 'session_id', 'last_used', 'created_at']
 		]
 		,'authentications': [
 			['provider','uid']
