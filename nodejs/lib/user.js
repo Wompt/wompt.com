@@ -77,6 +77,17 @@ var providerAuthInfo = {
 			var url = get_urls_hash(this).GitHub;
 			return url || "http://facebook.com/profile.php?id=" + this.uid;
 		}
+	},
+	
+	google: {
+		profile: function(){
+			var name;  // auth.info.user_info.email
+			(name = this.info) &&
+			(name = name.user_info) &&
+			(name = name.email) &&
+			(name = name.split('@')[0]);
+			return name ? 'http://profiles.google.com/' + name : null;
+		}
 	}
 }
 
