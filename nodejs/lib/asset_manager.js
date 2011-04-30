@@ -57,6 +57,7 @@ var assetManagerGroups = {
 			, '/public/js/ui.layout.js'
 			, '/public/js/ui.fb.share.js'
 			, '/public/js/sign_in.js'
+			, '/public/js/links_in_new_tab.js'
 		]
 	}),	'landing_js': mc(defaultOptions,{
 		'route': /\/js\/landing_[\d]+.js/
