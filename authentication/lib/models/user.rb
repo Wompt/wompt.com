@@ -8,6 +8,13 @@ class User < Mongomatic::Base
     auths << hash
   end
   
+  def add_authentication_from_authinfo(auth)
+    self.add_authentication(
+      'provider' => auth['provider'],
+      'uid' => auth['uid'],
+      'info' => auth)
+  end
+  
   def save!
     self.is_new? ? insert! : update!
   end

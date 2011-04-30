@@ -42,6 +42,8 @@ class WomptAuth < Sinatra::Base
     auth = request.env['omniauth.auth']
     host = request.env['HTTP_HOST'].split(':')[0]
     user = find_or_create_user(auth)
+    return haml :error, :locals => {:message => user} if user.is_a? String
+    
     response.set_cookie(ONE_TIME_TOKEN_COOKIE, :value => user['one_time_token'], :path => '/')
     back_to = session && session.delete('back_to') || '/'
     haml :redirect, :locals => {:to => back_to}
@@ -53,13 +55,23 @@ class WomptAuth < Sinatra::Base
   
   def find_or_create_user auth
     info = auth['user_info']
+    create_session = true
     user = User.find_one('authentications.provider' => auth['provider'], 'authentications.uid' => auth['uid'])
+    if(token_user = get_user_from_token)
+      puts "Found a signed in user: #{token_user}"
+      if(token_user && user)
+        return "The #{auth['provider']} account is already associated with another Wompt account, please sign out and try again"
+      end
+      user = token_user
+      user.add_authentication_from_authinfo(auth)
+      # User is already logged in, no need for new sessions
+      create_session = false
+    end
     
     if !user
       if (email = info['email']) && (email.length > 3) && (user = User.find_one('email' => email))
-        user.add_authentication('provider' => auth['provider'], 'uid' => auth['uid'], 'info' => auth)
+        user.add_authentication_from_authinfo(auth)
       else
-        puts "Creating User"
         user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid'], 'info' => auth}])
         user['email'] = info['email'] if info['email']
         if(name = (info['name'] || info['nickname']))
@@ -68,12 +80,23 @@ class WomptAuth < Sinatra::Base
       end
     end
     
-    user['one_time_token'] = generate_token
+    user['one_time_token'] = generate_token if create_session
+    
     if(auth_doc = user.get_authentication(auth['provider'], auth['uid']))
       auth_doc['info'] = auth
     end
     user.save!
     return user
+  end
+  
+  def get_user_from_token()
+    user = (token = request.cookies[TOKEN_COOKIE]) &&
+    !token.blank? &&
+    User.find_one('sessions.token' => token)
+    if(token && !user) # a token that doesn't belong to a user should be deleted
+      response.delete_cookie TOKEN_COOKIE
+    end
+    user
   end
   
   get "/ok" do
