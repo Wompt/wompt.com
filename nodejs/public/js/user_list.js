@@ -74,7 +74,7 @@ function UserListUI(ul, container){
 			href: '/users/' + user.id,
 			target: "_blank",
 			style: 'color:' + UI.Colors.forUser(user.id) + ';',
-			class: 'user'
+			'class': 'user'
 		});
 		name_div.text(user.name);
 
