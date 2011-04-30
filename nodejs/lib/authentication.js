@@ -2,10 +2,9 @@ var wompt = require("./includes"),
     httpProxy = require('http-proxy');
 
 function Auth(config){
-	config = config || {};
 	var me = this;
-	this.COOKIE_KEY = config.cookie_key || '_wompt_auth';
-	this.ONE_TIME_TOKEN_COOKIE_KEY = config.one_time_token_cookie_key || 'wompt_auth_one_time_token';
+	this.COOKIE_KEY = config.cookies.token || wompt.fail("Missing environment setting: cookies.token");
+	this.ONE_TIME_TOKEN_COOKIE_KEY = config.cookies.one_time || wompt.fail("Missing environment setting: cookies.one_time");
 	this.TOKEN_VALID_DURATION = (180 * 24 * 60 * 60 * 1000); // ~6 months
 		
 	
@@ -190,4 +189,4 @@ function Auth(config){
 	}
 }
 
-exports.Auth = new Auth();
+exports.Auth = new Auth(wompt.env);

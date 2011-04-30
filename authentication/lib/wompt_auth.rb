@@ -11,7 +11,8 @@ end
 
 Mongomatic.db = Mongo::Connection.new.db(CONFIG[:database])
 
-ONE_TIME_TOKEN_COOKIE = 'wompt_auth_one_time_token'
+ONE_TIME_TOKEN_COOKIE = CONFIG[:cookies][:one_time]
+TOKEN_COOKIE = CONFIG[:cookies][:token]
 
 class WomptAuth < Sinatra::Base
   use Rack::Session::Pool,

@@ -34,3 +34,4 @@ e.loggers        = {
 	,LoggerCreator:   require('./loggers/logger_creator.js')
 }
 e.util           = require('./util');
+e.fail           = function(msg){throw msg};

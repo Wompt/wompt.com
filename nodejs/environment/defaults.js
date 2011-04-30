@@ -44,6 +44,13 @@ module.exports = {
 		}
 	}
 	
+	/* Authentication */
+	, cookies : {
+		one_time: 'wompt_auth_one_time_token',
+		token:    '_wompt_auth'
+	}
+	
+	
 	, redirectWww: false
 	, redirectWwwToPort: 16867
 }
