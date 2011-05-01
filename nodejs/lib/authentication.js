@@ -1,5 +1,5 @@
 var wompt = require("./includes"),
-    httpProxy = require('http-proxy');
+    httpProxy = wompt.dependencies.httpProxy;
 
 function Auth(config){
 	var me = this;
