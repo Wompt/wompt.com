@@ -132,8 +132,9 @@ App.prototype = {
 		}
 
 		exp.get("/user/sign_out", function(req, res){
-			wompt.Auth.sign_out_user(req, res);
-			res.redirect('/');
+			wompt.Auth.sign_out_user(req, res, function(){
+				res.redirect(req.headers.referer || '/');
+			});
 		});
 		
 		exp.get("/admin/stats", wompt.Auth.adminMiddleware, function(req, res){

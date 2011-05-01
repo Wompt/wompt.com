@@ -130,7 +130,7 @@ function Auth(config){
 		return new_session;
 	}
 	
-	this.sign_out_user = function(req, res, callbacks){
+	this.sign_out_user = function(req, res, callback){
 		var token = this.get_token(req);
 		var user = req.user;
 		this.clear_token(res);
@@ -141,7 +141,7 @@ function Auth(config){
 					user.sessions[i].remove();
 				}
 			}
-			user.save();
+			user.save(callback);
 		}
 	}
 		
