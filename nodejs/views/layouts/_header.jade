@@ -6,7 +6,7 @@
 		- if(w.user.authenticated())
 			a(href=w.user.profile_url()) #{w.user.doc.email || w.user.doc.name}
 			| &nbsp;|&nbsp;
-			a(href="/user/sign_out", title="Sign out of Wompt") sign out
+			a(href="/user/sign_out", title="Sign out of Wompt", class='same_window') sign out
 		- else
 			| &nbsp;sign in using:
 			<a href="/auth/google"   class='popup' title="Sign in using Google">google</a> &nbsp;|&nbsp;
