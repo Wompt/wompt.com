@@ -5,10 +5,11 @@ UI.once('init', function(){
 			
 	connectionStatus('Connecting', true);
 	
-	try_now_link.click(function(){
+	try_now_link.click(function(e){
 		if(!socket.connected && !socket.connecting){
 			socket.reconnect();
 		}
+		e.preventDefault();
 	});
 	
 	socket.on('connect', function(){
