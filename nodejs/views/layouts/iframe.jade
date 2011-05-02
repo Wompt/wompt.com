@@ -17,6 +17,9 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 			!=partial('layouts/_style_iframe')
 		- if(w.page_js)
 			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
+			script(type='text/javascript')
+				UI.input = UI.input || {};
+				UI.input.disableAutoExpand = true;
 		- if(w.channel)
 			script(type='text/javascript', src='http://connect.facebook.net/en_US/all.js#appId=181725458505189&xfbml=1',async='true')
 		!=partial('shared/_ga')

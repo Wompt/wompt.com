@@ -26,6 +26,7 @@ UI.once('init', function(){
 	}
 	
 	function resizeInput(lines){
+		if(UI.input.disableAutoExpand) return;
 		lines = Math.max(min_input_height, Math.min(lines, max_input_height));
 		if(lines != previousLines){
 			/* at lines = 2 this needs to match the height of #input defined in the CSS */
