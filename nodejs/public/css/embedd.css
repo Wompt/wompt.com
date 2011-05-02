@@ -4,14 +4,26 @@ body, .main #input{
 
 .main #content{
 	top: 0px;
+	bottom: 4.4em;
 }
 .main #user_list{
 	top: 40px;
 }
 
+.main #input{
+	left:5px;
+	right:5px;
+	bottom:1em;
+}
+
 #top{
 	left:auto;
 	width:180px;
+	right:5px;
+	top:5px;
+}
+.hide_userlist #top{
+	right:35px;
 }
 
 #chat #wompt{
@@ -26,4 +38,38 @@ a.popout{
 	position:absolute;
 	right:10px;
 	top:7px;
+}
+
+#messages{
+	-vendor-border-top-left-radius:10px;
+}
+.hide_userlist #top,
+#messages{
+	-vendor-border-bottom-left-radius:10px;
+}
+
+#user_list,
+.hide_userlist #top,
+.hide_userlist #messages{
+	-vendor-border-bottom-right-radius:10px;
+}
+
+.hide_userlist #messages{
+	-vendor-border-top-right-radius:10px;
+}
+
+.main #content{
+	-vendor-box-shadow:rgba(0,0,0,0.3) 0 0 5px;
+	-vendor-border-radius:10px;
+	top:5px;
+	left:5px;
+	right:5px;
+}
+
+.hide_userlist #share_links{
+	height:2.9em;
+}
+
+.hide_userlist #footer_container{
+	left:5px;
 }
