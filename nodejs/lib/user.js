@@ -80,21 +80,22 @@ var providerAuthInfo = {
 		profile: function(){
 			var url = get_urls_hash(this).GitHub, nick;
 			return url ||
-				((nick = this.get('info.user_info.nickname'))
+				((nick = this.get('info')) && (nick = nick.user_info) && (nick = nick.nickname)
 				  && ("http://github.com/" + nick));
 		}
 	},
 	
 	google: {
 		profile: function(){
-			var name = this.get('info.user_info.email');
-			name = name && name.split('@')[0];
+			var name;
+			(name = this.get('info')) && (name = name.user_info) && (name = name.email) && (name = name.split('@')[0]);
 			return name ? 'http://profiles.google.com/' + name : null;
 		}
 	}
 }
 
 function get_urls_hash(auth){
-	return auth.get('info.user_info.urls');
+	var urls;
+	return (urls = auth.get('info')) && (urls = urls.user_info) && urls.urls;
 }
 
