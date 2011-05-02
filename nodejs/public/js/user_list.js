@@ -45,6 +45,7 @@ function UserListUI(ul, container){
 			addUser(user);
 			names.push(user.name);
 		});
+		updateUserCount();
 	});
 
 	ul.on('part', function(users){
@@ -53,7 +54,8 @@ function UserListUI(ul, container){
 			user.id = id;
 			removeUser(user);
 			names.push(user.name);
-		});		
+		});
+		updateUserCount();
 	});
 	
 	ul.on('who', function(users){
@@ -62,6 +64,7 @@ function UserListUI(ul, container){
 			user.id = id;
 			addUser(user);
 		});
+		updateUserCount();
 	});
 	
 	function addUser(user){
@@ -111,5 +114,9 @@ function UserListUI(ul, container){
 		}
 		user_divs = {};
 		sorted = [];
+	}
+	
+	function updateUserCount(){
+		$('#user_count').text('(' + sorted.length + ')');
 	}
 }
