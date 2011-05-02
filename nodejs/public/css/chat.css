@@ -18,6 +18,9 @@
 #chat #footer{
 	padding:0 41px 4px 3px;
 }
+#chat.hide_userlist #footer{
+	padding-right:7px;
+}
 
 #chat #wompt{
 	display:none;
@@ -30,6 +33,9 @@
 	right:0;
 	width:181px;
 	height:3.4em;
+}
+.hide_userlist #share_links{
+	width:110px;
 }
 
 .main #input{
@@ -54,6 +60,11 @@ body .main #share_links,
 	color:#444;	
 	overflow:visible;
 }
+.hide_userlist .main #input .container{
+	right:117px;
+	left:125px;
+}
+
 
 .main #input #own_name {
 	position:absolute;
@@ -104,8 +115,6 @@ a.try_now{
 	z-index:1;
 	background-color:#f7f7f7;
 }
-
-
 .hide_userlist .main #messages{
 	right:0;
 }
@@ -148,12 +157,17 @@ tr.first td {
 .line.mention{
 	background-color: #ffb;
 }
+
 td.name {
 	width: 10em;
 	padding-right: 10px;
 	text-align:right;
 	color: black;
 	font-weight:bold;
+}
+.hide_userlist .name {
+	font-size:12px;
+	width:10em;
 }
 
 .msg {
