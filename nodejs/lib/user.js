@@ -7,6 +7,7 @@ var Schema = mongoose.Schema
 var Authentication = new Schema({
 	'provider'      : String
 	,'uid'          : String
+	,info           : {}
 });
 
 // number defines index sort order (1=asc)
@@ -77,25 +78,23 @@ var providerAuthInfo = {
 	
 	github: {
 		profile: function(){
-			var url = get_urls_hash(this).GitHub;
-			return url || "http://facebook.com/profile.php?id=" + this.uid;
+			var url = get_urls_hash(this).GitHub, nick;
+			return url ||
+				((nick = this.get('info.user_info.nickname'))
+				  && ("http://github.com/" + nick));
 		}
 	},
 	
 	google: {
 		profile: function(){
-			var name;  // auth.info.user_info.email
-			(name = this.info) &&
-			(name = name.user_info) &&
-			(name = name.email) &&
-			(name = name.split('@')[0]);
+			var name = this.get('info.user_info.email');
+			name = name && name.split('@')[0];
 			return name ? 'http://profiles.google.com/' + name : null;
 		}
 	}
 }
 
 function get_urls_hash(auth){
-	var i;
-	return (i = auth.info) && (i = i.user_info) && (i = i.urls) || {};
+	return auth.get('info.user_info.urls');
 }
 
