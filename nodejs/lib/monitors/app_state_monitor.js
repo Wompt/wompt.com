@@ -33,7 +33,7 @@ function AppStatePreparer(app){
 		var result = {
 			connected: app.clients.userCount
 		};
-		User.count({},function(value){
+		User.count({},function(err, value){
 			result.db = value;
 			done(result);
 		});
