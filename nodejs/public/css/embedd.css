@@ -21,13 +21,16 @@ body, .main #input{
 	width:180px;
 	right:5px;
 	top:5px;
+	background-color:white;
 }
 .hide_userlist #top{
 	right:35px;
+	background-color:rgba(255,255,255,0.7);	
 }
 
 #chat #wompt{
 	display:inline;
+	color:white;
 }
 
 a.popout{
@@ -54,8 +57,13 @@ a.popout{
 	-vendor-border-bottom-right-radius:10px;
 }
 
+#top,
 .hide_userlist #messages{
 	-vendor-border-top-right-radius:10px;
+}
+
+.hide_userlist #top{
+	-vendor-border-top-right-radius:0;
 }
 
 .main #content{
