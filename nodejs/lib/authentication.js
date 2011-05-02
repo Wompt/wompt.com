@@ -142,12 +142,12 @@ function Auth(config){
 				}
 			}
 			user.save(callback);
-		}
+		} else callback();
 	}
 		
 		
 	this.clear_token = function(response){
-		response.clearCookie(this.COOKIE_KEY);
+		response.cookie(this.COOKIE_KEY, '', {expires: new Date(1), path:'/'});
 	}
 	
 	this.set_token = function(response){
