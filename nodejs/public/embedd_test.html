@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  <head> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta charset="utf-8" />
+		<style type='text/css'>
+			iframe{
+				border:none;
+			}
+			body{
+				background:#ccc;
+				height:100%;
+				width:100%;
+				font-family:Arial;
+			}
+		</style>
+	</head>
+	<body>
+		<h2> This is wompt embedded as an iframe</h2>
+		<p>
+			Notice the transparent background and rounded corners.  It only takes only line of html to add this to your site and you can customize the text color with a parameter.
+		</p>
+		<h3>Replace the "room_name" in the code below with any text you want to get your own room name..  i.e. "jsconf/2011"</h3>
+<pre>
+&lt;iframe src=&#39;http://wompt.com/chat/room_name?iframe=1#c=444444&#39;
+	style=&#39;margin:30px; width:800px; height:500px;&#39;
+	allowtransparency=&quot;true&quot;&gt;&lt;/iframe&gt;
+</pre>
+		<iframe src='http://wompt.com/chat/wompt?iframe=1#c=444444'
+		  style='margin:30px; width:800px; height:500px;'
+			allowtransparency="true"></iframe>
+	</body>
+</html>
