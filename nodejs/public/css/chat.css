@@ -37,7 +37,6 @@
 	bottom:0;
 	left:0;
 	right:0;
-	color:#444;
 	height:3.4em;
 }
 
@@ -52,6 +51,7 @@ body .main #share_links,
 	left:10.4em;
 	bottom:7px;
 	right:187px;
+	color:#444;	
 	overflow:visible;
 }
 
@@ -59,7 +59,6 @@ body .main #share_links,
 	position:absolute;
 	width:9.5em;
 	padding:.9em .4em 0 .4em;
-	color:white;
 	text-align:right;
 	font-weight:bold;
 }
@@ -109,6 +108,11 @@ a.try_now{
 
 .hide_userlist .main #messages{
 	right:0;
+}
+
+.main #messages a,
+.main #input .container a{
+	color:#286ea0;
 }
 
 #messages_scroller{

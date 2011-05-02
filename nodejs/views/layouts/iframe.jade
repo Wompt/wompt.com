@@ -2,7 +2,6 @@
 html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.org/1999/xhtml")
 	head
 		!=partial('layouts/_head')
-		
 		-if(w.css_file)
 			link(type='text/css',src=w.css_file)
 		link(href="/css/embedd_"+cacheTimeStamps.embedd_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
@@ -10,12 +9,12 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 		#fb-root
 		!=partial('layouts/_mini_header')
 		.main
-			#bg
 			!{body}
 			!=partial('layouts/_footer')
 			.clear
 		- if(w.jquery)
 			script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js", type="text/javascript")
+			!=partial('layouts/_style_iframe')
 		- if(w.page_js)
 			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
 		- if(w.channel)

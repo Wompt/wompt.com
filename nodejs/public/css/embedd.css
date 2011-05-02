@@ -1,3 +1,7 @@
+body, .main #input{
+	background:none;
+}
+
 .main #content{
 	top: 0px;
 }
