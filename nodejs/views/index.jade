@@ -3,7 +3,26 @@
 		.name Wompt
 		.w
 		.sub is&nbsp;chat
-	.group
+	.plainpage.new_group
+		.split
+			.first.thing
+				.text Easy to embedd in any web page
+			.thing
+				.text Users can sign in with Google, facebook, ...
+			.last.thing
+				.text Real-time discussion is contagious
+			.clear
+		.wompt_embedd
+			<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+		.spacer
+		h1 Your content inspires discussion!
+		h2 Adding Wompt to your site allows discussion to flourish
+		.your_content_box.hide
+			.your_content your goes content here
+		.code= "<iframe src='http://wompt.com/chat/room_name?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency='true'></iframe>"
+		h3 Turns into ...
+		h1 Public Chat
+	.group.hide
 		.cell.first
 			.private_chat
 				h1.title Private Chat
@@ -22,7 +41,7 @@
 					input.submit#join(type='submit', value="Join Chat Room")
 		.clear.narrow_tail
 	.wide_tail
-	.group
+	.group.hide
 		.cell.first
 			.channel_list
 				h1 Popular Rooms

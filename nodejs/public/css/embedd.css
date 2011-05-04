@@ -7,7 +7,7 @@ body, .main #input{
 	bottom: 4.4em;
 }
 .main #user_list{
-	top: 40px;
+	top: 0px;
 }
 
 .main #input{
@@ -18,10 +18,10 @@ body, .main #input{
 
 #top{
 	left:auto;
-	width:180px;
+	width:45px;
 	right:5px;
 	top:5px;
-	background-color:white;
+	background:none;
 }
 .hide_userlist #top{
 	right:35px;
@@ -34,14 +34,19 @@ body, .main #input{
 }
 
 a.popout{
-	background:center no-repeat data-url(/images/popout.png);
-	height:20px;
-	width:20px;
+	background:center no-repeat data-url(/images/popout_dark.png);
+	height:25px;
+	width:25px;
 	display:block;
 	position:absolute;
-	right:10px;
-	top:7px;
+	right:8px;
+	top:5px;
+	z-index:2;
 }
+.hide_userlist a.popout{
+	right:32px;
+}
+
 
 #messages{
 	-vendor-border-top-left-radius:10px;
@@ -57,13 +62,10 @@ a.popout{
 	-vendor-border-bottom-right-radius:10px;
 }
 
-#top,
+#user_list,
+#user_list .title,
 .hide_userlist #messages{
 	-vendor-border-top-right-radius:10px;
-}
-
-.hide_userlist #top{
-	-vendor-border-top-right-radius:0;
 }
 
 .main #content{
