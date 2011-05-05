@@ -50,7 +50,7 @@ App.prototype = {
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(assetManager.middleware);
 			exp.use(express.favicon(config.public_dir + '/favicon.ico'));
-			exp.use(express.static(config.public_dir, {maxAge:1000*60*60*24}));
+			exp.use(express.static(config.public_dir, {maxAge:1000*60*60*24*14})); // 2 weeks
 			exp.use(express.cookieParser());
 			exp.use(express.bodyParser());
 			exp.use(wompt.Auth.one_time_token_middleware());
