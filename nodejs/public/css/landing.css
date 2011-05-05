@@ -196,6 +196,39 @@
 
 /* New layout */
 
+#landing .slides {
+	height:300px;
+	position:relative;
+	overflow:hidden;
+}
+
+#landing .slide{
+	position:absolute;
+	left:-100%;
+	top:0;
+	width:100%;
+	display:none;
+	-webkit-transition:left 0.75s ease-in-out;
+}
+
+#landing .slide .title{
+	color:#444;
+}
+
+#landing .slide.future{
+	left:100%;
+	display:block;
+}
+#landing .slide.current{
+	left:0;
+	display:block;
+}
+#landing .slide.past{
+	left:-100%;
+	display:block;	
+}
+
+
 #landing .spacer{
 	height:5px;
 	margin:30px 0;
@@ -214,7 +247,7 @@
 	border-radius:10px;
 	text-align:center;
 	background: #eee;
-	padding:20px 50px;
+	padding:20px 0px;
 }
 
 #landing .split{
@@ -271,18 +304,6 @@
 	position:relative;
 	height:200px;
 	padding:15px 25px;
-}
-
-#landing .wompt_embedd .overlay{
-	position:absolute;
-	left:50px;
-	right:50px;
-	top:80px;
-	padding:20px;
-	background:rgba(0,0,0,0.1);
-	border-radius:10px;
-	z-index:1;
-	font-size:25px;
 }
 
 #landing .hide{

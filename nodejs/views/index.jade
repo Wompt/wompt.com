@@ -4,32 +4,36 @@
 		.w
 		.sub is&nbsp;chat
 	.plainpage.new_group
-		.split
-			.first.thing
-				.text Easy to embedd in any web page
-			.thing
-				.text Users can sign in with Google, facebook, ...
-			.last.thing
-				.text Real-time discussion is contagious
-			.clear
-		.wompt_embedd
-			<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+		.slides
+			.slide.current
+				h3.title Easy to embedd in any web page
+				.wompt_embedd
+					<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+			.slide.future
+				h3.title Users can sign in with Google, facebook, ...
+				img(src='/images/external/facebook_128.png')
+				img(src='/images/external/github_128.png')
+				img(src='/images/external/google_128.png')
+			.slide
+				h3.title Create private chat rooms to have sensitive discussions
+				form(method='get', action='/unlisted/new')
+					input.submit#join(type='submit', value="Create Private Room")
+			.slide.past
+				h3.title Real-time discussion is contagious
+				p Blah Blah
 		.spacer
-		h1 Your content inspires discussion!
-		h2 Adding Wompt to your site allows discussion to flourish
 		.your_content_box.hide
 			.your_content your goes content here
-		.code= "<iframe src='http://wompt.com/chat/room_name?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency='true'></iframe>"
-		h3 Turns into ...
+		.code= "<iframe src='http://wompt.com/chat/any_room_name_you_want?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency='true'></iframe>"
+		.spacer
 		h1 Public Chat
 	.group.hide
 		.cell.first
 			.private_chat
 				h1.title Private Chat
 				.subtitle chat with anyone you invite
-				form(method='get', action='/unlisted/new')
-					input.submit#join(type='submit', value="Create Private Room")
-		.narrow_tail
+				
+		.narrow_tail.hide
 		.cell
 			.channel_selector
 				.right_back.back
@@ -40,7 +44,7 @@
 					input.text.big.inline_label#channel(name='channel', title="Chat topic", type='text', placeholder="Enter a topic")
 					input.submit#join(type='submit', value="Join Chat Room")
 		.clear.narrow_tail
-	.wide_tail
+	.wide_tail.hide
 	.group.hide
 		.cell.first
 			.channel_list
