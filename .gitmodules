@@ -5,3 +5,7 @@
 [submodule "nodejs/vendor/Socket.IO-node"]
 	path = nodejs/vendor/Socket.IO-node
 	url = git://github.com/danielbeardsley/Socket.IO-node.git
+
+[submodule "nodejs/vendor/connect-assetmanager"]
+	path = nodejs/vendor/connect-assetmanager
+	url = git://github.com/danielbeardsley/connect-assetmanager.git
