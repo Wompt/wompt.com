@@ -26,7 +26,6 @@
 }
 
 /* One column */
-#landing .narrow.container,
 #landing .narrow .group {
 	max-width:390px;
 	padding:0;
