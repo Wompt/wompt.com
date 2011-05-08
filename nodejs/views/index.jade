@@ -6,27 +6,30 @@
 	.plainpage.new_group
 		.slides
 			.slide.current
-				h3.title Easy to embedd in any web page
-				.wompt_embedd
-					<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+				.contents
+					h3.title Like Disqus?  Want Real time?
+					h4.Easily add chat to embedd in any web page
+					.wompt_embedd
+						<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency="true"></iframe>
 			.slide.future
-				h3.title Users can sign in with Google, facebook, ...
-				img(src='/images/external/facebook_128.png')
-				img(src='/images/external/github_128.png')
-				img(src='/images/external/google_128.png')
+				.contents
+					h3.title You can sign in with Google, facebook, or Github
+					img(src='/images/external/facebook_128.png')
+					img(src='/images/external/github_128.png')
+					img(src='/images/external/google_128.png')
 			.slide
-				h3.title Create private chat rooms to have sensitive discussions
-				form(method='get', action='/unlisted/new')
-					input.submit#join(type='submit', value="Create Private Room")
+				.contents
+					h3.title Create private chat rooms for sensitive discussions
+					form(method='get', action='/unlisted/new')
+						input.submit#join(type='submit', value="Create Private Room")
 			.slide.past
-				h3.title Real-time discussion is contagious
-				p Blah Blah
+				.contents
+					h3.title Capture and engage your community
+					p Blah Blah
 		.spacer
 		.your_content_box.hide
 			.your_content your goes content here
 		.code= "<iframe src='http://wompt.com/chat/any_room_name_you_want?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency='true'></iframe>"
-		.spacer
-		h1 Public Chat
 	.group.hide
 		.cell.first
 			.private_chat

@@ -210,6 +210,12 @@
 	-webkit-transition:left 0.75s ease-in-out;
 }
 
+#landing .contents{
+	max-width:900px;
+	margin:0 auto;
+	padding:0 30px;
+}
+
 #landing .slide .title{
 	color:#444;
 }
