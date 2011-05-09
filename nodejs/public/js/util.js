@@ -1,8 +1,9 @@
-Util.Text = (function Text(){
+var Util = {
+Text: (function Text(){
 	var http_matcher = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
 	var www_matcher = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
 	var mail_to_matcher = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
-	var my_name = (Me && Me.name && Me.name.toLowerCase()) || '';
+	var my_name = (window.Me && Me.name && Me.name.toLowerCase()) || '';
 	
 	return {
 		newlineMatcher: /\n|\r\n/gim,
@@ -28,7 +29,12 @@ Util.Text = (function Text(){
 			});
 		}
 	};
-})()
+})(),
+
+nextTick: function(f){
+	return setTimeout(f,0);
+}
+};
 
 EventEmitter.prototype.muteEvents = function(fn){
 	var e = this._events;
