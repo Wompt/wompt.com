@@ -1,26 +1,75 @@
 $(function(){
 	UI.emit('init');
 
-	var slides = $('.slides .slide').get(), current = 1;
-	function showNext(){
-		var i=0;
-		$.each(slides, function(key, slide){
-			var s = $(slide);
-			
-			s[addClassIf(-1)]('past')
-			[addClassIf(0)]('current')
-			[addClassIf(1)]('future');
-			i++;
+	var slides = $('.slides .slide'),
+		current = 0,
+		buttons = [],
+		button_box = $('#slide_buttons');
+	
+	// Create the buttons and bind their click events
+	slides.each(function(i){
+		var b = $('<a>'),
+		slide = $(this);
+		b.attr('href','#');
+		b.click(function(e){
+			showSlide(i);
+			stopSlides();
+			e.preventDefault();
 		});
-		current = (current + 1) % i;
-		console.log(current);
-		function addClassIf(inc){
-			var x = (current + inc) % slides.length;
-			if(x < 0) x = x + slides.length;
-			return (x == i ? 'add' : 'remove') + 'Class';
+		button_box.append(b);
+		buttons.push(b);
+	});
+	
+	buttons[0].addClass('selected');
+	
+	function showSlide(index){
+		if(index == current) return;
+
+		slides.each(function(i){
+			var s = $(this),
+			is_next = i == index,
+			is_cur = i == current;
+			
+			buttons[i][addClassIf(i == index)]('selected');
+			
+			// add 'future' to position the coming slide off in the right place
+			s[addClassIf(is_next)]('future')
+			
+			 // animate current slide to the default position
+			 // make sure no slide is in the 'current' position
+			.removeClass('current')
+			
+			// hide all slides except the one moving to the default position
+			// -- this ensures a slide moving from default to 'current' moves
+			//    invisibly from default to 'future' before being animated
+			[addClassIf(!is_cur)]('hide'); 
+		});
+		
+		// Give the UI thread some time to begin the animation and apply the CSS changes
+		Util.nextTick(function(){
+			var next = $(slides.get(index));
+			next.removeClass('hide');
+			
+			Util.nextTick(function(){
+				next.removeClass('future').addClass('current');
+			});
+		});
+		
+		function addClassIf(bool){
+			return (bool ? 'add' : 'remove') + 'Class';
 		}
+		
+		current = index;
 	}
-	setInterval(showNext, 5000);
+	
+	function showNext(){
+		showSlide((current + 1) % slides.length);
+	}
+	
+	function stopSlides(){
+		clearInterval(slideInterval);
+	}
+	var slideInterval = setInterval(showNext, 4000);
 });
 
 

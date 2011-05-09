@@ -66,6 +66,7 @@ var assetManagerGroups = {
 		, 'files': [
 			'/public/external/bootstrap.js'
 			, '/public/external/events.js'
+			, '/public/js/util.js'
 			, '/public/js/sign_in.js'
 			, '/public/js/ui.js'
 			, '/public/js/ui.layout.js'
