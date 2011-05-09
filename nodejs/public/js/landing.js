@@ -3,21 +3,18 @@ $(function(){
 
 	var slides = $('.slides .slide'),
 		current = 0,
-		buttons = [],
-		button_box = $('#slide_buttons');
+		buttons = $('#slide_buttons > a').get();
 	
-	// Create the buttons and bind their click events
-	slides.each(function(i){
-		var b = $('<a>'),
-		slide = $(this);
+	buttons = buttons.map(function(b, i){
+		var slide = $(slides.get(i));
+		b = $(b);
 		b.attr('href','#');
 		b.click(function(e){
 			showSlide(i);
 			stopSlides();
 			e.preventDefault();
 		});
-		button_box.append(b);
-		buttons.push(b);
+		return b;
 	});
 	
 	buttons[0].addClass('selected');

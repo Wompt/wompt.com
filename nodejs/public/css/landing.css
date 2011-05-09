@@ -186,18 +186,27 @@
 }
 
 /* New layout */
+#slide_buttons{
+	position:absolute;
+	left:0;
+	top:0;
+	bottom:0;
+	width:220px;
+	background:#eee;
+	text-shadow:#fff 0 1px 0;
+	border-right:3px solid #ddd;
+}
+
 #slide_buttons a{
-	display:inline-block;
-	height:30px;
-	width:30px;
-	border-radius:15px;
-	margin:0 20px;
-	background:#e4e4e4;
-	box-shadow:#c7c7c7 0 2px 4px;
+	text-align:right;
+	min-height:40px;
+	display:block;
+	padding:20px 10px;
+	border-right:7px solid #eee;	
 }
 
 #slide_buttons a.selected{
-	background:#f7f7f7;
+	border-right-color:#ddd;
 }
 
 #landing .plainpage a{
@@ -205,9 +214,11 @@
 }
 
 #landing .slides {
-	height:300px;
+	height:450px;
 	position:relative;
 	overflow:hidden;
+	margin:0 auto;
+	max-width:968px;
 }
 
 #landing .slide{
@@ -219,9 +230,8 @@
 }
 
 #landing .contents{
-	max-width:900px;
 	margin:0 auto;
-	padding:0 30px;
+	padding:0 30px 0 250px;
 }
 
 #landing .slide .title{
