@@ -96,7 +96,7 @@
 	font-size:30px;
 }
 
-#landing .narrow .wompt > .name,
+#landing .narrow .wompt > .company,
 #landing .narrow .wompt > .sub{
 	top:45px;
 }
@@ -109,7 +109,7 @@
 	height:135px;
 }
 
-#landing .wompt > .name ,
+#landing .wompt > .company ,
 #landing .wompt > .sub {
 	position:absolute;
 	top:0.35em;
@@ -123,7 +123,7 @@
 	left:50%;
 }
 
-#landing .wompt > .name {
+#landing .wompt > .company {
 	text-align:right;
 	padding-right:75px;
 	right:50%;
