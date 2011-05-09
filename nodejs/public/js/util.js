@@ -33,6 +33,10 @@ Text: (function Text(){
 
 nextTick: function(f){
 	return setTimeout(f,0);
+},
+
+ts:function(){
+	return new Date().getTime();
 }
 };
 

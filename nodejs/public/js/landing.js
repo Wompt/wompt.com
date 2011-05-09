@@ -3,23 +3,33 @@ $(function(){
 
 	var slides = $('.slides .slide'),
 		current = 0,
-		buttons = $('#slide_buttons > a').get();
+		buttons = $('#slide_buttons > a').get(),
+		last_slide_change,
+		interval = 5000,
+		timer,
+		pause_left;
 	
 	buttons = buttons.map(function(b, i){
 		var slide = $(slides.get(i));
 		b = $(b);
 		b.attr('href','#');
 		b.click(function(e){
-			showSlide(i);
-			stopSlides();
+			show(i);
+			stop();
 			e.preventDefault();
 		});
 		return b;
 	});
 	
-	buttons[0].addClass('selected');
+	slides.click(stop);
+	slides.bind('mouseenter', pause);
+	slides.bind('mouseleave', start);
 	
-	function showSlide(index){
+	buttons[0].addClass('selected');
+
+	scheduleNext();
+	
+	function show(index){
 		if(index == current) return;
 
 		slides.each(function(i){
@@ -56,17 +66,36 @@ $(function(){
 			return (bool ? 'add' : 'remove') + 'Class';
 		}
 		
+		last_slide_change = Util.ts();
 		current = index;
 	}
 	
 	function showNext(){
-		showSlide((current + 1) % slides.length);
+		show((current + 1) % slides.length);
+		scheduleNext();
 	}
 	
-	function stopSlides(){
-		clearInterval(slideInterval);
+	function scheduleNext(){
+		timer = setTimeout(showNext, pause_left || interval);
+		pause_left = null;
 	}
-	var slideInterval = setInterval(showNext, 4000);
+	
+	function start(){
+		if(!timer)
+			scheduleNext();
+	}
+	
+	function pause(){
+		if(!pause_left){
+			pause_left = Math.max(1, interval - (Util.ts() - last_slide_change));
+			stop();
+		}
+	}
+	
+	function stop(){
+		clearTimeout(timer);
+		timer = null;
+	}
 });
 
 
