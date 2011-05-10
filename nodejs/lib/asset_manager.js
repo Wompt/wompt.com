@@ -95,6 +95,7 @@ var assetManagerGroups = {
 			, 'user_list.css'
 			, 'support_pages.css'
 			, 'share_links.css'
+			, 'autocomplete.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{

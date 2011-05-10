@@ -52,7 +52,7 @@ var proto = {
 		var channels = this.channels;
 		for(var k in channels){
 			if(channels.hasOwnProperty(k)){
-				callback(channels[k]);
+				if(callback(channels[k])) return;
 			}
 		}
 	}

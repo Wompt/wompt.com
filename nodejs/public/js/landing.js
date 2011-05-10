@@ -1,5 +1,7 @@
 $(function(){
 	UI.emit('init');
+	
+	$('input#channel').autocomplete({source:'/channels/search'});
 
 	var slides = $('.slides .slide'),
 		current = 0,
