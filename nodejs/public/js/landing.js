@@ -14,8 +14,10 @@ $(function(){
 		b = $(b);
 		b.attr('href','#');
 		b.click(function(e){
-			show(i);
 			stop();
+			show(i);
+			scheduleNext(10000);
+			pause();
 			e.preventDefault();
 		});
 		return b;
