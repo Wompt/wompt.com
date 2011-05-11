@@ -4,7 +4,6 @@ UI.once('init', function(){
 		, pane = $("#messages_scroller")
 		, paneEl = pane.get(0)
 		, scrolling = false
-		, animateScroll = true
 		, bottom_dist
 		, old_height
 		// When the height of the content scrolled beneath the viewport is greater than this
@@ -12,10 +11,10 @@ UI.once('init', function(){
 		, SCROLL_LIMIT = 40;
 
 	var me = UI.messagesScroller = {				
-		scrollToBottom: function(){
+		scrollToBottom: function(animate){
 			var destScroll = paneEl.scrollHeight - pane.innerHeight(); // height of content - height of viewport (always <= height of content)
 			
-			if(animateScroll){
+			if(animate){
 				var distance = destScroll - pane.scrollTop(), // distance to scroll the viewport
 				added_height = paneEl.scrollHeight - old_height, // height of new content
 				end_at = {scrollTop: destScroll, bottom:0};
@@ -50,10 +49,12 @@ UI.once('init', function(){
 	UI.on('before_append', me.checkShouldSroll);
 	UI.on('after_append', function(data){
 		if(should_scroll){
-			var old = animateScroll;
-			animateScroll = !$.isArray(data);
-			me.scrollToBottom();
-			animateScroll = old;
+			me.scrollToBottom(!$.isArray(data));
+		}
+	});
+	UI.on('resize', function(){
+		if(should_scroll){
+			me.scrollToBottom(false);
 		}
 	});
 });

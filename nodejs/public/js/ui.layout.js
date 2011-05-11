@@ -9,13 +9,18 @@ UI.once('init', function(){
 	
 	$(window).resize(function(){
 		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(doLayout, layout_delay);
+		resizeTimer = setTimeout(onResize, layout_delay);
 	});
 	
 	function doLayout(){
 		var w = $(window).width();
 		c[(w < hide_userlist_at ? 'add' : 'remove') + 'Class']('hide_userlist');
 		$('.container')[(w < narrow_at ? 'add' : 'remove') + 'Class']('narrow');
+	}
+	
+	function onResize(){
+		doLayout();
+		UI.emit('resize');
 	}
 	
 	//stick the footer at the bottom of the page if we're on an iPad/iPhone due to viewport/page bugs in mobile webkit
