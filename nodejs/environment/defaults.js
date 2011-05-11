@@ -67,6 +67,7 @@ module.exports = {
 			 {name: 'facebook',  code: 'facebook'}
 			,{name: 'Github',    code: 'github'}
 			,{name: 'Google',    code: 'google'}
+			,{name: 'Twitter',   code: 'twitter'}
 		]
 	}
 	

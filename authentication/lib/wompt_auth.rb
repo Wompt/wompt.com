@@ -30,6 +30,7 @@ class WomptAuth < Sinatra::Base
       provider :github , '60ae284d5c81eceaebe1' , '2bac1bc17e414ad15eee27403c6cd900623ae9b4', :scope => nil
     end
     provider :facebook , '181725458505189' , '5afa28d747aabd3d1a6ce71d26933c14', :scope => 'email'
+    provider :twitter , 'P5TqY6I9EmvxNLQVjNZJGw' , 'msMp5fnQ5QvbfzRcAdVOvDyAYiROnm9C9g8grR0doQQ'
     provider :open_id, nil, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :scope => 'email'
   end
   
