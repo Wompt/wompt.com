@@ -3,6 +3,25 @@ $(function(){
 	
 	$('input#channel').autocomplete({source:'/channels/search'});
 
+	var form = $('#embedd_form');
+	form.find('input').keyup(updateCode);
+	
+	
+	function updateCode(){
+		var code = [
+		"<iframe src='http://wompt.com/chat/",
+			encodeURIComponent(form.find('#room_name').val()),
+		"?iframe=1#c=",
+			form.find('#color').val(),
+		"' style='width:",
+			form.find('#width').val(),
+		,"; height:",
+			form.find('#height').val(),
+		,";' allowtransparency='true'></iframe>"];
+		$('#code').text(code.join(''));
+	}
+	updateCode();
+
 	var slides = $('.slides .slide'),
 		current = 0,
 		buttons = $('#slide_buttons > a').get();

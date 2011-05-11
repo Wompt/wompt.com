@@ -35,8 +35,18 @@
 					h4 Easily add chat to any web page for free!
 					.wompt_embedd
 						<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=444' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+					h4 Embedd code
+					#embedd_form
+						| Room Name:
+						input#room_name(type='text',value='whatever you want', title='Room name')
+						| Text Color:
+						input#color(type='text',value='444444', title='Color in hex')
+						| Height:
+						input#height(type='text',value='500', title='Height')
+						| Width:
+						input#width(type='text',value='100%', title='Width')
 					h4 HTML
-					.code= "<iframe src='http://wompt.com/chat/any_room_name_you_want?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency='true'></iframe>"
+					#code
 			.slide.future
 				.contents
 					h3 You can sign in with Google, facebook, or Github

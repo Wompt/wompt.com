@@ -142,7 +142,7 @@
 }
 
 #landing .slides {
-	height:450px;
+	height:550px;
 	position:relative;
 	overflow:hidden;
 	margin:0 auto;
@@ -153,7 +153,7 @@
 	position:absolute;
 	left:-100%;
 	top:0;
-	width:100%;
+	width:90%;
 	-webkit-transition:left 0.75s ease-in-out;
 }
 
@@ -189,9 +189,9 @@
 }
 
 
-.code{
+#code{
 	position:relative;
-	margin:20px 30px 10px 30px;
+	margin:0px 15px;
 	padding:10px;
 	font-size:12px;
 	font-family:Consolas, "Courier New", monospace;
@@ -201,11 +201,33 @@
 	background:#f7f7f7;
 }
 
+#embedd_form{
+	margin-left:15px;
+	font-size:12px;
+}
+
+#embedd_form input{
+	margin-right:10px;
+}
+
+#embedd_form > #height,
+#embedd_form > #width{
+	width:40px;	
+}
+
+#embedd_form > #color{
+	width:70px;
+}
+
+#embedd_form > #room_name{
+	width:150px;
+}
 
 #landing .wompt_embedd{
 	position:relative;
 	height:250px;
-	padding:10px 0;
+	margin-right:15px;
+	padding-bottom: 10px;
 }
 
 #landing .hide{
