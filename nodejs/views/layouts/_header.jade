@@ -8,10 +8,10 @@
 			| &nbsp;|&nbsp;
 			a(href="/user/sign_out", title="Sign out of Wompt", class='same_window') sign out
 		- else
-			| &nbsp;sign in using:
-			<a href="/auth/google"   class='popup' title="Sign in using Google">google</a> &nbsp;|&nbsp;
-			<a href="/auth/facebook" class='popup' title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
-			<a href="/auth/github"   class='popup' title="Sign in using Github">github</a>
+			| &nbsp;sign in:
+			<a href="/auth/facebook" class='popup ico fb' title="Sign in using Facebook"></a>
+			<a href="/auth/github"   class='popup ico gi' title="Sign in using Github"></a>
+			<a href="/auth/google"   class='popup ico go' title="Sign in using Google"></a>
 			- if(w.config.force_sign_in)
 				= '&nbsp;|&nbsp; '
 				<a href="/users/force_sign_in/1" title="Force sign in as the first user">user 1</a> &nbsp;|&nbsp;
