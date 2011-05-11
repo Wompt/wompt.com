@@ -110,7 +110,7 @@ App.prototype = {
 		});
 		
 		exp.get("/channels/search", function(req, res){
-			var results = [], term, terms;
+			var results = [], term, terms, max_results = 10;
 			(term = req.query) && (term = term.term) && (term = term.toLowerCase());
 			// Limit length, split on spaces, remove blank terms, enforce maximum term count
 			terms = term.substr(0,50).split(' ').filter(function(t){return t.length > 0 ;}).slice(0,5);
