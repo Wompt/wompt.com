@@ -26,7 +26,6 @@ script(type='text/javascript')
 		.container
 			#message
 				| sign in to participate:
-				<a href="/auth/facebook" class='popup ico fa' title="Sign in using facebook"></a>
-				<a href="/auth/github"   class='popup ico gi' title="Sign in using Github"></a>
-				<a href="/auth/google"   class='popup ico go' title="Sign in using Google"></a>
+				- each provider in w.config.auth.providers
+					<a href="/auth/#{provider.code}" class='popup ico #{provider.code.substr(0,2)}' title="Sign in using #{provider.name}"></a>
 	!=partial('partials/_share_links.jade')

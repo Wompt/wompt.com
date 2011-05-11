@@ -17,9 +17,9 @@
 				.contents
 					h3 You can sign in with Google, facebook, or Github
 					h4 No new usernames or passwords to memorize
-					img(src='/images/external/google_128.png')
-					img(src='/images/external/facebook_128.png')
-					img(src='/images/external/github_128.png')
+					- each provider in w.config.auth.providers
+						a(href='/auth/' + provider.code, class='popup', title="Sign in with #{provider.name}")
+							img(src='/images/external/'+provider.code+'_128.png')
 			.slide
 				.contents
 					h3 Use private chat rooms for sensitive discussions

@@ -9,9 +9,8 @@
 			a(href="/user/sign_out", title="Sign out of Wompt", class='same_window') sign out
 		- else
 			| &nbsp;sign in:
-			<a href="/auth/facebook" class='popup ico fa' title="Sign in using facebook"></a>
-			<a href="/auth/github"   class='popup ico gi' title="Sign in using Github"></a>
-			<a href="/auth/google"   class='popup ico go' title="Sign in using Google"></a>
+			- each provider in w.config.auth.providers
+				<a href="/auth/#{provider.code}" class='popup ico #{provider.code.substr(0,2)}' title="Sign in using #{provider.name}"></a>
 			- if(w.config.force_sign_in)
 				= '&nbsp;|&nbsp; '
 				<a href="/users/force_sign_in/1" title="Force sign in as the first user">user 1</a> &nbsp;|&nbsp;

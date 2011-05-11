@@ -50,6 +50,13 @@ module.exports = {
 		token:    '_wompt_auth'
 	}
 	
+	, auth: {
+		providers:[
+			 {name: 'facebook',  code: 'facebook'}
+			,{name: 'Github',    code: 'github'}
+			,{name: 'Google',    code: 'google'}
+		]
+	}
 	
 	, redirectWww: false
 	, redirectWwwToPort: 16867
