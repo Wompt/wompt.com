@@ -5,19 +5,19 @@ link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", 
 		.providers
 			.title Public Profiles
 			- var missing_providers = [];
-			- each provider in ['google', 'facebook', 'github']
-				- var auth = w.profileUser.authentication_for(provider)
+			- each provider in w.config.auth.providers
+				- var auth = w.profileUser.authentication_for(provider.code)
 				- if(auth)
 					.provider
-						- var url = w.profileUser.provider_attribute(provider, 'profile')
+						- var url = w.profileUser.provider_attribute(provider.code, 'profile')
 						a.link(href=(url||'#'))
-							.title= provider
-							div(class="logo " + provider)
+							.title= provider.name
+							div(class="logo " + provider.code)
 				- else missing_providers.push(provider)
 			-if(w.user.same_user(w.profileUser))
 				- each provider in missing_providers
 					.provider.missing
-						a.link(href='/auth/' + provider, class='popup', title="Add a " + provider + " account")
-							.title= provider
-							div(class="logo missing " + provider) ?
+						a.link(href='/auth/' + provider.code, class='popup', title="Link your " + provider.name + " account")
+							.title= provider.name
+							div(class="logo missing " + provider.code) ?
 			.clear

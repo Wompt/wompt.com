@@ -66,6 +66,7 @@ var assetManagerGroups = {
 		, 'files': [
 			'/public/external/bootstrap.js'
 			, '/public/external/events.js'
+			, '/public/js/util.js'
 			, '/public/js/sign_in.js'
 			, '/public/js/ui.js'
 			, '/public/js/ui.layout.js'
@@ -94,6 +95,8 @@ var assetManagerGroups = {
 			, 'user_list.css'
 			, 'support_pages.css'
 			, 'share_links.css'
+			, 'autocomplete.css'
+			, 'icons.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{

@@ -1,5 +1,4 @@
-var userList
-  , Util = {};
+var userList;
 
 jQuery(function(){
 	IO = new IO();

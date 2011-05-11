@@ -107,7 +107,31 @@ App.prototype = {
 					profilePage(req, res, user);
 				});
 			}
-		});		
+		});
+		
+		exp.get("/channels/search", function(req, res){
+			var results = [], term, terms;
+			(term = req.query) && (term = term.term) && (term = term.toLowerCase());
+			// Limit length, split on spaces, remove blank terms, enforce maximum term count
+			terms = term.substr(0,50).split(' ').filter(function(t){return t.length > 0 ;}).slice(0,5);
+			
+			if(terms.length > 1){
+				me.channels.each(function(channel){
+					var name = channel.name;
+					if(terms.every(function(term){return name.indexOf(term) >= 0;})) results.push(channel);
+					if(results.length >= max_results) return true;
+				});
+			} else if(term = terms[0]){
+				me.channels.each(function(channel){
+					if(channel.name.indexOf(term) >= 0) results.push(channel);
+					if(results.length >= max_results) return true;
+				});
+			}
+			results = results.map(function(channel){ return channel.name});
+			
+			res.writeHead(200, {"Content-Type":"application/json"});
+			res.end(JSON.stringify(results));
+		});
 		
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);

@@ -1,38 +1,55 @@
-.container
-	.full.wompt
-		.name Wompt
-		.w
-		.sub is&nbsp;chat
-	.group
-		.cell.first
-			.private_chat
-				h1.title Private Chat
-				.subtitle chat with anyone you invite
-				form(method='get', action='/unlisted/new')
-					input.submit#join(type='submit', value="Create Private Room")
-		.narrow_tail
-		.cell
-			.channel_selector
-				.right_back.back
-				.left_back.back
-				h1.title Public Chat
-				.subtitle !{w.subtitle}
-				form(method='post')
-					input.text.big.inline_label#channel(name='channel', title="Chat topic", type='text', placeholder="Enter a topic")
-					input.submit#join(type='submit', value="Join Chat Room")
-		.clear.narrow_tail
-	.wide_tail
-	.group
+.full.wompt
+	.company Wompt
+	.w
+	.sub is&nbsp;chat
+.plainpage
+	.container
+		.slides
+			.slide.current
+				.contents
+					h3 Like Disqus?  Want Real time?
+					h4 Easily add chat to any web page for free!
+					.wompt_embedd
+						<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=444' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+					h4 HTML
+					.code= "<iframe src='http://wompt.com/chat/any_room_name_you_want?iframe=1#c=888' style='width:100%; height:100%;' allowtransparency='true'></iframe>"
+			.slide.future
+				.contents
+					h3 You can sign in with Google, facebook, or Github
+					h4 No new usernames or passwords to memorize
+					- each provider in w.config.auth.providers
+						a(href='/auth/' + provider.code, class='popup', title="Sign in with #{provider.name}")
+							img(src='/images/external/'+provider.code+'_128.png')
+			.slide
+				.contents
+					h3 Use private chat rooms for sensitive discussions
+					h4 Send others the link, or use the Facebook Send button
+					form(method='get', action='/unlisted/new')
+						span.submit Go to a
+						input.submit#join(type='submit', value="Private Room")
+			.slide
+				.contents
+					h3 Visit any room or create a new one
+					h4 Name chat rooms anything you like
+					form(method='post')
+						input#channel(name='channel', type='text', placeholder="Enter a topic")
+						input.submit#join(type='submit', value="Join Chat Room")
+					h4 Popular rooms
+					table.room_list
+						- each chan in w.app.popular_channels.sorted_list
+							tr
+								td.count= chan.clients.userCount
+								td
+									a(href="/chat/" + chan.name)= chan.name.substring(0,30)
+			#slide_buttons
+				a Add chat to your web site
+				a No new accounts
+				a Privacy
+				a Public Access
+		.clear
+	.group.hide
 		.cell.first
 			.channel_list
 				h1 Popular Rooms
-				table.room_list
-					- each chan in w.app.popular_channels.sorted_list
-						tr
-							td
-								a(href="/chat/" + chan.name)= chan.name.substring(0,20)
-							td.count= chan.clients.userCount
-		.clear.narrow_tail
-	.wide_tail
+			.clear
 	.clear
-	

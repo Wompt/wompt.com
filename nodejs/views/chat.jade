@@ -22,11 +22,10 @@ script(type='text/javascript')
 				| &nbsp;
 				a.try_now(href='#') Try Now
 	- else
-		.name#own_name Observing
+		.name#own_name Just Observing
 		.container
 			#message
 				| sign in to participate:
-				<a href="/auth/google"   class='popup' title="Sign in using Google">google</a> &nbsp;|&nbsp;
-				<a href="/auth/facebook" class='popup' title="Sign in using Facebook">facebook</a> &nbsp;|&nbsp;
-				<a href="/auth/github"   class='popup' title="Sign in using Github">github</a>
+				- each provider in w.config.auth.providers
+					<a href="/auth/#{provider.code}" class='popup ico #{provider.code.substr(0,2)}' title="Sign in using #{provider.name}"></a>
 	!=partial('partials/_share_links.jade')

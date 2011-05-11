@@ -1,0 +1,25 @@
+.ico.fa{
+	background-image:data-url(/images/external/facebook_32.png);
+}
+
+.ico.tw{
+	background-image:data-url(/images/external/twitter_32.png);
+}
+
+.ico.go{
+	background-image:data-url(/images/external/google_32.png);
+}
+
+.ico.gi{
+	background-image:data-url(/images/external/github_32.png);
+}
+
+.ico{
+	display:inline-block;
+	height:28px;
+	width:28px;
+	background:transparent center no-repeat;
+	vertical-align:middle;
+	margin-bottom:5px;
+	margin-right:2px;
+}
