@@ -62,7 +62,7 @@ body .main #share_links,
 }
 .hide_userlist .main #input .container{
 	right:117px;
-	left:125px;
+	left:0px;
 }
 
 
@@ -72,6 +72,9 @@ body .main #share_links,
 	padding:.9em .4em 0 .4em;
 	text-align:right;
 	font-weight:bold;
+}
+.hide_userlist .main #input #own_name{
+	display:none;
 }
 
 #input #message{
@@ -93,6 +96,11 @@ body .main #share_links,
 	left:0;
 	bottom:0;
 	right:0;
+}
+
+.hide_userlist #input #message,
+.hide_userlist #input #input_overlay{
+	font-size:12px;
 }
 
 /* connection status input overlay */
@@ -123,6 +131,7 @@ a.try_now{
 }
 .hide_userlist .main #messages{
 	right:0;
+	font-size:12px;	
 }
 
 .main #messages a,
