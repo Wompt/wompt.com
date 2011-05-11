@@ -95,9 +95,15 @@ body .main #share_links,
 	right:0;
 }
 
+/* connection status input overlay */
 #input #input_overlay{
 	color:#888;
 	background-color: #f0f0f0;
+}
+
+/* only applies when message input ISN'T a textarea */
+#input div#message{
+	overflow:hidden;
 }
 
 a.try_now{
