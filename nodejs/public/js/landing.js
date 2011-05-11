@@ -7,7 +7,7 @@ $(function(){
 		current = 0,
 		buttons = $('#slide_buttons > a').get(),
 		last_slide_change,
-		interval = 5000,
+		interval = 7000,
 		timer,
 		pause_left;
 	
