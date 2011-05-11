@@ -5,34 +5,21 @@ $(function(){
 
 	var slides = $('.slides .slide'),
 		current = 0,
-		buttons = $('#slide_buttons > a').get(),
-		last_slide_change,
-		interval = 7000,
-		timer,
-		pause_left;
+		buttons = $('#slide_buttons > a').get();
 	
 	buttons = buttons.map(function(b, i){
 		var slide = $(slides.get(i));
 		b = $(b);
 		b.attr('href','#');
 		b.click(function(e){
-			stop();
 			show(i);
-			scheduleNext(10000);
-			pause();
 			e.preventDefault();
 		});
 		return b;
 	});
 	
-	slides.click(stop);
-	slides.bind('mouseenter', pause);
-	slides.bind('mouseleave', start);
-	
 	buttons[0].addClass('selected');
 
-	scheduleNext();
-	
 	function show(index){
 		if(index == current) return;
 
@@ -72,33 +59,6 @@ $(function(){
 		
 		last_slide_change = Util.ts();
 		current = index;
-	}
-	
-	function showNext(){
-		show((current + 1) % slides.length);
-		scheduleNext();
-	}
-	
-	function scheduleNext(){
-		timer = setTimeout(showNext, pause_left || interval);
-		pause_left = null;
-	}
-	
-	function start(){
-		if(!timer)
-			scheduleNext();
-	}
-	
-	function pause(){
-		if(!pause_left){
-			pause_left = Math.max(1, interval - (Util.ts() - last_slide_change));
-			stop();
-		}
-	}
-	
-	function stop(){
-		clearTimeout(timer);
-		timer = null;
 	}
 });
 
