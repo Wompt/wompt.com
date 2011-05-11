@@ -36,6 +36,8 @@
 }
 .hide_userlist #share_links{
 	width:110px;
+	left:0;
+	right:auto;
 }
 
 .main #input{
@@ -59,10 +61,11 @@ body .main #share_links,
 	right:187px;
 	color:#444;	
 	overflow:visible;
+	width:auto;
 }
 .hide_userlist .main #input .container{
-	right:117px;
-	left:0px;
+	left:117px;
+	right:0px;
 }
 
 
