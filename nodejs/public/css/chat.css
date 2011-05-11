@@ -149,6 +149,7 @@ a.try_now{
 #message_list {
 	width: 100%;
 	margin-bottom:0.2em;
+	table-layout:fixed;
 }
 
 #message_list.hide_system .line.system {
@@ -157,8 +158,6 @@ a.try_now{
 
 .line td{
 	padding:.1em;
-	word-break:break-all;
-	word-wrap:break-word;
 }
 
 tr.first {
@@ -179,6 +178,8 @@ td.name {
 	text-align:right;
 	color: black;
 	font-weight:bold;
+	word-wrap:normal;
+	word-break:keep-all;	
 }
 .hide_userlist .name {
 	font-size:12px;
@@ -186,5 +187,6 @@ td.name {
 }
 
 .msg {
-	padding-bottom:0.2em;	
+	padding-bottom:0.2em;
+	word-wrap:break-word;
 }
