@@ -1,9 +1,10 @@
-.container
-	.full.wompt
-		.company Wompt
-		.w
-		.sub is&nbsp;chat
-	.plainpage
+.full.wompt
+	.company Wompt
+	.w
+	.sub is&nbsp;chat
+.plainpage
+	.container
+		
 		.slides
 			.slide.current
 				.contents
@@ -27,26 +28,29 @@
 					form(method='get', action='/unlisted/new')
 						span.submit Go to a
 						input.submit#join(type='submit', value="Private Room")
+			.slide
+				.contents
+					h3 Visit any room or create a new one
+					h4 Name chat rooms anything you like
+					form(method='post')
+						input#channel(name='channel', type='text', placeholder="Enter a topic")
+						input.submit#join(type='submit', value="Join Chat Room")
+					h4 Popular rooms
+					table.room_list
+						- each chan in w.app.popular_channels.sorted_list
+							tr
+								td.count= chan.clients.userCount
+								td
+									a(href="/chat/" + chan.name)= chan.name.substring(0,30)
 			#slide_buttons
 				a Add chat to your web site
 				a No new accounts
 				a Privacy
-		.channel_selector
-			h1.title Public Chat
-			.subtitle !{w.subtitle}
-			form(method='post')
-				input.text.big.inline_label#channel(name='channel', title="Chat topic", type='text', placeholder="Enter a topic")
-				input.submit#join(type='submit', value="Join Chat Room")
+				a Public Access
 		.clear
 	.group.hide
 		.cell.first
 			.channel_list
 				h1 Popular Rooms
-				table.room_list
-					- each chan in w.app.popular_channels.sorted_list
-						tr
-							td
-								a(href="/chat/" + chan.name)= chan.name.substring(0,20)
-							td.count= chan.clients.userCount
-		.clear
+			.clear
 	.clear
