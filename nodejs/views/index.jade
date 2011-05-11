@@ -2,9 +2,33 @@
 	.company Wompt
 	.w
 	.sub is&nbsp;chat
-.plainpage
+.container
+	.grid6.first
+		.bubble.black_fade
+			h3 Visit any room or create a new one
+			h4 Name chat rooms anything you like
+			form(method='post')
+				input#channel(name='channel', type='text', placeholder="Enter a topic")
+				input.submit#join(type='submit', value="Join Chat Room")
+			h4.hide Popular rooms
+			table.room_list.hide
+				- each chan in w.app.popular_channels.sorted_list
+					tr
+						td.count= chan.clients.userCount
+						td
+							a(href="/chat/" + chan.name)= chan.name.substring(0,30)
+		.tail
+	.grid6
+		.bubble.black_fade
+			h3 Private rooms for sensitive discussions
+			h4 Email the link, or use the Facebook Send button
+			form(method='get', action='/unlisted/new')
+				span.submit Go to a
+				input.submit#join(type='submit', value="Private Room")
+		.tail
+.plainpage.clear
 	.container
-		.slides
+		.slides.clear
 			.slide.current
 				.contents
 					h3 Like Disqus?  Want Real time?
@@ -20,32 +44,9 @@
 					- each provider in w.config.auth.providers
 						a(href='/auth/' + provider.code, class='popup', title="Sign in with #{provider.name}")
 							img(src='/images/external/'+provider.code+'_128.png')
-			.slide
-				.contents
-					h3 Use private chat rooms for sensitive discussions
-					h4 Send others the link, or use the Facebook Send button
-					form(method='get', action='/unlisted/new')
-						span.submit Go to a
-						input.submit#join(type='submit', value="Private Room")
-			.slide
-				.contents
-					h3 Visit any room or create a new one
-					h4 Name chat rooms anything you like
-					form(method='post')
-						input#channel(name='channel', type='text', placeholder="Enter a topic")
-						input.submit#join(type='submit', value="Join Chat Room")
-					h4 Popular rooms
-					table.room_list
-						- each chan in w.app.popular_channels.sorted_list
-							tr
-								td.count= chan.clients.userCount
-								td
-									a(href="/chat/" + chan.name)= chan.name.substring(0,30)
 			#slide_buttons
 				a Add chat to your web site
-				a No new accounts
-				a Privacy
-				a Public Access
+				a No registration required
 		.clear
 	.group.hide
 		.cell.first

@@ -96,6 +96,7 @@ var assetManagerGroups = {
 			, 'support_pages.css'
 			, 'share_links.css'
 			, 'external/autocomplete.css'
+			, 'external/grid_978.css'
 			, 'icons.css'
 		]
 		, 'preManipulate': cssPreManipulators
