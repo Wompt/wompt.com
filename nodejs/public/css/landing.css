@@ -260,8 +260,3 @@
 	width:100%;
 	height:40px;
 }
-
-/* embedded wompt without iframe */
-#landing .embedd #content{
-	position:absolute;
-}

@@ -4,7 +4,7 @@ body#chat{
 }
 
 .main #content{
-	position:fixed;
+	position:absolute;
 	top:40px;
 	bottom:3.4em;
 	left:0;
