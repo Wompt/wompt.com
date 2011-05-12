@@ -12,18 +12,6 @@ body, #chat #input{
 	bottom:1em;
 }
 
-#top{
-	left:auto;
-	width:45px;
-	right:5px;
-	top:5px;
-	background:none;
-}
-.hide_userlist #top{
-	right:35px;
-	background-color:rgba(255,255,255,0.7);	
-}
-
 #chat #wompt{
 	display:inline;
 	color:white;
@@ -47,17 +35,12 @@ a.popout{
 	border-bottom-left-radius:5px;
 }
 
-
 #messages{
 	-vendor-border-top-left-radius:10px;
-}
-.hide_userlist #top,
-#messages{
 	-vendor-border-bottom-left-radius:10px;
 }
 
 #user_list,
-.hide_userlist #top,
 .hide_userlist #messages{
 	-vendor-border-bottom-right-radius:10px;
 }
