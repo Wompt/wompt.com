@@ -234,6 +234,10 @@
 	display:none;
 }
 
+#landing .container > div{
+	margin-top: 0;
+}
+
 #landing .bubble {
 	position:relative;
 	text-align:center;
