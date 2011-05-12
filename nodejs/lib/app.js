@@ -135,7 +135,7 @@ App.prototype = {
 		
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
-			res.redirect('/chat/' + req.body.channel);
+			res.redirect('/chat/' + (req.body.channel || 'wompt'));
 		});
 		
 		exp.get("/unlisted/new", function(req, res){
