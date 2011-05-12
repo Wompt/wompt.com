@@ -1,4 +1,4 @@
-- if(w.config.ga.use && !(w.user && w.user.doc && w.user.doc.is_admin()))
+- if(w.config.ga.use && !w.disable_ga && !(w.user && w.user.doc && w.user.doc.is_admin()))
 	script(type='text/javascript')
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-19794419-1']);

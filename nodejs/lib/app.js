@@ -339,6 +339,8 @@ App.prototype = {
 			if(options.allowIframe && req.query.iframe == '1'){
 				opt.layout = 'layouts/iframe';
 				locals.w.ga_source = 'embedd';
+				// Disable google analytics when embedding wompt on a wompt page
+				locals.w.disable_ga = (req.headers.referer || '').indexOf("wompt.com") >=0;
 				if(options.allowCSS) locals.w.css_file = req.query.css_file;
 			}
 			
