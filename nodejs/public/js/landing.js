@@ -1,5 +1,5 @@
-$(function(){
-	UI.emit('init');
+UI.once('init',function(){
+	if(!$('#landing').get(0)) return;
 	
 	$('input#channel').autocomplete({source:'/channels/search'});
 
@@ -76,7 +76,6 @@ $(function(){
 			return (bool ? 'add' : 'remove') + 'Class';
 		}
 		
-		last_slide_change = Util.ts();
 		current = index;
 	}
 });
