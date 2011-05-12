@@ -1,5 +1,5 @@
 UI.once('init', function(){
-	var c = $('body'),
+	var c = $('#chat'),
 	hide_userlist_at = 650,
 	layout_delay = 200,
 	narrow_at = 800,
@@ -13,7 +13,7 @@ UI.once('init', function(){
 	});
 	
 	function doLayout(){
-		var w = $(window).width();
+		var w = c.width();
 		c[(w < hide_userlist_at ? 'add' : 'remove') + 'Class']('hide_userlist');
 		$('.container')[(w < narrow_at ? 'add' : 'remove') + 'Class']('narrow');
 	}
