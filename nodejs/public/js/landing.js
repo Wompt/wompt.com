@@ -3,7 +3,7 @@ UI.once('init',function(){
 	
 	$('input#channel').autocomplete({source:'/channels/search'});
 
-	var form = $('#embedd_form');
+	var form = $('#embed_form');
 	form.find('input').keyup(updateCode);
 	
 	

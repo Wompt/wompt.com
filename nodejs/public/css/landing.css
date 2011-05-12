@@ -202,29 +202,29 @@
 	background:white;
 }
 
-#embedd_form{
+#embed_form{
 	margin-left:15px;
 	font-size:12px;
 }
 
-#embedd_form input{
+#embed_form input{
 	margin-right:10px;
 }
 
-#embedd_form > #height,
-#embedd_form > #width{
+#embed_form > #height,
+#embed_form > #width{
 	width:40px;	
 }
 
-#embedd_form > #color{
+#embed_form > #color{
 	width:70px;
 }
 
-#embedd_form > #room_name{
+#embed_form > #room_name{
 	width:150px;
 }
 
-#landing .embedd{
+#landing .embed{
 	position:relative;
 	height:250px;
 	margin-right:15px;
