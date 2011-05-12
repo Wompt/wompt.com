@@ -16,3 +16,10 @@
 #footer a{
 	margin: 0px 5px;
 }
+
+.hide_userlist #footer .left{
+	display:none;
+}
+.hide_userlist #footer .right{
+	float:left;
+}

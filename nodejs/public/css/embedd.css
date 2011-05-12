@@ -73,8 +73,21 @@ a.popout{
 	bottom: 4.4em;	
 }
 
+#share_links > .pad{
+	padding-top:10px;
+}
+
 .hide_userlist #share_links{
-	height:2.9em;
+	height:3.2em;
+}
+
+/* undo the CSS that hides the left side of the footer
+  In embedd mode, we show all of the footer */
+.hide_userlist #footer .left{
+	display:block;
+}
+.hide_userlist #footer .right{
+	float:right;
 }
 
 .hide_userlist #footer_container{
