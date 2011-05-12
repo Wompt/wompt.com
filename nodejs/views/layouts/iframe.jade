@@ -5,7 +5,7 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 		-if(w.css_file)
 			link(type='text/css',src=w.css_file)
 		link(href="/css/embedd_"+cacheTimeStamps.embedd_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
-	body(id=w.page_name)
+	body.embedd(id=w.page_name)
 		#fb-root
 		.main
 			a.popout(href=w.url.split('?')[0], title="Open this chat room in a new tab")		

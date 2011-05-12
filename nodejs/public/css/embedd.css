@@ -1,4 +1,5 @@
-body, #chat #input{
+body.embedd,
+#chat #input{
 	background:none;
 }
 
