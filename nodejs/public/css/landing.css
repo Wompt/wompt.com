@@ -1,7 +1,8 @@
-#landing .main {
-	margin-top:0px;
+#landing,
+#landing .main{
+	margin-top:0;
+	padding-top:0;
 	position:relative;
-	min-height:100%;
 }
 
 #landing #top{

@@ -2,8 +2,17 @@ body{
 	font-family: helvetica, arial, freesans, clean, sans-serif;
 	font-size:1em;
 	margin: 0px;
-	min-height: 100%;
 	background: #ff7936 top center repeat;
+	position:relative;
+}
+
+.main{
+	padding:55px 0;
+	margin: 0 auto;
+}
+
+html{
+	min-height: 100%;
 }
 
 /* Text that is displayed on the base body background */
@@ -13,7 +22,7 @@ body {
 }
 
 #bg{
-	position:fixed;
+	position:absolute;
 	top:0;
 	left:0;
 	right:0;
@@ -62,10 +71,6 @@ ol { list-style-type: decimal; }
 .left { float:left;  }
 .right{ float:right; }
 .clear{ clear:both; }
-
-.main {
-	margin-top:55px;	
-}
 
 tt{
 	font-family: Consolas, 'Courier New', monospace;
