@@ -1,4 +1,4 @@
-var connect_utils = require('connect').utils,
+var utils = require('./util'),
     util = require("util"),
     events = require("events");
 		
@@ -10,7 +10,7 @@ function Expirer(collection, options){
 		me = this,
 		timer;
 		
-	options = connect_utils.merge(defaults, options || {});
+	options = utils.merge(defaults, options || {});
 	options.cleanup_interval = options.check_interval || options.expire_after_ms;
 	
 	function check_expiration(){
