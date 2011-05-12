@@ -68,14 +68,14 @@
 }
 
 
-.main #input #own_name {
+#input #own_name {
 	position:absolute;
 	width:9.5em;
 	padding:.9em .4em 0 .4em;
 	text-align:right;
 	font-weight:bold;
 }
-.hide_userlist .main #input #own_name{
+.hide_userlist #input #own_name{
 	display:none;
 }
 
@@ -120,7 +120,7 @@ a.try_now{
 	display:none;
 }
 
-.main #messages{
+#chat #messages{
 	padding-bottom:0px;
 	overflow: hidden;
 	position:absolute;
@@ -131,7 +131,7 @@ a.try_now{
 	z-index:1;
 	background-color:#f7f7f7;
 }
-.hide_userlist .main #messages{
+#chat.hide_userlist #messages{
 	right:0;
 	font-size:12px;	
 }
