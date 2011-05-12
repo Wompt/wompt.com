@@ -86,7 +86,7 @@ var assetManagerGroups = {
 			, 'external/autocomplete.css'
 			, 'external/grid_978.css'
 			, 'icons.css'
-			, 'embedd.css'
+			, 'embed.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{
