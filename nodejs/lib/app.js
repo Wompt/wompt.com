@@ -169,14 +169,25 @@ App.prototype = {
 		});
 		
 		function landingPage(req, res){
-			wompt.Auth.get_or_set_token(req, res);
+			var meta_user = req.meta_user,
+			token = wompt.Auth.get_or_set_token(req, res);
+
+			var connector = me.client_connectors.add({
+				meta_user:meta_user,
+				namespace:me.channels,
+				token: token
+			});
+			
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
 					app:me,
+					channel: 'wompt',
+					namespace: 'chat',
+					connector_id: connector.id,
+					popout: '/chat/wompt',
 					jquery: true,
-					page_js: 'landing',
-					page_name:'landing',
-					subtitle: me.choose_subtitle()
+					page_js: 'channel',					
+					page_name:'landing'
 				})
 			});
 		}
@@ -213,15 +224,6 @@ App.prototype = {
 		return {
 			w:vars
 		};
-	},
-	
-	choose_subtitle: function(){
-		var subtitles = [
-			 "Try it free, no signup required"
-			,"Always free, sign in using Facebook"
-			,"Speak <strong><tt>c0d3?</tt></strong> sign in using Github"
-		];
-		return subtitles[Math.floor(Math.random() * subtitles.length)];
 	},
 	
 	start_server: function(){

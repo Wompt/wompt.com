@@ -1,19 +1,19 @@
 body.embedd,
-#chat #input{
+.embedd#chat #input{
 	background:none;
 }
 
-#chat #user_list{
+.embedd#chat #user_list{
 	top: 0px;
 }
 
-#chat #input{
+.embedd#chat #input{
 	left:5px;
 	right:0px;
 	bottom:1em;
 }
 
-#chat #wompt{
+.embedd#chat #wompt{
 	display:inline;
 	color:white;
 }
@@ -36,23 +36,23 @@ a.popout{
 	border-bottom-left-radius:5px;
 }
 
-#messages{
+.embedd #messages{
 	-vendor-border-top-left-radius:10px;
 	-vendor-border-bottom-left-radius:10px;
 }
 
-#user_list,
+.embedd #user_list,
 .hide_userlist #messages{
 	-vendor-border-bottom-right-radius:10px;
 }
 
-#user_list,
-#user_list .title,
-.hide_userlist #messages{
+.embedd #user_list,
+.embedd #user_list .title,
+.embedd.hide_userlist #messages{
 	-vendor-border-top-right-radius:10px;
 }
 
-#chat #content{
+.embedd#chat #content{
 	-vendor-box-shadow:rgba(0,0,0,0.3) 0 0 5px;
 	-vendor-border-radius:10px;
 	top:5px;
@@ -61,23 +61,23 @@ a.popout{
 	bottom: 4.4em;	
 }
 
-#share_links > .pad{
+.embedd #share_links > .pad{
 	padding-top:10px;
 }
 
-.hide_userlist #share_links{
+.embedd .hide_userlist #share_links{
 	height:3.2em;
 }
 
 /* undo the CSS that hides the left side of the footer
   In embedd mode, we show all of the footer */
-.hide_userlist #footer .left{
+.embedd .hide_userlist #footer .left{
 	display:block;
 }
-.hide_userlist #footer .right{
+.embedd .hide_userlist #footer .right{
 	float:right;
 }
 
-.hide_userlist #footer_container{
+.embedd .hide_userlist #footer_container{
 	left:5px;
 }

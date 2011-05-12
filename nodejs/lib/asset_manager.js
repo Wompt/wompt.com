@@ -58,19 +58,7 @@ var assetManagerGroups = {
 			, '/public/js/ui.fb.share.js'
 			, '/public/js/sign_in.js'
 			, '/public/js/links_in_new_tab.js'
-		]
-	}),	'landing_js': mc(defaultOptions,{
-		'route': /\/js\/landing_[\d]+.js/
-		, 'path': root
-		, 'dataType': 'javascript'
-		, 'files': [
-			'/public/external/bootstrap.js'
-			, '/public/external/events.js'
-			, '/public/js/util.js'
-			, '/public/js/sign_in.js'
-			, '/public/js/ui.js'
-			, '/public/js/ui.layout.js'
-			, '/public/js/landing.js'
+			, '/public/js/landing.js'			
 		]
 	}), 'profile_js': mc(defaultOptions,{
 		'route': /\/js\/profile_[\d]+.js/
@@ -98,6 +86,7 @@ var assetManagerGroups = {
 			, 'external/autocomplete.css'
 			, 'external/grid_978.css'
 			, 'icons.css'
+			, 'embedd.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{
@@ -106,14 +95,6 @@ var assetManagerGroups = {
 		, 'dataType': 'css'
 		, 'files': [
 			'profile.css'
-		]
-		, 'preManipulate': cssPreManipulators
-	}), 'embedd_css': mc(defaultOptions,{
-		'route': /\/css\/embedd_[0-9]+\.css/
-		, 'path': pub + '/css/'
-		, 'dataType': 'css'
-		, 'files': [
-			'embedd.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}),	

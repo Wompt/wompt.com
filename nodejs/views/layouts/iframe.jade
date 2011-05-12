@@ -4,7 +4,6 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 		!=partial('layouts/_head')
 		-if(w.css_file)
 			link(type='text/css',src=w.css_file)
-		link(href="/css/embedd_"+cacheTimeStamps.embedd_css+".css", rel="stylesheet", type="text/css", media="screen,projection")
 	body.embedd(id=w.page_name)
 		#fb-root
 		.main

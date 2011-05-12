@@ -33,8 +33,9 @@
 				.contents
 					h3 Like Disqus?  Want Real time?
 					h4 Easily add chat to any web page for free!
-					.wompt_embedd
-						<iframe src='http://#{w.host}/chat/wompt?iframe=1#c=444' style='width:100%; height:100%;' allowtransparency="true"></iframe>
+					.embedd#chat
+						a.popout(href=w.popout, title="Open this chat room in a new tab")		
+						!= partial('chat')
 					h4 Embedd code
 					#embedd_form
 						| Room Name:
