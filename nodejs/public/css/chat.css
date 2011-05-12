@@ -26,8 +26,7 @@
 	display:none;
 }
 
-
-.main #share_links{
+#share_links{
 	position:absolute;
 	bottom:0;
 	right:0;
@@ -40,7 +39,7 @@
 	right:auto;
 }
 
-.main #input{
+#chat #input{
 	position:absolute;
 	bottom:0;
 	left:0;
@@ -48,12 +47,12 @@
 	height:3.4em;
 }
 
-body .main #share_links,
-.main #content #input{
+#share_links,
+#content #input{
 	background-position:bottom left;
 }
 
-.main #input .container{
+#input .container{
 	position:absolute;
 	top:7px;
 	left:10.4em;
@@ -63,7 +62,7 @@ body .main #share_links,
 	overflow:visible;
 	width:auto;
 }
-.hide_userlist .main #input .container{
+.hide_userlist #input .container{
 	left:117px;
 	right:0px;
 }

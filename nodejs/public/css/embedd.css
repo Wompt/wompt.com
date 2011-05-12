@@ -1,16 +1,12 @@
-body, .main #input{
+body, #chat #input{
 	background:none;
 }
 
-.main #content{
-	top: 0px;
-	bottom: 4.4em;
-}
-.main #user_list{
+#chat #user_list{
 	top: 0px;
 }
 
-.main #input{
+#chat #input{
 	left:5px;
 	right:5px;
 	bottom:1em;
@@ -68,12 +64,13 @@ a.popout{
 	-vendor-border-top-right-radius:10px;
 }
 
-.main #content{
+#chat #content{
 	-vendor-box-shadow:rgba(0,0,0,0.3) 0 0 5px;
 	-vendor-border-radius:10px;
 	top:5px;
 	left:5px;
 	right:5px;
+	bottom: 4.4em;	
 }
 
 .hide_userlist #share_links{
