@@ -25,10 +25,6 @@
 	margin: 0 auto;
 }
 
-#landing .narrow .wompt{
-	font-size:30px;
-}
-
 #landing .w {
 	background: top center no-repeat url(/images/logo/white_100_shadow.png);
 	margin:0 auto;
@@ -56,12 +52,6 @@
 	padding-right:75px;
 	right:50%;
 }
-
-#landing .narrow .wompt > .company,
-#landing .narrow .wompt > .sub{
-	top:45px;
-}
-
 
 #landing h3{
 	font-size: 1.3em;
