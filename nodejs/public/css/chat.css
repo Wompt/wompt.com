@@ -1,5 +1,8 @@
 body#chat{
-	height: 100%;
+	overflow:hidden;
+}
+
+body#chat .main{
 	position:static;
 }
 

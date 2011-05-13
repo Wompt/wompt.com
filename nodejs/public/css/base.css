@@ -3,16 +3,21 @@ body{
 	font-size:1em;
 	margin: 0px;
 	background: #ff7936 top center repeat;
-	position:relative;
+	height: 100%;
 }
 
 .main{
-	padding:55px 0;
+	padding: 55px 0;
 	margin: 0 auto;
+	min-height:100%;
+}
+
+.main.taller{
+	position:relative;
 }
 
 html{
-	min-height: 100%;
+	height: 100%;
 }
 
 /* Text that is displayed on the base body background */
@@ -30,6 +35,7 @@ body {
 	background-image: data-url(/images/structure/striped_179_thick.png), data-url(/images/structure/striped_97_multi.png), data-url(/images/structure/striped_71_thin.png), data-url(/images/structure/striped_61x67_multi.png);
 	z-index:-1;
 	opacity:0.5;
+	min-height:100%;
 }
 
 a{
