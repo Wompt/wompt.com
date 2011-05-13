@@ -26,7 +26,7 @@ body#chat .main{
 #chat #footer{
 	padding:0 41px 4px 3px;
 }
-#chat.hide_userlist #footer{
+#chat.small #footer{
 	padding-right:7px;
 }
 
@@ -41,7 +41,7 @@ body#chat .main{
 	width:181px;
 	height:3.4em;
 }
-.hide_userlist #share_links{
+.small #share_links{
 	width:110px;
 	left:0;
 	right:auto;
@@ -70,7 +70,7 @@ body#chat .main{
 	overflow:visible;
 	width:auto;
 }
-.hide_userlist #input .container{
+.small #input .container{
 	left:117px;
 	right:5px;
 }
@@ -83,7 +83,7 @@ body#chat .main{
 	text-align:right;
 	font-weight:bold;
 }
-.hide_userlist #input #own_name{
+.small #input #own_name{
 	display:none;
 }
 
@@ -108,8 +108,8 @@ body#chat .main{
 	right:0;
 }
 
-.hide_userlist #input #message,
-.hide_userlist #input #input_overlay{
+.small #input #message,
+.small #input #input_overlay{
 	font-size:12px;
 }
 
@@ -191,7 +191,7 @@ td.name {
 	word-wrap:normal;
 	word-break:keep-all;	
 }
-.hide_userlist .name {
+.small .name {
 	font-size:12px;
 	width:10em;
 }

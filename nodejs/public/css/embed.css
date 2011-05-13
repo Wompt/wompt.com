@@ -65,10 +65,10 @@ a.popout{
 	padding-top:10px;
 }
 
-.embed.hide_userlist #share_links{
+.embed.small #share_links{
 	height:3.2em;
 }
 
-.embed.hide_userlist #footer_container{
+.embed.small #footer_container{
 	left:5px;
 }
