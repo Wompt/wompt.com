@@ -9,7 +9,7 @@ function Channel(config){
 	
 	this.last_activity = new Date();
 	this.name = config.name;
-	this.messages = new wompt.MessageList();
+	this.messages = new wompt.MessageList(this);
 	this.clients = new wompt.ClientPool();
 	
 	// Called from the context of the client
@@ -142,7 +142,6 @@ var proto = {
 	
 	broadcast_message: function(msg, except){
 		this.emit('msg', msg);
-		this.messages.add(msg);
 		this.clients.broadcast(msg, except);
 	},
 	

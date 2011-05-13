@@ -1,7 +1,19 @@
 var events = require("events");
 
-function MessageList(){
+function MessageList(channel){
 	this.messages = [];
+	var self = this;
+	if(channel){
+		channel.on('msg', function(msg){
+			if(keep_message(msg))
+				self.add(msg);
+		});
+	}
+}
+
+function keep_message(msg){
+	// Don't keep these messages around in memory.
+	return msg.action != 'join' && msg.action != 'part';
 }
 
 var proto = MessageList.prototype;
@@ -37,6 +49,7 @@ proto.is_empty = function(){
 }
 
 proto.prepend = function(msgs){
+	msgs = msgs.filter(keep_message);
 	this.messages = msgs.concat(this.messages);
 }
 
