@@ -12,7 +12,7 @@
 	display:none;
 }
 
-#user_list .users{
+#user_list .list{
 	overflow-x:hidden;
 	overflow-y:auto;
 	white-space:nowrap;
@@ -35,4 +35,8 @@
 #user_list .user{
 	padding:4px 10px 1px 10px;
 	display:block;
+}
+
+#user_list .user.anon{
+	color:#aaa;
 }

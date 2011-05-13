@@ -11,7 +11,9 @@ script(type='text/javascript')
 	#user_list
 		.title People&nbsp;
 			span#user_count
-		.users			
+		.list
+			.top
+			.users
 #input
 	- if(w.user.authenticated())
 		.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}

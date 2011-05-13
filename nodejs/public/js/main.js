@@ -4,7 +4,7 @@ jQuery(function(){
 	IO = new IO();
 
 	userList = new UserList();
-	uli = new UserListUI(userList, $('#user_list .users'));
+	uli = new UserListUI(userList, $('#user_list .users'), $('#user_list .top'));
 
 	UI.emit('init');
 	
