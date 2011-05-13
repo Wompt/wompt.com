@@ -78,7 +78,7 @@ App.prototype = {
 		]);
 		
 		exp.get("/re-authenticate", function(req, res, next){
-			if(req.meta_user && req.meta_user.authenticated()){
+			if(req.meta_user){
 				var token = wompt.Auth.get_or_set_token(req, res);
 				var connector = me.client_connectors.add({
 					meta_user:req.meta_user,
