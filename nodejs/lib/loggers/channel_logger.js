@@ -4,7 +4,7 @@ Hoptoad = require('../hoptoad'),
 
 env = require('../../environment');
 
-var MAX_PRELOAD_BYTES = 1024 * 32;
+var MAX_PRELOAD_BYTES = 1024 * 64;
 
 if(!env.logs.channels.disabled)
 	fs.mkdir(env.logs.channels.root, 0775, Hoptoad.notifyCallback);
