@@ -24,7 +24,8 @@ function Channel(config){
 		channel.touch();
 		delete client.meta_data;
 		if(client.user.visible){
-			if(channel.clients.other_clients_from_same_user(client).length == 0)
+			// Anonymous clients are treated independently for the userlist (anon count = anonymous clients)
+			if(!client.user.authenticated() || channel.clients.other_clients_from_same_user(client).length == 0)
 				channel.broadcast_user_list_change({'part': client.user});
 		}
 	}
@@ -41,7 +42,8 @@ var proto = {
 		this.clients.add(client);
 
 		if(client.user.visible){
-			if(this.clients.other_clients_from_same_user(client).length == 0)
+			// Anonymous clients are treated independently for the userlist (anon count = anonymous clients)
+			if(!client.user.authenticated() || this.clients.other_clients_from_same_user(client).length == 0)
 				this.broadcast_user_list_change({
 					join: client.user,
 					except: client
@@ -94,18 +96,24 @@ var proto = {
 	},
 	
 	get_user_list: function(client){
-		var users = {}, list = this.clients.list;
+		var users = {anonymous:{count:0}}, list = this.clients.list;
 		
 		for(var id in list){
 			var cl = list[id],
 			    doc = cl.user.doc,
 			    uid = cl.user.id();
 			
-			if(cl.user.visible && doc && !users[uid])
+			if(cl.user.visible && doc && !users[uid]){
 				users[uid]={
 					name: doc.name || 'anonymous'
 				};
+			}else {
+				users.anonymous.count++;
+			}
 		}
+		
+		if(users.anonymous.count == 0) delete users.anonymous;
+		
 		return users;
 	},
 	
@@ -116,9 +124,13 @@ var proto = {
 		else if(opt.join) action='join';
 		
 		var users = {}, user = opt.part || opt.join;
-		users[user.id()] = {
-			'name': user.doc.name || user.doc.email
-		} 
+		if(user.authenticated()){
+			users[user.id()] = {
+				'name': user.doc.name || user.doc.email
+			}
+		} else {
+			users.anonymous = {count:1};
+		}
 		
 		var message = {
 			t: new Date().getTime(),

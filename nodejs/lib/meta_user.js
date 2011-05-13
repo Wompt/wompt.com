@@ -4,7 +4,7 @@ function MetaUser(doc){
 	var me = this;
 	this.clients = new wompt.ClientPool();
 	this.doc = doc;
-	this.visible = !!doc;
+	this.visible = true;
 	this.readonly = !doc;
 	this.touch();
 	
