@@ -33,27 +33,28 @@ UserList.prototype.each = function(f){
 	$.each(this.users,f);	
 }
 
-function UserListUI(ul, container){
+function UserListUI(ul, container, top){
 	if(!ul) return;
 	var user_divs = {},
+	// Single Anonymous user for the userlist
+	anonymous = {el: null, count:0},
 	sorted = [];
 	
 	ul.on('join', function(users){
-		var names=[];
 		$.each(users, function(id, user){
 			user.id = id;
 			addUser(user);
-			names.push(user.name);
 		});
 		updateUserCount();
 	});
 
 	ul.on('part', function(users){
-		var names=[];
 		$.each(users, function(id, user){
 			user.id = id;
-			removeUser(user);
-			names.push(user.name);
+			if(id == 'anonymous')
+				removeAnonymous(user);
+			else
+				removeUser(user);
 		});
 		updateUserCount();
 	});
@@ -68,6 +69,8 @@ function UserListUI(ul, container){
 	});
 	
 	function addUser(user){
+		if(user.id == 'anonymous') return addAnonymous(user);
+		
 		if(user_divs[user.id]) return;
 		
 		var name_div = user.el = $('<a>');
@@ -87,6 +90,39 @@ function UserListUI(ul, container){
 		else
 			container.prepend(name_div);
 		user_divs[user.id] = name_div;
+	}
+	
+	function addAnonymous(user){
+		var a = anonymous;
+		if(!a.el){
+			a.el = $('<div>');
+			a.id = user.id;
+			user_divs[a.id] = a.el;
+			a.el.attr({
+				'class': 'user anon'
+			});
+			a.count = 0;
+			top.prepend(a.el);
+		}
+		
+		a.count += user.count;
+		
+		a.el.text("Anonymous ("+ a.count +")");
+	}
+	
+	function removeAnonymous(user){
+		var a = anonymous;
+		if(!a.el) return;
+
+		a.count -= user.count;
+	
+		if(a.count <= 0){
+			removeUser(a);
+			a.el = null;
+			a.count = 0;
+		}else{
+			a.el.text("Anonymous ("+ a.count +")");
+		}
 	}
 	
 	function addToSortedList(user){
@@ -112,11 +148,12 @@ function UserListUI(ul, container){
 		for(var i in user_divs){
 			user_divs[i].remove();
 		}
+		anonymous.el = null;
 		user_divs = {};
 		sorted = [];
 	}
 	
 	function updateUserCount(){
-		$('#user_count').text('(' + sorted.length + ')');
+		$('#user_count').text('(' + (sorted.length + anonymous.count) + ')');
 	}
 }
