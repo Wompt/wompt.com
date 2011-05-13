@@ -17,9 +17,9 @@
 	margin: 0px 5px;
 }
 
-.hide_userlist #footer .left{
+.hide_userlist #footer.regular .left{
 	display:none;
 }
-.hide_userlist #footer .right{
+.hide_userlist #footer.regular .right{
 	float:left;
 }

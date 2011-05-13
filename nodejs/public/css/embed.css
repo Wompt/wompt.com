@@ -42,7 +42,7 @@ a.popout{
 }
 
 .embed #user_list,
-.hide_userlist #messages{
+.embed.hide_userlist #messages{
 	-vendor-border-bottom-right-radius:10px;
 }
 
@@ -65,19 +65,10 @@ a.popout{
 	padding-top:10px;
 }
 
-.embed .hide_userlist #share_links{
+.embed.hide_userlist #share_links{
 	height:3.2em;
 }
 
-/* undo the CSS that hides the left side of the footer
-  In embed mode, we show all of the footer */
-.embed .hide_userlist #footer .left{
-	display:block;
-}
-.embed .hide_userlist #footer .right{
-	float:right;
-}
-
-.embed .hide_userlist #footer_container{
+.embed.hide_userlist #footer_container{
 	left:5px;
 }
