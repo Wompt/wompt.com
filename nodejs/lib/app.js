@@ -181,10 +181,10 @@ App.prototype = {
 			res.render('index', {
 				locals: me.standard_page_vars(req, {
 					app:me,
-					channel: 'wompt',
+					channel: 'general',
 					namespace: 'chat',
 					connector_id: connector.id,
-					popout: '/chat/wompt',
+					popout: '/chat/general',
 					jquery: true,
 					page_js: 'channel',					
 					page_name:'landing'
