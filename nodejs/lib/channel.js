@@ -118,7 +118,7 @@ var proto = {
 	},
 	
 	broadcast_user_list_change: function(opt){
-		var action;
+		var action, dont_emit;
 		
 		if(opt.part) action='part';
 		else if(opt.join) action='join';
@@ -130,6 +130,8 @@ var proto = {
 			}
 		} else {
 			users.anonymous = {count:1};
+			// anonymous join / parts shouldn't be emitted (and thus logged to disk)
+			dont_emit = true;
 		}
 		
 		var message = {
@@ -137,11 +139,12 @@ var proto = {
 			action:action,
 			users: users
 		};
-		this.broadcast_message(message, opt.except);
+		this.broadcast_message(message, opt.except, dont_emit);
 	},
 	
-	broadcast_message: function(msg, except){
-		this.emit('msg', msg);
+	broadcast_message: function(msg, except, dont_emit){
+		if(!dont_emit)
+			this.emit('msg', msg);
 		this.clients.broadcast(msg, except);
 	},
 	
