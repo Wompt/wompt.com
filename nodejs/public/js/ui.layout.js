@@ -17,8 +17,6 @@ UI.once('init', function(){
 		c[(w < hide_userlist_at ? 'add' : 'remove') + 'Class']('hide_userlist');
 		$('.container')[(w < narrow_at ? 'add' : 'remove') + 'Class']('narrow');
 		var taller = $('body').height() >= $(window).height();
-		console.log("Taller?: " + taller);
-		console.log("Body: " +  $('body').height()  + "   Window:" + $(window).height() + "  HTML:" +  $('html').height());
 		$('.main')[(taller ? 'add' : 'remove') + "Class"]('taller');
 	}
 	
