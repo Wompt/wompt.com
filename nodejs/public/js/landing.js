@@ -9,15 +9,15 @@ UI.once('init',function(){
 	
 	function updateCode(){
 		var code = [
-		"<iframe src='http://wompt.com/chat/",
+		'<iframe src="http://wompt.com/chat/',
 			encodeURIComponent(form.find('#room_name').val()),
-		"?iframe=1#c=",
+		'?iframe=1#c=',
 			form.find('#color').val(),
-		"' style='width:",
+		'" style="width:',
 			form.find('#width').val(),
 		,"; height:",
 			form.find('#height').val(),
-		,";' allowtransparency='true'></iframe>"];
+		,';" allowtransparency="true"></iframe>'];
 		$('#code').text(code.join(''));
 	}
 	updateCode();
