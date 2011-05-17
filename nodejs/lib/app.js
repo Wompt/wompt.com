@@ -297,7 +297,7 @@ App.prototype = {
 
 		var me = this,
 		exp = this.express,
-		channelManager = new wompt.ChannelManager();
+		channelManager = new wompt.ChannelManager(options);
 		
 		this.namespaces[namespace] = channelManager;
 		
