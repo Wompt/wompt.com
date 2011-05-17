@@ -103,10 +103,12 @@ var proto = {
 			    doc = cl.user.doc,
 			    uid = cl.user.id();
 			
-			if(cl.user.visible && doc && !users[uid]){
-				users[uid]={
-					name: doc.name || 'anonymous'
-				};
+			if(cl.user.visible && doc){
+				if(!users[uid]){
+					users[uid]={
+						name: doc.name || 'anonymous'
+					};
+				}
 			}else {
 				users.anonymous.count++;
 			}
