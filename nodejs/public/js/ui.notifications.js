@@ -107,7 +107,10 @@ UI.once('init', function(){
 				return modes[pub.current][0] == m;
 			}
 		}
-		button.click(pub.cycle);		
+		button.click(function(e){
+			pub.cycle();
+			e.preventDefault();
+		});		
 		return pub;
 	})();
 });
