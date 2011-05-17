@@ -21,19 +21,7 @@ body.embed,
 a.popout{
 	background:center no-repeat data-url(/images/popout_dark.png);
 	height:25px;
-	width:25px;
-	display:block;
-	position:absolute;
-	right:8px;
-	top:5px;
-	z-index:2;
-}
-.hide_userlist a.popout{
-	right:32px;
-	background-color:rgba(255,255,255,0.5);
-	padding:3px 5px;
-	border-bottom-right-radius:5px;
-	border-bottom-left-radius:5px;
+	width:30px;
 }
 
 .embed #messages{

@@ -340,6 +340,7 @@ App.prototype = {
 			
 			if(options.allowIframe && req.query.iframe == '1'){
 				opt.layout = 'layouts/iframe';
+				locals.w.embedded = true;
 				locals.w.ga_source = 'embedd';
 				if(options.allowCSS) locals.w.css_file = req.query.css_file;
 			}

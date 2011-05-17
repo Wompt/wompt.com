@@ -6,10 +6,11 @@
 	width:180px;
 	background-color:#fff;
 	border-left:solid 1px #ccc;
-	font-weight:bold;	
+	font-weight:bold;
+	z-index:1;
 }
 .hide_userlist #user_list{
-	display:none;
+	right:-190px;
 }
 .small #user_list{
 	font-size:12px;
@@ -42,4 +43,16 @@
 
 #user_list .user.anon{
 	color:#aaa;
+}
+
+.userlist_toggle {
+	padding:0 8px;
+	font-size:24px;
+}
+
+.show_userlist .ul_hidden{
+	display:none;
+}
+.hide_userlist .ul_shown{
+	display:none;
 }

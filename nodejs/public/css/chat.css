@@ -15,6 +15,7 @@ body#chat .main{
 	z-index:1;
 	overflow: hidden;
 	color:black;
+	background-color:#f7f7f7;	
 }
 
 #chat #footer_container{
@@ -137,7 +138,6 @@ a.try_now{
 	right:181px;
 	bottom:0;
 	z-index:1;
-	background-color:#f7f7f7;
 }
 #chat.hide_userlist #messages{
 	right:0;
@@ -149,10 +149,14 @@ a.try_now{
 #chat.small.hide_userlist #messages{
 	right:0;
 }
+
+#chat #messages,
+#user_list{
+	-vendor-transition:right 0.3s ease-in-out;
 }
 
-.main #messages a,
-.main #input .container a{
+#messages a,
+#input .container a{
 	color:#286ea0;
 }
 
@@ -206,4 +210,31 @@ td.name {
 .msg {
 	padding-bottom:0.2em;
 	word-wrap:break-word;
+}
+
+
+/* Actions section */
+#actions{
+	position:absolute;
+	right:30px;
+	top:0px;
+	padding:3px 5px 5px 5px;
+	z-index:2;
+	background-color:rgba(255,255,255,0.5);
+	border:1px solid #eee;
+	border-top:none;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+	line-height:22px;
+}
+
+#actions a{
+	float:left;
+	display:block;
+	color:#444;
+	text-decoration:none;
+}
+
+#actions a:active{
+	padding-top:2px;
 }
