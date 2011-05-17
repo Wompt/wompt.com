@@ -18,6 +18,7 @@ UI.once('init', function(){
 		c[(w < hide_userlist_at ? 'add' : 'remove') + 'Class']('hide_userlist');
 		var taller = $('body').height() >= $(window).height();
 		$('.main')[(taller ? 'add' : 'remove') + "Class"]('taller');
+		$('.hide_userlist').removeClass('hide_userlist');
 	}
 	
 	function onResize(){

@@ -2,7 +2,7 @@
 html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.org/1999/xhtml")
 	head
 		!=partial('layouts/_head')
-	body(id=w.page_name)
+	body.hide_userlist(id=w.page_name)
 		#fb-root
 		!=partial('layouts/_header')
 		.main.taller
