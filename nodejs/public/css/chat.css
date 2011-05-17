@@ -216,6 +216,7 @@ td.name {
 /* Actions section */
 #actions{
 	position:absolute;
+	height:25px;
 	right:30px;
 	top:0px;
 	padding:3px 5px 5px 5px;
@@ -236,5 +237,5 @@ td.name {
 }
 
 #actions a:active{
-	padding-top:2px;
+	margin-top:2px;
 }

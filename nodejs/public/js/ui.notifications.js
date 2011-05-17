@@ -6,6 +6,8 @@ UI.once('init', function(){
 	,   standard_title = document.title
 	,   last_sound_time = 0;
 	
+	UI.notifications = {};
+	
 	var titleAlternator = {
 		start: function(){
 			if(this.timer) return;
@@ -60,8 +62,8 @@ UI.once('init', function(){
 		}
 		
 		UI.on('user_message', function(data){
-			if(user.away){
-				var now = (new Date()).getTime();
+			if(shouldNotify(data)){
+				var now = Util.ts()
 				if(now - last_sound_time >= 60000){
 					last_sound_time = now;
 					ding();
@@ -71,5 +73,42 @@ UI.once('init', function(){
 			}
 		});
 	}
+	
+	function shouldNotify(data){
+		return user.away &&
+			!mode.is('mute') &&
+			(mode.is('all') || mode.is('mentions') && Util.Text.mentionMatcher(data.msg))
+	}
+	
+	var mode = UI.notifications.mode = (function(){
+		var modes = [
+			['all','notify me on all messages'],
+			['mentions', 'notify me when my name is @mentioned'],
+			['mute', 'mute']],
+		classes ="all mentions mute",
+		button = $('#ding');
+		
+		var pub = {
+			current:0,
+			
+			cycle: function(){
+				pub.set((pub.current + 1) % modes.length);
+			},
+			
+			set: function(i){
+				var mode = modes[i];
+				button.removeClass(classes);
+				button.addClass(mode[0]);
+				button.attr('title', mode[1]);
+				pub.current = i;
+			},
+			
+			is: function(m){
+				return modes[pub.current][0] == m;
+			}
+		}
+		button.click(pub.cycle);		
+		return pub;
+	})();
 });
 
