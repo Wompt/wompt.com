@@ -39,7 +39,8 @@ UI.once('init', function(){
 	}
 	
 	//stick the footer at the bottom of the page if we're on an iPad/iPhone due to viewport/page bugs in mobile webkit
-	if(navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod'){
+	var plat = navigator.platform;
+	if(plat == 'iPad' || plat == 'iPhone' || plat == 'iPod'){
 		$("#footer_container").css("position", "static");
 	};
 	
