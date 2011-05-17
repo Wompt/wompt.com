@@ -16,10 +16,17 @@ function App(options){
 	this.express = this.create_express_server();
 
 	// default namespace
-	this.channels =	this.chatNamespace('chat', {logged: true, allowIframe: true});
+	this.channels =	this.chatNamespace('chat', {
+		logged: true,
+		allowIframe: true,
+		allowAnonymous: true
+	});
 
 	// other namespaces
-	this.chatNamespace('unlisted', {logged: true});
+	this.chatNamespace('unlisted', {
+		logged: true,
+		allowAnonymous: false
+	});
 
 	
 	this.client_connectors = new wompt.ClientConnectors();
@@ -272,7 +279,7 @@ App.prototype = {
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
 				var channel = namespace.get(data.channel);
-				if(channel){
+				if(channel && (user.authenticated() || namespace.options.allowAnonymous)){
 					channel.add_client(client, connector && connector.token, data);
 				}
 				user.clients.add(client);

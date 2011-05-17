@@ -9,10 +9,12 @@ function MetaUser(doc){
 	this.touch();
 	
 	this.clients.on('added', function(client){
-		me.clients.broadcast({
-			action: 'new_client',
-			channel: client.meta_data.channel.name
-		},client);
+		if(client.meta_data && client.meta_data.channel){
+			me.clients.broadcast({
+				action: 'new_client',
+				channel: client.meta_data.channel.name
+			},client);
+		}
 	});	
 };
 
