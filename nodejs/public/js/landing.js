@@ -47,10 +47,10 @@ UI.once('init',function(){
 			is_next = i == index,
 			is_cur = i == current;
 			
-			buttons[i][addClassIf(i == index)]('selected');
+			buttons[i].toggleClass('selected', i == index);
 			
 			// add 'future' to position the coming slide off in the right place
-			s[addClassIf(is_next)]('future')
+			s.toggleClass('future', is_next)
 			
 			 // animate current slide to the default position
 			 // make sure no slide is in the 'current' position
@@ -59,7 +59,7 @@ UI.once('init',function(){
 			// hide all slides except the one moving to the default position
 			// -- this ensures a slide moving from default to 'current' moves
 			//    invisibly from default to 'future' before being animated
-			[addClassIf(!is_cur)]('hide'); 
+			.toggleClass('hide', !is_cur); 
 		});
 		
 		// Give the UI thread some time to begin the animation and apply the CSS changes
@@ -71,10 +71,6 @@ UI.once('init',function(){
 				next.removeClass('future').addClass('current');
 			});
 		});
-		
-		function addClassIf(bool){
-			return (bool ? 'add' : 'remove') + 'Class';
-		}
 		
 		current = index;
 	}
