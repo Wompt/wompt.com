@@ -67,7 +67,11 @@ var assetManagerGroups = {
 		, 'dataType': 'javascript'
 		, 'files': [
 			'/public/external/bootstrap.js'
+			, '/public/external/events.js'			
+			, '/public/js/ui.js'
 			, '/public/js/sign_in.js'
+			, '/public/js/ui.layout.js'
+			, '/public/js/profile.js'
 		]
 	}), 'all_css': mc(defaultOptions,{
 		'route': /\/css\/all_[0-9]+\.css/
