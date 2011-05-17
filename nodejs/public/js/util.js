@@ -41,10 +41,7 @@ ts:function(){
 };
 
 EventEmitter.prototype.muteEvents = function(fn){
-	var e = this._events;
-	this._events = null;
-
+	this.emit = function(){}
 	fn();
-	
-	this._events = e;
+	delete this.emit;
 }
