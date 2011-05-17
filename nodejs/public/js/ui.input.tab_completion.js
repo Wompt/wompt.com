@@ -154,7 +154,7 @@ UI.once('init', function(){
 		var match;
 
 		userList.each(function(id, user){
-			if(user.name.toLowerCase().indexOf(pattern) == 0){
+			if(user.name && user.name.toLowerCase().indexOf(pattern) == 0){
 				match = user;
 				return false;
 			}
