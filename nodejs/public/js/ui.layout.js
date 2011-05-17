@@ -3,9 +3,14 @@ UI.once('init', function(){
 	hide_userlist_at = 700,
 	layout_delay = 200,
 	small_at = 700,
+	hul = 'hide_userlist',
 	resizeTimer;
 	
-	setTimeout(onResize, 1000);
+	setTimeout(function(){
+		doLayout()
+		$('.'+hul).removeClass(hul);
+		toggleUserlist(c.width() >= hide_userlist_at)
+	}, 1000);
 	
 	$(window).resize(function(){
 		clearTimeout(resizeTimer);
@@ -19,17 +24,17 @@ UI.once('init', function(){
 		$('.main').toggleClass('taller', taller);
 	}
 
-	function hideShowUserlist(){
-		$('.hide_userlist').removeClass('hide_userlist');
-		var w = c.width(),
-		hide_ul = w < hide_userlist_at;
-		c.toggleClass('hide_userlist', hide_ul)
-		.toggleClass('show_userlist', !hide_ul)
+	function testShowUserlist(){
+	}
+	
+	function toggleUserlist(show){
+		if(arguments.length < 1) show = c.hasClass(hul);
+		c.toggleClass(hul,!show)
+		.toggleClass('show_userlist',show);
 	}
 	
 	function onResize(){
 		doLayout();
-		hideShowUserlist();
 		UI.emit('resize');
 	}
 	
@@ -39,7 +44,7 @@ UI.once('init', function(){
 	};
 	
 	$('.userlist_toggle').click(function(e){
-		c.toggleClass('hide_userlist').toggleClass('show_userlist');
+		toggleUserlist();
 		e.preventDefault();
 	})
 });
