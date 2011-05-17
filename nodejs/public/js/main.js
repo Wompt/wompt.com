@@ -16,9 +16,11 @@ jQuery(function(){
 		watcher.subscribeToEvents();
 	});
 	
-	IO.addMessageHandler(UI.Messages.list);
-	IO.addMessageHandler(UI.Messages);
-	IO.addMessageHandler(userList);
+	[
+		UI.Messages.list,
+		UI.Messages,
+		userList
+	].forEach(IO.addMessageHandler)
 
 	IO.connect();
 	
