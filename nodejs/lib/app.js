@@ -57,7 +57,15 @@ App.prototype = {
 			exp.use(express.logger({format: ':method :url :status :response-time' }));
 			exp.use(assetManager.middleware);
 			exp.use(express.favicon(config.public_dir + '/favicon.ico'));
-			exp.use(express.static(config.public_dir, {maxAge:1000*60*60*24*14})); // 2 weeks
+			// Filter requests based on '/s/' and strip that part when passing throuh to the static server
+			var staticServer = express.static(config.public_dir, {maxAge:1000*60*60*24*14}); // 2 weeks
+			exp.use(function checkStaticAndStrip(req,res,next){
+				var url = req.url;
+				if(url.substr(0,3) == '/s/'){
+					req.url = url.substr(2);
+					return staticServer(req, res, next);
+				}else next();
+			}); 
 			exp.use(express.cookieParser());
 			exp.use(express.bodyParser());
 			exp.use(wompt.Auth.one_time_token_middleware());

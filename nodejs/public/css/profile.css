@@ -76,11 +76,11 @@
 	text-shadow: black 0 0 25px;
 }
 .logo.google{
-	background-image:url(/images/external/google_128.png);
+	background-image:url(/s/images/external/google_128.png);
 }
 .logo.facebook{
-	background-image:url(/images/external/facebook_128.png);
+	background-image:url(/s/images/external/facebook_128.png);
 }
 .logo.github{
-	background-image:url(/images/external/github_128.png);
+	background-image:url(/s/images/external/github_128.png);
 }

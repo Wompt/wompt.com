@@ -5,6 +5,7 @@ customHandlers = require('./asset_handlers.js'),
 assetManager = require('connect-assetmanager'),
 assetHandler = require('connect-assetmanager-handlers'),
 util = require('./util'),
+staticFileUrlPrefix = '/s/',
 
 cssPreManipulators = {
 	// Regexp to match user-agents including MSIE.
@@ -118,7 +119,7 @@ var exporting = {
 			if(user && user.is_admin()){
 				var group = assetManagerGroups[name+'_js'];
 				return group.files.map(function(file){
-					return exporting.helpers.scriptTag(file.replace(/^\/[^\/]+\//, '/') + '?' + ts); // strip the first directory  /public/blah -> /blah
+					return exporting.helpers.scriptTag(staticFileUrlPrefix + file.replace(/^\/[^\/]+\//, '') + '?' + ts); // strip the first directory  /public/blah -> /blah
 				}).join('');
 			}else
 				return exporting.helpers.scriptTag("/js/" + name + "_" + ts + ".js");
