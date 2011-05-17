@@ -141,7 +141,14 @@ a.try_now{
 }
 #chat.hide_userlist #messages{
 	right:0;
-	font-size:12px;	
+}
+#chat.small #messages{
+	font-size:12px;
+	right:141px;
+}
+#chat.small.hide_userlist #messages{
+	right:0;
+}
 }
 
 .main #messages a,
