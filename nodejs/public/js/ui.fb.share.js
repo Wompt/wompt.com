@@ -23,7 +23,7 @@ UI.fb = {
 	shareCurrentPage: function(){
 		FB.ui({ method: 'feed',
 			display: 'iframe',
-			message: "I'm chatting right now on Wompt at: " + window.location.href + " - Come join me!"
+			message: "I'm chatting right now on Wompt at: " + Util.url() + " - Come join me!"
 		});
 	},
 

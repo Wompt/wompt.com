@@ -37,6 +37,10 @@ nextTick: function(f){
 
 ts:function(){
 	return new Date().getTime();
+},
+
+url:function(){
+	return window.location.href.split('?')[0];
 }
 };
 

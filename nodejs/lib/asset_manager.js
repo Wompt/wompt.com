@@ -57,6 +57,7 @@ var assetManagerGroups = {
 			, '/public/js/ui.connection_status.js'
 			, '/public/js/ui.layout.js'
 			, '/public/js/ui.fb.share.js'
+			, '/public/js/ui.twitter.js'
 			, '/public/js/sign_in.js'
 			, '/public/js/links_in_new_tab.js'
 			, '/public/js/landing.js'			
