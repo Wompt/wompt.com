@@ -1,4 +1,4 @@
-var wompt = require("./includes"),
+var wompt = require("../includes"),
     mongoose = wompt.mongoose;
 
 var Schema = mongoose.Schema

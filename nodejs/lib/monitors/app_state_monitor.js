@@ -1,5 +1,5 @@
 var util = require('util'),
-    User = require('../user')
+    User = require('../models/user')
 
 function AppStatePreparer(app){
 	
