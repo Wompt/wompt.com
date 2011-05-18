@@ -4,7 +4,7 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 		!=partial('layouts/_head')
 		-if(w.css_file)
 			link(type='text/css',src=w.css_file)
-	body.hide_userlist.embed(id=w.page_name)
+	body.hide_userlist.embed.small(id=w.page_name)
 		#fb-root
 		.main
 			!{body}
