@@ -184,6 +184,14 @@
 	position:relative;
 }
 
+#powered_by{
+	font-size:12px;
+	margin-bottom:15px;
+}
+
+#landing h4.space{
+	margin-top:15px;
+}
 
 #code{
 	position:relative;

@@ -34,9 +34,9 @@
 					h3 Like Disqus?  Want Real time?
 					h4 Easily add chat to any web page for free!
 					#chat.embed.hide_userlist
-						a.popout(href=w.popout, title="Open this chat room in a new tab")		
 						!= partial('chat')
-					h4 Embed code
+					a#powered_by(href='http://wompt.com') Chat Powered by Wompt
+					h4.space Embed code
 					#embed_form
 						| Room Name:
 						input#room_name(type='text',value='whatever you want', title='Room name')

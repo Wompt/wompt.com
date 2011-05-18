@@ -17,7 +17,8 @@ UI.once('init',function(){
 			form.find('#width').val(),
 		,"; height:",
 			form.find('#height').val(),
-		,';" allowtransparency="true"></iframe>'];
+		,';" allowtransparency="true"></iframe>'
+		,'<a href="http://wompt.com">Chat Powered by Wompt</a>'];
 		$('#code').text(code.join(''));
 	}
 	updateCode();

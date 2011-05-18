@@ -32,7 +32,7 @@ body#chat .main{
 	padding:0 41px 4px 3px;
 }
 #chat.small #footer{
-	padding-right:7px;
+	padding:0 7px 2px 3px;
 }
 
 #chat #wompt{
@@ -50,6 +50,9 @@ body#chat .main{
 	width:110px;
 	left:0;
 	right:auto;
+}
+.small #share_links > .pad{
+	padding-top:4px;
 }
 
 #chat #input{
