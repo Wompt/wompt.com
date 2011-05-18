@@ -1,0 +1,3 @@
+$(function(){
+	UI.emit('init');
+})
