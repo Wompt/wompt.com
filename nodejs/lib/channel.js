@@ -9,6 +9,7 @@ function Channel(config){
 	
 	this.last_activity = new Date();
 	this.name = config.name;
+	this.namespace = config.namespace;
 	this.messages = new wompt.MessageList(this);
 	this.clients = new wompt.ClientPool();
 	

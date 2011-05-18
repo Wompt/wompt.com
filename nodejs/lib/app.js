@@ -310,6 +310,7 @@ App.prototype = {
 	chatNamespace: function(namespace, options){
 		this.namespaces = this.namespaces || {};
 		otions = options || {};
+		options.namespace = namespace;
 
 		var me = this,
 		exp = this.express,
