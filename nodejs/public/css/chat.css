@@ -9,7 +9,7 @@ body#chat .main{
 .main #content{
 	position:absolute;
 	top:40px;
-	bottom:3.4em;
+	bottom:4em;
 	left:0;
 	right:0;
 	z-index:1;
@@ -40,7 +40,7 @@ body#chat .main{
 	bottom:0;
 	right:0;
 	width:181px;
-	height:3.4em;
+	height:4em;
 }
 .small #share_links{
 	width:110px;
@@ -53,7 +53,8 @@ body#chat .main{
 	bottom:0;
 	left:0;
 	right:0;
-	height:3.4em;
+	height:4em;
+	z-index:1;
 }
 
 #share_links,
@@ -74,6 +75,8 @@ body#chat .main{
 .small #input .container{
 	left:117px;
 	right:5px;
+	bottom:5px;
+	top:5px;
 }
 
 

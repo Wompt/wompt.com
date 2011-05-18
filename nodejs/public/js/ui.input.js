@@ -30,9 +30,9 @@ UI.once('init', function(){
 		lines = Math.max(min_input_height, Math.min(lines, max_input_height));
 		if(lines != previousLines){
 			/* at lines = 2 this needs to match the height of #input defined in the CSS */
-			var em_height = 1.5 + lines * 1.2;
+			var em_height = 1.6 + lines * 1.2;
 			$("#input").height(          lines <= 1 ? '' : em_height + 'em');
-			$("#messages").css('bottom', lines <= 1 ? '' : (em_height - 3.4) + 'em');
+			$("#content").css('bottom', lines <= 1 ? '' : (em_height) + 'em');
 			previousLines = lines;
 		}
 	}

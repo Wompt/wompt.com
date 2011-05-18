@@ -11,6 +11,8 @@ body.embed,
 	left:5px;
 	right:0px;
 	bottom:1em;
+.embed#chat #input .container{
+	bottom:5px;
 }
 
 .embed#chat #wompt{
@@ -46,7 +48,6 @@ a.popout{
 	top:5px;
 	left:5px;
 	right:5px;
-	bottom: 4.4em;	
 }
 
 .embed #share_links > .pad{
