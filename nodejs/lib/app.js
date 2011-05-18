@@ -287,10 +287,11 @@ App.prototype = {
 				}
 				
 				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
-				var channel = namespace.get(data.channel);
-				if(channel && (user.authenticated() || namespace.options.allowAnonymous)){
-					channel.add_client(client, connector && connector.token, data);
-				}
+				namespace.get(data.channel, function(channel){
+					if(channel && (user.authenticated() || namespace.options.allowAnonymous)){
+						channel.add_client(client, connector && connector.token, data);
+					}
+				});
 				user.clients.add(client);
 			}
 		});

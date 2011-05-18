@@ -4,7 +4,8 @@ var wompt  = require("./includes")
    ,util = require("util")
    ,logger = wompt.logger;
 
-function Channel(config){
+// Callback executed once DB record is loaded
+function Channel(config, callback){
 	var channel = this;
 	
 	this.last_activity = new Date();
@@ -30,7 +31,13 @@ function Channel(config){
 				channel.broadcast_user_list_change({'part': client.user});
 		}
 	}
+	
+	wompt.Room.findOrCreate({name:this.name, namespace:this.namespace}, function(room){
+		channel.room = room;
+		callback(channel);
+	});	
 }
+
 
 var proto = {
 	add_client: function(client, token, joinMsg){
@@ -154,6 +161,7 @@ var proto = {
 	clean_up: function(){
 		delete this.messages;
 		delete this.clients;
+		delete this.room;
 		this.emit('destroy');
 	}
 }
