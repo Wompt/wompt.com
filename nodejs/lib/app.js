@@ -25,7 +25,8 @@ function App(options){
 	// other namespaces
 	this.chatNamespace('unlisted', {
 		logged: true,
-		allowAnonymous: false
+		allowAnonymous: false,
+		allowOps: true
 	});
 
 	this.chatNamespace('mod', {
