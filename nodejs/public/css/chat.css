@@ -178,7 +178,6 @@ a.try_now{
 
 .line td{
 	padding:0 .1em .2em .1em;
-	position:relative;
 }
 
 tr.first {
@@ -216,6 +215,10 @@ td.name {
 	word-wrap:break-word;
 }
 
+.msg > .wrap{
+	position:relative;
+}
+
 
 /* Actions section */
 #actions{
@@ -246,10 +249,10 @@ td.name {
 
 .ts {
 	position:absolute;
-	top:1px;
+	top:0;
 	right:0;
 	color:#999;
-	padding:3px 6px;
+	padding:1px .4em;
 	font-size:0.9em;
 	background:#f7f7f7;
 	display:none;

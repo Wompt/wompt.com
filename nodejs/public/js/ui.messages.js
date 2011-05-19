@@ -6,19 +6,18 @@ UI.once('init', function(){
 	  , msgs = [];
 
 	function prepareMessageElement(el, data){
-		var text = data.msg;
-		if(newline.test(text)){
-			text
-				.split(newline)
-				.forEach(function(line){
-					el.append(linkifyAndInsert($('<div>'), line));
-				});
-		}else{
-			linkifyAndInsert(el,text);
-		}
+		var text = data.msg, first;
+		text
+			.split(newline)
+			.forEach(function(line){
+				var wrap = $('<div class="wrap">');
+				first = first || wrap; 
+				el.append(linkifyAndInsert(wrap, line));
+			});
 		
 		el.addClass('msg');
-		el.append(timestamp(data));
+		
+		first.append(timestamp(data));
 		return el;
 	}
 	
