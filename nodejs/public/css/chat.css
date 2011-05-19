@@ -247,12 +247,12 @@ td.name {
 
 .ts {
 	position:absolute;
-	top:2px;
+	top:1px;
 	right:0;
-	color:#AAA;
-	padding:3px;
+	color:#999;
+	padding:3px 6px;
 	font-size:12px;
-	background:white;
+	background:#f7f7f7;
 	display:none;
 }
 
