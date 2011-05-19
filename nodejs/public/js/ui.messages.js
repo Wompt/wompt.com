@@ -53,7 +53,8 @@ UI.once('init', function(){
 	
 	function firstMessageInGroup(msg){
 		msg.nick.text(msg.from.name);
-		msg.nick.css('color', UI.Colors.forUser(msg.from.id));
+		if(msg.from.id != 'system')
+			msg.nick.css('color', UI.Colors.forUser(msg.from.id));
 		msg.nick.addClass('name');
 		msg.line.addClass('first');
 	}
@@ -95,12 +96,16 @@ UI.once('init', function(){
 				nick = $('<td>'),
 				msg_container  = $('<td>');
 
-			if(data.from.id == 'system')
+			if(data.from.id == 'system'){
 				line.addClass('system');
+				msg_container.attr('colspan', 2);
+				line.append(msg_container);
+			}else
+				line.append(nick, msg_container);
 				
 			line.addClass('line');
 			prepareMessageElement(msg_container, data.msg);
-			line.append(nick, msg_container);
+			
 
 			if(Util.Text.mentionMatcher(data.msg)){
 				line.addClass('mention');
@@ -115,13 +120,15 @@ UI.once('init', function(){
 			$('#message_list').append(line);
 			msgs.push(data);
 			pruneOldMessages();
+			return line;
 		},
 		
 		system: function(msg){
 			UI.emit('before_append', msg);
-			UI.Messages.appendWithoutEvents({from:{name: "System", id:'system'}, msg:msg});
+			var line = UI.Messages.appendWithoutEvents({from:{id:'system'}, msg:msg});
 			UI.emit('after_append', msg);
 			UI.emit('system_message', msg);
+			return line;
 		}
 	}
 });

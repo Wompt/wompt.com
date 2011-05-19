@@ -15,6 +15,9 @@ script(type='text/javascript')
 				span.ul_hidden «
 		#messages_scroller
 			table#message_list.hide_system
+				// Blank row and name to ensure columns widths are correct (widths were wrong if first row had a cell with colspan)
+				tr
+					td.name
 	#user_list
 		.title People&nbsp;
 			span#user_count

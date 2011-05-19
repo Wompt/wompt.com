@@ -176,9 +176,6 @@ a.try_now{
 	table-layout:fixed;
 }
 
-#message_list.hide_system .line.system {
-	display:none;
-}
 .line td{
 	padding:0 .1em .2em .1em;
 }
@@ -191,6 +188,15 @@ tr.first td {
 	padding-top:0.3em;
 }
 
+.line.system{
+	background-color:#eee;
+	color:#888;
+}
+.line.system td{
+	padding:.8em 3em;
+	text-align:center;
+}
+
 .line.mention{
 	background-color: #ffb;
 }
@@ -199,7 +205,6 @@ td.name {
 	width: 10em;
 	padding-right: 10px;
 	text-align:right;
-	color: black;
 	font-weight:bold;
 	word-wrap:normal;
 	word-break:keep-all;	
