@@ -173,7 +173,6 @@ a.try_now{
 }
 #message_list {
 	width: 100%;
-	margin-bottom:0.2em;
 	table-layout:fixed;
 }
 
@@ -251,7 +250,7 @@ td.name {
 	right:0;
 	color:#999;
 	padding:3px 6px;
-	font-size:12px;
+	font-size:0.9em;
 	background:#f7f7f7;
 	display:none;
 }

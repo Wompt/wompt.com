@@ -7,9 +7,9 @@ UI.once('init', function(){
 	resizeTimer;
 	
 	setTimeout(function(){
-		doLayout()
 		$('.'+hul).removeClass(hul);
 		toggleUserlist(c.width() >= hide_userlist_at)
+		doLayout()
 	}, 1000);
 	
 	$(window).resize(function(){
@@ -24,13 +24,13 @@ UI.once('init', function(){
 		$('.main').toggleClass('taller', taller);
 	}
 
-	function testShowUserlist(){
-	}
-	
 	function toggleUserlist(show){
+		var saved = UI.messagesScroller.save();
 		if(arguments.length < 1) show = c.hasClass(hul);
 		c.toggleClass(hul,!show)
 		.toggleClass('show_userlist',show);
+		//This needs to be greater than the animation duration of the userlist slide so it happens afterward
+		setTimeout(saved.restore, 500);
 	}
 	
 	function onResize(){

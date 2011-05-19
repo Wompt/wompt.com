@@ -11,15 +11,16 @@ UI.once('init', function(){
 		, SCROLL_LIMIT = 40;
 
 	var me = UI.messagesScroller = {				
-		scrollToBottom: function(animate){
-			var destScroll = paneEl.scrollHeight - pane.innerHeight(); // height of content - height of viewport (always <= height of content)
+		scroll: function(animate, destScroll, newContent){ // destScroll defaults to bottom of content area
+			if(destScroll == null)
+				destScroll = paneEl.scrollHeight - pane.innerHeight(); // height of content - height of viewport (always <= height of content)
 			
 			if(animate){
 				var distance = destScroll - pane.scrollTop(), // distance to scroll the viewport
 				added_height = paneEl.scrollHeight - old_height, // height of new content
 				end_at = {scrollTop: destScroll, bottom:0};
 
-				if(destScroll == 0){ // the content is smaller than the viewport
+				if(newContent && destScroll == 0){ // the content is smaller than the viewport
 					pane.css('bottom',-added_height); //we have to slide the content from slightly below the viewport, instead of scrolling it
 					distance = added_height;
 				}
@@ -43,18 +44,27 @@ UI.once('init', function(){
 			old_height = paneEl.scrollHeight;
 			bottom_dist = old_height - pane.scrollTop() - pane.innerHeight();
 			should_scroll = scrolling || (bottom_dist < SCROLL_LIMIT);
+		},
+		
+		save: function(){
+			var bottom_scroll = paneEl.scrollHeight - pane.scrollTop() - pane.innerHeight();
+			return {
+				restore: function(){  // content height - bottom distance - viewport = TopScroll
+					me.scroll(true, paneEl.scrollHeight - bottom_scroll - pane.innerHeight());
+				}
+			}
 		}
 	}
 	
 	UI.on('before_append', me.checkShouldSroll);
 	UI.on('after_append', function(data){
 		if(should_scroll){
-			me.scrollToBottom(!$.isArray(data));
+			me.scroll(!$.isArray(data), null, true);
 		}
 	});
 	UI.on('resize', function(){
 		if(should_scroll){
-			me.scrollToBottom(false);
+			me.scroll(true, null, true);
 		}
 	});
 });
