@@ -29,6 +29,9 @@ module.exports = {
 	
 	, logs: {
 		root: root,
+		monitor:{
+			interval: 1*60*1000
+		},
 		channels: {
 			root: root + '/logs/channels'
 		}
