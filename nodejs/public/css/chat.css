@@ -178,6 +178,7 @@ a.try_now{
 
 .line td{
 	padding:0 .1em .2em .1em;
+	position:relative;
 }
 
 tr.first {
@@ -241,4 +242,19 @@ td.name {
 
 #actions a:active{
 	margin-top:2px;
+}
+
+.ts {
+	position:absolute;
+	top:2px;
+	right:0;
+	color:#AAA;
+	padding:3px;
+	font-size:12px;
+	background:white;
+	display:none;
+}
+
+tr:hover .ts {
+	display:block;
 }
