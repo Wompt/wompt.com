@@ -53,7 +53,7 @@ var proto = {
 			token: token
 		};
 
-		// TODO: this should also check if another user has a claim on the Ops
+		// TODO: this should also check if another user has ops that aren't expired
 		if(this.clients.userCount == 0 && client.user.authenticated())
 			this.give_ops(client)
 
