@@ -6,8 +6,11 @@ var specified_env = require("./environment/" + environment);
 
 specified_env = util.mergeCopy(default_env, specified_env);
 
-// Pre-compute this so it can be spit out quickly in templates
-specified_env.constantsJSON = JSON.stringify(specified_env.constants);
+function precomputeConstantsJSON(){
+	// Pre-compute this so it can be spit out quickly in templates
+	specified_env.constantsJSON = JSON.stringify(specified_env.constants);
+}
+precomputeConstantsJSON();
 
 console.log("Using environment: " + environment);
 
@@ -18,6 +21,7 @@ if(util.fs.readFile(specified_env.deploy_root + '/REVISION', function(text, exis
 	var version = text || Math.random().toString();
 	var hash = util.md5(version);
 	util.mergeDeep(specified_env, {constants: {version_hash: hash}});
+	precomputeConstantsJSON();
 }));
 
 
