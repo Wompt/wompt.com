@@ -108,7 +108,7 @@ body#chat .main{
 #input #input_overlay{
 	display:block;
 	-vendor-border-radius:5px;
-	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 8px;
+	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0px 5px;
 	-vendor-box-sizing:border-box;
 	padding:4px 7px;	
 	position:absolute;
@@ -116,6 +116,7 @@ body#chat .main{
 	left:0;
 	bottom:0;
 	right:0;
+	background:#fff top repeat-x data-url(/images/structure/5px_fade_to_white.gif);
 }
 
 /* connection status input overlay */
