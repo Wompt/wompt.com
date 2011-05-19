@@ -28,6 +28,11 @@ function App(options){
 		allowAnonymous: false
 	});
 
+	this.chatNamespace('mod', {
+		logged: true,
+		allowAnonymous: true,
+		allowOps: true
+	});
 	
 	this.client_connectors = new wompt.ClientConnectors();
 	this.popular_channels = new wompt.monitors.PopularChannels(this.channels);
