@@ -34,13 +34,16 @@ var proto = {
 	
 	create: function(name, callback){
 		name = Channel.generalizeName(name);
-		var channel = new wompt.Channel({name: name, namespace: this.options.namespace}, function(channel){
+		var channel = new wompt.Channel({
+				name: name,
+				namespace: this.options.namespace,
+				ops: this.options.allowOps
+			}, function(channel){
 			callback(channel);
 		});
 		this.channels[name] = channel;
 		this.count++;
 		this.emit('new_channel', channel);
-		channel.app = this;
 	},
 	
 	remove: function(channel){
