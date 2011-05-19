@@ -37,7 +37,7 @@
 }
 
 #user_list .user{
-	padding:4px 15px 1px 10px;
+	padding:2px 15px 1px 10px;
 	position:relative;
 }
 
@@ -45,13 +45,20 @@
 	color:#aaa;
 }
 
-#user_list .kick{
+#user_list .kick,
+#user_list .ops{
 	position:absolute;
 	right:5px;
 	height:1em;
 	width:1em;
+	top:0.3em;
 	background:center no-repeat data-url(/images/icons/red_x.gif);
 	cursor:pointer;
+}
+
+#user_list .ops{
+	background-image:data-url(/images/icons/crown.png);
+	cursor:default;
 }
 
 .userlist_toggle {

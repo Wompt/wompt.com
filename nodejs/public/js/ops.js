@@ -1,7 +1,10 @@
 function Ops(uli){
 	var self = this;
 	uli.on('new_user', function(user, el){
-		if(self.kick){
+		if(user.ops){
+			var ops = $('<div class="ops">');
+			el.append(ops);
+		} else if(self.kick){
 			var x = $('<div class="kick">');
 			x.click(function(e){
 				e.stopPropagation();

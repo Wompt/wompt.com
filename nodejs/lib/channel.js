@@ -92,7 +92,7 @@ var proto = {
 	send_ops: function(client){
 		if(!this.config.ops) return;
 		
-		var ops = this.opsUsers[client.uid]
+		var ops = this.opsUsers[client.uid];
 		if(ops){
 			if(!ops.lastSeen || (new Date() - ops.lastSeen) < wompt.env.ops.keep_when_absent_for){
 				client.send({action: 'ops'});
@@ -149,7 +149,9 @@ var proto = {
 	},
 	
 	get_user_list: function(client){
-		var users = {anonymous:{count:0}}, list = this.clients.list;
+		var users = {anonymous:{count:0}},
+		list = this.clients.list,
+		now = new Date();
 		
 		for(var id in list){
 			var cl = list[id],
@@ -161,6 +163,10 @@ var proto = {
 					users[uid]={
 						name: doc.name || 'anonymous'
 					};
+					
+					var ops = this.opsUsers[uid];
+					if(ops && (!ops.lastSeen || (now - ops.lastSeen) < wompt.env.ops.keep_when_absent_for))
+						users[uid].ops = true;
 				}
 			}else {
 				users.anonymous.count++;
