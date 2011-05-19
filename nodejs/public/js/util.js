@@ -41,6 +41,10 @@ ts:function(){
 
 url:function(){
 	return window.location.href.split('?')[0];
+},
+
+inherits:function(to, from){
+	$.extend(to.prototype, from.prototype, {_super: from});
 }
 };
 
