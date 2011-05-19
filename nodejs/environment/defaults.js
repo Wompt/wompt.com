@@ -20,6 +20,9 @@ module.exports = {
 		messages: {
 				max_length: 1024 * 1,
 				max_shown: 500
+		},
+		ops:{
+			kick_time: 30 // seconds
 		}
 	}
 	
@@ -35,6 +38,12 @@ module.exports = {
 		channels: {
 			root: root + '/logs/channels'
 		}
+	}
+	
+	/* Ops */
+	, ops: {
+		// how long a user should keep ops after they leave a room
+		keep_when_absent_for: 5*60*1000
 	}
 	
 	/* google analytics */

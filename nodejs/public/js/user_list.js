@@ -36,6 +36,7 @@ UserList.prototype.each = function(f){
 function UserListUI(ul, container, top){
 	if(!ul) return;
 	var user_divs = {},
+	self = this,
 	// Single Anonymous user for the userlist
 	anonymous = {el: null, count:0},
 	sorted = [];
@@ -90,6 +91,8 @@ function UserListUI(ul, container, top){
 		else
 			container.prepend(name_div);
 		user_divs[user.id] = name_div;
+		
+		self.emit('new_user', user, name_div);
 	}
 	
 	function addAnonymous(user){
@@ -157,3 +160,5 @@ function UserListUI(ul, container, top){
 		$('#user_count').text('(' + (sorted.length + anonymous.count) + ')');
 	}
 }
+
+Util.inherits(UserListUI, EventEmitter);

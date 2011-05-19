@@ -45,6 +45,13 @@
 	color:#aaa;
 }
 
+#user_list .kick{
+	position:absolute;
+	right:5px;
+	color:#a00;
+	text-decoration:none;
+}
+
 .userlist_toggle {
 	padding:0 8px;
 	font-size:24px;

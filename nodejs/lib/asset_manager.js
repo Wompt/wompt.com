@@ -54,6 +54,7 @@ var assetManagerGroups = {
 			, '/public/js/color_dispensor.js'
 			, '/public/js/message_list.js'
 			, '/public/js/user_list.js'
+			, '/public/js/ops.js'
 			, '/public/js/ui.connection_status.js'
 			, '/public/js/ui.layout.js'
 			, '/public/js/ui.fb.share.js'
