@@ -2,8 +2,7 @@ function Ops(uli){
 	var self = this;
 	uli.on('new_user', function(user, el){
 		if(self.kick){
-			var x = $('<span class="kick">');
-			x.text('x');
+			var x = $('<div class="kick">');
 			x.click(function(e){
 				e.stopPropagation();
 				e.preventDefault();
