@@ -138,7 +138,7 @@ UI.once('init', function(){
 		
 		system: function(msg){
 			UI.emit('before_append', msg);
-			var line = UI.Messages.appendWithoutEvents({from:{id:'system'}, msg:msg});
+			var line = UI.Messages.appendWithoutEvents({from:{id:'system'}, msg:msg, t:Util.ts()});
 			UI.emit('after_append', msg);
 			UI.emit('system_message', msg);
 			return line;
