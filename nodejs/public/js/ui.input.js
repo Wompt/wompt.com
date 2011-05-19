@@ -15,7 +15,7 @@ UI.once('init', function(){
 			if(message.length > WOMPT.messages.max_length){
 				alert("Messages are limited to "+ WOMPT.messages.max_length + " characters.");
 			}else	if(message.length > 0){
-				IO.socket.send({chan: channel, action:'post', msg:message});
+				IO.socket.send({action:'post', msg:message});
 				input.val('');
 			}
 		}
