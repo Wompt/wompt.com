@@ -179,17 +179,16 @@ a.try_now{
 #message_list.hide_system .line.system {
 	display:none;
 }
-
 .line td{
-	padding:.1em;
+	padding:0 .1em .2em .1em;
 }
 
 tr.first {
-	background: left 0.1em repeat-x data-url(/images/chat/line_back.png);
+	background: left 0 repeat-x data-url(/images/chat/line_back.png);
 }
 
 tr.first td {
-	padding-top:0.5em;
+	padding-top:0.3em;
 }
 
 .line.mention{
