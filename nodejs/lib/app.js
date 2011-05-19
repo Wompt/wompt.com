@@ -59,12 +59,18 @@ App.prototype = {
 			exp.use(express.favicon(config.public_dir + '/favicon.ico'));
 			// Filter requests based on '/s/' and strip that part when passing throuh to the static server
 			var staticServer = express.static(config.public_dir, {maxAge:1000*60*60*24*14}); // 2 weeks
+			var exceptions = {
+				'/apple-itouch-icon.png':true
+				,'/robots.txt':true
+			}
 			exp.use(function checkStaticAndStrip(req,res,next){
 				var url = req.url;
 				if(url.substr(0,3) == '/s/'){
 					req.url = url.substr(2);
 					return staticServer(req, res, next);
-				}else next();
+				}else if(exceptions[req.url])
+					return staticServer(req, res, next);
+				else next();
 			}); 
 			exp.use(express.cookieParser());
 			exp.use(express.bodyParser());
