@@ -57,7 +57,7 @@ UI.once('init', function(){
 	if(window.Audio){
 		var sound;
 		function ding(){
-			if(!sound) sound = new Audio("/sounds/missed-message.wav");
+			if(!sound) sound = new Audio("/s/sounds/missed-message.wav");
 			sound.play();
 		}
 		
