@@ -37,12 +37,21 @@
 }
 
 #user_list .user{
-	padding:4px 10px 1px 10px;
-	display:block;
+	padding:4px 15px 1px 10px;
+	position:relative;
 }
 
 #user_list .user.anon{
 	color:#aaa;
+}
+
+#user_list .kick{
+	position:absolute;
+	right:5px;
+	height:1em;
+	width:1em;
+	background:center no-repeat data-url(/images/icons/red_x.gif);
+	cursor:pointer;
 }
 
 .userlist_toggle {

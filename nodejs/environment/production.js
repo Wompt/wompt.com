@@ -13,9 +13,6 @@ module.exports = {
 	}
 	, logs: {
 		root: path.normalize(shared + '/log')
-		,monitor:{
-			interval: 1*60*1000
-		}
 		,channels:{
 			root: path.normalize(shared + '/log/channels')
 		}

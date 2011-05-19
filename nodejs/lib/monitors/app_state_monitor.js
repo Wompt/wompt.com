@@ -1,5 +1,6 @@
 var util = require('util'),
-    User = require('../user')
+    User = require('../models/user'),
+    Room = require('../models/room');
 
 function AppStatePreparer(app){
 	
@@ -46,9 +47,14 @@ function AppStatePreparer(app){
 			if(chan.clients.count > 0) inuse++;
 		});
 
-		done({
+		var result = {
 			loaded: app.channels.count
 			,inuse: inuse
+		};
+
+		Room.count({},function(err, value){
+			result.db = value;
+			done(result);
 		});
 	}
 	

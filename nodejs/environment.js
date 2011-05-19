@@ -6,6 +6,9 @@ var specified_env = require("./environment/" + environment);
 
 specified_env = util.mergeCopy(default_env, specified_env);
 
+// Pre-compute this so it can be spit out quickly in templates
+specified_env.constantsJSON = JSON.stringify(specified_env.constants);
+
 console.log("Using environment: " + environment);
 
 specified_env.name = environment;

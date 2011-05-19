@@ -4,7 +4,7 @@ jQuery(function(){
 	IO = new IO();
 
 	userList = new UserList();
-	uli = new UserListUI(userList, $('#user_list .users'), $('#user_list .top'));
+	UI.userList = new UserListUI(userList, $('#user_list .users'), $('#user_list .top'));
 
 	UI.emit('init');
 	
@@ -19,7 +19,8 @@ jQuery(function(){
 	[
 		UI.Messages.list,
 		UI.Messages,
-		userList
+		userList,
+		new Ops(UI.userList)
 	].forEach(IO.addMessageHandler)
 
 	IO.connect();

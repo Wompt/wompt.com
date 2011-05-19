@@ -4,18 +4,20 @@ var wompt  = require("./includes")
    ,util = require("util")
    ,logger = wompt.logger;
 
-function Channel(config){
+// Callback executed once DB record is loaded
+function Channel(config, callback){
 	var channel = this;
 	
-	this.last_activity = new Date();
 	this.name = config.name;
+	this.namespace = config.namespace;
+	this.config = config;
 	this.messages = new wompt.MessageList(this);
 	this.clients = new wompt.ClientPool();
+	this.opsUsers = {};
 	
 	// Called from the context of the client
 	this._message_from_client = function(msg){
 		msg.from_client = this;
-		this.user.touch();
 		channel.receive_message(msg);
 	}
 	
@@ -25,11 +27,24 @@ function Channel(config){
 		delete client.meta_data;
 		if(client.user.visible){
 			// Anonymous clients are treated independently for the userlist (anon count = anonymous clients)
-			if(!client.user.authenticated() || channel.clients.other_clients_from_same_user(client).length == 0)
+			if(!client.user.authenticated() || channel.clients.other_clients_from_same_user(client).length == 0){
 				channel.broadcast_user_list_change({'part': client.user});
+				
+				if(channel.config.ops && client.user.authenticated()){
+					var ops = channel.opsUsers[client.uid];
+					if(ops)
+						ops.lastSeen = new Date();
+				}				
+			}
 		}
 	}
+	
+	wompt.Room.findOrCreate({name:this.name, namespace:this.namespace}, function(room){
+		channel.room = room;
+		callback(channel);
+	});	
 }
+
 
 var proto = {
 	add_client: function(client, token, joinMsg){
@@ -38,6 +53,10 @@ var proto = {
 			channel: this,
 			token: token
 		};
+
+		// TODO: this should also check if another user has ops that aren't expired
+		if(this.config.ops && this.clients.userCount == 0 && client.user.authenticated())
+			this.give_ops(client)
 
 		this.clients.add(client);
 
@@ -64,9 +83,27 @@ var proto = {
 		client.bufferSends(function(){
 			if(!this.messages.is_empty())
 				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
-			
+				
+			this.send_ops(client);
 			client.send({action: 'who',	users: this.get_user_list(client)});
 		}, this);
+	},
+	
+	send_ops: function(client){
+		if(!this.config.ops) return;
+		
+		var ops = this.opsUsers[client.uid]
+		if(ops){
+			if(!ops.lastSeen || (new Date() - ops.lastSeen) < wompt.env.ops.keep_when_absent_for){
+				client.send({action: 'ops'});
+			}else
+				delete this.opsUsers[client.uid];
+		}
+	},
+	
+	give_ops: function(client){
+		var ops = this.opsUsers;
+		ops[client.uid] = {};
 	},
 	
 	receive_message: function(data){
@@ -79,7 +116,7 @@ var proto = {
 	},
 	
 	action_responders: {
-		post: function(data){
+		post: function post(data){
 			if(data.from_client.user.readonly) return;
 			if(data.msg && data.msg.length > constants.messages.max_length) return;
 			var message = {
@@ -92,6 +129,22 @@ var proto = {
 				}
 			};
 			this.broadcast_message(message, {first:data.from_client});
+		},
+		
+		kick: function kick(kick){
+			if(!this.config.ops || !this.opsUsers[kick.from_client.uid]) return;
+			
+			this.clients.each(function(client){
+				if(client == kick.from_client) return;
+				if(client.uid != kick.id) return;
+				client.send({
+					action:'kick'
+					,from:{
+						name: kick.from_client.user.doc.name,
+						id: kick.from_client.user.id()
+					}
+				});
+			})
 		}
 	},
 	
@@ -153,6 +206,7 @@ var proto = {
 	clean_up: function(){
 		delete this.messages;
 		delete this.clients;
+		delete this.room;
 		this.emit('destroy');
 	}
 }

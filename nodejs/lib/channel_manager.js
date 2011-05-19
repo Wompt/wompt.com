@@ -22,22 +22,28 @@ function ChannelManager(options){
 }
 
 var proto = {
-	get: function(name){
-		return this.peek(name) || this.create(name);
+	get: function(name, cb){
+		var room = this.peek(name);
+		if(room) return cb(room);
+		return this.create(name, cb);
 	},
 	
 	peek: function(name){
 		return this.channels[Channel.generalizeName(name)];
 	},
 	
-	create: function(name){
+	create: function(name, callback){
 		name = Channel.generalizeName(name);
-		var channel = new wompt.Channel({name: name});
-		channel.app = this;
+		var channel = new wompt.Channel({
+				name: name,
+				namespace: this.options.namespace,
+				ops: this.options.allowOps
+			}, function(channel){
+			callback(channel);
+		});
 		this.channels[name] = channel;
 		this.count++;
-		this.emit('new_channel', channel)
-		return channel;
+		this.emit('new_channel', channel);
 	},
 	
 	remove: function(channel){

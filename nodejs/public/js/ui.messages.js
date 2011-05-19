@@ -5,7 +5,8 @@ UI.once('init', function(){
 	  , last_line = null
 	  , msgs = [];
 
-	function prepareMessageElement(el, text){
+	function prepareMessageElement(el, data){
+		var text = data.msg;
 		if(newline.test(text)){
 			text
 				.split(newline)
@@ -17,6 +18,7 @@ UI.once('init', function(){
 		}
 		
 		el.addClass('msg');
+		el.append(timestamp(data));
 		return el;
 	}
 	
@@ -31,6 +33,19 @@ UI.once('init', function(){
 		return el;
 	}
 	
+	function timestamp(data){
+		if(!data.t) return;
+		
+		var ts = $('<div>'),
+		    t = new Date(data.t),
+		    H = t.getHours(),
+		    h = H % 12,
+		    m = t.getMinutes();
+		
+		ts.addClass('ts');
+		ts.text((h==0 ? 12 : h) + ":" + (m < 10 ? '0' + m : m) + (H > 11 ? 'pm' : 'am'));
+		return ts;
+	}
 	
 	function pruneOldMessages(){
 		var num_to_remove = msgs.length - WOMPT.messages.max_shown;
@@ -53,7 +68,8 @@ UI.once('init', function(){
 	
 	function firstMessageInGroup(msg){
 		msg.nick.text(msg.from.name);
-		msg.nick.css('color', UI.Colors.forUser(msg.from.id));
+		if(msg.from.id != 'system')
+			msg.nick.css('color', UI.Colors.forUser(msg.from.id));
 		msg.nick.addClass('name');
 		msg.line.addClass('first');
 	}
@@ -95,12 +111,15 @@ UI.once('init', function(){
 				nick = $('<td>'),
 				msg_container  = $('<td>');
 
-			if(data.from.id == 'system')
+			if(data.from.id == 'system'){
 				line.addClass('system');
+				msg_container.attr('colspan', 2);
+				line.append(msg_container);
+			}else
+				line.append(nick, msg_container);
 				
 			line.addClass('line');
-			prepareMessageElement(msg_container, data.msg);
-			line.append(nick, msg_container);
+			prepareMessageElement(msg_container, data);
 
 			if(Util.Text.mentionMatcher(data.msg)){
 				line.addClass('mention');
@@ -115,13 +134,15 @@ UI.once('init', function(){
 			$('#message_list').append(line);
 			msgs.push(data);
 			pruneOldMessages();
+			return line;
 		},
 		
 		system: function(msg){
 			UI.emit('before_append', msg);
-			UI.Messages.appendWithoutEvents({from:{name: "System", id:'system'}, msg:msg});
+			var line = UI.Messages.appendWithoutEvents({from:{id:'system'}, msg:msg});
 			UI.emit('after_append', msg);
 			UI.emit('system_message', msg);
+			return line;
 		}
 	}
 });

@@ -115,7 +115,6 @@ function Auth(config){
 			next();
 		else{
 			res.send("", 404);
-			res.end();
 		}
 	}
 	

@@ -108,7 +108,7 @@ body#chat .main{
 #input #input_overlay{
 	display:block;
 	-vendor-border-radius:5px;
-	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 8px;
+	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0px 5px;
 	-vendor-box-sizing:border-box;
 	padding:4px 7px;	
 	position:absolute;
@@ -116,6 +116,7 @@ body#chat .main{
 	left:0;
 	bottom:0;
 	right:0;
+	background:#fff top repeat-x data-url(/images/structure/5px_fade_to_white.gif);
 }
 
 /* connection status input overlay */
@@ -176,20 +177,26 @@ a.try_now{
 	table-layout:fixed;
 }
 
-#message_list.hide_system .line.system {
-	display:none;
-}
-
 .line td{
-	padding:.1em;
+	padding:0 .1em .2em .1em;
+	position:relative;
 }
 
 tr.first {
-	background: left 0.1em repeat-x data-url(/images/chat/line_back.png);
+	background: left 0 repeat-x data-url(/images/chat/line_back.png);
 }
 
 tr.first td {
-	padding-top:0.5em;
+	padding-top:0.3em;
+}
+
+.line.system{
+	background-color:#eee;
+	color:#888;
+}
+.line.system td{
+	padding:.8em 3em;
+	text-align:center;
 }
 
 .line.mention{
@@ -200,7 +207,6 @@ td.name {
 	width: 10em;
 	padding-right: 10px;
 	text-align:right;
-	color: black;
 	font-weight:bold;
 	word-wrap:normal;
 	word-break:keep-all;	
@@ -237,4 +243,19 @@ td.name {
 
 #actions a:active{
 	margin-top:2px;
+}
+
+.ts {
+	position:absolute;
+	top:2px;
+	right:0;
+	color:#AAA;
+	padding:3px;
+	font-size:12px;
+	background:white;
+	display:none;
+}
+
+tr:hover .ts {
+	display:block;
 }
