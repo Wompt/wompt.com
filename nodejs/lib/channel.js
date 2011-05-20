@@ -30,11 +30,8 @@ function Channel(config, callback){
 			if(!client.user.authenticated() || channel.clients.other_clients_from_same_user(client).length == 0){
 				channel.broadcast_user_list_change({'part': client.user});
 				
-				if(channel.config.ops && client.user.authenticated()){
-					var ops = channel.opsUsers[client.uid];
-					if(ops)
-						ops.lastSeen = new Date();
-				}				
+				if(channel.config.ops && client.user.authenticated())
+					channel.delay_release_ops(client.uid)
 			}
 		}
 	}
@@ -51,11 +48,12 @@ var proto = {
 		this.touch();
 		client.meta_data = {
 			channel: this,
-			token: token
+			token: token,
+			joined: Date.now()
 		};
 
 		// TODO: this should also check if another user has ops that aren't expired
-		if(this.config.ops && this.clients.userCount == 0 && client.user.authenticated())
+		if(this.config.ops && this.clients.userCount == 0 && client.user.authenticated() && this.vacant_ops())
 			this.give_ops(client)
 
 		this.clients.add(client);
@@ -92,18 +90,63 @@ var proto = {
 	send_ops: function(client){
 		if(!this.config.ops) return;
 		
-		var ops = this.opsUsers[client.uid];
+		var ops = this.get_ops(client.uid);
 		if(ops){
-			if(!ops.lastSeen || (new Date() - ops.lastSeen) < wompt.env.ops.keep_when_absent_for){
-				client.send({action: 'ops'});
-			}else
-				delete this.opsUsers[client.uid];
+			// If a user comes back before the delayed ops release, clear the timer
+			if(ops && ops.timer) clearTimeout(ops.timer);
+			client.send({action: 'ops', kick: true});
+		}else{
+			client.send({action: 'ops', kick: false});
 		}
 	},
 	
 	give_ops: function(client){
-		var ops = this.opsUsers;
-		ops[client.uid] = {};
+		this.opsUsers[client.uid] = {};
+	},
+	
+	get_ops: function(uid){
+		if(uid){
+			return this.opsUsers[uid];
+		}
+	},
+	
+	vacant_ops: function(){
+		for(var key in this.opsUsers)
+			return false;
+		return true;
+	},
+	
+	delay_release_ops: function(uid){
+		var ops = this.opsUsers[uid],
+		self = this;
+		
+		if(ops){
+			ops.timer = setTimeout(function(){
+				self.release_ops(uid);
+			}, wompt.env.ops.keep_when_absent_for)
+		}				
+	},
+	
+	release_ops: function(uid){
+		var ops = this.opsUsers[uid],
+		oldest_client,
+		oldest_join = Date.now();
+		
+		this.clients.each(function(client){
+			var meta = client.meta_data;
+			if(client.uid != uid && meta.joined < oldest_join && client.user.authenticated()){
+				oldest_join = meta.joined;
+				oldest_client = client;
+			}
+		});
+		
+		if(oldest_client){
+			this.give_ops(oldest_client);
+			// TODO - we need to inform all clients that ops have transfered
+			this.send_ops(oldest_client);
+		}
+		
+		delete this.opsUsers[uid];
 	},
 	
 	receive_message: function(data){
@@ -111,8 +154,6 @@ var proto = {
 		var responder = this.action_responders[data.action];
 		if(responder)
 			responder.call(this, data);
-		else
-			throw "No such action handler:" + data.action;
 	},
 	
 	action_responders: {
@@ -120,7 +161,7 @@ var proto = {
 			if(data.from_client.user.readonly) return;
 			if(data.msg && data.msg.length > constants.messages.max_length) return;
 			var message = {
-				t: new Date().getTime(),
+				t: Date.now(),
 				action: 'message',
 				msg: data.msg,
 				from:{
@@ -165,7 +206,7 @@ var proto = {
 					};
 					
 					var ops = this.opsUsers[uid];
-					if(ops && (!ops.lastSeen || (now - ops.lastSeen) < wompt.env.ops.keep_when_absent_for))
+					if(ops)
 						users[uid].ops = true;
 				}
 			}else {
@@ -179,15 +220,19 @@ var proto = {
 	},
 	
 	broadcast_user_list_change: function(opt){
-		var action, dont_emit;
+		var action, dont_emit, ops = this.config.ops;
 		
 		if(opt.part) action='part';
 		else if(opt.join) action='join';
 		
 		var users = {}, user = opt.part || opt.join;
 		if(user.authenticated()){
-			users[user.id()] = {
+			var uid = user.id(),
+			user_info = users[uid] = {
 				'name': user.doc.name || user.doc.email
+			}
+			if(opt.join && ops && this.get_ops(uid)){
+				user_info.ops = true;
 			}
 		} else {
 			users.anonymous = {count:1};

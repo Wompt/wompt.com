@@ -45,6 +45,16 @@
 	color:#aaa;
 }
 
+#user_list .kick{
+	display:none;
+}
+#user_list .ops_kick .kick{
+	display:block;
+}
+#user_list .has_ops .kick{
+	display: none;
+}
+
 #user_list .kick,
 #user_list .ops{
 	position:absolute;

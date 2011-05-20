@@ -41,6 +41,8 @@ function UserListUI(ul, container, top){
 	anonymous = {el: null, count:0},
 	sorted = [];
 	
+	this.container = container;
+	
 	ul.on('join', function(users){
 		$.each(users, function(id, user){
 			user.id = id;
