@@ -76,6 +76,15 @@ var providerAuthInfo = {
 		}
 	},
 	
+	twitter: {
+		profile: function(){
+			var nick;
+			return get_urls_hash(this).Twitter || (
+				(nick = this.get("info.user_info.nickname")) &&
+				("http://twitter.com/" + nick));
+		}
+	},
+	
 	github: {
 		profile: function(){
 			var url = get_urls_hash(this).GitHub, nick;
