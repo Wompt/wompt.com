@@ -73,7 +73,7 @@ class WomptAuth < Sinatra::Base
       if (email = info['email']) && (email.length > 3) && (user = User.find_one('email' => email))
         user.add_authentication_from_authinfo(auth)
       else
-        user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid'], 'info' => auth}])
+        user = User.new('authentications' => [{'provider' => auth['provider'], 'uid' => auth['uid'], 'info' => convert_unserializable_objects(auth)}])
         user['email'] = info['email'] if info['email']
         if(name = (info['name'] || info['nickname']))
           user['name'] = name
@@ -84,7 +84,7 @@ class WomptAuth < Sinatra::Base
     user['one_time_token'] = generate_token if create_session
     
     if(auth_doc = user.get_authentication(auth['provider'], auth['uid']))
-      auth_doc['info'] = auth
+      auth_doc['info'] = convert_unserializable_objects(auth)
     end
     user.save!
     return user
@@ -98,6 +98,25 @@ class WomptAuth < Sinatra::Base
       response.delete_cookie TOKEN_COOKIE
     end
     user
+  end
+  
+  def convert_unserializable_objects obj
+    return obj if obj.nil?
+    
+    if(obj.is_a? Array)
+      obj.map do |item|
+        convert_unserializable_objects(item)
+      end
+    elsif obj.is_a? Hash
+      obj.inject({}) do |memo, pair|
+        memo[pair[0]] = convert_unserializable_objects(pair[1])
+        memo
+      end
+    elsif obj.is_a? Numeric
+      obj
+    else
+      obj.to_s
+    end
   end
   
   get "/ok" do
