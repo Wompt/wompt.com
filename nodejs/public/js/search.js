@@ -3,16 +3,17 @@ $(function(){
 	searching,
 	timer,
 	delay = 300,
-	input = $('#room_query');
+	input = $('.wompt_query');
 	
 	scheduleSearch();
+	
 	input.keyup(function(e){
 		var query = input.val().trim();
 		if(last_query == query) return;
 		scheduleSearch();
 		last_query = query;
 	})
-	
+
 	function scheduleSearch(){
 		clearTimeout(timer);
 		timer = setTimeout(function(){

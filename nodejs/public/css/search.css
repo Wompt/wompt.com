@@ -1,5 +1,6 @@
 #search #top {
 	border-bottom:2px solid  rgba(255,255,255,.5);
+	height:2.5em;
 }
 
 .main{
@@ -24,14 +25,18 @@
 	color: #999;
 }
 
-#room_query{
+#search .wompt_query.top{
+	display:none;
+}
+
+.wompt_query{
 	padding:3px 25px 3px 6px;
 	border-radius:5px;
 	border:3px solid #EF6F2F;
 	width:300px;
 	font-size:16px;
 	color:#444;
-	background:right center no-repeat data-url(/images/icons/search_orange.png);
+	background:#fff right center no-repeat data-url(/images/icons/search_orange.png);
 }
 
 #search #footer_container {

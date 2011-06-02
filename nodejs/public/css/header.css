@@ -1,13 +1,12 @@
 #top{
 	position:relative;
-	height:2.5em;
+	height:3em;
+	z-index:1;
 }
 
 #toplinks {
-	position:absolute;
-	right:0;
-	top:0;
 	margin:5px 5px 0 0;
+	float:right;
 	font-size:12px;
 }
 
@@ -34,7 +33,6 @@
 .invite {
 	font-size:14px;
 	vertical-align:middle;
-	margin-left:10px;
 	font-weight:normal;
 }
 
@@ -46,4 +44,11 @@
 
 #top .room_name{
 	font-size: 1.3em;
+}
+
+.wompt_query.top{
+	float:right;
+	clear:right;
+	border:none;
+	margin:7px;
 }
