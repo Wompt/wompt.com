@@ -26,6 +26,10 @@ body#chat .main{
 	top:73px;
 }
 
+#chat .ui-autocomplete{
+	color:#444;
+}
+
 #chat #footer_container{
 	font-size:12px;
 	height:auto;

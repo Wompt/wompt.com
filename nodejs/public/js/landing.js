@@ -1,18 +1,24 @@
 UI.once('init',function(){
-	if(!$('#landing').get(0)) return;
 	
 	// Cant use the default AJAX url source option with the autocompletor because
 	// we need to translate {n:"room", u:12} -> {label:"room - 2", value:"room"}
-	$('input#channel').autocomplete({
+	$('input.query,input#channel').autocomplete({
+		minLength: 0,
 		source:function(req,res){
+			req.term = req.term.trim();
 			var done;
 			$.ajax({
 				url: '/rooms/search',
 				dataType: 'json',
 				success: function(data){
-					res(data.map(function(room){
-						return {label: room.n + ' - ' + room.u, value: room.n}
-					}));
+					data = data.map(function(room){
+						return {
+							label: room.n + ' - ' + room.u,
+							value: room.n,
+							url: '/chat/' + room.n}
+					});
+					data.push({label: "search for: " +req.term, url:'/search?q=' + req.term})
+					res(data);
 					done = true
 				},
 				complete: function(){
@@ -20,12 +26,44 @@ UI.once('init',function(){
 				},
 				data: req
 			});
+		},
+		
+		select: function(event, ui) {
+			window.open(ui.item.url, '_blank');
+			event.preventDefault();
+		}
+	});
+	
+	$("form#query").submit(function(e){
+		window.open('/chat/' + $('input.query').val().trim(), '_blank');
+		e.preventDefault();
+	})
+	
+	// Override default rendering	for auto-complete list
+	$.extend( $.ui.autocomplete.prototype, {
+		_renderMenu: function( ul, items ) {
+			var self = this;
+			ul.append($("<h4></h4>").text("Rooms"));
+			$.each( items, function( index, item ) {
+				self._renderItem( ul, item );
+			});
+		},
+		
+		_renderItem:	function( ul, item) {
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( $( "<a></a>" ).text( item.label ) )
+				.appendTo( ul );
 		}
 	});
 
+
+	// Ugly hack to prevent the rest of this code from running on anything but the landing page
+	
+	if(!$('#landing').get(0)) return;
+
 	var form = $('#embed_form');
 	form.find('input').keyup(updateCode);
-	
 	
 	function updateCode(){
 		var code = [
@@ -46,7 +84,7 @@ UI.once('init',function(){
 	var slides = $('.slides .slide'),
 		current = 0,
 		buttons = $('#slide_buttons > a').get();
-	
+
 	buttons = buttons.map(function(b, i){
 		var slide = $(slides.get(i));
 		b = $(b);
