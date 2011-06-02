@@ -151,6 +151,7 @@ App.prototype = {
 					query: terms,
 					resultsJSON: JSON.stringify(me.search(terms)),
 					jquery: true,
+					hide_top_query: true,
 					page_js: 'search',					
 					page_name:'search'
 				})

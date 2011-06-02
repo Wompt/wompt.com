@@ -26,10 +26,6 @@
 	color: #999;
 }
 
-#search .query.top{
-	display:none;
-}
-
 .query{
 	padding:3px 25px 3px 6px;
 	border-radius:5px;

@@ -15,8 +15,10 @@
 				= '&nbsp;|&nbsp; '
 				<a href="/users/force_sign_in/1" title="Force sign in as the first user">user 1</a> &nbsp;|&nbsp;
 				<a href="/users/force_sign_in/2" title="Force Sign in as the second user">user 2</a>
-		form(action='/search', target='_blank')
-			input.query.top(type='text', name='q', value= w.query)
+		- if(!w.hide_top_query)
+			form(action='/search', target='_blank', autocomplete="off")
+				input.query.top(type='text', name='q', value= w.query)
+				#results
 	#logo
 		a.W(href="/", title="Wompt.com")
 			span#wompt Wompt
