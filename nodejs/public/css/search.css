@@ -2,6 +2,10 @@
 	padding:0px;
 }
 
+#search #top{
+	min-height:34px;
+}
+
 #search #container{
 	background:#fff;
 	color:#444;
