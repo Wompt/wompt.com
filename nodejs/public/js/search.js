@@ -3,7 +3,7 @@ $(function(){
 	searching,
 	timer,
 	delay = 300,
-	input = $('.wompt_query');
+	input = $('#wompt_search');
 	
 	scheduleSearch();
 	

@@ -25,11 +25,11 @@
 	color: #999;
 }
 
-#search .wompt_query.top{
+#search .query.top{
 	display:none;
 }
 
-.wompt_query{
+.query{
 	padding:3px 25px 3px 6px;
 	border-radius:5px;
 	border:3px solid #EF6F2F;

@@ -15,6 +15,8 @@
 				= '&nbsp;|&nbsp; '
 				<a href="/users/force_sign_in/1" title="Force sign in as the first user">user 1</a> &nbsp;|&nbsp;
 				<a href="/users/force_sign_in/2" title="Force Sign in as the second user">user 2</a>
+		form(action='/search', target='_blank')
+			input.query.top(type='text', name='q', value= w.query)
 	#logo
 		a.W(href="/", title="Wompt.com")
 			span#wompt Wompt
@@ -27,6 +29,4 @@
 			span.invite(title='Invite your friends to this room') Invite people:&nbsp;
 				<fb:send href="http://#{w.host + w.url}" class='fb'></fb:send>
 				<fb:like href="www.facebook.com%2Fapps%2Fapplication.php%3Fid%3D181725458505189" send="false" layout="button_count" class="fb" show_faces="false"></fb:like>
-	form(action='/search', target='_blank')
-		input.wompt_query.top(type='text', name='q', value= w.query)
 	.clear

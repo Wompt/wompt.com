@@ -1,6 +1,6 @@
 #top{
 	position:relative;
-	height:3em;
+	height:4em;
 	z-index:1;
 }
 
@@ -11,7 +11,9 @@
 }
 
 #top #logo{
-	float: left;
+	position:absolute;
+	left:0;
+	top:0;
 	margin:5px 20px 0px 8px;
 	font-size:22px;
 	font-weight:700;
@@ -46,9 +48,10 @@
 	font-size: 1.3em;
 }
 
-.wompt_query.top{
+.query.top{
 	float:right;
 	clear:right;
+	width:150px;
 	border:none;
-	margin:7px;
+	margin:7px 2px;
 }
