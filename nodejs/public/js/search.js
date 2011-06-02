@@ -44,18 +44,17 @@ $(function(){
 		var results = $('#results'),
 		title = $('<h3>'),
 		titleText = query && query.length > 0 ?
-			(data.length + " Room" + (data.length == 1 ? '' : 's') + " Matching: '"+ query +"'")
+			(data.length + " Room" + (data.length == 1 ? '' : 's') + " Matching '"+ query +"'")
 			:
 			"Popular Rooms";
 		results.empty();
 		results.append(title.text(titleText))
+		title.append(" - ", link('permalink', '/search' + (query ? '/?q=' + query : '')));
 
 		data.forEach(function(room){
 			var row = $('<div class="room">'),
-			a = $('<a>');
-			a.attr('href', '/chat/'+room.n);
-			a.text(room.n);
-			row.append(a," - " + room.u + "");
+			a = link(room.n, '/chat/' + room.n);
+			row.append(a," - " + room.u);
 			results.append(row);
 		});
 		
@@ -65,9 +64,13 @@ $(function(){
 				$('<h4>')
 				.append(
 					"Create a room called ",
-					$('<a>').attr('href', '/chat/' + query).text(query)
+					link(query, '/chat/' + query)
 				)
 			);
 		}
+	}
+	
+	function link(text, url){
+		return $('<a>').attr('href', url).text(text)
 	}
 });
