@@ -13,7 +13,11 @@ cssPreManipulators = {
 		assetHandler.fixVendorPrefixes
 		, assetHandler.fixGradients
 		, customHandlers.replaceRgbaWithRgb
-		, assetHandler.stripDataUrlsPrefix
+		// Custom version of assetHandler.stripDataUrlsPrefix that takes into account
+		// The static files url prefix
+		, function (file, path, index, isLast, callback) {
+			callback(file.replace(/data-url\(\//ig,'url(/s/'));
+		}
 		, assetHandler.yuiCssOptimize
 	],
 	// Matches all (regex start line)
