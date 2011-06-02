@@ -1,17 +1,14 @@
-#search #top {
-	border-bottom:2px solid  rgba(255,255,255,.5);
-	height:2.5em;
-}
-
 .main{
 	padding:0px;
-	min-height:0;
 }
 
 #search #container{
 	background:#fff;
 	color:#444;
 	padding:0.5em 1em;
+	border:2px solid #F6AA84;
+	border-left:none;
+	border-right:none;
 }
 
 #search_bar,
@@ -39,12 +36,6 @@
 	background:#fff right center no-repeat data-url(/images/icons/search_orange.png);
 }
 
-#search #footer_container {
-	border-top:2px solid rgba(255,255,255,.5);
-	background:none;
-	position:static;
-}
-
 #results a{
-	color:#33a;
+	color:#26D;
 }
