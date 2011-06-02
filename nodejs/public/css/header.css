@@ -1,7 +1,7 @@
 #top{
 	position:relative;
-	height:4em;
 	z-index:1;
+	margin-bottom:5px;
 }
 
 #toplinks {

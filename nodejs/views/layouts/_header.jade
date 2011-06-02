@@ -3,7 +3,7 @@
 		- if(w.channel)
 			span.connection_status
 			&nbsp;|
-		- if(w.user.authenticated())
+		- if(w.authenticated)
 			a(href=w.user.profile_url()) #{w.user.doc.email || w.user.doc.name}
 			| &nbsp;|&nbsp;
 			a(href="/user/sign_out", title="Sign out of Wompt", class='same_window') sign out

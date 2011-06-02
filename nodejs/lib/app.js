@@ -273,6 +273,7 @@ App.prototype = {
 			jquery: false,
 			url: req.url,
 			user: req.meta_user,
+			authenticated: req.meta_user.authenticated(),
 			footer: true,
 			host: req.headers.host,
 			config: this.config

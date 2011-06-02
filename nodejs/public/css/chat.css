@@ -22,6 +22,10 @@ body#chat .main{
 	background-color:#f7f7f7;	
 }
 
+.anonymous .main #content{
+	top:73px;
+}
+
 #chat #footer_container{
 	font-size:12px;
 	height:auto;
