@@ -1,38 +1,43 @@
 UI.once('init',function(){
 	
+	// This stuff is only useful if we have jquery autocomplete
+	if(!($.ui && $.ui.autocomplete)) return;
+	
 	// Cant use the default AJAX url source option with the autocompletor because
 	// we need to translate {n:"room", u:12} -> {label:"room - 2", value:"room"}
 	$('input.query,input#channel').autocomplete({
 		minLength: 0,
-		source:function(req,res){
-			req.term = req.term.trim();
-			var done;
-			$.ajax({
-				url: '/rooms/search',
-				dataType: 'json',
-				success: function(data){
-					data = data.map(function(room){
-						return {
-							label: room.n + ' - ' + room.u,
-							value: room.n,
-							url: '/chat/' + room.n}
-					});
-					data.push({label: "search for: " +req.term, url:'/search?q=' + req.term})
-					res(data);
-					done = true
-				},
-				complete: function(){
-					if(!done) res();
-				},
-				data: req
-			});
-		},
+		source: performSearch,
 		
 		select: function(event, ui) {
 			window.open(ui.item.url, '_blank');
 			event.preventDefault();
 		}
 	});
+	
+	function performSearch(req,res){
+		req.term = req.term.trim();
+		var done;
+		$.ajax({
+			url: '/rooms/search',
+			dataType: 'json',
+			success: function(data){
+				data = data.map(function(room){
+					return {
+						label: room.n + ' - ' + room.u,
+						value: room.n,
+						url: '/chat/' + room.n}
+				});
+				data.push({label: "search for: " +req.term, url:'/search?q=' + req.term, 'class':"search"})
+				res(data);
+				done = true
+			},
+			complete: function(){
+				if(!done) res();
+			},
+			data: req
+		});
+	}
 	
 	$("form#query").submit(function(e){
 		window.open('/chat/' + $('input.query').val().trim(), '_blank');
@@ -52,7 +57,7 @@ UI.once('init',function(){
 		_renderItem:	function( ul, item) {
 			return $( "<li></li>" )
 				.data( "item.autocomplete", item )
-				.append( $( "<a></a>" ).text( item.label ) )
+				.append( $( "<a></a>" ).text( item.label ).addClass(item['class']) )
 				.appendTo( ul );
 		}
 	});

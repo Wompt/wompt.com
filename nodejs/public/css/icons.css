@@ -14,6 +14,11 @@
 	background-image:data-url(/images/external/github_32.png);
 }
 
+.query,
+.search{
+	background:right center no-repeat data-url(/images/icons/search_orange.png);
+}
+
 .ico{
 	display:inline-block;
 	height:28px;
