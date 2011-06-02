@@ -75,6 +75,17 @@ var assetManagerGroups = {
 			, '/public/js/ui.layout.js'
 			, '/public/js/profile.js'
 		]
+	}), 'search_js': mc(defaultOptions,{
+		'route': /\/js\/search_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/public/external/bootstrap.js'
+			, '/public/external/events.js'			
+			, '/public/js/ui.js'
+			, '/public/js/sign_in.js'
+			, '/public/js/search.js'
+		]
 	}), 'all_css': mc(defaultOptions,{
 		'route': /\/css\/all_[0-9]+\.css/
 		, 'path': pub + '/css/'
@@ -94,6 +105,7 @@ var assetManagerGroups = {
 			, 'external/grid_978.css'
 			, 'icons.css'
 			, 'embed.css'
+			, 'search.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{

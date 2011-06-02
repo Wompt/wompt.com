@@ -1,0 +1,45 @@
+#search #top {
+	border-bottom:2px solid  rgba(255,255,255,.5);
+}
+
+.main{
+	padding:0px;
+	min-height:0;
+}
+
+#search #container{
+	background:#fff;
+	color:#444;
+	padding:0.5em 1em;
+}
+
+#search_bar,
+#results{
+	padding:5px 0;
+	font-size:16px;
+	color:#444;
+}
+#results{
+	padding-left:5px;
+	color: #999;
+}
+
+#room_query{
+	padding:3px 25px 3px 6px;
+	border-radius:5px;
+	border:3px solid #EF6F2F;
+	width:300px;
+	font-size:16px;
+	color:#444;
+	background:right center no-repeat data-url(/images/icons/search_orange.png);
+}
+
+#search #footer_container {
+	border-top:2px solid rgba(255,255,255,.5);
+	background:none;
+	position:static;
+}
+
+#results a{
+	color:#33a;
+}

@@ -1,7 +1,7 @@
 UI.once('init',function(){
 	if(!$('#landing').get(0)) return;
 	
-	$('input#channel').autocomplete({source:'/channels/search'});
+	$('input#channel').autocomplete({source:'/rooms/search'});
 
 	var form = $('#embed_form');
 	form.find('input').keyup(updateCode);
