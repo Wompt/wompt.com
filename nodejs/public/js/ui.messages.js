@@ -4,6 +4,20 @@ UI.once('init', function(){
 	  , newline = Util.Text.newlineMatcher
 	  , last_line = null
 	  , msgs = [];
+	
+	// Clicking on username appends @username to the input
+	$('#message_list').click(function(e){
+		var name = $(e.target).data('data-uname');
+		if(name){
+			var input = $('#message'),
+			val = input.val().trim();
+			val += ' @' + name.split(' ')[0];
+			val = val.trim() + ' ';
+			input.val(val).focus();
+			input.get(0).selectionStart =
+			input.get(0).selectionEnd = val.length;
+		}
+	})
 
 	function prepareMessageElement(el, data){
 		var text = data.msg, first;
@@ -67,8 +81,10 @@ UI.once('init', function(){
 	
 	function firstMessageInGroup(msg){
 		msg.nick.text(msg.from.name);
-		if(msg.from.id != 'system')
+		if(msg.from.id != 'system'){
 			msg.nick.css('color', UI.Colors.forUser(msg.from.id));
+			msg.nick.data('data-uname', msg.from.name);
+		}
 		msg.nick.addClass('name');
 		msg.line.addClass('first');
 	}

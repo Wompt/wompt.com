@@ -219,7 +219,11 @@ td.name {
 	text-align:right;
 	font-weight:bold;
 	word-wrap:normal;
-	word-break:keep-all;	
+	word-break:keep-all;
+	cursor:pointer;
+}
+td.name:hover {
+	text-decoration:underline;
 }
 
 .msg {
