@@ -137,46 +137,19 @@ App.prototype = {
 		});
 		
 		exp.get("/rooms/search", function(req, res){
-			var results = [], term, terms, max_results = 10;
-			(term = req.query) && (term = term.term) && (term = term.toLowerCase());
-			
-			if(term){
-				// Limit length, split on spaces, remove blank terms, enforce maximum term count
-				terms = term.substr(0,50)
-					.split(' ')
-					.filter(function(t){return t.length > 0;})
-					.slice(0,5);
-
-				if(terms.length > 1){
-					me.channels.each(function(channel){
-						var name = channel.name;
-						if(terms.every(function(term){return name.indexOf(term) >= 0;}))
-							results.push(channel);
-						if(results.length >= max_results) return true;
-					});
-				} else if(term = terms[0]){
-					me.channels.each(function(channel){
-						if(channel.name.indexOf(term) >= 0)
-							results.push(channel);
-						if(results.length >= max_results) return true;
-					});
-				}
-			} else {
-				results = me.popular_channels.sorted_list;
-			}
-			
-			results = results.map(function(channel){
-				return {n:channel.name, u:channel.clients.userCount}
-			});
-			
+			var terms = req.query && req.query.term,
+			    results = me.search(terms);
 			res.writeHead(200, {"Content-Type":"application/json"});
 			res.end(JSON.stringify(results));
 		});
 		
 		exp.get("/search", function(req, res){
+			var terms = req.query && req.query.q;
+			
 			res.render('search',{
 				locals: me.standard_page_vars(req, {
-					query: req.query && req.query.q,
+					query: terms,
+					resultsJSON: JSON.stringify(me.search(terms)),
 					jquery: true,
 					page_js: 'search',					
 					page_name:'search'
@@ -258,6 +231,41 @@ App.prototype = {
 		}
 
 		return exp;
+	},
+	
+	search: function(term){
+		var results = [], terms, max_results = 100;
+		
+		term = term ? term.toLowerCase() : null;
+			
+		if(term){
+			// Limit length, split on spaces, remove blank terms, enforce maximum term count
+			terms = term.substr(0,50)
+				.split(' ')
+				.filter(function(t){return t.length > 0;})
+				.slice(0,5);
+
+			if(terms.length > 1){
+				this.channels.each(function(channel){
+					var name = channel.name;
+					if(terms.every(function(term){return name.indexOf(term) >= 0;}))
+						results.push(channel);
+					if(results.length >= max_results) return true;
+				});
+			} else if(term = terms[0]){
+				this.channels.each(function(channel){
+					if(channel.name.indexOf(term) >= 0)
+						results.push(channel);
+					if(results.length >= max_results) return true;
+				});
+			}
+		} else {
+			results = this.popular_channels.sorted_list;
+		}
+		
+		return results.map(function(channel){
+			return {n:channel.name, u:channel.clients.count}
+		});
 	},
 	
 	standard_page_vars: function(req, custom_vars){

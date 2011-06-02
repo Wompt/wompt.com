@@ -5,11 +5,14 @@ $(function(){
 	delay = 300,
 	input = $('#wompt_search');
 	
-	scheduleSearch();
+	if(window.initialResults){
+		last_query = input.val().trim();
+		showResults(last_query, window.initialResults);
+	}
 	
 	input.keyup(function(e){
 		var query = input.val().trim();
-		if(last_query == query) return;
+		if(last_query == query && e.which != 13) return;
 		scheduleSearch();
 		last_query = query;
 	})
