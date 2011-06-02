@@ -1,6 +1,3 @@
-#landing .bubble,
-#top,
-.main #input,
-#footer_container{
-	background: bottom left repeat-x data-url(/images/structure/black_fade.png);	
+#landing .bubble{
+	background: bottom left repeat-x data-url(/images/structure/black_fade.png);
 }

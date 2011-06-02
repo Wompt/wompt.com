@@ -20,8 +20,6 @@ UI.once('init', function(){
 	function doLayout(){
 		var w = c.width();
 		c.toggleClass('small', w < small_at);
-		var taller = $('body').height() >= $(window).height();
-		$('.main').toggleClass('taller', taller);
 	}
 
 	function toggleUserlist(show){

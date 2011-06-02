@@ -23,9 +23,13 @@ body#chat .main{
 }
 
 #chat #footer_container{
-	background:none;
 	font-size:12px;
 	height:auto;
+	position:fixed;
+	z-index:1;
+	bottom:0px;
+	left:0px;
+	right:0px;
 }
 
 #chat #footer{

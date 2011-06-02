@@ -1,11 +1,6 @@
 #top{
-	height:40px;
-	position:absolute;
-	top:0px;
-	right:0px;
-	left:0px;
-	z-index:2;
-	background-position:top left;
+	position:relative;
+	height:3em;
 }
 
 #toplinks {

@@ -2,40 +2,20 @@ body{
 	font-family: helvetica, arial, freesans, clean, sans-serif;
 	font-size:1em;
 	margin: 0px;
-	background: #ff7936 top center repeat;
-	height: 100%;
+	background: #EF6F2F;
 }
 
 .main{
 	padding: 55px 0;
 	margin: 0 auto;
-	min-height:100%;
+	position:relative;	
 }
 
-.main.taller{
-	position:relative;
-}
-
-html{
-	height: 100%;
-}
 
 /* Text that is displayed on the base body background */
 a,
 body {
-	color:white
-}
-
-#bg{
-	position:absolute;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	background-image: data-url(/images/structure/striped_179_thick.png), data-url(/images/structure/striped_97_multi.png), data-url(/images/structure/striped_71_thin.png), data-url(/images/structure/striped_61x67_multi.png);
-	z-index:-1;
-	opacity:0.5;
-	min-height:100%;
+	color:white;
 }
 
 a{
