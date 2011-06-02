@@ -42,9 +42,13 @@ $(function(){
 		});
 
 		var results = $('#results'),
-		title = query && query.length > 0 ? "Rooms Matching: '"+ query +"'" : "Popular Rooms";
+		title = $('<h3>'),
+		titleText = query && query.length > 0 ?
+			(data.length + " Room" + (data.length == 1 ? '' : 's') + " Matching: '"+ query +"'")
+			:
+			"Popular Rooms";
 		results.empty();
-		results.append($('<h3>').text(title))
+		results.append(title.text(titleText))
 
 		data.forEach(function(room){
 			var row = $('<div class="room">'),
@@ -56,7 +60,14 @@ $(function(){
 		});
 		
 		if(data.length == 0){
-			results.append($('<h4>').text("(no results)"));
+			results
+			.append(
+				$('<h4>')
+				.append(
+					"Create a room called ",
+					$('<a>').attr('href', '/chat/' + query).text(query)
+				)
+			);
 		}
 	}
 });
