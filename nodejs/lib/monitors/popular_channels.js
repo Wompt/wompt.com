@@ -1,6 +1,6 @@
 var DEFAULTS = {
 	 interval: 1 * 60 * 1000
-	,length: 10
+	,length: 100
 };
 
 function PopularChannels(channelManager, interval){
