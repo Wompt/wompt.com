@@ -1,7 +1,27 @@
 UI.once('init',function(){
 	if(!$('#landing').get(0)) return;
 	
-	$('input#channel').autocomplete({source:'/rooms/search'});
+	// Cant use the default AJAX url source option with the autocompletor because
+	// we need to translate {n:"room", u:12} -> {label:"room - 2", value:"room"}
+	$('input#channel').autocomplete({
+		source:function(req,res){
+			var done;
+			$.ajax({
+				url: '/rooms/search',
+				dataType: 'json',
+				success: function(data){
+					res(data.map(function(room){
+						return {label: room.n + ' - ' + room.u, value: room.n}
+					}));
+					done = true
+				},
+				complete: function(){
+					if(!done) res();
+				},
+				data: req
+			});
+		}
+	});
 
 	var form = $('#embed_form');
 	form.find('input').keyup(updateCode);
