@@ -62,7 +62,7 @@ $(function(){
 			results.append(row);
 		});
 		
-		if(data.length == 0){
+		if(data.length == 0 && query != ''){
 			results
 			.append(
 				$('<h4>')
