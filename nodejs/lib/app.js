@@ -67,6 +67,8 @@ App.prototype = {
 			var staticServer = express.static(config.public_dir, {maxAge:1000*60*60*24*14}); // 2 weeks
 			var exceptions = {
 				'/apple-itouch-icon.png':true
+				,'/fb_cross_domain.html': true
+				,'/google8a88ebb03a6df8aa.html': true
 				,'/robots.txt':true
 			}
 			exp.use(function checkStaticAndStrip(req,res,next){
