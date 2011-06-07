@@ -40,7 +40,8 @@ UI.once('init',function(){
 	}
 	
 	$("form#query").submit(function(e){
-		window.open('/chat/' + $('input.query').val().trim(), '_blank');
+		var room_name = $('input.query').val().trim();
+		window.open(room_name == '' ? '/search' : '/chat/' + room_name, '_blank');
 		e.preventDefault();
 	})
 	
