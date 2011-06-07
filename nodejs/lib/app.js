@@ -375,10 +375,17 @@ App.prototype = {
 		if(options.fakeUsers) argumentsForGet.push(wompt.Auth.fake_user_middleware());
 		
 		function handleChatRoomGet(req, res){
-			if(req.url.substr(-1,1) == '/'){
+
+			// Trim off ending slash
+			if(req.url.substr(-1,1) == '/')
 				return res.redirect(wompt.util.chop(req.url));
+				
+			// Trim of ending slash when we have query parameters
+			if(req.url.indexOf('/?') >=0){
+				req.url = req.url.replace('/?', '?');
+				req.params[0] = wompt.util.chop(req.params[0]);
 			}
-			
+
 			var meta_user = req.meta_user,
 					channel = req.params[0];
 					
