@@ -160,6 +160,12 @@ App.prototype = {
 			});					
 		});
 		
+		exp.post("/occupancy", function(req, res){
+			var rooms = req.body && req.body.rooms;
+			
+			res.send(me.occupancy(rooms));
+		});		
+		
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + (req.body.channel || 'wompt'));
@@ -269,6 +275,15 @@ App.prototype = {
 		return results.map(function(channel){
 			return {n:channel.name, u:channel.clients.count}
 		});
+	},
+	
+	occupancy:function(rooms){
+		var self = this;
+		if(rooms.length > 100) rooms = rooms.slice(0,99);
+		return rooms.map(function(room_name){
+			room = self.channels.peek(room_name);
+			return room ? room.clients.count : 0;
+		})
 	},
 	
 	standard_page_vars: function(req, custom_vars){
