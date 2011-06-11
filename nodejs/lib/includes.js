@@ -38,5 +38,6 @@ e.loggers        = {
 e.controllers    = {
 	Accounts:         require('./controllers/accounts.js')
 }
+e.errors         = require('./errors');
 e.util           = require('./util');
 e.fail           = function(msg){throw msg};

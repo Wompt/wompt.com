@@ -48,6 +48,10 @@ function App(options){
 	var accounts = new wompt.controllers.Accounts(wompt, this);
 	
 	this.express.resource('accounts', accounts);
+	
+	this.express.get('*', function(req, res, next){
+		next(new wompt.errors.NotFound());
+	});
 }
 
 App.prototype = {
@@ -89,6 +93,11 @@ App.prototype = {
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.Auth.lookup_user_middleware());
 			exp.use(wompt.Auth.meta_user_middleware(me.meta_users));
+			
+			// User-level error handler (404, 406, ...)
+			exp.error(wompt.errors.createPageRenderer(me));
+			
+			// Application-level error handler (500)
 			exp.error(Hoptoad.expressErrorNotifier);
 		});
 		
