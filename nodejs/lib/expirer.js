@@ -7,7 +7,7 @@ function Expirer(collection, options){
 			expire_after_ms: 10 * 60 * 1000,
 			time_attribute: 'touched'
 		},
-		me = this,
+		self = this,
 		timer;
 		
 	options = utils.merge(defaults, options || {});
@@ -22,21 +22,13 @@ function Expirer(collection, options){
 		for(var k in collection){
 			var obj = collection[k];
 			if(obj[time_attr] < expire_time && !(keep_if && keep_if(obj))){
-				me.emit('expired', obj);
+				self.emit('expired', obj);
 				delete collection[k];
 			}
 		}
 	}
-	
-	this.pause = function(){
-		if(timer) clearInterval(timer);
-	}
-	
-	this.start = function(){
-		if(!timer) timer = setInterval(check_expiration, options.cleanup_interval);	
-	}
 
-	this.start();
+	timer = setInterval(check_expiration, options.cleanup_interval);	
 }
 
 util.inherits(Expirer, events.EventEmitter);
