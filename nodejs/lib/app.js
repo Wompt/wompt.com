@@ -44,6 +44,10 @@ function App(options){
 		path: wompt.env.logs.root + '/app_state.log',
 		monitor: this.appStateMonitor
 	}));
+	
+	var accounts = new wompt.controllers.Accounts(wompt, this);
+	
+	this.express.resource('accounts', accounts);
 }
 
 App.prototype = {

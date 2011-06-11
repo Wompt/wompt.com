@@ -35,5 +35,8 @@ e.loggers        = {
 	,AppStateLogger:  require('./loggers/app_state_logger.js')
 	,LoggerCreator:   require('./loggers/logger_creator.js')
 }
+e.controllers    = {
+	Accounts:         require('./controllers/accounts.js')
+}
 e.util           = require('./util');
 e.fail           = function(msg){throw msg};
