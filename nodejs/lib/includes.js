@@ -13,6 +13,7 @@ e.mongoose       = require('./db');
 e.MetaUser       = require("./meta_user");
 e.MetaUserManager= require("./meta_user_manager");
 e.Account        = require("./models/account");
+e.AccountManager = require("./account_manager");
 e.User           = require("./models/user");
 e.Room           = require("./models/room");
 e.ClientConnectors=require("./client_connectors");
