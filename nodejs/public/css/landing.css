@@ -11,6 +11,7 @@
 
 #landing > #top{
 	height:14px;
+	min-height:14px;
 	overflow:visible;
 }
 
