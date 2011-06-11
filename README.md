@@ -46,3 +46,15 @@ Locally: (within any subdirectory of the application)
 On Box:
 		cd /ubuntu/www/wompt/current
 		cap production deploy  #cap does sudo for you, no need for it here
+
+### Deployment Environment Configuration ###
+#### Deployment Environment ####
+This specifies the directory to deploy to, the name of the git branch, and which
+application environment to use.  These settings are stored in `/config/deploy.rb`.
+
+#### Application Environment ####
+This specifies all the various settings for the application: db name, constants,
+file locations, port numbers, ...  All of these are loaded from the files in
+`/nodejs/environment` and `/authentication/config`.  Settings from the default
+environment are deep-merged with the application environment specified in the
+Deployment Environment config. 
