@@ -41,4 +41,6 @@ var proto = {
 	}
 }
 
+AccountManager.prototype = proto;
+
 module.exports = AccountManager;
