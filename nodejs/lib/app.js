@@ -14,22 +14,23 @@ function App(options){
 	this.meta_users = new wompt.MetaUserManager();
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
+	this.namespaceController = new wompt.controllers.Namespace(this);
 
 	// default namespace
-	this.channels =	this.chatNamespace('chat', {
+	this.channels =	this.namespaceController.createNamespace('chat', {
 		logged: true,
 		allowIframe: true,
 		allowAnonymous: true
 	});
 
 	// other namespaces
-	this.chatNamespace('unlisted', {
+	this.namespaceController.createNamespace('unlisted', {
 		logged: true,
 		allowAnonymous: false,
 		allowOps: true
 	});
 
-	this.chatNamespace('mod', {
+	this.namespaceController.createNamespace('mod', {
 		logged: true,
 		allowAnonymous: true,
 		allowOps: true
@@ -49,6 +50,7 @@ function App(options){
 
 	this.accountsController = new wompt.controllers.Accounts(this);
 	this.adminController    = new wompt.controllers.Admin(this);
+	this.namespaceController.register();
 	
 	this.express.resource('accounts', this.accountsController);
 	
@@ -367,77 +369,7 @@ App.prototype = {
 		};
 	},
 	
-	chatNamespace: function(namespace, options){
-		this.namespaces = this.namespaces || {};
-		otions = options || {};
-		options.namespace = namespace;
 
-		var me = this,
-		exp = this.express,
-		channelManager = new wompt.ChannelManager(options);
-		
-		this.namespaces[namespace] = channelManager;
-		
-		if(options.logged){
-			new wompt.loggers.LoggerCreator(channelManager, namespace);
-		}
-		
-		var argumentsForGet = [new RegExp("\\/" + namespace + "\\/(.+)")];
-		if(options.fakeUsers) argumentsForGet.push(wompt.Auth.fake_user_middleware());
-		
-		function handleChatRoomGet(req, res){
-
-			// Trim off ending slash
-			if(req.url.substr(-1,1) == '/')
-				return res.redirect(wompt.util.chop(req.url));
-				
-			// Trim of ending slash when we have query parameters
-			if(req.url.indexOf('/?') >=0){
-				req.url = req.url.replace('/?', '?');
-				req.params[0] = wompt.util.chop(req.params[0]);
-			}
-
-			var meta_user = req.meta_user,
-					channel = req.params[0];
-					
-			var token = wompt.Auth.get_or_set_token(req, res);
-
-			var connector = me.client_connectors.add({
-				meta_user:meta_user,
-				namespace:channelManager,
-				token: token
-			});
-			
-			var locals = me.standard_page_vars(req, {
-				channel: channel,
-				namespace: namespace,
-				connector_id: connector.id,
-				url: req.url,
-				jquery: true,
-				page_name: 'chat',
-				page_js: 'channel'
-			});
-			
-			var opt = {
-				locals:locals
-			};
-			
-			if(options.allowIframe && req.query.iframe == '1'){
-				opt.layout = 'layouts/iframe';
-				locals.w.embedded = true;
-				locals.w.ga_source = 'embedd';
-				if(options.allowCSS) locals.w.css_file = req.query.css_file;
-			}
-			
-			res.render('chat', opt);
-		}
-		
-		argumentsForGet.push(handleChatRoomGet);
-		exp.get.apply(exp, argumentsForGet);
-		
-		return channelManager;
-	},
-	
 	plain_routes: function(exp, urls){
 		var me = this;
 		urls.forEach(function(url){

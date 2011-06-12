@@ -94,3 +94,13 @@ Util.curry = function(fn, args){
 	}
 }
 
+// extracts the first part of the URL before the second slash
+// "/chat/room_name" -> "chat"
+// stores it in req._first_url_part
+Util.extractFirstUrlPart = function (req){
+	if(req._first_url_part) return req._first_url_part;
+	
+	var slash_index = req.url.indexOf('/', 1);
+	if(slash_index < 0) slash_index = req.url.length;
+	return req._first_url_part = slash_index && req.url.substr(1, slash_index-1);
+}

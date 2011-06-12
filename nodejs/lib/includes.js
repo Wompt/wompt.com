@@ -39,6 +39,7 @@ e.loggers        = {
 e.controllers    = {
 	 Accounts:        require('./controllers/accounts.js')
 	,Admin:           require('./controllers/admin.js')
+	,Namespace:       require('./controllers/namespace.js')
 }
 e.errors         = require('./errors');
 e.fail           = function(msg){throw msg};
