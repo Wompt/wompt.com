@@ -2,7 +2,17 @@ var wompt = require("../includes");
 
 function AccountsController(app){
 	this.index = blockNonAdmins(function index(req, res, next){
-		res.end('Hello Admin');
+		wompt.Account.find(function(err, results){
+			res.render('accounts/index', app.standard_page_vars(req, {
+				accounts: results
+			}));
+		});
+	})
+	
+	this.show = blockNonAdmins(function show(req, res, next){
+		res.render('accounts/show', app.standard_page_vars(req, {
+			account: req.account
+		}));
 	})
 	
 	this.new = blockNonAdmins(function _new(req, res, next){
@@ -10,9 +20,16 @@ function AccountsController(app){
 	})
 	
 	this.create = blockNonAdmins(function create(req, res, next){
-		console.log("Account created: ");
-		console.dir(req.body);
-		res.redirect('/accounts');
+		var account = new wompt.Account();
+		['name'].forEach(function(key){
+			account[key] = req.body[key];
+		});
+		account.save(function(err){
+			if(err)
+				next(err);
+			else
+				res.redirect('/accounts');
+		})
 	})
 	
 	this.load = function loadAccount(name, fn){
