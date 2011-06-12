@@ -46,10 +46,13 @@ function App(options){
 	}));
 	
 	this.accountManager = new wompt.AccountManager();
-	var accounts = new wompt.controllers.Accounts(this);
+
+	this.accountsController = new wompt.controllers.Accounts(this);
+	this.adminController    = new wompt.controllers.Admin(this);
 	
-	this.express.resource('accounts', accounts);
+	this.express.resource('accounts', this.accountsController);
 	
+	// All other requests get a 404
 	this.express.get('*', function(req, res, next){
 		next(new wompt.errors.NotFound());
 	});
@@ -115,7 +118,7 @@ App.prototype = {
 		exp.register('html', require('./templating/raw_html')({stripNewlines: true}));
 		
 		this.plain_routes(exp, [
-			,'/support'
+			'/support'
 			,'/terms'
 			,'/privacy'
 		]);
@@ -202,12 +205,6 @@ App.prototype = {
 			});
 		});
 		
-		exp.get("/admin/stats", wompt.Auth.blockNonAdmins, function(req, res){
-			res.render('admin/stats', {
-				locals: {w: me},
-				layout: 'admin/layout'
-			});
-		});
 		
 		function landingPage(req, res){
 			var meta_user = req.meta_user,

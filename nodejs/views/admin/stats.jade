@@ -1,20 +1,20 @@
 table
 	tr
 		th Active Channels
-		td #{w.channels.count}
+		td #{w.app.channels.count}
 	tr
 		th Active Clients
-		td #{w.clients.count}
+		td #{w.app.clients.count}
 	tr
 		th Unique Users
-		td #{w.clients.userCount}		
+		td #{w.app.clients.userCount}		
 	tr
 		th Popular Channels
 		td
-			- w.popular_channels.rebuildPopularList()
-			- each chan in w.popular_channels.sorted_list
+			- w.app.popular_channels.rebuildPopularList()
+			- each chan in w.app.popular_channels.sorted_list
 				div (#{chan.clients.userCount}) - #{chan.name}
 	tr
 		th App State
 		td
-			pre	#{JSON.stringify(w.appStateMonitor.previousState)}
+			pre	#{JSON.stringify(w.app.appStateMonitor.previousState)}
