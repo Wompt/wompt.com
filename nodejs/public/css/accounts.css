@@ -1,9 +1,14 @@
 #accounts .main {
-	background:white;
-	padding:3em 1em 7em 1em;
+	margin:0 auto 50px auto;
+	padding:30px 50px 60px 50px;
 	color:#444;
+	background:white;
+	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 7px;
+	border-radius:4px;
+	max-width:978px;
 }
 
 #accounts .main a {
 	color:#286ea0;
 }
+
