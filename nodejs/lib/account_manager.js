@@ -33,10 +33,10 @@ var proto = {
 		var self = this;
 		Account.findOne({name: name}, function(err, account){
 			if(account){
-				self.channels[name] = channel;
+				self.accounts[name] = account;
 				self.count++;
-				self.emit('new_channel', channel);
 			}
+			callback(err, account);
 		});
 	}
 }

@@ -3,4 +3,5 @@ table
 		th Name
 	- each account in w.accounts
 		tr
-			td #{account.name}
+			td
+				a(href='/accounts/' + account.name) #{account.name}
