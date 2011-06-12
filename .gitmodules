@@ -9,3 +9,7 @@
 [submodule "nodejs/vendor/connect-assetmanager"]
 	path = nodejs/vendor/connect-assetmanager
 	url = git://github.com/danielbeardsley/connect-assetmanager.git
+
+[submodule "nodejs/vendor/express-resource"]
+	path = nodejs/vendor/express-resource
+	url = git://github.com/Wompt/express-resource.git
