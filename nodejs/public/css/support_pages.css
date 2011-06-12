@@ -1,7 +1,7 @@
 #accounts .main,
 #admin .main,
 .plainpage {
-	margin:0 auto 50px auto;
+	margin:0 auto 0 auto;
 	padding:30px 50px 60px 50px;
 	color:#444;
 	background:white;
@@ -14,4 +14,5 @@
 
 #supportcontent{
 	max-width:600px;
+	margin-bottom:50px;
 }
