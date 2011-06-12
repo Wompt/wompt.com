@@ -4,7 +4,7 @@ function AccountsController(app){
 	// url: /accounts
 	this.index = blockNonAdmins(function index(req, res, next){
 		wompt.Account.find(function(err, results){
-			res.render('accounts/index', app.standard_page_vars(req, {
+			res.render('accounts/index', locals(req, {
 				accounts: results
 			}));
 		});
@@ -12,14 +12,14 @@ function AccountsController(app){
 	
 	// url: /accounts/:id
 	this.show = blockNonAdmins(function show(req, res, next){
-		res.render('accounts/show', app.standard_page_vars(req, {
+		res.render('accounts/show', locals(req, {
 			account: req.account
 		}));
 	})
 	
 	// url: /accounts/new
 	this.new = blockNonAdmins(function _new(req, res, next){
-		res.render('accounts/new', app.standard_page_vars(req));
+		res.render('accounts/new', locals(req));
 	})
 	
 	// url: POST /accounts
@@ -39,6 +39,11 @@ function AccountsController(app){
 	// called for each of the above actions that use an :id sets req.account
 	this.load = function loadAccount(name, fn){
 		app.accountManager.get(name, fn);
+	}
+	
+	function locals(req, opt){
+		if(opt) opt.page_name = 'accounts';
+		return app.standard_page_vars(req, opt);
 	}
 }
 

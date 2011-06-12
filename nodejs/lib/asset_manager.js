@@ -111,6 +111,7 @@ var assetManagerGroups = {
 			, 'embed.css'
 			, 'search.css'
 			, 'errors.css'
+			, 'accounts.css'
 		]
 		, 'preManipulate': cssPreManipulators
 	}), 'profile_css': mc(defaultOptions,{
