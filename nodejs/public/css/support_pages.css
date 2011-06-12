@@ -1,11 +1,17 @@
+#accounts .main,
+#admin .main,
 .plainpage {
 	margin:0 auto 50px auto;
 	padding:30px 50px 60px 50px;
 	color:#444;
 	background:white;
 	-vendor-box-shadow:rgba(0,0,0,0.5) 0 0 7px;
-	border-radius:4px;
 }
+
+.buffer {
+	padding:10px;
+}
+
 #supportcontent{
 	max-width:600px;
 }
