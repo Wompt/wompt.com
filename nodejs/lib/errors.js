@@ -2,7 +2,11 @@ var wompt = require("./includes");
 
 function NotFound(msg){
 	this.message = msg;
+	if(wompt.env.errors.showDebugData)
+		this.stack = (new Error()).stack;
 }
+
+NotFound.prototype.name = 'Not Found';
 
 function createPageRenderer(app){
 	var renderError;
