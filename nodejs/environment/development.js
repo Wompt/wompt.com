@@ -11,6 +11,10 @@ module.exports = {
 		}
 	}
 	
+	,errors:{
+		showDebugData: true
+	}
+	
 	, ga: {
 		use: false
 	}	

@@ -30,6 +30,10 @@ module.exports = {
 		reportErrors: false
 	}
 	
+	,errors:{
+		showDebugData: false
+	}	
+	
 	, logs: {
 		root: root,
 		monitor:{
