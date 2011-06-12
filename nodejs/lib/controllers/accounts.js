@@ -2,7 +2,7 @@ var wompt = require("../includes"),
 Util = wompt.util;
 
 function AccountsController(app){
-	var m = Util.preStackMiddleware(blockNonAdmins);
+	var m = Util.preStackMiddleware(wompt.Auth.blockNonAdmins);
 	
 	// url: /accounts
 	this.index = m(function index(req, res, next){
@@ -54,13 +54,6 @@ function AccountsController(app){
 		opt.page_name = 'accounts';
 		return app.standard_page_vars(req, opt);
 	}
-}
-
-function blockNonAdmins(req, res, next){
-	if(req.user && req.user.is_admin())
-		next();
-	else
-		next(new wompt.errors.NotFound());
 }
 
 module.exports = AccountsController

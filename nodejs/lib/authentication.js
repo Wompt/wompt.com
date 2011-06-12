@@ -110,14 +110,13 @@ function Auth(config){
 		}
 	}
 	
-	this.adminMiddleware = function(req, res, next){
+	this.blockNonAdmins = function(req, res, next){
 		if(req.user && req.user.is_admin())
 			next();
-		else{
-			res.send("", 404);
-		}
+		else
+			next(new wompt.errors.NotFound());
 	}
-	
+		
 	this.start_session = function(res, user){
 		var token = this.set_token(res),
 		new_session = {

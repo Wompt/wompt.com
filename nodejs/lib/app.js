@@ -202,7 +202,7 @@ App.prototype = {
 			});
 		});
 		
-		exp.get("/admin/stats", wompt.Auth.adminMiddleware, function(req, res){
+		exp.get("/admin/stats", wompt.Auth.blockNonAdmins, function(req, res){
 			res.render('admin/stats', {
 				locals: {w: me},
 				layout: 'admin/layout'
