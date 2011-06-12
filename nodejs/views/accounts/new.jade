@@ -1,3 +1,5 @@
+h3 New Account
 form(action='/accounts', method='POST')
-	input(name='name')
-	input(type='submit') Create Account
+	label(for='name') Name
+	input#name(name='name')
+	button(type='submit') Create Account

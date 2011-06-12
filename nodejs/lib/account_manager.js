@@ -20,7 +20,7 @@ var proto = {
 		var account = this.peek(name);
 		
 		if(account)
-			callback(account);
+			callback(null, account);
 		else
 			this.load(name, callback);
 	},
