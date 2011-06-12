@@ -45,7 +45,7 @@ function App(options){
 		monitor: this.appStateMonitor
 	}));
 	
-	var accounts = new wompt.controllers.Accounts(wompt, this);
+	var accounts = new wompt.controllers.Accounts(this);
 	
 	this.express.resource('accounts', accounts);
 	
