@@ -3,6 +3,7 @@ var env = e.env = require("../environment");
 require.paths.unshift(env.root + '/vendor');
 
 e.dependencies   = require("wompt_dependencies");
+e.util           = require('./util');
 
 e.logger         = require("./logger");
 e.Channel        = require("./channel").Channel;
@@ -39,5 +40,4 @@ e.controllers    = {
 	Accounts:         require('./controllers/accounts.js')
 }
 e.errors         = require('./errors');
-e.util           = require('./util');
 e.fail           = function(msg){throw msg};
