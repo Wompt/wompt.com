@@ -50,7 +50,7 @@ function App(options){
 	
 	this.accountManager = new wompt.AccountManager();
 	this.accountManager.loadEach(function(account){
-		self.namespaceController.createNamespace(account.name);
+		self.namespaceController.createNamespaceForAccount(account);
 	});
 
 	this.accountsController = new wompt.controllers.Accounts(this);

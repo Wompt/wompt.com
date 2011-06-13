@@ -19,6 +19,11 @@ function NamespaceController(app){
 				next();
 		});
 	}
+	
+	this.createNamespaceForAccount = function(account){
+		var channelManager = this.createNamespace(account.name);
+		account.channelManager = channelManager;
+	}
 
 	this.createNamespace = function(namespace_id, options){
 		app.namespaces = app.namespaces || {};
