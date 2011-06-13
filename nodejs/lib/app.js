@@ -9,6 +9,8 @@ var http   = require("http"),
     express = wompt.dependencies.express;
 
 function App(options){
+	var self = this;
+	
 	this.config = options.config;
 	this.pretty_print_config();
 	this.meta_users = new wompt.MetaUserManager();
@@ -47,6 +49,9 @@ function App(options){
 	}));
 	
 	this.accountManager = new wompt.AccountManager();
+	this.accountManager.loadEach(function(account){
+		self.namespaceController.createNamespace(account.name);
+	});
 
 	this.accountsController = new wompt.controllers.Accounts(this);
 	this.adminController    = new wompt.controllers.Admin(this);

@@ -32,11 +32,25 @@ var proto = {
 	load: function(name, callback){
 		var self = this;
 		Account.findOne({name: name}, function(err, account){
-			if(account){
-				self.accounts[name] = account;
-				self.count++;
-			}
+			if(account) self._put(account);
 			callback(err, account);
+		});
+	},
+	
+	_put: function(account){
+		this.accounts[account.name] = account;
+		this.count++;
+	},
+	
+	loadEach: function(callback){
+		var self = this;
+		Account.find({}, function(err, results){
+			if(results){
+				results.forEach(function(account){
+					self._put(account);
+					callback(account);
+				});
+			}
 		});
 	}
 }
