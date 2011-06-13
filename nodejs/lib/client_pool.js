@@ -95,4 +95,20 @@ proto.broadcast = function(msg, options){
 	}
 };
 
+function ClientPoolStats(clientPool){
+	var self = this;
+	this.max = clientPool.count;
+	this.clientPool = clientPool;
+	
+	clientPool.on('added', function(){
+		if(clientPool.count > self.max)
+			self.max = clientPool.count;
+	})
+}
+
+ClientPoolStats.prototype.reset = function(){
+	this.max = clientPool.count;
+}
+
 exports.ClientPool = ClientPool;
+exports.ClientPoolStats = ClientPoolStats;

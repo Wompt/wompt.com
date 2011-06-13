@@ -8,6 +8,7 @@ e.util           = require('./util');
 e.logger         = require("./logger");
 e.Channel        = require("./channel").Channel;
 e.ClientPool     = require("./client_pool").ClientPool;
+e.ClientPoolStats= require("./client_pool").ClientPoolStats;
 e.MessageList    = require("./message_list").MessageList;
 e.Auth           = require("./authentication").Auth;
 e.mongoose       = require('./db');
