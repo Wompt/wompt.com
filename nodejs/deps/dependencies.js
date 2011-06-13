@@ -4,5 +4,6 @@ module.exports = {
 	jade: require('jade'),
 	httpProxy: require('http-proxy'),
 	express_resource: require('express-resource'),
-	step: require('step')
+	step: require('step'),
+	lingo: require('lingo')
 }
