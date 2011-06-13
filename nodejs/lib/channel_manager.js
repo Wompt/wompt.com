@@ -6,6 +6,8 @@ var wompt  = require("./includes")
 function ChannelManager(options){
 	var me = this;
 	this.channels = {};
+	this.clients = new wompt.ClientPool();
+	this.clientStats = new wompt.ClientPoolStats(this.clients);
 	this.count = 0;
 	this.options = options;
 	this.expirer = new wompt.Expirer(this.channels, {
@@ -44,6 +46,10 @@ var proto = {
 		this.channels[name] = channel;
 		this.count++;
 		this.emit('new_channel', channel);
+	},
+	
+	addClient: function(client){
+		this.clients.add(client);
 	},
 	
 	remove: function(channel){

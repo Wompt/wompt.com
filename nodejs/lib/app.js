@@ -356,6 +356,9 @@ App.prototype = {
 				namespace.get(data.channel, function(channel){
 					if(channel && (user.authenticated() || namespace.options.allowAnonymous)){
 						channel.add_client(client, connector && connector.token, data);
+						// TODO Create event bubbling feature that allows an event from
+						// Channel i.e. "client_added" to bubble up to the ChannelManager
+						namespace.addClient(client);
 					}
 				});
 				user.clients.add(client);
