@@ -25,6 +25,8 @@ var User = new Schema({
 	'name'             : String
 	,'email'           : {type: String, index:true}
 	,'one_time_token'  : String
+	,'account_id'      : ObjectId
+	,'account_user_id' : String
 	
 	// embedded documents
 	,'sessions'        : [Session]
