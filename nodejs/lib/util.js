@@ -37,6 +37,10 @@ Util.md5 = function(str){
 	return crypto.createHash('md5').update(str).digest("hex");
 }
 
+Util.sha1 = function(str){
+	return crypto.createHash('sha1').update(str).digest("hex");
+}
+
 Util.fs = {
 	fileExists: function(path, callback){
 		fs.stat(path, function(err, stat){
