@@ -1,12 +1,31 @@
-var wompt = require("./includes");
+var wompt = require("./includes"),
+util = require('util');
 
-function NotFound(msg){
-	this.message = msg;
-	if(wompt.env.errors.showDebugData)
-		this.stack = (new Error()).stack;
+function BaseError(msg){
+	this.message = msg || this.name;
+	this.captureStack();
 }
 
+BaseError.prototype.captureStack = function(){
+	if(wompt.env.errors.showDebugData)
+		Error.captureStackTrace(this, this.constructor);
+}
+
+
+function NotFound(msg){
+	NotFound.super_.apply(this, arguments);
+}
+util.inherits(NotFound, BaseError)
 NotFound.prototype.name = 'Not Found';
+
+
+function NotAuthorized(msg){
+	NotAuthorized.super_.apply(this, arguments);
+}
+util.inherits(NotAuthorized, BaseError)
+NotAuthorized.prototype.name = 'Not Authorized';
+
+
 
 function createPageRenderer(app){
 	var renderError;
