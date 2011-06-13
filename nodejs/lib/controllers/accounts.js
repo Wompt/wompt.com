@@ -6,17 +6,17 @@ function AccountsController(app){
 	
 	// url: /accounts
 	this.index = m(function index(req, res, next){
-		wompt.Account.find(function(err, results){
-			res.render('accounts/index', locals(req, {
-				accounts: results
-			}));
-		});
+		var accounts = app.accountManager.allAccounts();
+		res.render('accounts/index', locals(req, {
+			accounts: accounts
+		}));
 	})
 	
 	// url: /accounts/:id
 	this.show = m(function show(req, res, next){
 		res.render('accounts/show', locals(req, {
 			account: req.account
+			,namespace: app.namespaces[req.account.name]
 		}));
 	})
 	

@@ -52,6 +52,14 @@ var proto = {
 				});
 			}
 		});
+	},
+	
+	allAccounts: function(){
+		var self = this, results = [];
+		for(name in this.accounts){
+			results.push(this.accounts[name]);
+		}
+		return results;
 	}
 }
 

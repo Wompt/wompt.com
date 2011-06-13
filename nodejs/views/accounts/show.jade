@@ -1,3 +1,7 @@
 table
 	tr
-		th Name #{w.account.name}
+		th Name
+		td #{w.account.name}
+	tr
+		th Max Concurrent Connections
+		td #{w.namespace.clientStats.max}

@@ -2,8 +2,11 @@ h3 Accounts
 table
 	tr
 		th Name
+		th Max Concurrent Connections
 	- each account in w.accounts
 		tr
 			td
 				a(href='/accounts/' + account.name) #{account.name}
+			td #{account.channelManager.clientStats.max}
+h3 Actions
 a(href='/accounts/new') Create Account
