@@ -7,7 +7,10 @@ function MetaUser(doc){
 	this.visible = true;
 	this.readonly = !doc;
 	this.touch();
-	
+/*
+ 	No sense in using this memory untill we are actually doing something with these
+ 	messages on the client side
+ 	TODO: do somehting with these messages on the client side
 	this.clients.on('added', function(client){
 		if(client.meta_data && client.meta_data.channel){
 			me.clients.broadcast({
@@ -15,7 +18,8 @@ function MetaUser(doc){
 				channel: client.meta_data.channel.name
 			},client);
 		}
-	});	
+	});
+*/
 };
 
 MetaUser.prototype = {
