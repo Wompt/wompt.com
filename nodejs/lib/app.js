@@ -60,7 +60,7 @@ function App(options){
 	this.express.resource('accounts', this.accountsController);
 	
 	// All other requests get a 404
-	this.express.get('*', function(req, res, next){
+	this.express.get('*', function noRouteFound(req, res, next){
 		next(new wompt.errors.NotFound());
 	});
 }
