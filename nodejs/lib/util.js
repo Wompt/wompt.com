@@ -33,6 +33,16 @@ Util.chop = function(str){
 	return str.substr(0, str.length - 1);
 }
 
+var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz".split('');
+Util.randomString = function(len) {
+    var result = [];
+    for (var i=0; i<len; i++) {
+        var index = Math.floor(Math.random() * chars.length);
+        result.push(chars[index]);
+    }
+    return result.join('');
+}
+
 Util.md5 = function(str){
 	return crypto.createHash('md5').update(str).digest("hex");
 }
@@ -62,8 +72,10 @@ Util.fs = {
 // function A(req,res,next)
 // function B(req,res,next)
 // stackMiddleware(A,B) will return a function(req,res,next) that passes the request
-// through both handlers,  just like Connect. If a next is called with an error
+// through both handlers,  just like Connect. If a next() is called with an error
 // the call chain is stopped and the error is passed to the original next()
+// If next() is called with the second parameter set to true "next(null, true)"
+// The chain is halted and route control is passed back to the original next()
 Util.stackMiddleware = function stackMiddleware(){
 	var layers = Array.prototype.slice.call(arguments,0);
 	len = layers.length;
@@ -71,8 +83,9 @@ Util.stackMiddleware = function stackMiddleware(){
 	var handler = function(req,res,next){
 		var i = 0;
 		
-		function nextLayer(err){
+		function nextLayer(err, escapeStack){
 			if(err)	return next(err);
+			if(escapeStack) return next();
 			if(i < len){
 				var layer = layers[i++];
 				layer(req, res, nextLayer);
