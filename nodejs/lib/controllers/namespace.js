@@ -8,21 +8,21 @@ function NamespaceController(app){
 	
 	this.register = function(){
 		//Lookup Chat namespaces in the namespace hash, and respond.
-		express.get("*", function(req, res, next){
-			var namespace_id = Util.extractFirstUrlPart(req),
+		express.get("/:namespace/*", function(req, res, next){
+			var namespace_id = req.params.namespace,
 			namespace = namespace_id && self.namespaces[namespace_id];
 			
 			if(namespace){
+				req.params.room_name = req.params[0];
 				namespace.handler.apply(this, arguments);
 			}else
 				next();
 		});
 	}
 
-
 	this.createNamespace = function(namespace_id, options){
 		app.namespaces = app.namespaces || {};
-		otions = options || {};
+		options = options || {};
 		options.namespace = namespace_id;
 
 		var	channelManager = new wompt.ChannelManager(options);
@@ -41,14 +41,14 @@ function NamespaceController(app){
 			if(req.url.substr(-1,1) == '/')
 				return res.redirect(wompt.util.chop(req.url));
 				
-			// Trim of ending slash when we have query parameters
+			// Trim off ending slash when we have query parameters
 			if(req.url.indexOf('/?') >=0){
 				req.url = req.url.replace('/?', '?');
-				req.params[0] = wompt.util.chop(req.params[0]);
+				req.params.room_name = wompt.util.chop(req.room_name);
 			}
 
 			var meta_user = req.meta_user,
-					channel = req.params[0];
+					channel = req.params.room_name;
 					
 			var token = wompt.Auth.get_or_set_token(req, res);
 
