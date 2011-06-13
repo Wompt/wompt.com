@@ -14,6 +14,7 @@ function App(options){
 	this.config = options.config;
 	this.pretty_print_config();
 	this.meta_users = new wompt.MetaUserManager();
+	this.accountManager = new wompt.AccountManager();
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
 	this.namespaceController = new wompt.controllers.Namespace(this);
@@ -48,7 +49,6 @@ function App(options){
 		monitor: this.appStateMonitor
 	}));
 	
-	this.accountManager = new wompt.AccountManager();
 	this.accountManager.loadEach(function(account){
 		self.namespaceController.createNamespaceForAccount(account);
 	});
@@ -102,6 +102,7 @@ App.prototype = {
 			exp.use(express.cookieParser());
 			exp.use(express.bodyParser());
 			exp.use(wompt.Auth.one_time_token_middleware());
+			exp.use(wompt.ParameterAuthentication.middleware(me.accountManager));
 			exp.use(wompt.Auth.lookup_user_middleware());
 			exp.use(wompt.Auth.meta_user_middleware(me.meta_users));
 			

@@ -11,6 +11,7 @@ e.ClientPool     = require("./client_pool").ClientPool;
 e.ClientPoolStats= require("./client_pool").ClientPoolStats;
 e.MessageList    = require("./message_list").MessageList;
 e.Auth           = require("./authentication").Auth;
+e.ParameterAuthentication = require("./parameter_authentication");
 e.mongoose       = require('./db');
 e.MetaUser       = require("./meta_user");
 e.MetaUserManager= require("./meta_user_manager");
