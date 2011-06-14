@@ -1,7 +1,7 @@
 var wompt = require("./includes"),
 util = require('util');
 
-var MAX_REQUEST_AGE_MS = 10 * 60 * 1000;
+var MAX_REQUEST_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 // Looks up the account for a request
 // for a url of /account_name/room_name
