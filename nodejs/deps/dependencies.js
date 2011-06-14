@@ -3,7 +3,7 @@ module.exports = {
 	mongoose: require('mongoose'),
 	jade: require('jade'),
 	httpProxy: require('http-proxy'),
-	express_resource: require('express-resource'),
 	step: require('step'),
+	async: require('async'),
 	lingo: require('lingo')
 }
