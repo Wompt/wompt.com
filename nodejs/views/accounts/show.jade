@@ -2,12 +2,26 @@
 	h2 #{w.account.name}
 table.vertical
 	tr
+		th Current Connections
+		td #{w.namespace.clients.count}
+	tr
 		th Peak Connections (today)
 		td #{w.namespace.clientStats.max}
 	tr
 		th Secret
-		td.code #{w.account.secret}
+		td
+			span.code #{w.account.secret}
+			| &nbsp;
 			a(id='reset_secret', href='#') Reset Secret
 	tr
 		th Base Url
 		td.code http://wompt.com/#{w.account.name}/
+	tr
+		th Owners
+		td
+			- each owner in w.account_owners
+				a(href='/users/' + owner.id)= owner.name
+			- if(w.user.doc.is_admin())
+				form(action='/accounts/' + w.account.name, method="POST")
+					label(for='add_owner') Add by ID:
+					input(type='text', id='add_owner', name='add_owner_id')

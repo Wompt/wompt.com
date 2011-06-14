@@ -8,6 +8,7 @@ function AccountsController(app){
 	
 	
 	this.register = function(){
+		app.express.post(base_url + "/:account", this.update);
 		app.express.resource('accounts', this);
 	}
 	
@@ -20,9 +21,10 @@ function AccountsController(app){
 	})
 	
 	// url: /accounts/:id
-	this.show = m(function show(req, res, next){
+	this.show = m(loadAccountOwners, function show(req, res, next){
 		res.render('accounts/show', locals(req, {
 			account: req.account
+			,account_owners: req.account_owners
 			,namespace: app.namespaces[req.account.name]
 		}));
 	})
@@ -33,9 +35,22 @@ function AccountsController(app){
 	})
 	
 	// url: /accounts/edit/:id
-	this.edit = m(function edit(req, res, next){
+	this.edit = m(loadAccountOwners, function edit(req, res, next){
 		res.render('accounts/edit', locals(req));
-	})	
+	})
+	
+	// url: /accounts/edit/:id
+	this.update = m(function update(req, res, next){
+		var redirect_to = base_url + '/' + req.account.name;
+		
+		if(req.body.add_owner_id){
+			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(req.body.add_owner_id));
+			req.account.save(function(){
+				res.redirect(redirect_to);
+			});
+		} else
+			res.redirect(redirect_to);
+	})		
 	
 	// url: POST /accounts
 	this.create = m(function create(req, res, next){
@@ -55,11 +70,23 @@ function AccountsController(app){
 	this.load = function loadAccount(name, fn){
 		app.accountManager.get(name, fn);
 	}
-	
+
 	function locals(req, opt){
 		opt = opt || {};
 		opt.page_name = 'accounts';
 		return app.standard_page_vars(req, opt);
+	}
+
+	function loadAccountOwners(req,res,next){
+		req.account_owners = [];
+		
+		if(req.account.owner_ids.length > 0){
+			wompt.User.find({_id: {$in: req.account.owner_ids.toObject()}}, function(err, results){
+				req.account_owners = results;
+				next();
+			});
+		} else
+			next()
 	}
 }
 
