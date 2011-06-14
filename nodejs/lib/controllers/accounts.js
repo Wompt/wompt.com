@@ -5,7 +5,7 @@ var base_url = '/accounts';
 
 function AccountsController(app){
 	var m = Util.preStackMiddleware(wompt.Auth.blockNonAdmins);
-	
+	var stack = Util.stackMiddleware;
 	
 	this.register = function(){
 		app.express.post(base_url + "/:account", this.update);
@@ -21,7 +21,7 @@ function AccountsController(app){
 	})
 	
 	// url: /accounts/:id
-	this.show = m(loadAccountOwners, function show(req, res, next){
+	this.show = stack(loadAccountOwners, allowOwnersAndAdmins, function show(req, res, next){
 		res.render('accounts/show', locals(req, {
 			account: req.account
 			,account_owners: req.account_owners
@@ -87,6 +87,13 @@ function AccountsController(app){
 			});
 		} else
 			next()
+	}
+	
+	function allowOwnersAndAdmins(req, res, next){
+		if(req.user && (req.user.is_admin() || req.account.owner_ids.indexOf(req.user.id) >= 0))
+			next();
+		else
+			next(new wompt.errors.NotFound());
 	}
 }
 
