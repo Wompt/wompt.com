@@ -53,6 +53,8 @@ function createPageRenderer(app){
 		
 		if(err instanceof wompt.errors.NotFound){
 			// not important, just a 404
+		}else if(err instanceof wompt.errors.NotAuthorized){
+			// 
 		}else{
 			// pass on the error, it should be reported
 			next(err);
@@ -62,5 +64,6 @@ function createPageRenderer(app){
 
 module.exports = {
 	NotFound: NotFound,
+	NotAuthorized: NotAuthorized,
 	createPageRenderer: createPageRenderer
 }
