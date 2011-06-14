@@ -38,7 +38,6 @@ function NamespaceController(app){
 			new wompt.loggers.LoggerCreator(channelManager, namespace_id);
 		}
 		
-		//if(options.fakeUsers) argumentsForGet.push(wompt.Auth.fake_user_middleware());
 		
 		function handleChatRoomGet(req, res){
 
