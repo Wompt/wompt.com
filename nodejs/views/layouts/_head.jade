@@ -19,5 +19,4 @@ meta(property="og:description", content="Come chat on wompt - the place to chat.
 meta(property="og:image", content="http://wompt.com/apple-itouch-icon.png")
 meta(property="og:type", content="website")
 script(type='text/javascript')
-	var readonly = #{w.user.readonly};
-	
+	var readonly = #{w.user && w.user.readonly};
