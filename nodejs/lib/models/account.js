@@ -20,7 +20,6 @@ Account.static({
 mongoose.model('Account', Account, 'accounts');
 module.exports = mongoose.model('Account');
 
-
 function generateSecret(){
 	return wompt.util.randomString(20);
 }
