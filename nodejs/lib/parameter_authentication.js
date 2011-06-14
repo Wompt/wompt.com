@@ -23,7 +23,8 @@ function lookupAccountMiddleware(accountManager){
 // that was loaded into req.account
 function verifyAuthenticity(req, res, next){
 	if(req.account){
-		var query = req.url.match(/\?(.*)&secure=[a-f0-9]+$/)[1],
+		var match = req.url.match(/\?(.*)&secure=[a-f0-9]+$/),
+		query = match && match[1],
 		secureStr = query && query.length > 0 && wompt.util.sha1(query + req.account.secret);
 		
 		if(secureStr && secureStr == req.query.secure && verifyTimeliness(req))
