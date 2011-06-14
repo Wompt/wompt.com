@@ -39,7 +39,9 @@ function createPageRenderer(app){
 		renderError = function(err, req, res, next){
 			res.render('errors/generic',{
 				status: status,
+				layout: 'layouts/plain',
 				locals: app.standard_page_vars(req, {
+					err: err,
 					hide_top_query: true,
 					page_name:'error'
 				})
