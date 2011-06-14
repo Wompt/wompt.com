@@ -22,8 +22,8 @@ function lookupAccountMiddleware(accountManager){
 // Verifies the url query params against the hashed secret stored in the account
 // that was loaded into req.account
 function verifyAuthenticity(req, res, next){
-	if(req.account){
-		var match = req.url.match(/\?(.*)&secure=[a-f0-9]+$/),
+	if(req.account){   //  /account_name/(room_name?query_parameters)&secure=blah
+		var match = req.url.match(/^\/[^\/]+\/(.*\?.*)&secure=\w+$/),
 		query = match && match[1],
 		secureStr = query && query.length > 0 && wompt.util.sha1(query + req.account.secret);
 		
