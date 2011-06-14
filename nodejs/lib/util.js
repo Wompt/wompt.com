@@ -78,18 +78,22 @@ Util.fs = {
 // The chain is halted and route control is passed back to the original next()
 Util.stackMiddleware = function stackMiddleware(){
 	var layers = Array.prototype.slice.call(arguments,0);
-	len = layers.length;
 		
 	var handler = function(req,res,next){
 		var i = 0;
 		
+		// This is passed as the next() parameter
 		function nextLayer(err, escapeStack){
 			if(err)	return next(err);
+			// if the second param is truish, break out of this stack by calling
+			// the original next()
 			if(escapeStack) return next();
-			if(i < len){
+			
+			// if there are still layers left
+			if(i < layers.length){
 				var layer = layers[i++];
 				layer(req, res, nextLayer);
-			}
+			} else next(); // we're done with the stack.
 		}
 		
 		nextLayer();
