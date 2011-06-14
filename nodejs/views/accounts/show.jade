@@ -21,6 +21,7 @@ table.vertical
 		td
 			- each owner in w.account_owners
 				a(href='/users/' + owner.id)= owner.name
+				br
 			- if(w.user.doc.is_admin())
 				form(action='/accounts/' + w.account.name, method="POST")
 					label(for='add_owner') Add by ID:
