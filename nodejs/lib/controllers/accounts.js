@@ -61,8 +61,10 @@ function AccountsController(app){
 		account.save(function(err){
 			if(err)
 				next(err);
-			else
+			else{
 				res.redirect(base_url);
+				app.accountManager._put(account);
+			}
 		})
 	})
 	
