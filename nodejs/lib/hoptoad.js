@@ -3,12 +3,13 @@ var Hoptoad = require('hoptoad-notifier').Hoptoad
   , shouldReport = env.hoptoad && env.hoptoad.reportErrors;
 	
 	
-if(shouldReport){
+if(shouldReport)
 	Hoptoad.key = env.hoptoad.apiKey;
-	process.addListener('uncaughtException', function(err) {
+	
+process.addListener('uncaughtException', function(err) {
+	if(shouldReport)
 		Hoptoad.notify(err, function(){});
-	});
-}
+});
 
 Hoptoad.expressErrorNotifier = function(err,req,res,next){
 	if(shouldReport)
