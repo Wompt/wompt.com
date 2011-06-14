@@ -18,6 +18,12 @@ body {
 	color:white;
 }
 
+/* TODO should probably make this the default and change containers that need
+   it to .light_links or something  */ 
+.dark_links a{
+	color:#286ea0;
+}
+
 a{
 	text-decoration:none;
 }

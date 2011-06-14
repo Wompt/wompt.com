@@ -41,10 +41,14 @@ body#chat .main{
 }
 
 #chat #footer{
-	padding:0 41px 4px 3px;
+	padding:0 5px 4px 3px;
 }
 #chat.small #footer{
 	padding:0 7px 2px 3px;
+}
+
+#chat.small #contact_us{
+	display:none;
 }
 
 #chat #wompt{

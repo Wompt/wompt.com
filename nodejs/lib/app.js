@@ -128,6 +128,7 @@ App.prototype = {
 			'/support'
 			,'/terms'
 			,'/privacy'
+			,'/contact_us'
 		]);
 		
 		exp.get("/re-authenticate", function(req, res, next){
