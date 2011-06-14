@@ -22,7 +22,11 @@ function NamespaceController(app){
 	
 	this.createNamespaceForAccount = function(account){
 		var channelManager = this.createNamespace(account.name, {
-			forceEmbedStyle: true
+			allowCSS: true,
+			forceEmbedStyle: true,
+			ui:{
+				hidePopout: true
+			}
 		});
 		account.channelManager = channelManager;
 	}
@@ -69,6 +73,7 @@ function NamespaceController(app){
 				namespace: namespace_id,
 				connector_id: connector.id,
 				url: req.url,
+				ui: options.ui || {},
 				jquery: true,
 				page_name: 'chat',
 				page_js: 'channel'

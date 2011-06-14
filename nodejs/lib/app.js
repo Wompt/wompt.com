@@ -230,6 +230,7 @@ App.prototype = {
 					channel: 'general',
 					namespace: 'chat',
 					connector_id: connector.id,
+					ui:{},
 					popout: '/chat/general',
 					embedded: true,
 					jquery: true,
