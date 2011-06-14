@@ -1,7 +1,8 @@
 var wompt = require("./includes"),
 util = require('util');
 
-	
+var MAX_REQUEST_AGE_MS = 10 * 60 * 1000;
+
 // Looks up the account for a request
 // for a url of /account_name/room_name
 // this sets req.account = Account.find(name==account_name) 
@@ -25,15 +26,16 @@ function verifyAuthenticity(req, res, next){
 		var query = req.url.match(/\?(.*)&secure=[a-f0-9]+$/)[1],
 		secureStr = query && query.length > 0 && wompt.util.sha1(query + req.account.secret);
 		
-		if(secureStr && secureStr == req.query.secure)
+		if(secureStr && secureStr == req.query.secure && verifyTimeliness(req))
 			return next()
 	}
-	
-	console.log("Query: " + query);
-	console.log("Secret: " + req.account.secret);
-	console.log("Secure: " + secureStr);
+
 	// Didn't pass validation, respond with error.
 	return next(new wompt.errors.NotAuthorized());
+}
+
+function verifyTimeliness(req){
+	return Math.abs(Date.now() - parseInt(req.query.ts, 10)) < MAX_REQUEST_AGE_MS;
 }
 
 // Loads req.user based on req.account and the user_id query param
