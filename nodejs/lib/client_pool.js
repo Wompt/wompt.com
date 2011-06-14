@@ -98,7 +98,7 @@ proto.broadcast = function(msg, options){
 function ClientPoolStats(clientPool){
 	var self = this;
 	this.max = clientPool.count;
-	this.clientPool = clientPool;
+	this.clients = clientPool;
 	
 	clientPool.on('added', function(){
 		if(clientPool.count > self.max)
@@ -107,7 +107,7 @@ function ClientPoolStats(clientPool){
 }
 
 ClientPoolStats.prototype.reset = function(){
-	this.max = clientPool.count;
+	this.max = this.clients.count;
 }
 
 exports.ClientPool = ClientPool;
