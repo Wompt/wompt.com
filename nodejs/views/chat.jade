@@ -40,4 +40,5 @@ script(type='text/javascript')
 				| sign in to participate:
 				- each provider in w.config.auth.providers
 					<a href="/auth/#{provider.code}" class='popup ico #{provider.code.substr(0,2)}' title="Sign in using #{provider.name}"></a>
-	!=partial('partials/_share_links.jade')
+	- if(!w.ui.hideSocialLinks)
+		!=partial('partials/_share_links.jade')
