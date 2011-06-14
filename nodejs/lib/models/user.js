@@ -32,7 +32,10 @@ var User = new Schema({
 	,'sessions'        : [Session]
 	,'authentications' : [Authentication]
 });
+
+User.index({account_id: 1, account_user_id: 1});
 	
+
 User.method({
 	wrap: function(){
 		return new wompt.MetaUser(this);
