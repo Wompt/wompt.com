@@ -28,7 +28,7 @@ NotAuthorized.prototype.name = 'Not Authorized';
 
 
 function createPageRenderer(app){
-	var renderError;
+	var renderError, status;
 	
 	if(app.config.errors.showDebugData){
 		renderError = wompt.dependencies.express.errorHandler({
@@ -38,6 +38,7 @@ function createPageRenderer(app){
 	} else {
 		renderError = function(err, req, res, next){
 			res.render('errors/generic',{
+				status: status,
 				locals: app.standard_page_vars(req, {
 					hide_top_query: true,
 					page_name:'error'
@@ -48,17 +49,20 @@ function createPageRenderer(app){
 	
 	return function PageRenderer(err, req, res, next){
 		
+		if(err instanceof wompt.errors.NotFound){
+			// not important, just a 404
+			status = 404
+		}else if(err instanceof wompt.errors.NotAuthorized){
+			status = 401
+		}else{
+			status = 500
+		}
 		// renderError doesn't actually use 'this'
 		renderError.apply(this, arguments);
 		
-		if(err instanceof wompt.errors.NotFound){
-			// not important, just a 404
-		}else if(err instanceof wompt.errors.NotAuthorized){
-			// 
-		}else{
-			// pass on the error, it should be reported
+		// pass on the error, it should be reported		
+		if(status >= 500)
 			next(err);
-		}
 	}
 }
 
