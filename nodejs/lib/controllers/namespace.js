@@ -21,7 +21,9 @@ function NamespaceController(app){
 	}
 	
 	this.createNamespaceForAccount = function(account){
-		var channelManager = this.createNamespace(account.name);
+		var channelManager = this.createNamespace(account.name, {
+			forceEmbedStyle: true
+		});
 		account.channelManager = channelManager;
 	}
 
@@ -76,7 +78,7 @@ function NamespaceController(app){
 				locals:locals
 			};
 			
-			if(options.allowIframe && req.query.iframe == '1'){
+			if(options.forceEmbedStyle || (options.allowIframe && req.query.iframe == '1')){
 				opt.layout = 'layouts/iframe';
 				locals.w.embedded = true;
 				locals.w.ga_source = 'embedd';
