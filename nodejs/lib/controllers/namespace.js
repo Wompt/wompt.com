@@ -26,7 +26,8 @@ function NamespaceController(app){
 			forceEmbedStyle: true,
 			ui:{
 				hidePopout: true,
-				hideSocialLinks: true
+				hideSocialLinks: true,
+				hideProfileLinks: true
 			}
 		});
 		account.channelManager = channelManager;

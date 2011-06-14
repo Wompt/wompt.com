@@ -77,7 +77,13 @@ function UserListUI(ul, container, top){
 		if(user_divs[user.id]) return;
 		
 		var name_div = user.el = $('<div>'),
-		link = $('<a>');
+		link;
+		if(UI.hideProfileLinks){
+			link = $('<span>');
+		}else{
+			link = $('<a>');
+			link.attr('href','/users/' + user.id);		
+		}
 		
 		name_div.attr({
 			id:'user_' + user.id,
@@ -87,7 +93,6 @@ function UserListUI(ul, container, top){
 		
 		link.attr({
 			title: user.name,
-			href: '/users/' + user.id,
 			target: "_blank",
 			style: 'color:' + UI.Colors.forUser(user.id) + ';'
 		});
