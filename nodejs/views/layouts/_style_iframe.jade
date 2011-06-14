@@ -5,4 +5,5 @@ script(type='text/javascript')
 		sides = pair.split('=');
 		opt[sides[0]] = sides[1];
 	})
-	$('body').css('color', '#' + opt.c || '444');
+
+	$('body').css('color', '#' + (opt.c || '444'));
