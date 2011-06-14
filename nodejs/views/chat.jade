@@ -24,7 +24,7 @@ script(type='text/javascript')
 		.list
 			.top
 			.users
-#input
+#input(class= w.ui.hideSocialLinks ? 'hide_social' : '')
 	- if(w.user.authenticated())
 		.name#own_name #{w.user.doc ? w.user.doc.name : "Anonymous"}
 		.container

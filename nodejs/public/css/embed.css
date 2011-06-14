@@ -17,6 +17,10 @@ body.embed,
 	bottom:5px;
 }
 
+.embed.hide_userlist #input.hide_social .container{
+	right:5px;
+}
+
 .embed#chat #wompt{
 	display:inline;
 	color:white;

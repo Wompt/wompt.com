@@ -113,6 +113,9 @@ body#chat .main{
 .small #input #own_name{
 	display:none;
 }
+.small #input.hide_social #own_name{
+	display:block;
+}
 
 #input #message{
 	background-color:#fff;
@@ -171,7 +174,8 @@ a.try_now{
 }
 
 #chat #messages,
-#user_list{
+#user_list,
+#chat #input .container{
 	-vendor-transition:right 0.3s ease-in-out;
 }
 
