@@ -15,7 +15,7 @@ Room.static({
 	findOrCreate: function(attributes, callback){
 		this.findOne(attributes, function(err, room){
 			if(!room){
-				room = new wompt.Room();
+				room = new wompt.models.Room();
 				room.set(attributes);
 				room.save();
 			}

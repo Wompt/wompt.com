@@ -36,7 +36,7 @@ function Channel(config, callback){
 		}
 	}
 	
-	wompt.Room.findOrCreate({name:this.name, namespace:this.namespace}, function(room){
+	wompt.models.Room.findOrCreate({name:this.name, namespace:this.namespace}, function(room){
 		channel.room = room;
 		callback(channel);
 	});	

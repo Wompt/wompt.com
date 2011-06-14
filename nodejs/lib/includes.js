@@ -18,7 +18,6 @@ e.MetaUserManager= require("./meta_user_manager");
 e.Account        = require("./models/account");
 e.AccountManager = require("./account_manager");
 e.User           = require("./models/user");
-e.Room           = require("./models/room");
 e.ClientConnectors=require("./client_connectors");
 e.ChannelManager = require('./channel_manager');
 e.Expirer        = require('./expirer');
@@ -29,6 +28,12 @@ e.Helpers        = {
 e.App            = require("./app");
 e.middleware     = {
 };
+// The above model references should be phased out
+e.models         = {
+	 Account:         require("./models/account")
+	,User:            require("./models/user")
+	,Room:            require("./models/room")
+}
 e.monitors       = {
 	 PopularChannels: require('./monitors/popular_channels.js')
 	,AppState:        require('./monitors/app_state_monitor.js')
