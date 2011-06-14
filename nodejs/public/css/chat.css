@@ -64,7 +64,7 @@ body#chat .main{
 }
 .small #share_links{
 	width:110px;
-	left:0;
+	left:5px;
 	right:auto;
 }
 .small #share_links > .pad{
@@ -96,7 +96,6 @@ body#chat .main{
 	width:auto;
 }
 .small #input .container{
-	left:117px;
 	right:5px;
 	bottom:5px;
 	top:5px;
