@@ -77,7 +77,7 @@ Util.fs = {
 // If next() is called with the second parameter set to true "next(null, true)"
 // The chain is halted and route control is passed back to the original next()
 Util.stackMiddleware = function stackMiddleware(){
-	var layers = Array.prototype.slice.call(arguments,0);
+	var layers = Array.prototype.slice.call(arguments);
 		
 	var handler = function(req,res,next){
 		var i = 0;
@@ -104,14 +104,14 @@ Util.stackMiddleware = function stackMiddleware(){
 
 // Shortcut to curry the stackMiddleware function
 Util.preStackMiddleware = function preStackMiddleware(){
-	var layers = Array.prototype.slice.call(arguments,0);
+	var layers = Array.prototype.slice.call(arguments);
 	return Util.curry(Util.stackMiddleware, layers);
 }
 
 // applies arguments
 Util.curry = function(fn, args){
 	return function(){
-		return fn.apply(this, args.concat(Array.prototype.slice.call(arguments,0)));
+		return fn.apply(this, args.concat(Array.prototype.slice.call(arguments)));
 	}
 }
 
