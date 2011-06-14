@@ -7,3 +7,31 @@
 	color:#286ea0;
 }
 
+#accounts table{
+	margin:1em;
+	border-collapse:collapse;
+}
+
+#accounts table th{
+	font-weight:bold;
+}
+
+#accounts table.vertical th{
+	border-right:1px solid #ddd;
+	text-align:right;
+}
+
+#accounts td,
+#accounts th{
+	padding:.2em 1em;
+}
+
+#accounts .code{
+	font-family:Consolas, monospace;
+	color:#888;
+}
+
+#accounts .title{
+	text-align:center;
+	border-bottom:2px solid #ddd;
+}

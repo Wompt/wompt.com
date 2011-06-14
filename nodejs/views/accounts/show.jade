@@ -1,10 +1,13 @@
-table
+.title
+	h2 #{w.account.name}
+table.vertical
 	tr
-		th Name
-		td #{w.account.name}
-	tr
-		th Max Concurrent Connections
+		th Peak Connections (today)
 		td #{w.namespace.clientStats.max}
 	tr
 		th Secret
-		td #{w.account.secret}
+		td.code #{w.account.secret}
+			a(id='reset_secret', href='#') Reset Secret
+	tr
+		th Base Url
+		td.code http://wompt.com/#{w.account.name}/
