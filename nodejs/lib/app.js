@@ -54,11 +54,10 @@ function App(options){
 	});
 
 	this.accountsController = new wompt.controllers.Accounts(this);
+	this.accountsController.register();
 	this.adminController    = new wompt.controllers.Admin(this);
 	this.namespaceController.register();
-	
-	this.express.resource('accounts', this.accountsController);
-	
+
 	// All other requests get a 404
 	this.express.get('*', function noRouteFound(req, res, next){
 		next(new wompt.errors.NotFound());

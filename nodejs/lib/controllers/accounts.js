@@ -1,8 +1,15 @@
 var wompt = require("../includes"),
 Util = wompt.util;
 
+var base_url = '/accounts';
+
 function AccountsController(app){
 	var m = Util.preStackMiddleware(wompt.Auth.blockNonAdmins);
+	
+	
+	this.register = function(){
+		app.express.resource('accounts', this);
+	}
 	
 	// url: /accounts
 	this.index = m(function index(req, res, next){
@@ -40,7 +47,7 @@ function AccountsController(app){
 			if(err)
 				next(err);
 			else
-				res.redirect('/accounts');
+				res.redirect(base_url);
 		})
 	})
 	
