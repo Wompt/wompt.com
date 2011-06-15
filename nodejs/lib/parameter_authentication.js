@@ -36,7 +36,7 @@ function verifyAuthenticity(req, res, next){
 }
 
 function verifyTimeliness(req){
-	return Math.abs(Date.now() - parseInt(req.query.ts, 10)) < MAX_REQUEST_AGE_MS;
+	return Math.abs(Date.now()/1000 - parseInt(req.query.ts, 10)) < MAX_REQUEST_AGE_MS;
 }
 
 // Loads req.user based on req.account and the user_id query param
