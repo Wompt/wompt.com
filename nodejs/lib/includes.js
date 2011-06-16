@@ -3,6 +3,7 @@ var env = e.env = require("../environment");
 require.paths.unshift(env.root + '/vendor');
 
 e.dependencies   = require("wompt_dependencies");
+e.dependencies.expressResource = require("express-resource");
 e.util           = require('./util');
 
 e.logger         = require("./logger");
