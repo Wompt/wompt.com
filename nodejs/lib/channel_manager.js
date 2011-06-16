@@ -7,7 +7,6 @@ function ChannelManager(options){
 	var me = this;
 	this.channels = {};
 	this.clients = new wompt.ClientPool();
-	this.clientStats = new wompt.ClientPoolStats(this.clients);
 	this.count = 0;
 	this.options = options;
 	this.expirer = new wompt.Expirer(this.channels, {
