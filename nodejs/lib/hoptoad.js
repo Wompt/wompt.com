@@ -9,6 +9,8 @@ if(shouldReport)
 process.addListener('uncaughtException', function(err) {
 	if(shouldReport)
 		Hoptoad.notify(err, function(){});
+	console.error("~~~ Error ~~~   " + Date())
+	console.error(err.stack);
 });
 
 Hoptoad.expressErrorNotifier = function(err,req,res,next){
