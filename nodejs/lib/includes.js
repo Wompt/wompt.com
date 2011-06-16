@@ -38,6 +38,7 @@ e.models         = {
 e.monitors       = {
 	 PopularChannels: require('./monitors/popular_channels.js')
 	,AppState:        require('./monitors/app_state_monitor.js')
+	,NamespaceStats:  require('./monitors/namespace_stats.js')
 }
 e.loggers        = {
 	 ChannelLogger:   require('./loggers/channel_logger.js')
