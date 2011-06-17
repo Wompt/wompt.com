@@ -30,6 +30,16 @@ function NamespaceController(app){
 				hideProfileLinks: true
 			}
 		});
+		
+		var stats = new wompt.monitors.NamespaceStats(channelManager, {intervals: ['minute']});
+		stats.on('stats', function(interval, stats){
+			stats.frequency = interval;
+			stats.account_id = account._id;
+			var rec = new wompt.models.AccountStats(stats);
+			rec.save();			
+		});
+		
+		channelManager.stats = stats;
 		account.channelManager = channelManager;
 	}
 
