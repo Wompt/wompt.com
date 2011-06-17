@@ -64,7 +64,7 @@ $(function(){
 			" to this search");
 
 		data.forEach(function(room){
-			var a = link(room.n.replace('/', ' / '), '/chat/' + room.n),
+			var a = link(room.n.replace(/\//g, ' / '), '/chat/' + room.n),
 			td_count = td(room.u + '', 'count');
 			results.append(row(td_count, td(a)));
 		});
