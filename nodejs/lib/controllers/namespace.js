@@ -31,7 +31,7 @@ function NamespaceController(app){
 			}
 		});
 		
-		var stats = new wompt.monitors.NamespaceStats(channelManager, {intervals: ['minute']});
+		var stats = new wompt.monitors.NamespaceStats(channelManager, {intervals: ['minute', 'hour', 'day']});
 		stats.on('stats', function(interval, stats){
 			stats.frequency = interval;
 			stats.account_id = account._id;
