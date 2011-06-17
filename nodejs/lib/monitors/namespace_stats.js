@@ -42,7 +42,6 @@ function NamespaceStatsPreparer(channelManager){
 // }
 function NamespaceStatsMonitor(channelManager, options){
 	var self = this,
-	cron = new Cron();
 	stats = {};
 	
 	options = wompt.util.merge({intervals:[]}, options);
@@ -52,7 +51,7 @@ function NamespaceStatsMonitor(channelManager, options){
 	options.intervals.forEach(function(interval){
 		stats[interval] = new NamespaceStatsPreparer(channelManager);
 		var ticker = createTicker(interval, stats[interval]);
-		cron.every(interval, ticker);
+		Cron.onThe(interval, ticker);
 	});
 	
 	function createTicker(interval, statsPreparer){
