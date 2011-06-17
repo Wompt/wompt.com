@@ -29,11 +29,12 @@ e.Helpers        = {
 e.App            = require("./app");
 e.middleware     = {
 };
-// The above model references should be phased out
+// TODO: The above model references should be phased out in preference of these
 e.models         = {
 	 Account:         require("./models/account")
 	,User:            require("./models/user")
 	,Room:            require("./models/room")
+	,AccountStats:    require("./models/account_stats")
 }
 e.monitors       = {
 	 PopularChannels: require('./monitors/popular_channels.js')
