@@ -1,9 +1,44 @@
+var util = require('util'),
+events = require('events');
+
 var MAX_ERROR_MS = 20;
 
 function Cron(){
-	var timmy = [], self = this;
+	var self = this,
+	callbackLists = {},
+	stoppers = {};
+
+	// Returns a unique ID that you can pass to .stop(ID)
+	// interval = 'second' | 'minute' | 'hour' | 'day'
+	this.onThe = function onThe(interval, cb){
+		var list = getOrCreateCallbackList(interval);
+		var id = Math.random().toString();
+		list[id] = cb;
+		return id;
+	}
+
+	// Stops calling the callback identified by the passed ID
+	// Actual timers are stopped once the last callback has been stopped.
+	this.clear = function(id_to_stop){
+		for(var interval in callbackLists){
+			var empty = true,
+			list = callbackLists[interval];
+			
+			for(var id in list){
+				if(id == id_to_stop){
+					delete list[id];
+				} else {
+					empty = false;
+				}
+			}
+			
+			if(empty){
+				stopInterval(interval)
+			}
+		}
+	}
 	
-	this.every = function(frequency, cb){
+	function registerInterval(frequency, cb){
 		var interval, timeout, nextTime;
 		scheduleIntervalSoonest();
 		
@@ -42,12 +77,40 @@ function Cron(){
 			cb();
 		}
 		
-		return {stop: function(){
+		callbackLists[frequency]
+		stoppers[frequency] = function(){
 			clearInterval(interval);
 			clearTimeout(timeout);
-		}};
+		};
+	}
+	
+	function stopInterval(interval){
+		delete callbackLists[interval];
+		var stopper = stoppers[interval]();
+		if(stopper){
+			stopper()
+			delete stoppers[interval];
+		}
+	}
+
+	
+	function getOrCreateCallbackList(interval){
+		if(callbackLists[interval]) return callbackLists[interval];
+		
+		var list = callbackLists[interval] = {};
+		registerInterval(interval, function(){
+			for(var id in list){
+				list[id]();
+			}
+		});
+		
+		return list;
 	}
 }
+
+util.inherits(Cron, events.EventEmitter);
+
+Cron = new Cron();
 
 Cron.math = {
 	round: function round(num, divisor){
