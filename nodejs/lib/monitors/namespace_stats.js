@@ -15,6 +15,7 @@ function NamespaceStatsPreparer(channelManager){
 
 	this.prepare = function(done){
 		async.parallel(monitors, function(err, results){
+			results.t = new Date();
 			stats.reset();
 			done(err, results);
 		});
