@@ -69,15 +69,14 @@
 	margin:0 auto;
 }
 
-.provider.missing{
+.provider.missing a.link{
 	-vendor-box-shadow: rgb(100,100,100) 0 0 10px;
 	opacity:0.3;
 }
 .provider.missing .title{
 	color:black;
 }
-
-.provider.missing:hover{
+.provider.missing:hover a.link{
 	opacity:1;
 	background-color:white;
 }
