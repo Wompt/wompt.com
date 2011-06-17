@@ -6,12 +6,11 @@
 	margin:0px auto 30px auto;
 	padding:20px;
 	text-align:left;
-	color:black;
+	color:#444;
 }
 
 .profile #name{
 	font-size:2em;
-	color:black;
 }
 
 .profile .providers{
@@ -27,18 +26,21 @@
 }
 
 .profile,
-.profile .provider{
+.profile .provider a.link{
 	-vendor-border-radius:10px;
 }
+.provider .title{
+	font-size:20px;
+	color:#aaa;
+}
 .provider{
-	margin-right:10px;
+	margin-right:15px;
+	font-size:17px;
 	float:left;
 	text-align:center;
-	-vendor-transition: 0.3s ease;
-	transition-property:background-color opacity;
 }
 
-.provider:hover{
+.provider a:hover{
 	background-color:#f3f3f3;
 }
 
@@ -47,6 +49,16 @@
 	text-decoration:none;
 	padding:15px;
 	display:block;
+	-vendor-transition: 0.3s ease-in-out;
+}
+
+.provider .known_as_name,
+.provider .known_as{
+	color:#aaa;
+}
+
+.provider .known_as_name{
+	color:#444;
 }
 
 .provider .logo{

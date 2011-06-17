@@ -13,6 +13,9 @@ link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", 
 						a.link(href=(url||'#'))
 							.title= provider.name
 							div(class="logo " + provider.code)
+						- var name = w.profileUser.provider_attribute(provider.code, 'name')
+						.known_as known as
+						.known_as_name #{name || '(no name)'}
 				- else missing_providers.push(provider)
 			-if(w.user.same_user(w.profileUser))
 				- each provider in missing_providers
