@@ -57,6 +57,9 @@ function App(options){
 	this.accountsController.register();
 	this.adminController    = new wompt.controllers.Admin(this);
 	this.namespaceController.register();
+	this.profileController  = new wompt.controllers.Profile(this);
+	this.profileController.register();
+
 
 	// All other requests get a 404
 	this.express.get('*', function noRouteFound(req, res, next){
@@ -146,24 +149,6 @@ App.prototype = {
 		
 		exp.get("/", landingPage);
 
-		exp.get("/profile", function(req, res){
-			if(req.meta_user && req.meta_user.authenticated())
-				res.redirect('/users/' + req.meta_user.id())
-			else
-				res.redirect('/');
-		});
-		
-		exp.get("/users/:id", function(req, res){
-			if(req.params.id && req.user && req.meta_user.id() == req.params.id){
-				//User record is already loaded but auth middleware, no need to load again
-				profilePage(req, res, req.user);
-			}
-			else{
-				wompt.User.findById(req.params.id, function(err, user){
-					profilePage(req, res, user);
-				});
-			}
-		});
 		
 		exp.get("/rooms/search", function(req, res){
 			var terms = req.query && req.query.term,
@@ -239,19 +224,6 @@ App.prototype = {
 					jquery: true,
 					page_js: 'channel',					
 					page_name:'landing'
-				})
-			});
-		}
-		
-		function profilePage(req, res, user){
-			if(!user) return res.send("", 404);
-			
-			res.render('profile', {
-				locals: me.standard_page_vars(req, {
-					app:me,
-					profileUser: user,
-					jquery: true,
-					page_js: 'profile'
 				})
 			});
 		}
