@@ -26,6 +26,12 @@
 	color: #999;
 }
 
+#results .count{
+	text-align:right;
+	padding-right:10px;
+	width: 3em;
+}
+
 .query{
 	padding:3px 25px 3px 6px;
 	border-radius:5px;

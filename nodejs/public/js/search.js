@@ -51,27 +51,46 @@ $(function(){
 			(data.length + " Room" + (data.length == 1 ? '' : 's') + " Matching '"+ query +"'")
 			:
 			"Popular Rooms";
+			
 		results.empty();
-		results.append(title.text(titleText))
-		title.append(" - ", link('permalink', '/search' + (query ? '/?q=' + query : '')));
+		results.append(
+			row(
+				td(
+					title.text(titleText)
+				).attr('colspan', 2)));
+		title.append(" - ");
+		title.append(
+			link('permalink', '/search' + (query ? '/?q=' + query : '')),
+			" to this search");
 
 		data.forEach(function(room){
-			var row = $('<div class="room">'),
-			a = link(room.n, '/chat/' + room.n);
-			row.append(a," - " + room.u);
-			results.append(row);
+			var a = link(room.n.replace('/', ' / '), '/chat/' + room.n),
+			td_count = td(room.u + '', 'count');
+			results.append(row(td_count, td(a)));
 		});
 		
 		if(data.length == 0 && query != ''){
 			results
-			.append(
+			.append(row(
 				$('<h4>')
 				.append(
 					"Create a room called ",
 					link(query, '/chat/' + query)
 				)
-			);
+			).attr('colspan', 2));
 		}
+	}
+	
+	function row(a,b, cl){
+		var row = $('<tr>');
+		if(cl) row.addClass(cl);
+		return row.append(a,b);
+	}
+	
+	function td(a, cl){
+		var cell = $('<td>');
+		if(cl) cell.addClass(cl);
+		return cell.append(a);
 	}
 	
 	function link(text, url){
