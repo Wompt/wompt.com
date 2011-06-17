@@ -167,7 +167,8 @@ App.prototype = {
 		
 		exp.get("/rooms/search", function(req, res){
 			var terms = req.query && req.query.term,
-			    results = me.search(terms);
+			    limit = req.query && req.query.limit,
+			    results = me.search(terms, limit);
 			res.writeHead(200, {"Content-Type":"application/json"});
 			res.end(JSON.stringify(results));
 		});
@@ -258,8 +259,9 @@ App.prototype = {
 		return exp;
 	},
 	
-	search: function(term){
-		var results = [], terms, max_results = 100;
+	search: function(term, max_results){
+		var results = [], terms;
+		max_results = max_results > 0 ? Math.min(max_results, 100) : 100;
 		
 		term = term ? term.toLowerCase() : null;
 			

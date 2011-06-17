@@ -8,6 +8,7 @@ UI.once('init',function(){
 	$('input.query,input#channel').autocomplete({
 		minLength: 0,
 		source: performSearch,
+		position:{my:'right top', at:'right bottom'},
 		
 		select: function(event, ui) {
 			window.open(ui.item.url, '_blank');
@@ -17,14 +18,17 @@ UI.once('init',function(){
 	
 	function performSearch(req,res){
 		req.term = req.term.trim();
+		req.limit = 15;
 		var done;
 		$.ajax({
 			url: '/rooms/search',
 			dataType: 'json',
 			success: function(data){
 				data = data.map(function(room){
+					var name = room.n;
+					if(name.length > 25) name = name.substr(0,23) + '...';
 					return {
-						label: room.n + ' - ' + room.u,
+						label: room.u + " • " + name,
 						value: room.n,
 						url: '/chat/' + room.n}
 				});
@@ -59,7 +63,7 @@ UI.once('init',function(){
 			return $( "<li></li>" )
 				.data( "item.autocomplete", item )
 				.append( $( "<a></a>" ).text( item.label ).addClass(item['class']) )
-				.appendTo( ul );
+				.appendTo( ul ).attr('title', item.value);
 		}
 	});
 
