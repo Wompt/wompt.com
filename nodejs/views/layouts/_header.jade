@@ -24,9 +24,9 @@
 			span#wompt Wompt
 		- if(w.channel)
 			- if(w.channel.length > 20)
-				span(title=w.channel)= w.channel.substr(0,20) + '...';
+				span(title=w.channel)= w.channel.substr(0,20).replace(/\//g,' / ') + '...';
 			- else
-				=w.channel
+				=w.channel.replace(/\//g,' / ')
 			br
 			span.invite(title='Invite your friends to this room') Invite people:&nbsp;
 				<fb:send href="http://#{w.host + w.url}" class='fb'></fb:send>
