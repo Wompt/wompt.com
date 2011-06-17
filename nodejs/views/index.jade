@@ -31,8 +31,8 @@
 		.slides.clear
 			.slide.current
 				.contents
-					h3 Like Disqus?  Want Real time?
-					h4 Easily add chat to any web page for free!
+					h3 Easily add chat to any web page for free!
+					h4 Your content inspires discussion, give it an outlet.
 					#chat.embed.small.hide_userlist
 						!= partial('chat')
 					a#powered_by(href='http://wompt.com') Chat Powered by Wompt
@@ -50,7 +50,7 @@
 					#code
 			.slide.future
 				.contents
-					h3 You can sign in with Google, facebook, or Github
+					h3 You can sign in with Google, facebook, Github, or Twitter
 					h4 No new usernames or passwords to memorize
 					- each provider in w.config.auth.providers
 						a(href='/auth/' + provider.code, class='popup', title="Sign in with #{provider.name}")
