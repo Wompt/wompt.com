@@ -5,5 +5,6 @@ module.exports = {
 	httpProxy: require('http-proxy'),
 	step: require('step'),
 	async: require('async'),
-	lingo: require('lingo')
+	lingo: require('lingo'),
+	vows: require('vows')
 }

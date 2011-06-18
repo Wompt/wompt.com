@@ -1,9 +1,9 @@
 {
-  "name": "wompt_dependencies",
-  "version": "0.0.4",
-  "engines": {
-    "node": "0.4.1"
-  },
+	"name": "wompt_dependencies",
+	"version": "0.0.4",
+	"engines": {
+		"node": "0.4.1"
+	},
 	"files":[
 		"./dependencies.js"
 	],
@@ -17,5 +17,8 @@
 		"http-proxy": "~0.3.0",
 		"async": "~0.1.9",
 		"lingo": "0.0.4"
-	}
+	},
+	"devDependencies": {
+		"vows": "~0.5.8"
+	},	
 }
