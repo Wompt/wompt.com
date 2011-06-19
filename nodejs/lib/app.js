@@ -53,6 +53,8 @@ function App(options){
 		self.namespaceController.createNamespaceForAccount(account);
 	});
 
+	this.searchController    = new wompt.controllers.Search(this);
+	this.searchController.register();
 	this.accountsController = new wompt.controllers.Accounts(this);
 	this.accountsController.register();
 	this.adminController    = new wompt.controllers.Admin(this);
@@ -165,29 +167,7 @@ App.prototype = {
 			}
 		});
 		
-		exp.get("/rooms/search", function(req, res){
-			var terms = req.query && req.query.term,
-			    limit = req.query && req.query.limit,
-			    results = me.search(terms, limit);
-			res.writeHead(200, {"Content-Type":"application/json"});
-			res.end(JSON.stringify(results));
-		});
-		
-		exp.get("/search", function(req, res){
-			var terms = req.query && req.query.q;
-			
-			res.render('search',{
-				locals: me.standard_page_vars(req, {
-					query: terms,
-					resultsJSON: JSON.stringify(me.search(terms)),
-					jquery: true,
-					hide_top_query: true,
-					page_js: 'search',					
-					page_name:'search'
-				})
-			});					
-		});
-		
+
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + (req.body.channel || 'wompt'));
@@ -257,42 +237,6 @@ App.prototype = {
 		}
 
 		return exp;
-	},
-	
-	search: function(term, max_results){
-		var results = [], terms;
-		max_results = max_results > 0 ? Math.min(max_results, 100) : 100;
-		
-		term = term ? term.toLowerCase() : null;
-			
-		if(term){
-			// Limit length, split on spaces, remove blank terms, enforce maximum term count
-			terms = term.substr(0,50)
-				.split(' ')
-				.filter(function(t){return t.length > 0;})
-				.slice(0,5);
-
-			if(terms.length > 1){
-				this.channels.each(function(channel){
-					var name = channel.name;
-					if(terms.every(function(term){return name.indexOf(term) >= 0;}))
-						results.push(channel);
-					if(results.length >= max_results) return true;
-				});
-			} else if(term = terms[0]){
-				this.channels.each(function(channel){
-					if(channel.name.indexOf(term) >= 0)
-						results.push(channel);
-					if(results.length >= max_results) return true;
-				});
-			}
-		} else {
-			results = this.popular_channels.sorted_list;
-		}
-		
-		return results.map(function(channel){
-			return {n:channel.name, u:channel.clients.count}
-		});
 	},
 	
 	standard_page_vars: function(req, custom_vars){
