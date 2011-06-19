@@ -12,29 +12,33 @@ function SearchController(app){
 	
 	function resultsHandler(req, res){
 		var terms = req.query && req.query.term,
-				limit = req.query && req.query.limit,
-				results = search(terms, limit);
-		res.writeHead(200, {"Content-Type":"application/json"});
-		res.end(JSON.stringify(results));
+		limit = req.query && req.query.limit;
+		
+		search(terms, limit, function(results){
+			res.writeHead(200, {"Content-Type":"application/json"});
+			res.end(JSON.stringify(results));
+		});
 	}
 	
 	function searchPage(req, res){
 		var terms = req.query && req.query.q;
-		
-		res.render('search',{
-			locals: app.standard_page_vars(req, {
-				query: terms,
-				resultsJSON: JSON.stringify(search(terms)),
-				jquery: true,
-				hide_top_query: true,
-				page_js: 'search',					
-				page_name:'search'
-			})
-		});					
+		search(terms, null, function(results){
+			res.render('search', {
+				locals: app.standard_page_vars(req, {
+					query: terms,
+					resultsJSON: JSON.stringify(results),
+					jquery: true,
+					hide_top_query: true,
+					page_js: 'search',					
+					page_name:'search'
+				})
+			});
+		});
 	}
 	
-	function search(term, max_results){
-		var results = [], terms;
+	function search(term, max_results, callback){
+		var results = [],
+		terms;
 		max_results = max_results > 0 ? Math.min(max_results, 100) : 100;
 		
 		term = term ? term.toLowerCase() : null;
@@ -64,9 +68,9 @@ function SearchController(app){
 			results = app.popular_channels.sorted_list;
 		}
 		
-		return results.map(function(channel){
+		callback(results.map(function(channel){
 			return {n:channel.name, u:channel.clients.count}
-		});
+		}));
 	}	
 }
 
