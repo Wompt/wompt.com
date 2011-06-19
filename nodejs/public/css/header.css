@@ -12,10 +12,8 @@
 }
 
 #top #logo{
-	position:absolute;
-	left:0;
-	top:0;
-	margin:5px 20px 0px 8px;
+	float:left;
+	margin:5px 20px 4px 8px;
 	font-size:22px;
 	font-weight:700;
 }
