@@ -29,7 +29,6 @@
 #results .count{
 	text-align:right;
 	padding-right:10px;
-	width: 3em;
 }
 
 .query{
@@ -44,4 +43,36 @@
 
 #results a{
 	color:#26D;
+}
+
+#options {
+	margin:.6em .3em;
+}
+
+#options a{
+	display:inline-block;
+	height:20px;
+	width:24px;
+	padding:4px 2px 2px 2px;
+	margin-right:10px;
+	background:#EF6F2F;
+	
+	text-align:center;
+	border-radius:3px;
+	color:white;
+	cursor:pointer;
+	text-decoration:none;
+	font-weight:bold;
+	opacity:.55;
+}
+
+#options a.selected{
+	opacity:1;
+}
+#options a.selected:hover{
+	opacity:1;
+}
+
+#options a:hover{
+	opacity:0.7;
 }

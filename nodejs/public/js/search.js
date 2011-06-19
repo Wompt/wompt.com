@@ -1,5 +1,6 @@
 $(function(){
 	var last_query,
+	data,
 	searching,
 	timer,
 	delay = 300,
@@ -36,33 +37,26 @@ $(function(){
 			});
 		}, delay)
 	}
-	
-	function showResults(query, data){
+
+	function showResults(query, new_data){
+		data = new_data || data;
 		if(!data) return;
+	
+		sort(data);
 
-		// Sort results by room population
-		data.sort(function(a,b){
-			return (b.u || 0) - (a.u || 0)
-		});
-
-		var results = $('#results'),
-		title = $('<h3>'),
+		var results = $('#list'),
+		title = $('#results_title'),
 		titleText = query && query.length > 0 ?
 			(data.length + " Room" + (data.length == 1 ? '' : 's') + " Matching '"+ query +"'")
 			:
 			"Popular Rooms";
-			
-		results.empty();
-		results.append(
-			row(
-				td(
-					title.text(titleText)
-				).attr('colspan', 2)));
+		title.text(titleText);
 		title.append(" - ");
 		title.append(
 			link('permalink', '/search' + (query ? '/?q=' + query : '')),
 			" to this search");
 
+		results.empty();
 		data.forEach(function(room){
 			var a = link(room.n.replace(/\//g, ' / '), '/chat/' + room.n),
 			td_count = td(room.u + '', 'count');
@@ -79,6 +73,31 @@ $(function(){
 				)
 			).attr('colspan', 2));
 		}
+	}
+	
+	$('#options a').click(function(e){
+		sortMode(e.target.id);
+		$('#options a').removeClass('selected');
+		$(e.target).addClass('selected');
+		showResults();
+	})
+	
+	function sort(data){
+		var sorters = {
+			numeric: function(a, b){
+				return (b.u || 0) - (a.u || 0)
+			},
+			alpha: function(a, b) {
+				return a.n > b.n ? 1 : a.n < b.n ? -1 : 0
+			}
+		}
+
+		return data.sort(sorters[sortMode()]);
+	}
+
+	var mode;
+	function sortMode(m){
+		return m ? mode=(m || 'numeric') : mode;
 	}
 	
 	function row(a,b, cl){

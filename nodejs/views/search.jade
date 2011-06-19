@@ -5,4 +5,9 @@ script
 		// Use the class for styling and the id for identification
 		// wompt_ prefix ensures uniqueness for browser auto form fill
 		input#wompt_search.query(type='text', value=w.query)
-	table#results
+	#results
+		h3#results_title
+		#options
+			a#numeric.selected 1
+			a#alpha A
+		table#list
