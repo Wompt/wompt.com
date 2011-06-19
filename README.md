@@ -10,10 +10,22 @@
 		./make install
 		
 ### Install npm ###
-		curl http://npmjs.org/install.sh | sudo sh
+		curl http://npmjs.org/install.sh | sh
 
 ### Install packages ###
 		npm install hoptoad-notifier
+
+### Local Development ###
+#### Offline mode ####
+    node nodejs/server.js -offline
+		
+Running Wompt with the `-offline` flag tells wompt to rely on no external
+dependencies.
+ * Facebook JS isn't loaded
+ * Facebook Like and Send buttons aren't included
+ * Uses a local copy of jQuery (needs jQuery in `nodejs/public/external/')
+ instead of google's CDN
+
 		
 ### Deploying ###
 
