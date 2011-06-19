@@ -68,10 +68,6 @@ UI.once('init',function(){
 	});
 
 
-	// Ugly hack to prevent the rest of this code from running on anything but the landing page
-	
-	if(!$('#landing').get(0)) return;
-
 	var form = $('#embed_form');
 	form.find('input').keyup(updateCode);
 	
@@ -90,6 +86,11 @@ UI.once('init',function(){
 		$('#code').text(code.join(''));
 	}
 	updateCode();
+
+	// Ugly hack to prevent the rest of this code from running on anything but the landing page
+	
+	if(!$('#landing').get(0)) return;
+	
 
 	var slides = $('.slides .slide'),
 		current = 0,

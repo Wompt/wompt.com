@@ -1,4 +1,5 @@
 var wompt = require("../includes"),
+async = wompt.dependencies.async
 Util = wompt.util;
 
 function SearchController(app){
@@ -34,6 +35,21 @@ function SearchController(app){
 				})
 			});
 		});
+	}
+	
+	function prepareTerms(str){
+		var terms,		
+		term = str ? str.toLowerCase() : null;
+			
+		if(term){
+			// Limit length, split on spaces, remove blank terms, enforce maximum term count
+			terms = term.substr(0,50)
+				.split(' ')
+				.filter(function(t){return t.length > 0;})
+				.slice(0,5);
+		}
+		
+		return terms;
 	}
 	
 	function search(term, max_results, callback){
