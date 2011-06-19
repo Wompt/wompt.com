@@ -6,6 +6,11 @@ var specified_env = require("./environment/" + environment);
 
 specified_env = util.mergeCopy(default_env, specified_env);
 
+// Offline mode loads additional flags
+if(process.argv.indexOf('-offline') > 0){
+	specified_env = util.mergeCopy(specified_env, require('./environment/offline'));	
+}
+
 function precomputeConstantsJSON(){
 	// Pre-compute this so it can be spit out quickly in templates
 	specified_env.constantsJSON = JSON.stringify(specified_env.constants);

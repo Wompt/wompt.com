@@ -9,7 +9,10 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 		.main
 			!{body}
 		- if(w.jquery)
-			script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js", type="text/javascript")
+			- if(w.config.flags.localjQuery)
+				script(src="/s/external/jquery-1.3.2.min.js", type="text/javascript")
+			- else
+				script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js", type="text/javascript")
 			!=partial('layouts/_style_iframe')
 		- if(w.page_js)
 			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
@@ -17,6 +20,6 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 				UI.input = UI.input || {};
 				UI.input.disableAutoExpand = true;
 				UI.hideProfileLinks = #{w.ui.hideProfileLinks};
-		- if(w.channel && !w.ui.hideSocialLinks)
+		- if(w.channel && !w.ui.hideSocialLinks && !w.config.flags.noFacebook)
 			script(type='text/javascript', src='http://connect.facebook.net/en_US/all.js#appId=181725458505189&xfbml=1',async='true')
 		!=partial('shared/_ga')

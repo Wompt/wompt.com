@@ -75,6 +75,11 @@ module.exports = {
 		]
 	}
 	
+	, flags:{
+		localjQuery:false,
+		noFacebook:false
+	}
+	
 	, redirectWww: false
 	, redirectWwwToPort: 16867
 }

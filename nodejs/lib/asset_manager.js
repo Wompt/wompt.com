@@ -98,6 +98,7 @@ var assetManagerGroups = {
 			  'reset.css'
 			, 'base.css'
 			, 'black_fade.css'
+			, 'buttons.css'
 			, 'landing.css'
 			, 'header.css'
 			, 'footer.css'
