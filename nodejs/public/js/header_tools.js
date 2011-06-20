@@ -1,16 +1,18 @@
 UI.once('init',function(){
 
-	var extras = $('#tools').click(function(e){
+	var drawer_open;
+	$('#tools').click(function(e){
+		// only register clicks on the children of #tools
 		if(e.target.parentNode.id != 'tools') return;
+		
 		var panel = $('.' + e.target.id + '.panel'),
-		selected = panel.hasClass('selected'),
-		drawer = $('#top_drawer');
+		selected = panel.hasClass('selected');
 
 		$('#tools_panels .panel').removeClass('selected');
 		panel.addClass('selected');
-		var closed = selected && drawer.hasClass('open');
-		drawer.height(closed ? 0 : $("#tools_panels").height()+4);
-		drawer.toggleClass('open', !closed);
+		drawer_open = !(selected && drawer_open);
+		$('#top_drawer').height(drawer_open ? $("#tools_panels").height()+4 : 0);
+		e.preventDefault();
 	});
 	
 	var form = $('#embed_form');

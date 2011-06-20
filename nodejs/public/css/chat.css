@@ -10,9 +10,15 @@ body#chat .main{
 	font-size:12px;
 }
 
+
+#chat #top{
+	margin-bottom:0;
+	height:55px;
+}
+
 .main #content{
 	position:absolute;
-	top:56px;
+	top:55px; /* to match heigh of #top */
 	bottom:4em;
 	left:0;
 	right:0;
@@ -22,23 +28,23 @@ body#chat .main{
 	background-color:#f7f7f7;	
 }
 
-.anonymous .main #content{
-	top:73px;
+#chat.anonymous #top{
+	height:73px;
 }
+.anonymous .main #content{
+	top:73px; /* to match heigh of #top */
+}
+
 
 #top_drawer{
 	overflow:hidden;
-	height:0;
+	z-index:2;
 	-vendor-transition:height .5s ease-in-out;
 	position:relative;
-	clear:both;
-}
-#top .divider{
-	height:5px;
 }
 
 #chat #top,
-#top .divider{
+#top_drawer{
 	background-color: #EF6F2F;	
 	box-shadow:rgba(0,0,0,.2) 0 2px 3px;
 }
