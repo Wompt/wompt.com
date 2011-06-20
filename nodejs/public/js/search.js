@@ -97,7 +97,7 @@ $(function(){
 
 	var mode;
 	function sortMode(m){
-		return m ? mode=(m || 'numeric') : mode;
+		return m ? mode=m : (mode || 'numeric');
 	}
 	
 	function row(a,b, cl){
