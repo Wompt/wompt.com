@@ -12,7 +12,7 @@ body#chat .main{
 
 .main #content{
 	position:absolute;
-	top:60px;
+	top:56px;
 	bottom:4em;
 	left:0;
 	right:0;
@@ -25,6 +25,58 @@ body#chat .main{
 .anonymous .main #content{
 	top:73px;
 }
+
+#top_drawer{
+	overflow:hidden;
+	height:0;
+	-vendor-transition:height .5s ease-in-out;
+	position:relative;
+	clear:both;
+}
+#top .divider{
+	height:5px;
+}
+
+#chat #top,
+#top .divider{
+	background-color: #EF6F2F;	
+	box-shadow:rgba(0,0,0,.2) 0 2px 3px;
+}
+
+#tools{
+	clear:left;
+	padding-left:10px;
+	font-size:14px;
+}
+
+#tools a{
+	cursor:pointer;
+	margin-right:.6em;
+}
+
+#tools_panels{
+	max-width:800px;
+	position:absolute;
+	bottom:0;
+}
+
+#tools_panels .panel{
+	display:none;
+	padding:.6em 1em;	
+}
+#tools_panels .panel.selected{
+	display:block;
+}
+
+
+#chat #embed_form{
+	margin:0;
+}
+#chat #embed_form input,
+#chat #embed_form .output{
+	border:none;
+}
+
 
 #chat .ui-autocomplete{
 	color:#444;

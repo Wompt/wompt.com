@@ -1,12 +1,13 @@
 #top{
 	position:relative;
-	z-index:1;
+	z-index:2;
 	margin-bottom:5px;
 	min-height:35px;
+	overflow:hidden;
 }
 
 #toplinks {
-	margin:5px 5px 0 0;
+	margin:4px 5px 0 0;
 	float:right;
 	font-size:12px;
 }
@@ -52,5 +53,5 @@
 	clear:right;
 	width:150px;
 	border:none;
-	margin:7px 2px;
+	margin:7px 2px 5px 2px;
 }

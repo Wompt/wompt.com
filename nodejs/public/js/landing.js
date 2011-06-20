@@ -67,29 +67,9 @@ UI.once('init',function(){
 		}
 	});
 
-
 	// Ugly hack to prevent the rest of this code from running on anything but the landing page
 	
 	if(!$('#landing').get(0)) return;
-
-	var form = $('#embed_form');
-	form.find('input').keyup(updateCode);
-	
-	function updateCode(){
-		var code = [
-		'<iframe src="http://wompt.com/chat/',
-			encodeURIComponent(form.find('#room_name').val()),
-		'?iframe=1#c=',
-			form.find('#color').val(),
-		'" style="width:',
-			form.find('#width').val(),
-		,"; height:",
-			form.find('#height').val(),
-		,';" allowtransparency="true"></iframe>'
-		,'<a href="http://wompt.com">Chat Powered by Wompt</a>'];
-		$('#code').text(code.join(''));
-	}
-	updateCode();
 
 	var slides = $('.slides .slide'),
 		current = 0,

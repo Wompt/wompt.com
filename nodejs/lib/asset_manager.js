@@ -65,7 +65,8 @@ var assetManagerGroups = {
 			, '/public/js/ui.twitter.js'
 			, '/public/js/sign_in.js'
 			, '/public/js/links_in_new_tab.js'
-			, '/public/js/landing.js'			
+			, '/public/js/landing.js'
+			, '/public/js/header_tools.js'
 		]
 	}), 'profile_js': mc(defaultOptions,{
 		'route': /\/js\/profile_[\d]+.js/
