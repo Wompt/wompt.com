@@ -26,8 +26,11 @@ function ProfileController(app){
 	function changeSettings(req, res){
 		var b = req.body;
 		if(b.useNameFrom){
-			req.user.name = req.user.provider_attribute(b.useNameFrom, 'name');
-			req.user.save();
+			var name = req.user.provider_attribute(b.useNameFrom, 'name');
+			if(name && name.length > 2){
+				req.user.name = name
+				req.user.save();
+			}
 			res.send({name:req.user.name}, 200);
 		} else next(new wompt.errors.NotAuthorized()); 
 	}

@@ -16,7 +16,8 @@ link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", 
 						- var name = w.profileUser.provider_attribute(provider.code, 'name')
 						.known_as known as
 						.known_as_name #{name || '(no name)'}
-						button.minimal.choose_name use this name
+						- if(name && name.length > 2)
+							button.minimal.choose_name use this name
 				- else missing_providers.push(provider)
 			-if(w.user.same_user(w.profileUser))
 				- each provider in missing_providers
