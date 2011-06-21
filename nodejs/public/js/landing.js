@@ -70,6 +70,8 @@ UI.once('init',function(){
 	// Ugly hack to prevent the rest of this code from running on anything but the landing page
 	
 	if(!$('#landing').get(0)) return;
+	
+	UI.Messages.system('Weclome! You are chatting in the wompt room "general"');
 
 	var slides = $('.slides .slide'),
 		current = 0,
