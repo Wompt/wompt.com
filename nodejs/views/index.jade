@@ -10,13 +10,6 @@
 			form(method='post')
 				input#channel(name='channel', type='text', placeholder="Enter a topic")
 				input.submit#join(type='submit', value="Join Chat Room")
-			h4.hide Popular rooms
-			table.room_list.hide
-				- each chan in w.app.popular_channels.sorted_list
-					tr
-						td.count= chan.clients.userCount
-						td
-							a(href="/chat/" + chan.name)= chan.name.substring(0,30)
 		.tail
 	.grid6
 		.bubble.black_fade
