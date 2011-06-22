@@ -16,7 +16,7 @@ Account.method({
 	findStats: function(){
 		var opts = arguments[0];
 		opts.account_id = this._id;
-		return wompt.models.AccountStats.findOne.apply(wompt.models.AccountStats, arguments);
+		return wompt.models.AccountStats.find.apply(wompt.models.AccountStats, arguments);
 	}
 })
 

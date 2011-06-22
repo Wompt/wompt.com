@@ -9,6 +9,7 @@ function AccountsController(app){
 	
 	this.register = function(){
 		app.express.post(base_url + "/:account", this.update);
+		app.express.get(base_url + "/:account/analytics", this.analytics);
 		app.express.resource('accounts', this);
 	}
 	
@@ -67,6 +68,22 @@ function AccountsController(app){
 			}
 		})
 	})
+	
+	this.analytics = stack(allowOwnersAndAdmins, function analytics(req, res, next){
+		req.account.findStats({frequency:'hour'}, null, {limit: 30},  function(err, results){
+				if(err)
+					next(err);
+				else{
+					var i=0;
+					function getValues(rec){
+						return [i++ + '', rec.peak_connections, rec.connections];
+					}
+					res.render('accounts/analytics', locals(req, {
+						stats:results.map(getValues)
+					}));
+				}
+			});
+	});
 	
 	// called for each of the above actions that use an :id sets req.account
 	this.load = function loadAccount(name, fn){
