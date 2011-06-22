@@ -12,6 +12,14 @@ var Account = new mongoose.Schema({
 // number defines index sort order (1=asc)
 Account.index({name: 1});
 
+Account.method({
+	findStats: function(){
+		var opts = arguments[0];
+		opts.account_id = this._id;
+		return wompt.models.AccountStats.findOne.apply(wompt.models.AccountStats, arguments);
+	}
+})
+
 Account.static({
 	generateSecret: generateSecret
 });
