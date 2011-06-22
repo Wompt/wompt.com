@@ -71,7 +71,9 @@ UI.once('init',function(){
 	
 	if(!$('#landing').get(0)) return;
 	
-	UI.Messages.system('Weclome! You are chatting in the wompt room "general"');
+	UI.once('after_append', function(){
+		UI.Messages.system('Weclome! You are chatting in the wompt room "general"');
+	});
 
 	var slides = $('.slides .slide'),
 		current = 0,
