@@ -4,17 +4,22 @@ link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", 
 		#name= w.profileUser.name
 		.providers
 			.title Public Profiles
-			- var missing_providers = [];
+			- var missing_providers = [], my_profile = w.user.same_user(w.profileUser);
 			- each provider in w.config.auth.providers
 				- var auth = w.profileUser.authentication_for(provider.code)
 				- if(auth)
-					.provider
+					.provider(id='provider_' + provider.code)
 						- var url = w.profileUser.provider_attribute(provider.code, 'profile')
 						a.link(href=(url||'#'))
 							.title= provider.name
 							div(class="logo " + provider.code)
+						- var name = w.profileUser.provider_attribute(provider.code, 'name')
+						.known_as known as
+						.known_as_name #{name || '(no name)'}
+						- if(my_profile && name && name.length > 2)
+							button.minimal.choose_name use this name
 				- else missing_providers.push(provider)
-			-if(w.user.same_user(w.profileUser))
+			-if(my_profile)
 				- each provider in missing_providers
 					.provider.missing
 						a.link(href='/auth/' + provider.code, class='popup', title="Link your " + provider.name + " account")

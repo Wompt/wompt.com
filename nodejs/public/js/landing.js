@@ -8,6 +8,7 @@ UI.once('init',function(){
 	$('input.query,input#channel').autocomplete({
 		minLength: 0,
 		source: performSearch,
+		position:{my:'right top', at:'right bottom'},
 		
 		select: function(event, ui) {
 			window.open(ui.item.url, '_blank');
@@ -17,14 +18,17 @@ UI.once('init',function(){
 	
 	function performSearch(req,res){
 		req.term = req.term.trim();
+		req.limit = 15;
 		var done;
 		$.ajax({
 			url: '/rooms/search',
 			dataType: 'json',
 			success: function(data){
 				data = data.map(function(room){
+					var name = room.n;
+					if(name.length > 25) name = name.substr(0,23) + '...';
 					return {
-						label: room.n + ' - ' + room.u,
+						label: room.u + " • " + name,
 						value: room.n,
 						url: '/chat/' + room.n}
 				});
@@ -59,33 +63,17 @@ UI.once('init',function(){
 			return $( "<li></li>" )
 				.data( "item.autocomplete", item )
 				.append( $( "<a></a>" ).text( item.label ).addClass(item['class']) )
-				.appendTo( ul );
+				.appendTo( ul ).attr('title', item.value);
 		}
 	});
-
 
 	// Ugly hack to prevent the rest of this code from running on anything but the landing page
 	
 	if(!$('#landing').get(0)) return;
-
-	var form = $('#embed_form');
-	form.find('input').keyup(updateCode);
 	
-	function updateCode(){
-		var code = [
-		'<iframe src="http://wompt.com/chat/',
-			encodeURIComponent(form.find('#room_name').val()),
-		'?iframe=1#c=',
-			form.find('#color').val(),
-		'" style="width:',
-			form.find('#width').val(),
-		,"; height:",
-			form.find('#height').val(),
-		,';" allowtransparency="true"></iframe>'
-		,'<a href="http://wompt.com">Chat Powered by Wompt</a>'];
-		$('#code').text(code.join(''));
-	}
-	updateCode();
+	UI.once('after_append', function(){
+		UI.Messages.system('Weclome! You are chatting in the wompt room "general"');
+	});
 
 	var slides = $('.slides .slide'),
 		current = 0,

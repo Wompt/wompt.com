@@ -74,7 +74,7 @@ Util.fs = {
 // stackMiddleware(A,B) will return a function(req,res,next) that passes the request
 // through both handlers,  just like Connect. If a next() is called with an error
 // the call chain is stopped and the error is passed to the original next()
-// If next() is called with the second parameter set to true "next(null, true)"
+// If next() is called with the second parameter set to 'break' "next(null, 'break')"
 // The chain is halted and route control is passed back to the original next()
 Util.stackMiddleware = function stackMiddleware(){
 	var layers = Array.prototype.slice.call(arguments);
@@ -85,9 +85,9 @@ Util.stackMiddleware = function stackMiddleware(){
 		// This is passed as the next() parameter
 		function nextLayer(err, escapeStack){
 			if(err)	return next(err);
-			// if the second param is truish, break out of this stack by calling
+			// if the second param is 'break', break out of this stack by calling
 			// the original next()
-			if(escapeStack) return next();
+			if(escapeStack == 'break') return next();
 			
 			// if there are still layers left
 			if(i < layers.length){

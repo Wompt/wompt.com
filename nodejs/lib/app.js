@@ -53,10 +53,15 @@ function App(options){
 		self.namespaceController.createNamespaceForAccount(account);
 	});
 
+	this.searchController    = new wompt.controllers.Search(this);
+	this.searchController.register();
 	this.accountsController = new wompt.controllers.Accounts(this);
 	this.accountsController.register();
 	this.adminController    = new wompt.controllers.Admin(this);
 	this.namespaceController.register();
+	this.profileController  = new wompt.controllers.Profile(this);
+	this.profileController.register();
+
 
 	// All other requests get a 404
 	this.express.get('*', function noRouteFound(req, res, next){
@@ -146,47 +151,8 @@ App.prototype = {
 		
 		exp.get("/", landingPage);
 
-		exp.get("/profile", function(req, res){
-			if(req.meta_user && req.meta_user.authenticated())
-				res.redirect('/users/' + req.meta_user.id())
-			else
-				res.redirect('/');
-		});
 		
-		exp.get("/users/:id", function(req, res){
-			if(req.params.id && req.user && req.meta_user.id() == req.params.id){
-				//User record is already loaded but auth middleware, no need to load again
-				profilePage(req, res, req.user);
-			}
-			else{
-				wompt.User.findById(req.params.id, function(err, user){
-					profilePage(req, res, user);
-				});
-			}
-		});
-		
-		exp.get("/rooms/search", function(req, res){
-			var terms = req.query && req.query.term,
-			    results = me.search(terms);
-			res.writeHead(200, {"Content-Type":"application/json"});
-			res.end(JSON.stringify(results));
-		});
-		
-		exp.get("/search", function(req, res){
-			var terms = req.query && req.query.q;
-			
-			res.render('search',{
-				locals: me.standard_page_vars(req, {
-					query: terms,
-					resultsJSON: JSON.stringify(me.search(terms)),
-					jquery: true,
-					hide_top_query: true,
-					page_js: 'search',					
-					page_name:'search'
-				})
-			});					
-		});
-		
+
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
 			res.redirect('/chat/' + (req.body.channel || 'wompt'));
@@ -241,56 +207,8 @@ App.prototype = {
 				})
 			});
 		}
-		
-		function profilePage(req, res, user){
-			if(!user) return res.send("", 404);
-			
-			res.render('profile', {
-				locals: me.standard_page_vars(req, {
-					app:me,
-					profileUser: user,
-					jquery: true,
-					page_js: 'profile'
-				})
-			});
-		}
 
 		return exp;
-	},
-	
-	search: function(term){
-		var results = [], terms, max_results = 100;
-		
-		term = term ? term.toLowerCase() : null;
-			
-		if(term){
-			// Limit length, split on spaces, remove blank terms, enforce maximum term count
-			terms = term.substr(0,50)
-				.split(' ')
-				.filter(function(t){return t.length > 0;})
-				.slice(0,5);
-
-			if(terms.length > 1){
-				this.channels.each(function(channel){
-					var name = channel.name;
-					if(terms.every(function(term){return name.indexOf(term) >= 0;}))
-						results.push(channel);
-					if(results.length >= max_results) return true;
-				});
-			} else if(term = terms[0]){
-				this.channels.each(function(channel){
-					if(channel.name.indexOf(term) >= 0)
-						results.push(channel);
-					if(results.length >= max_results) return true;
-				});
-			}
-		} else {
-			results = this.popular_channels.sorted_list;
-		}
-		
-		return results.map(function(channel){
-			return {n:channel.name, u:channel.clients.count}
-		});
 	},
 	
 	standard_page_vars: function(req, custom_vars){

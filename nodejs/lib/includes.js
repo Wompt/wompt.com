@@ -50,6 +50,8 @@ e.controllers    = {
 	 Accounts:        require('./controllers/accounts.js')
 	,Admin:           require('./controllers/admin.js')
 	,Namespace:       require('./controllers/namespace.js')
+	,Search:          require('./controllers/search.js')
+	,Profile:         require('./controllers/profile.js')
 }
 e.errors         = require('./errors');
 e.fail           = function(msg){throw msg};

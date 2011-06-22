@@ -13,6 +13,11 @@ body.embed,
 	bottom:0px;
 }
 
+/* Ditch the inside shadow on the input box */
+.embed#chat #input #message{
+	background:white;
+}
+
 .embed#chat #input .container{
 	bottom:5px;
 }

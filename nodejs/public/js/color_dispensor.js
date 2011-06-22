@@ -26,6 +26,7 @@ UI.once('init', function(){
 		
 	function colorDispensor(colors){
 		var map = {}
+		  , overrides = {}
 		  , index = 0;
 		
 		return {
@@ -37,7 +38,10 @@ UI.once('init', function(){
 					map[str] = index;
 					index = (index + 1) % colors.length;
 				}
-				return "#" + colors[map[str]];
+				return "#" + (overrides[str] || colors[map[str]]);
+			},
+			override: function(str, color){
+				overrides[str] = color;
 			}
 		}
 	}
@@ -50,6 +54,10 @@ UI.once('init', function(){
 		}
 		return colorDispensors[context];
 	}
+	
+	// User's own name is always black
+	if(Me && Me.id)
+		getDispensor('user').override(Me.id, '000000');
 	
 
 	this.Colors = {

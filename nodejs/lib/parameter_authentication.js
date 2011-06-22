@@ -1,7 +1,7 @@
 var wompt = require("./includes"),
 util = require('util');
 
-var MAX_REQUEST_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
+var MAX_REQUEST_AGE = 24 * 60 * 60; // 24 hours in seconds
 
 // Looks up the account for a request
 // for a url of /account_name/room_name
@@ -15,7 +15,7 @@ function lookupAccountMiddleware(accountManager){
 		
 		// if an account is not found, bail out of the rest of the stack,
 		// see Util.preStackMiddleware
-		next(null, !account);
+		next(null, account ? null : 'break');
 	}
 }
 
@@ -36,7 +36,7 @@ function verifyAuthenticity(req, res, next){
 }
 
 function verifyTimeliness(req){
-	return Math.abs(Date.now() - parseInt(req.query.ts, 10)) < MAX_REQUEST_AGE_MS;
+	return Math.abs(Date.now()/1000 - parseInt(req.query.ts, 10)) < MAX_REQUEST_AGE;
 }
 
 // Loads req.user based on req.account and the user_id query param
@@ -57,7 +57,7 @@ function loadUserBasedOnQueryParam(req, res, next){
 	// if there is no user_id or no account, bail out of the rest of the stack
 	// see Util.preStackMiddleware
 	else
-		next(null, true);
+		next(null, 'break');
 }
 
 function createUserFromQueryParams(req, callback){

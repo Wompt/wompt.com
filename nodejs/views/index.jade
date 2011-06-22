@@ -10,13 +10,6 @@
 			form(method='post')
 				input#channel(name='channel', type='text', placeholder="Enter a topic")
 				input.submit#join(type='submit', value="Join Chat Room")
-			h4.hide Popular rooms
-			table.room_list.hide
-				- each chan in w.app.popular_channels.sorted_list
-					tr
-						td.count= chan.clients.userCount
-						td
-							a(href="/chat/" + chan.name)= chan.name.substring(0,30)
 		.tail
 	.grid6
 		.bubble.black_fade
@@ -31,29 +24,29 @@
 		.slides.clear
 			.slide.current
 				.contents
-					h3 Like Disqus?  Want Real time?
-					h4 Easily add chat to any web page for free!
+					h3 Easily add chat to any web page for free!
+					h4 Your content inspires discussion, give it an outlet.
 					#chat.embed.small.hide_userlist
 						!= partial('chat')
 					a#powered_by(href='http://wompt.com') Chat Powered by Wompt
 					h4.space Embed code
 					#embed_form
-						| Room Name:
+						label(for='room_name') Room Name:
 						input#room_name(type='text',value='whatever you want', title='Room name')
-						| Text Color:
+						label(for='color') Text Color:
 						input#color(type='text',value='444444', title='Color in hex')
-						| Height:
+						label(for='height') Height:
 						input#height(type='text',value='500px', title='Height')
-						| Width:
+						label(for='width') Width:
 						input#width(type='text',value='100%', title='Width')
-					h4 HTML
-					#code
+						h4 HTML
+						#code.output
 			.slide.future
 				.contents
-					h3 You can sign in with Google, facebook, or Github
+					h3 You can sign in with Google, facebook, Github, or Twitter
 					h4 No new usernames or passwords to memorize
 					- each provider in w.config.auth.providers
-						a(href='/auth/' + provider.code, class='popup', title="Sign in with #{provider.name}")
+						a(href='/auth/' + provider.code, class='popup', title="Sign in with " + provider.name)
 							img(src='/s/images/external/'+provider.code+'_128.png')
 		#slide_buttons
 			a Add chat to your web site

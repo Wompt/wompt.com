@@ -10,9 +10,15 @@ body#chat .main{
 	font-size:12px;
 }
 
+
+#chat #top{
+	margin-bottom:0;
+	height:55px;
+}
+
 .main #content{
 	position:absolute;
-	top:60px;
+	top:55px; /* to match heigh of #top */
 	bottom:4em;
 	left:0;
 	right:0;
@@ -22,9 +28,61 @@ body#chat .main{
 	background-color:#f7f7f7;	
 }
 
-.anonymous .main #content{
-	top:73px;
+#chat.anonymous #top{
+	height:73px;
 }
+.anonymous .main #content{
+	top:73px; /* to match heigh of #top */
+}
+
+
+#top_drawer{
+	overflow:hidden;
+	z-index:2;
+	-vendor-transition:height .5s ease-in-out;
+	position:relative;
+}
+
+#chat #top,
+#top_drawer{
+	background-color: #EF6F2F;	
+	box-shadow:rgba(0,0,0,.2) 0 2px 3px;
+}
+
+#tools{
+	clear:left;
+	padding-left:10px;
+	font-size:14px;
+}
+
+#tools a{
+	cursor:pointer;
+	margin-right:.6em;
+}
+
+#tools_panels{
+	max-width:800px;
+	position:absolute;
+	bottom:0;
+}
+
+#tools_panels .panel{
+	display:none;
+	padding:.6em 1em;	
+}
+#tools_panels .panel.selected{
+	display:block;
+}
+
+
+#chat #embed_form{
+	margin:0;
+}
+#chat #embed_form input,
+#chat #embed_form .output{
+	border:none;
+}
+
 
 #chat .ui-autocomplete{
 	color:#444;
@@ -209,7 +267,7 @@ tr.first td {
 
 .line.system{
 	background-color:#eee;
-	color:#888;
+	color:#666;
 }
 .line.system td{
 	padding:.8em 3em;

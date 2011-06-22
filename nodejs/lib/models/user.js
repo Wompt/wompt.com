@@ -55,7 +55,15 @@ User.method({
 		var info       = this.authentication_for(provider),
 		provider_info  = info          && providerAuthInfo[provider],
 		attr_getter    = provider_info && provider_info[attr];
-		return attr_getter && attr_getter.call(info);
+		if(attr_getter)
+			return attr_getter && attr_getter.call(info);
+		else if(info) {
+			var value;
+			(value = info.info) && 
+			(value = value.user_info) &&
+			(value = value[attr]);
+			return value
+		}
 	},
 	
 	same_user: function(u){
