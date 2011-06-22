@@ -87,7 +87,7 @@ Util.stackMiddleware = function stackMiddleware(){
 			if(err)	return next(err);
 			// if the second param is truish, break out of this stack by calling
 			// the original next()
-			if(escapeStack) return next();
+			if(escapeStack == 'break') return next();
 			
 			// if there are still layers left
 			if(i < layers.length){

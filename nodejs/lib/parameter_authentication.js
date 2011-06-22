@@ -15,7 +15,7 @@ function lookupAccountMiddleware(accountManager){
 		
 		// if an account is not found, bail out of the rest of the stack,
 		// see Util.preStackMiddleware
-		next(null, !account);
+		next(null, account ? null : 'break');
 	}
 }
 
@@ -57,7 +57,7 @@ function loadUserBasedOnQueryParam(req, res, next){
 	// if there is no user_id or no account, bail out of the rest of the stack
 	// see Util.preStackMiddleware
 	else
-		next(null, true);
+		next(null, 'break');
 }
 
 function createUserFromQueryParams(req, callback){
