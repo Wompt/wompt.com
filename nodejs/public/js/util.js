@@ -47,6 +47,13 @@ time:function time(t){
 	return (h==0 ? 12 : h) + ":" + (m < 10 ? '0' + m : m) + (H > 11 ? 'pm' : 'am');
 },
 
+date:function date(t){
+	var d = t.getDate(),
+	    m = t.getMonth() + 1;
+	
+	return m + "/" + (d < 10 ? '0' + d : d);
+},
+
 url:function(){
 	return window.location.href.split('?')[0];
 },
@@ -56,8 +63,10 @@ inherits:function(to, from){
 }
 };
 
-EventEmitter.prototype.muteEvents = function(fn){
-	this.emit = function(){}
-	fn();
-	delete this.emit;
+if(window.EventEmitter){
+	EventEmitter.prototype.muteEvents = function(fn){
+		this.emit = function(){}
+		fn();
+		delete this.emit;
+	}
 }
