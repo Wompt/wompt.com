@@ -25,8 +25,7 @@ function AccountsController(app){
 	// url: /accounts/:id
 	this.show = stack(loadAccountOwners, allowOwnersAndAdmins, function show(req, res, next){
 		res.render('accounts/show', locals(req, {
-			account: req.account
-			,account_owners: req.account_owners
+			account_owners: req.account_owners
 			,namespace: app.namespaces[req.account.name]
 		}));
 	})
@@ -123,6 +122,7 @@ function AccountsController(app){
 	function locals(req, opt){
 		opt = opt || {};
 		opt.page_name = 'accounts';
+		if(req.account) opt.account = req.account;
 		return app.standard_page_vars(req, opt);
 	}
 
