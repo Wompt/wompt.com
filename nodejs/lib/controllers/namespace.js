@@ -8,26 +8,31 @@ function NamespaceController(app){
 	
 	this.register = function(){
 		//Lookup Chat namespaces in the namespace hash, and respond.
-		express.get("/:namespace/*", function(req, res, next){
-			var namespace_id = req.params.namespace,
-			namespace = namespace_id && self.namespaces[namespace_id];
-			
-			if(namespace){
-				req.params.room_name = req.params[0];
-				namespace.handler.apply(this, arguments);
-			}else
-				next();
-		});
+		function createNamespaceFilter(namespaceType){
+			return function handleNamespace(req, res, next){
+				var namespace_id = req.params.namespace,
+				namespace = namespace_id && self.namespaces[namespace_id];
+				
+				if(namespace && namespace.type == namespaceType){
+					req.params.room_name = req.params[0];
+					namespace.handler.apply(this, arguments);
+				}else
+					next();
+			}
+		}
+		
+		express.get("/:namespace/*", createNamespaceFilter('public'));
+		express.get("/a/:namespace/*", createNamespaceFilter('account')); 
 	}
 	
 	this.createNamespaceForAccount = function(account){
 		var channelManager = this.createNamespace(account.name, {
-			allowCSS: true,
-			forceEmbedStyle: true,
+			allowCSS: account.hasFeature('css_override'),
+			forceEmbedStyle: account.hasFeature('sso'),
 			ui:{
 				hidePopout: true,
 				hideSocialLinks: true,
-				hideProfileLinks: true
+				hideProfileLinks: account.hasFeature('sso')
 			}
 		});
 		
@@ -38,6 +43,8 @@ function NamespaceController(app){
 			var rec = new wompt.models.AccountStats(stats);
 			rec.save();			
 		});
+		
+		this.namespaces[account.name].type = 'account';
 		
 		channelManager.stats = stats;
 		account.channelManager = channelManager;
@@ -107,6 +114,7 @@ function NamespaceController(app){
 		
 		this.namespaces[namespace_id] = {
 			handler:  handleChatRoomGet
+			,type: 'public'
 			,manager: channelManager
 		}
 		
