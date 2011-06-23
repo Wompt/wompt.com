@@ -1,3 +1,4 @@
+h3 Peak Connections
 script(type="text/javascript", src="https://www.google.com/jsapi")
 script(type="text/javascript")
 	var stats = !{JSON.stringify(w.stats)};
@@ -7,6 +8,8 @@ script(type="text/javascript")
 		if(--callbacks == 0) initCharts();
 	}
 	google.setOnLoadCallback(waitForBoth());
-#chart
-#table
+h4 Per Hour - Last 24 Hours
+#chart_hourly
+h4 Per Day - Last 30 Days
+#chart_daily
 !{assetHelpers.assetGroupTag('analytics', w.user && w.user.doc)}

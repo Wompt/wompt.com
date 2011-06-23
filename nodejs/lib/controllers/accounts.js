@@ -72,13 +72,13 @@ function AccountsController(app){
 	
 	this.analytics = stack(allowOwnersAndAdmins, function analytics(req, res, next){
 		async.parallel({
-			'day': function(callback){
+			'daily': function(callback){
+				req.account.findStats({frequency:'day'})
+				.limit(30)
+				.run(callback);			},
+			'hourly': function(callback){
 				req.account.findStats({frequency:'hour'})
 				.limit(24)
-				.run(callback);			},
-			'hour': function(callback){
-				req.account.findStats({frequency:'minute'})
-				.limit(60)
 				.run(callback);
 			}
 		},
@@ -95,8 +95,8 @@ function AccountsController(app){
 		function formatResults(results){
 			var columns = ['t', 'peak_connections', 'connections'];
 			return {
-				hour:transpose(results.day, columns),
-				minute:transpose(results.hour, columns)
+				hourly:transpose(results.hourly, columns),
+				daily:transpose(results.daily, columns)
 			}
 		}
 
