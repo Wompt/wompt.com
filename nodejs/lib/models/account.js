@@ -7,18 +7,23 @@ var Account = new mongoose.Schema({
 	,'name'           : String
 	,'owner_ids'      : [ObjectId]
 	,'secret'         : {type: String, 'default': generateSecret}
+	,'features'       : {}
 });
 
 // number defines index sort order (1=asc)
 Account.index({name: 1});
 
 Account.method({
-	findStats: function(){
+	findStats: function findStats(){
 		var opts = arguments[0];
 		opts.account_id = this._id;
 		return wompt.models.AccountStats
 			.find.apply(wompt.models.AccountStats, arguments)
 			.sort('t', -1);
+	},
+	
+	hasFeature: function hasFeature(featureName){
+		return this.features && this.features[featureName];
 	}
 })
 
