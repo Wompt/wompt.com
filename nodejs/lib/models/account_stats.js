@@ -10,7 +10,8 @@ var AccountStats = new mongoose.Schema({
 	,connections       : Number
 });
 
-AccountStats.index({t: -1});
+AccountStats.index({t: -1, frequency: 1});
+
 
 // Model name, Schema, collection name
 mongoose.model('AccountStats', AccountStats);
