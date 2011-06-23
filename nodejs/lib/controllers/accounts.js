@@ -1,4 +1,5 @@
 var wompt = require("../includes"),
+async = wompt.dependencies.async,
 Util = wompt.util;
 
 var base_url = '/accounts';
@@ -70,19 +71,30 @@ function AccountsController(app){
 	})
 	
 	this.analytics = stack(allowOwnersAndAdmins, function analytics(req, res, next){
-		req.account.findStats({frequency:'hour'}, null, {limit: 30},  function(err, results){
-				if(err)
-					next(err);
-				else{
-					var i=0;
-					function getValues(rec){
-						return [i++ + '', rec.peak_connections, rec.connections];
-					}
-					res.render('accounts/analytics', locals(req, {
-						stats:results.map(getValues)
-					}));
+		async.parallel({
+			'day': function(callback){
+				req.account.findStats({frequency:'hour'}, null, {limit: 24},  callback);
+			},
+			'month': function(callback){
+				req.account.findStats({frequency:'day'}, null, {limit: 31},  callback);
+			}
+		},
+		function done(err, results){
+			if(err)
+				next(err);
+			else{
+				var i=0;
+				function getValues(rec){
+					return [rec.t.getTime(), rec.peak_connections, rec.connections];
 				}
-			});
+				res.render('accounts/analytics', locals(req, {
+					stats:{
+						day:results.day.map(getValues),
+						month:results.month.map(getValues)
+					}
+				}));
+			}
+		});
 	});
 	
 	// called for each of the above actions that use an :id sets req.account

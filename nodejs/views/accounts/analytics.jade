@@ -1,16 +1,12 @@
 script(type="text/javascript", src="https://www.google.com/jsapi")
 script(type="text/javascript")
 	var stats = !{JSON.stringify(w.stats)};
-	google.load("visualization", "1", {packages:["corechart"]});
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Minute');
-		data.addColumn('number', 'Connections');
-		data.addColumn('number', 'Max Connections');
-		data.addRows(stats);
-		var chart = new google.visualization.LineChart(document.getElementById('chart'));
-		chart.draw(data, {width: 400, height: 240, title: 'Last Hour'});
+	google.load("visualization", "1", {packages:["corechart", "table"]});
+	var callbacks=2;
+	function waitForBoth(){
+		if(--callbacks == 0) initCharts();
 	}
-
+	google.setOnLoadCallback(waitForBoth());
 #chart
+#table
+!{assetHelpers.assetGroupTag('analytics', w.user && w.user.doc)}
