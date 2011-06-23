@@ -39,6 +39,14 @@ ts:function(){
 	return new Date().getTime();
 },
 
+time:function time(t){
+	var H = t.getHours(),
+			h = H % 12,
+			m = t.getMinutes();
+	
+	return (h==0 ? 12 : h) + ":" + (m < 10 ? '0' + m : m) + (H > 11 ? 'pm' : 'am');
+},
+
 url:function(){
 	return window.location.href.split('?')[0];
 },

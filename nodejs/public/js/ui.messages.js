@@ -50,13 +50,10 @@ UI.once('init', function(){
 		if(!data.t) return;
 		
 		var ts = $('<div>'),
-		    t = new Date(data.t),
-		    H = t.getHours(),
-		    h = H % 12,
-		    m = t.getMinutes();
+		    time = Util.time(new Date(data.t));
 		
 		ts.addClass('ts');
-		ts.text((h==0 ? 12 : h) + ":" + (m < 10 ? '0' + m : m) + (H > 11 ? 'pm' : 'am'));
+		ts.text(time);
 		return ts;
 	}
 	
