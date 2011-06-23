@@ -73,28 +73,46 @@ function AccountsController(app){
 	this.analytics = stack(allowOwnersAndAdmins, function analytics(req, res, next){
 		async.parallel({
 			'day': function(callback){
-				req.account.findStats({frequency:'hour'}, null, {limit: 24},  callback);
-			},
-			'month': function(callback){
-				req.account.findStats({frequency:'day'}, null, {limit: 31},  callback);
+				req.account.findStats({frequency:'hour'})
+				.limit(24)
+				.run(callback);			},
+			'hour': function(callback){
+				req.account.findStats({frequency:'minute'})
+				.limit(60)
+				.run(callback);
 			}
 		},
 		function done(err, results){
 			if(err)
 				next(err);
 			else{
-				var i=0;
-				function getValues(rec){
-					return [rec.t.getTime(), rec.peak_connections, rec.connections];
-				}
 				res.render('accounts/analytics', locals(req, {
-					stats:{
-						day:results.day.map(getValues),
-						month:results.month.map(getValues)
-					}
+					stats:formatResults(results)
 				}));
 			}
 		});
+		
+		function formatResults(results){
+			var columns = ['t', 'peak_connections', 'connections'];
+			return {
+				hour:transpose(results.day, columns),
+				minute:transpose(results.hour, columns)
+			}
+		}
+
+		function transpose(records, columns){
+			var results = {};
+			columns.forEach(function(column){
+				results[column] = records.map(function(record){
+					return record[column];
+				})
+			});
+			
+			if(results.t)
+				results.t = results.t.map(function(t){return t.getTime();});
+			
+			return results;
+		}
 	});
 	
 	// called for each of the above actions that use an :id sets req.account

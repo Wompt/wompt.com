@@ -91,14 +91,22 @@ var assetManagerGroups = {
 			, '/public/js/sign_in.js'
 			, '/public/js/search.js'
 		]
-	}), 'analytics_js': mc(defaultOptions,{
+	}),
+	
+	'analytics_js': mc(defaultOptions,{
 		'route': /\/js\/analytics_[\d]+.js/
 		, 'path': root
 		, 'dataType': 'javascript'
 		, 'files': [
+			'/public/js/util.js',
 			'/public/js/analytics.js'
 		]
-	}), 'all_css': mc(defaultOptions,{
+	}),
+	
+
+/* ======  CSS Files  ======= */
+	
+	'all_css': mc(defaultOptions,{
 		'route': /\/css\/all_[0-9]+\.css/
 		, 'path': pub + '/css/'
 		, 'dataType': 'css'
