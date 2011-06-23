@@ -10,6 +10,8 @@ var AccountStats = new mongoose.Schema({
 	,connections       : Number
 });
 
+AccountStats.index({t: -1});
+
 // Model name, Schema, collection name
 mongoose.model('AccountStats', AccountStats);
 module.exports = mongoose.model('AccountStats');
