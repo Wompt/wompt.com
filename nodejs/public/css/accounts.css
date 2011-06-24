@@ -35,3 +35,7 @@
 	text-align:center;
 	border-bottom:2px solid #ddd;
 }
+
+#accounts textarea{
+	border:1px solid #aaa;
+}

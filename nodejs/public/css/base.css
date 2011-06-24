@@ -70,3 +70,7 @@ tt{
 strong{
 	font-weight:bold;
 }
+
+td.top_aligned{
+	vertical-align:top;
+}

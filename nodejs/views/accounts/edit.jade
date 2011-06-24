@@ -1,0 +1,14 @@
+form(action='/accounts/' + w.account.name, method='POST')
+	h3 Edit Account &nbsp;
+		button.minimal(type='submit') Save
+	table.top_aligned
+		tr
+			td.top_aligned
+				label(for='name') Name
+			td
+				input#name(name='name', value=w.account.name)
+		tr
+			td.top_aligned
+				label(for='features') Features
+			td
+				textarea#features.code(name='features', style='width:500px;height:200px;')!= JSON.stringify(w.account.features)

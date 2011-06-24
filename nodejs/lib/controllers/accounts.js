@@ -40,17 +40,19 @@ function AccountsController(app){
 		res.render('accounts/edit', locals(req));
 	})
 	
-	// url: /accounts/edit/:id
+	// url: PUT or POST /accounts/:id
 	this.update = m(function update(req, res, next){
-		var redirect_to = base_url + '/' + req.account.name;
+		var redirect_to = base_url + '/' + req.account.name,
+		body = req.body;
 		
-		if(req.body.add_owner_id){
-			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(req.body.add_owner_id));
-			req.account.save(function(){
-				res.redirect(redirect_to);
-			});
-		} else
+		if(body.add_owner_id)
+			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
+		
+		req.account.features = JSON.parse(body.features);
+		
+		req.account.save(function(){
 			res.redirect(redirect_to);
+		});
 	})		
 	
 	// url: POST /accounts
