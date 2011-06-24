@@ -20,8 +20,10 @@ function NamespaceController(app){
 					next();
 			}
 		}
-		
+		// Public namespaces are accesible at /namespace
 		express.get("/:namespace/*", createNamespaceFilter('public'));
+
+		// Owner namespaces are assessible at /a/namespace
 		express.get("/a/:namespace/*", createNamespaceFilter('account')); 
 	}
 	
