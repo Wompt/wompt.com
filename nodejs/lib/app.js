@@ -94,7 +94,6 @@ App.prototype = {
 				,'/google8a88ebb03a6df8aa.html': true
 				,'/robots.txt':true
 				,'/google5099d06e90a418ce.html': true
-				,'/fb_cross_domain.html': true
 			}
 			exp.use(function checkStaticAndStrip(req,res,next){
 				var url = req.url;
