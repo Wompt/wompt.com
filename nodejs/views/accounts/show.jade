@@ -4,10 +4,11 @@ table.vertical
 	tr
 		th Current Connections
 		td #{w.namespace ? w.namespace.clients.count : 0}
-	tr
-		th Secret
-		td
-			span.code #{w.account.secret}
+	- if(w.account.hasFeature('sso'))
+		tr
+			th Secret
+			td
+				span.code #{w.account.secret}
 	tr
 		th Base Url
 		td.code http://wompt.com/a/#{w.account.name}/
