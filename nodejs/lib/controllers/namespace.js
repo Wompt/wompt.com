@@ -72,10 +72,10 @@ function NamespaceController(app){
 		var namespace = createNamespace(account.name);
 		
 		var stats = new wompt.monitors.NamespaceStats(namespace.manager, {intervals: ['hour', 'day']});
-		stats.on('stats', function(interval, stats){
-			stats.frequency = interval;
-			stats.account_id = account._id;
-			var rec = new wompt.models.AccountStats(stats);
+		stats.on('stats', function(interval, info){
+			info.frequency = interval;
+			info.account_id = account._id;
+			var rec = new wompt.models.AccountStats(info);
 			rec.save();			
 		});
 		
