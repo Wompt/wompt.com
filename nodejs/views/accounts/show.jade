@@ -3,7 +3,8 @@
 table.vertical
 	tr
 		th Current Connections
-		td #{w.namespace ? w.namespace.clients.count : 0}
+		td #{w.namespace ? w.namespace.clients.count : 0} - 
+			a(href='/accounts/' + w.account.name + '/analytics') analytics
 	- if(w.account.hasFeature('sso'))
 		tr
 			th Secret
