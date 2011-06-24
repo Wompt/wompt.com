@@ -24,9 +24,11 @@ function AccountsController(app){
 	
 	// url: /accounts/:id
 	this.show = stack(loadAccountOwners, allowOwnersAndAdmins, function show(req, res, next){
+		var namespace = app.namespaceController.getNamespaceForAccount(req.account.name);
+
 		res.render('accounts/show', locals(req, {
 			account_owners: req.account_owners
-			,namespace: app.namespaces[req.account.name]
+			,namespace: namespace && namespace.manager
 		}));
 	})
 	

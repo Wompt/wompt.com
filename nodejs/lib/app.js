@@ -20,20 +20,20 @@ function App(options){
 	this.namespaceController = new wompt.controllers.Namespace(this);
 
 	// default namespace
-	this.channels =	this.namespaceController.createNamespace('chat', {
+	this.channels =	this.namespaceController.createPublicNamespace('chat', {
 		logged: true,
 		allowIframe: true,
 		allowAnonymous: true
 	});
 
 	// other namespaces
-	this.namespaceController.createNamespace('unlisted', {
+	this.namespaceController.createPublicNamespace('unlisted', {
 		logged: true,
 		allowAnonymous: false,
 		allowOps: true
 	});
 
-	this.namespaceController.createNamespace('mod', {
+	this.namespaceController.createPublicNamespace('mod', {
 		logged: true,
 		allowAnonymous: true,
 		allowOps: true
@@ -49,10 +49,6 @@ function App(options){
 		monitor: this.appStateMonitor
 	}));
 	
-	this.accountManager.loadEach(function(account){
-		self.namespaceController.createNamespaceForAccount(account);
-	});
-
 	this.searchController    = new wompt.controllers.Search(this);
 	this.searchController.register();
 	this.accountsController = new wompt.controllers.Accounts(this);
@@ -261,7 +257,7 @@ App.prototype = {
 					return client._onDisconnect();
 				}
 				
-				var namespace = connector.namespace || app.namespaces[data.namespace],
+				var namespace = connector.namespace,
 				    user      = connector.meta_user || new wompt.MetaUser();
 						
 				client.user = user;

@@ -3,7 +3,7 @@
 table.vertical
 	tr
 		th Current Connections
-		td #{w.namespace.clients.count}
+		td #{w.namespace ? w.namespace.clients.count : 0}
 	tr
 		th Secret
 		td

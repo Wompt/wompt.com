@@ -11,7 +11,7 @@ function lookupAccountMiddleware(accountManager){
 		var parts = wompt.util.urlParts(req);
 		if(parts[1] != 'a') return next(null, 'break');
 
-		accountManager.get(parts[2], function(account){
+		accountManager.get(parts[2], function(err, account){
 			req.account = account;
 			// if an account is not found, bail out of the rest of the stack,
 			// see Util.preStackMiddleware
