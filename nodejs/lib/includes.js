@@ -16,6 +16,7 @@ e.ParameterAuthentication = require("./parameter_authentication");
 e.mongoose       = require('./db');
 e.MetaUser       = require("./meta_user");
 e.MetaUserManager= require("./meta_user_manager");
+e.roles          = require("./roles");
 e.Account        = require("./models/account");
 e.AccountManager = require("./account_manager");
 e.User           = require("./models/user");
