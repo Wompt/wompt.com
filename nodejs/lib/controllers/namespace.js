@@ -67,6 +67,20 @@ function NamespaceController(app){
 		
 		
 		function handleChatRoomGet(req, res){
+			
+			if(req.account){
+				var features = req.account.featureSet();
+				var options = {
+					allowIframe: true,
+					allowCSS: features.css_override,
+					forceEmbedStyle: features.sso,
+					ui:{
+						hidePopout: features.sso,
+						hideSocialLinks: features.sso,
+						hideProfileLinks: features.sso
+					}
+				};
+			}
 
 			// Trim off ending slash
 			if(req.url.substr(-1,1) == '/')
