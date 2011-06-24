@@ -14,6 +14,11 @@ var Account = new mongoose.Schema({
 Account.index({name: 1});
 
 Account.method({
+	// touched is not saved and is only used for expiring the account record cache
+	touch: function(){
+		this.touched = new Date();
+	},
+	
 	findStats: function findStats(){
 		var opts = arguments[0];
 		opts.account_id = this._id;
