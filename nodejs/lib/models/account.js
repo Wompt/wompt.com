@@ -7,7 +7,7 @@ var Account = new mongoose.Schema({
 	,'name'           : String
 	,'owner_ids'      : [ObjectId]
 	,'secret'         : {type: String, 'default': generateSecret}
-	,'features'       : {}
+	,'role'           : String
 });
 
 // number defines index sort order (1=asc)
@@ -23,7 +23,12 @@ Account.method({
 	},
 	
 	hasFeature: function hasFeature(featureName){
-		return this.features && this.features[featureName];
+		var permissions = wompt.roles[this.role];
+		return permissions && permissions[featureName];
+	},
+	
+	featureSet: function(){
+		return wompt.roles[this.role] || wompt.roles.default;
 	}
 })
 
