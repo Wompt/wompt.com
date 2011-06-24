@@ -6,9 +6,18 @@ form(action='/accounts/' + w.account.name, method='POST')
 			td.top_aligned
 				label(for='name') Name
 			td
-				input#name(name='name', value=w.account.name)
+				input#name(name='name', disabled, value=w.account.name)
 		tr
 			td.top_aligned
-				label(for='features') Features
+				label(for='role') Role
 			td
-				textarea#features.code(name='features', style='width:500px;height:200px;')!= JSON.stringify(w.account.features)
+				select#role(name='role')
+					- for(var role in w.roles)
+						option(value=role, selected=(role == w.account.role))= role
+		tr
+			td.top_aligned
+				| Features from
+				br
+				| '#{w.account.role}' role
+			td
+				#features.code(name='features', style='width:500px;height:200px;')!= JSON.stringify(w.account.featureSet())

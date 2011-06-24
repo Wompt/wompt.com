@@ -23,6 +23,9 @@ table.vertical
 					input(type='text', id='add_owner', name='add_owner_id')
 	- if(w.user.doc.is_admin())
 		tr
+			th Role
+			td= w.account.role
+		tr
 			th Actions
 			td
 				a(href='/accounts/' + w.account.name + '/edit') Edit

@@ -48,7 +48,7 @@ function AccountsController(app){
 		if(body.add_owner_id)
 			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
 		
-		req.account.features = JSON.parse(body.features);
+		req.account.role = body.role.toString();
 		
 		req.account.save(function(){
 			res.redirect(redirect_to);
@@ -124,6 +124,7 @@ function AccountsController(app){
 	function locals(req, opt){
 		opt = opt || {};
 		opt.page_name = 'accounts';
+		opt.roles = wompt.roles;
 		if(req.account) opt.account = req.account;
 		return app.standard_page_vars(req, opt);
 	}
