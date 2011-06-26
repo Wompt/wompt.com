@@ -64,7 +64,24 @@ Util.fs = {
 			var exists = !!err;
 			callback(data, exists);
 		});
- 	}
+ 	},
+	
+	makeDirs: function(sure_part, unsure_part, mode, callback){
+		var dirs = unsure_part.split('/');
+		var currentDir = sure_part;
+		
+		function makeNextDir(){
+			currentDir += '/' + dirs.shift();
+			fs.mkdir(currentDir, mode, function(err){
+				if(err) return callback(err);
+				if(dirs.length > 0)
+					makeNextDir();
+				else
+					callback();
+			});
+		}
+		makeNextDir();
+	}
 };
 
 // Allows easy setup of a chain of connect-style middlewares
