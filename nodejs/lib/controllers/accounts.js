@@ -16,10 +16,15 @@ function AccountsController(app){
 	
 	// url: /accounts
 	this.index = m(function index(req, res, next){
-		var accounts = app.accountManager.allAccounts();
-		res.render('accounts/index', locals(req, {
-			accounts: accounts
-		}));
+		wompt.models.Account.find({}, function callback(err, accounts){
+			accounts = accounts.map(function(account){
+				return app.accountManager.peek(account.name) || account;
+			});
+			
+			res.render('accounts/index', locals(req, {
+				accounts: accounts
+			}));
+		});
 	})
 	
 	// url: /accounts/:id
