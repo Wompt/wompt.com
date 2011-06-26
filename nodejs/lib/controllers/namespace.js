@@ -69,7 +69,9 @@ function NamespaceController(app){
 
 	
 	this.createNamespaceForAccount = function(account){
-		var namespace = createNamespace(account.name);
+		var namespace = createNamespace(account.name, {
+			logDirectory: 'accounts/' + account.name
+		});
 		
 		var stats = new wompt.monitors.NamespaceStats(namespace.manager, {intervals: ['hour', 'day']});
 		stats.on('stats', function(interval, info){
@@ -95,16 +97,18 @@ function NamespaceController(app){
 
 
 	function createNamespace(namespace_id, options){
-		options = options || {
+		options = Util.mergeDeep({
 			logged: true,
-			allowIframe: true
-		};
+			allowIframe: true,
+			logDirecotry: namespace_id
+		}, options || {});
+		
 		options.namespace = namespace_id;
 
 		var	channelManager = new wompt.ChannelManager(options);
 		
 		if(options.logged){
-			new wompt.loggers.LoggerCreator(channelManager, namespace_id);
+			new wompt.loggers.LoggerCreator(channelManager, options.logDirectory);
 		}
 		
 		function handleChatRoomGet(req, res){
