@@ -100,7 +100,7 @@ function NamespaceController(app){
 		options = Util.mergeDeep({
 			logged: true,
 			allowIframe: true,
-			logDirecotry: namespace_id
+			logDirectory: namespace_id
 		}, options || {});
 		
 		options.namespace = namespace_id;
