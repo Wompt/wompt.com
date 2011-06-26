@@ -1,7 +1,7 @@
 var fs = require('fs'),
 Channel = require('../channel').Channel,
 Hoptoad = require('../hoptoad'),
-
+wompt = require('../includes'),
 env = require('../../environment');
 
 var MAX_PRELOAD_BYTES = 1024 * 32;
@@ -14,12 +14,9 @@ if(!Channel.prototype.send_initial_data) throw "Channel.send_initial_data functi
 function ChannelLogger(channel, subdirectory){
 	this.channel = channel;
 	this.subdirectory = subdirectory;
-	
-	if(!env.logs.channels.disabled)
-		fs.mkdir(this.baseDirectory(), 0775, Hoptoad.notifyCallback);
+	this.buffer = [];
 	
 	this._suspendChannel();
-	this.openFile();
 	
 	var self = this;
 	channel.on('msg', function(msg){
@@ -28,6 +25,15 @@ function ChannelLogger(channel, subdirectory){
 	channel.on('destroy', function(){
 		self.destroy();
 	});
+	
+	if(!env.logs.channels.disabled){
+		wompt.util.fs.makeDirs(env.logs.channels.root, this.subdirectory, 0775, function(err){
+			if(err)
+				Hoptoad.notifyCallback(err);
+
+			self.openFile();
+		});
+	}
 }
 
 var proto = ChannelLogger.prototype;
@@ -117,7 +123,6 @@ proto.openFile = function(){
 	this.filePath = this.baseDirectory() + '/' + this.hashChannelName() + ".log";
 	this.log = fs.createWriteStream(this.filePath, {flags:'a'});
 	this.loaded = false;
-	this.buffer = [];
 
 	fs.stat(this.filePath, function(err, stat){
 		if(err || stat.size == 0) self._onNewFile();
@@ -126,10 +131,10 @@ proto.openFile = function(){
 }
 
 proto.baseDirectory = function(){
-	var dir = [env.logs.channels.root];
+	var dir = env.logs.channels.root;
 	if(this.subdirectory)
-		dir.push(this.subdirectory)
-	return dir.join('/');
+		dir += '/' + this.subdirectory;
+	return dir;
 }
 
 proto.hashChannelName = function(){
