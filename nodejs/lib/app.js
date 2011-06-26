@@ -24,7 +24,7 @@ function App(options){
 		logged: true,
 		allowIframe: true,
 		allowAnonymous: true
-	});
+	}).manager;
 
 	// other namespaces
 	this.namespaceController.createPublicNamespace('unlisted', {
@@ -183,7 +183,7 @@ App.prototype = {
 
 			var connector = me.client_connectors.add({
 				meta_user:meta_user,
-				namespace:me.channels,
+				namespace:me.namespaceController.getPublicNamespace('chat').manager,
 				token: token
 			});
 			
@@ -191,7 +191,6 @@ App.prototype = {
 				locals: me.standard_page_vars(req, {
 					app:me,
 					channel: 'general',
-					namespace: 'chat',
 					connector_id: connector.id,
 					ui:{},
 					popout: '/chat/general',
