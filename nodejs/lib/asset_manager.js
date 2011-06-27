@@ -93,6 +93,19 @@ var assetManagerGroups = {
 		]
 	}),
 	
+	'accounts_js': mc(defaultOptions,{
+		'route': /\/js\/accounts_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/public/external/bootstrap.js'
+			, '/public/external/events.js'			
+			, '/public/js/ui.js'
+			, '/public/js/header_tools.js'
+			, '/public/js/account.js'
+		]
+	}),
+	
 	'analytics_js': mc(defaultOptions,{
 		'route': /\/js\/analytics_[\d]+.js/
 		, 'path': root
@@ -115,6 +128,7 @@ var assetManagerGroups = {
 			, 'base.css'
 			, 'black_fade.css'
 			, 'buttons.css'
+			, 'embed_form.css'
 			, 'landing.css'
 			, 'header.css'
 			, 'footer.css'

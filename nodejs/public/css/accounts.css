@@ -7,13 +7,14 @@
 	color:#286ea0;
 }
 
-#accounts table{
+#accounts table#account_info{
 	margin:1em;
 	border-collapse:collapse;
 }
 
 #accounts table th{
 	font-weight:bold;
+	width:200px;
 }
 
 #accounts table.vertical th{
@@ -26,6 +27,10 @@
 	padding:.2em 1em;
 }
 
+#accounts tr.spacer th{
+	padding:.6em 0;
+}
+
 #accounts .code{
 	font-family:Consolas, monospace;
 	color:#888;
@@ -36,6 +41,11 @@
 	border-bottom:2px solid #ddd;
 }
 
-#accounts textarea{
-	border:1px solid #aaa;
+#accounts table#embed_form {
+	table-layout: fixed;
+	margin:0;
+}
+
+#accounts #embed_form .label{
+	border:0;
 }

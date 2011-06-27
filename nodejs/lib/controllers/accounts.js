@@ -32,6 +32,8 @@ function AccountsController(app){
 		var namespace = app.namespaceController.getNamespaceForAccount(req.account.name);
 
 		res.render('accounts/show', locals(req, {
+			jquery: true,
+			page_js: 'accounts',
 			account_owners: req.account_owners
 			,namespace: namespace && namespace.manager
 		}));

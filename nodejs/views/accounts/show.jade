@@ -1,6 +1,8 @@
+script(type='text/javascript')
+	var baseUrl = "#{w.account.baseUrl()}";
 .title
 	h2 #{w.account.name}
-table.vertical
+table#account_info.vertical
 	tr
 		th Current Connections
 		td #{w.namespace ? w.namespace.clients.count : 0} - 
@@ -23,11 +25,19 @@ table.vertical
 				form(action='/accounts/' + w.account.name, method="POST")
 					label(for='add_owner') Add by ID:
 					input(type='text', id='add_owner', name='add_owner_id')
-	- if(w.user.doc.is_admin())
+	- if(!w.account.hasFeature('sso'))
+		tr.spacer
+			th
 		tr
-			th Role
-			td= w.account.role
-		tr
-			th Actions
+			th Embedded Rooms
 			td
-				a(href='/accounts/' + w.account.name + '/edit') Edit
+				h4 As many rooms as you like on any number of pages, no rules.
+				!=partial('shared/_embed_code_form_table')
+		- if(w.user.doc.is_admin())
+			tr
+				th Role
+				td= w.account.role
+			tr
+				th Actions
+				td
+					a(href='/accounts/' + w.account.name + '/edit') Edit
