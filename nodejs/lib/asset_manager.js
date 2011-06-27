@@ -115,7 +115,6 @@ var assetManagerGroups = {
 			, 'base.css'
 			, 'black_fade.css'
 			, 'buttons.css'
-			, 'embed_form.css'
 			, 'landing.css'
 			, 'header.css'
 			, 'footer.css'

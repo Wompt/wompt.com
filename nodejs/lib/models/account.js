@@ -34,6 +34,10 @@ Account.method({
 	
 	featureSet: function(){
 		return wompt.roles[this.role] || wompt.roles.default;
+	},
+	
+	baseUrl: function baseUrl(){
+		return 'http://wompt.com/a/' + this.name + '/';
 	}
 })
 

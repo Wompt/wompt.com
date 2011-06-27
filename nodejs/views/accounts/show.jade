@@ -12,7 +12,7 @@ table.vertical
 				span.code #{w.account.secret}
 	tr
 		th Base Url
-		td.code http://wompt.com/a/#{w.account.name}/
+		td.code= w.account.baseUrl()
 	tr
 		th Owners
 		td
