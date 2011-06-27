@@ -1,0 +1,39 @@
+table#embed_form
+	tr
+		td(colspan=3)
+			span.subtitle
+				| It is not necessary to register room names with wompt, use any
+				| url-encoded utf8 string.
+	tr
+		td.label
+		td
+		td(rowspan=6)
+			h4 HTML
+			#code.output
+	tr
+		th.label
+			h4
+				label(for='room_name') Room Name:
+		td
+			input#room_name(type='text', title="Room name, any utf8 string is valid, as long as it&apos;s url-encoded", value='anything. see? ♫ ☺ ☂')
+	tr
+		th.label
+			h4
+				label(for='color') Text Color:
+		td
+			input#color(type='text',value='444444', title='Color in hex, any valid 3 or 6 char hex color.')
+	tr
+		th.label
+			h4
+				label(for='height') Height:
+		td
+			input#height(type='text',value='500px', title='Height in px, %, or em')
+	tr
+		th.label
+			h4
+				label(for='width') Width:
+		td
+			input#width(type='text',value='100%', title='Width in px, %, or em')
+	// This empty TR is here to give the #code div room to grow.
+	// It will expand the last row that it's rowspan covers
+	tr
