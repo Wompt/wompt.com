@@ -1,11 +1,14 @@
 var wompt = require("./includes"),
+Url = require('url'),
 util = require('util');
 
 var MAX_REQUEST_AGE = 24 * 60 * 60; // 24 hours in seconds
 
 // Looks up the account for a request
+//
 // for a url of /a/account_name/room_name
-// this sets req.account = Account.find(name==account_name) 
+// this sets req.account = Account.find(name==account_name)
+//
 function lookupAccountMiddleware(accountManager){
 	return function(req,res,next){
 		var parts = wompt.util.urlParts(req);
@@ -20,8 +23,27 @@ function lookupAccountMiddleware(accountManager){
 	}
 }
 
+// Verifies that the referring domain is on the list of authroized domains for
+// the account that owns this namespace
+//
+function verifyDomain(req, res, next){
+	var referer = req.headers.referer;
+	if(referer){
+		var hostname = Url.parse(referer).hostname;
+		if(hostname && req.account.isValidDomain(hostname))
+			return next()
+		else
+			return next(new wompt.errors.NotAuthorized(referer + " needs to be added to the list of authorized domains for this account."));
+	} else
+		// blank referer means the page was visited directly, which is allowed
+		next()
+	
+}
+
+
 // Verifies the url query params against the hashed secret stored in the account
 // that was loaded into req.account
+//
 function verifyAuthenticity(req, res, next){
 	// if there is no account, or the account does't have SSO, break out of
 	// the rest of this stack
@@ -80,6 +102,7 @@ function createUserFromQueryParams(req, callback){
 function parameterAuthorization(accountManager){
 	return wompt.util.stackMiddleware(
 		lookupAccountMiddleware(accountManager),
+		verifyDomain,
 		verifyAuthenticity,
 		loadUserBasedOnQueryParam
 	);

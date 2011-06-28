@@ -28,6 +28,15 @@ Account.method({
 			.sort('t', -1);
 	},
 	
+	isValidDomain: function isValidDomain(domain_to_check){
+		var domains = this.domains;
+		for(var i=0; i<domains.length; i++){
+			var domain = domains[i];
+			if(domain_to_check == domain) return true;
+		}
+		return false;
+	},
+	
 	hasFeature: function hasFeature(featureName){
 		var permissions = wompt.roles[this.role];
 		return permissions && permissions[featureName];

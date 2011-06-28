@@ -62,7 +62,7 @@ function AccountsController(app){
 				// just test for *.*
 				// TODO - give some feedback to the user when filtering domains
 				return /.+\..+$/.test(domain);
-			});
+			}).map(function(domain){ return domain.toLowerCase() });
 			req.account.domains = domains;
 		}
 		
