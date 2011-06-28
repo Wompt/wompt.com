@@ -133,20 +133,8 @@ App.prototype = {
 			,'/contact_us'
 		]);
 		
-		exp.get("/re-authenticate", function(req, res, next){
-			if(req.meta_user){
-				var token = wompt.Auth.get_or_set_token(req, res);
-				var connector = me.client_connectors.add({
-					meta_user:req.meta_user,
-					token: token
-				});
-				res.send({connector_id:connector.id, version_hash:wompt.env.constants.version_hash});
-			}else next();
-		});
-		
 		exp.get("/", landingPage);
 
-		
 
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);

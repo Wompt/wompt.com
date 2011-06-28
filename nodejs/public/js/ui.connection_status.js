@@ -48,7 +48,9 @@ UI.once('init', function(){
 		connectionStatus('Authenticating', true);
 		authenticating = true;
 		$.ajax({
-			url: '/re-authenticate',
+			headers: {
+				"reauthenticate": '1'
+			},
 			dataType: 'json',
 			success: function(data){
 				if(data.version_hash != WOMPT.version_hash){
