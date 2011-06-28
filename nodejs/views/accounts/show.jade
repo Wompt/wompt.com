@@ -33,11 +33,11 @@ table#account_info.vertical
 			td
 				h4 As many rooms as you like on any number of pages, no rules.
 				!=partial('shared/_embed_code_form_table')
-		- if(w.user.doc.is_admin())
-			tr
-				th Role
-				td= w.account.role
-			tr
-				th Actions
-				td
-					a(href='/accounts/' + w.account.name + '/edit') Edit
+	- if(w.user.doc.is_admin())
+		tr
+			th Role
+			td= w.account.role
+		tr
+			th Actions
+			td
+				a(href='/accounts/' + w.account.name + '/edit') Edit
