@@ -57,8 +57,14 @@ function AccountsController(app){
 		if(req.user.is_admin() && body.add_owner_id)
 			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
 
-		if(body.domains)
-			req.account.domains = body.domains.split(/[\n\r]+/);
+		if(body.domains){
+			var domains = body.domains.split(/[\n\r]+/).filter(function(domain){
+				// just test for *.*
+				// TODO - give some feedback to the user when filtering domains
+				return /.+\..+$/.test(domain);
+			});
+			req.account.domains = domains;
+		}
 		
 		req.account.role = body.role.toString();
 		

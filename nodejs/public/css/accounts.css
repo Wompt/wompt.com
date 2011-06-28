@@ -50,6 +50,10 @@
 	color:#888;
 }
 
+#accounts #domains{
+	height:5em;
+}
+
 #accounts .title{
 	text-align:center;
 	border-bottom:5px solid #eee;
