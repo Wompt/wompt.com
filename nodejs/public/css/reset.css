@@ -63,10 +63,15 @@ select,
 textarea,
 input{
 	padding: 3px 7px;
-	width: 150px;
+	width: 180px;
 }
 
 select{
-	width:166px;
+	width:196px;
 	padding-left:7px;
+}
+
+input[type="button"],
+input[type="submit"]{
+	width:auto;
 }

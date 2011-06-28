@@ -44,6 +44,7 @@ table#embed_form {
 table#embed_form td,
 table#embed_form th{
 	vertical-align:middle;
+	padding:1px;
 }
 
 table#embed_form .label{
@@ -51,6 +52,10 @@ table#embed_form .label{
 	width:100px;
 	padding:.45em 2px;
 	border:0;
+}
+
+table#embed_form input {
+	width:150px;
 }
 
 table#embed_form #code {
