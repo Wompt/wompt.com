@@ -2,6 +2,8 @@ script(type='text/javascript')
 	var baseUrl = "#{w.account.baseUrl()}";
 .title
 	h2 #{w.account.name}
+.right
+	a.button.minimal(href='/accounts/' + w.account.name + '/edit') Edit
 table#account_info.vertical
 	tr
 		th Current Connections
@@ -15,6 +17,11 @@ table#account_info.vertical
 	tr
 		th Base Url
 		td.code= w.account.baseUrl()
+	tr
+		th Domains
+		td
+			- each domain in w.account.domains
+				.domain= domain
 	tr
 		th Owners
 		td
@@ -37,7 +44,3 @@ table#account_info.vertical
 		tr
 			th Role
 			td= w.account.role
-		tr
-			th Actions
-			td
-				a(href='/accounts/' + w.account.name + '/edit') Edit

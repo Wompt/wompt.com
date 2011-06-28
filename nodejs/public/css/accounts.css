@@ -1,30 +1,44 @@
 #accounts .main {
 	max-width:978px;
-	border-radius:4px;	
+	border-radius:4px;
 }
 
-#accounts .main a {
+.main a {
 	color:#286ea0;
 }
 
 #accounts table#account_info{
 	margin:1em;
 	border-collapse:collapse;
+	width:95%;
 }
 
 #accounts table th{
-	font-weight:bold;
 	width:200px;
 }
 
 #accounts table.vertical th{
-	border-right:1px solid #ddd;
+	border-right:5px solid #eee;
 	text-align:right;
+}
+
+
+#accounts table.top_aligned td,
+#accounts table.top_aligned th{
+	vertical-align:top;
+}
+
+#accounts table.top_aligned th{
+	padding-top:.5em;
+}
+
+#accounts td{
+
 }
 
 #accounts td,
 #accounts th{
-	padding:.2em 1em;
+	padding:.7em;
 }
 
 #accounts tr.spacer th{
@@ -38,7 +52,7 @@
 
 #accounts .title{
 	text-align:center;
-	border-bottom:2px solid #ddd;
+	border-bottom:5px solid #eee;
 }
 
 #accounts table#embed_form {

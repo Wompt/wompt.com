@@ -1,27 +1,33 @@
 form(action='/accounts/' + w.account.name, method='POST')
-	h3 Edit Account &nbsp;
+	.title
+		.left
+			h3 Editing:	
+		h2 #{w.account.name}
+	.right
 		button.minimal(type='submit') Save
-	table.top_aligned
+		a.button.minimal(href='/accounts/' + w.account.name) Cancel
+	table#account_info.vertical.top_aligned
 		tr
-			td.top_aligned
+			th.top_aligned
 				label(for='name') Name
 			td
 				input#name(name='name', disabled, value=w.account.name)
 		tr
-			td.top_aligned
+			th.top_aligned
 				label(for='domains') Domains
+				.note one per line
 			td
 				textarea#domains(name='domains')= w.account.domains.join("\n")
 		- if(w.user.doc.is_admin())
 			tr
-				td.top_aligned
+				th.top_aligned
 					label(for='role') Role
 				td
 					select#role(name='role')
 						- for(var role in w.roles)
 							option(value=role, selected=(role == w.account.role))= role
 			tr
-				td.top_aligned
+				th.top_aligned
 					| Features from
 					br
 					| '#{w.account.role}' role
