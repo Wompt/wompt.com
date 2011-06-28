@@ -6,6 +6,7 @@ var Account = new mongoose.Schema({
 	'display_name'    : String
 	,'name'           : String
 	,'owner_ids'      : [ObjectId]
+	,'domains'        : [String]
 	,'secret'         : {type: String, 'default': generateSecret}
 	,'role'           : String
 });

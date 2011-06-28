@@ -45,7 +45,7 @@ function AccountsController(app){
 	})
 	
 	// url: /accounts/edit/:id
-	this.edit = m(loadAccountOwners, function edit(req, res, next){
+	this.edit = stack(loadAccountOwners, allowOwnersAndAdmins, function edit(req, res, next){
 		res.render('accounts/edit', locals(req));
 	})
 	
@@ -54,15 +54,18 @@ function AccountsController(app){
 		var redirect_to = base_url + '/' + req.account.name,
 		body = req.body;
 		
-		if(body.add_owner_id)
+		if(req.user.is_admin() && body.add_owner_id)
 			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
+
+		if(body.domains)
+			req.account.domains = body.domains.split(/[\n\r]+/);
 		
 		req.account.role = body.role.toString();
 		
 		req.account.save(function(){
 			res.redirect(redirect_to);
 		});
-	})		
+	})	
 	
 	// url: POST /accounts
 	this.create = m(function create(req, res, next){
