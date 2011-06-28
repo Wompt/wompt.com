@@ -48,3 +48,25 @@ table {
 textarea:focus, input:focus{
 	outline:none;
 }
+
+/* Style normalization */
+
+textarea,
+input,
+select,
+.input-style{
+	border: 1px solid #AAA;
+	border-radius: 3px;
+	font-size:14px;
+}
+
+textarea,
+input{
+	padding: 3px 7px;
+	width: 150px;
+}
+
+select{
+	width:166px;
+	padding-left:7px;
+}
