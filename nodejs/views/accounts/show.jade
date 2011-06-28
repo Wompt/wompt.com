@@ -29,7 +29,7 @@ table#account_info.vertical
 				a(href='/users/' + owner.id)= owner.name
 				br
 			- if(w.user.doc.is_admin())
-				form(action='/accounts/' + w.account.name, method="POST")
+				form(action='/accounts/' + w.account.name, method="POST").admin
 					label(for='add_owner') Add by ID:
 					input(type='text', id='add_owner', name='add_owner_id')
 	- if(!w.account.hasFeature('sso'))
@@ -41,6 +41,6 @@ table#account_info.vertical
 				h4 As many rooms as you like on any number of pages, no rules.
 				!=partial('shared/_embed_code_form_table')
 	- if(w.user.doc.is_admin())
-		tr
+		tr.admin
 			th Role
 			td= w.account.role
