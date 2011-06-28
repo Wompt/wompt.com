@@ -18,12 +18,15 @@
 			reverseCategories: true
 		};
 
-		var chart = new google.visualization.AreaChart(document.getElementById('chart_hourly'));
-		chart.draw(dataTableFor(stats.hourly), settings);
+		if(stats.hourly.t && stats.hourly.t.length > 0){
+			var chart = new google.visualization.AreaChart(document.getElementById('chart_hourly'));
+			chart.draw(dataTableFor(stats.hourly), settings);
+		}
 		
-		var chart = new google.visualization.AreaChart(document.getElementById('chart_daily'));
-		chart.draw(dataTableFor(stats.daily, 'date'), settings);
-
+		if(stats.daily.t && stats.daily.t.length > 0){
+			var chart = new google.visualization.AreaChart(document.getElementById('chart_daily'));
+			chart.draw(dataTableFor(stats.daily, 'date'), settings);
+		}
 
 		function dataTableFor(stats, time_format){
 			var data = new google.visualization.DataTable();
