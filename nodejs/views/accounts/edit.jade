@@ -19,14 +19,14 @@ form(action='/accounts/' + w.account.name, method='POST')
 			td
 				textarea#domains(name='domains')= w.account.domains.join("\n")
 		- if(w.user.doc.is_admin())
-			tr
+			tr.admin
 				th.top_aligned
 					label(for='role') Role
 				td
 					select#role(name='role')
 						- for(var role in w.roles)
 							option(value=role, selected=(role == w.account.role))= role
-			tr
+			tr.admin
 				th.top_aligned
 					| Features from
 					br
