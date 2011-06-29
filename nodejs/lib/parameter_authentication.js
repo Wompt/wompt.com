@@ -28,16 +28,25 @@ function lookupAccountMiddleware(accountManager){
 //
 function verifyDomain(req, res, next){
 	var referer = req.headers.referer;
-	if(referer){
+	// Only try to verify the domain if there is a referer and the iframe layout
+	// is being used
+	if(req.query.iframe == '1'){
+		
+		// blank referer means the page was visited directly, so render it in regular mode.
+		if(!referer){
+			delete req.query.iframe;
+			return next();
+		}
+		
 		var hostname = Url.parse(referer).hostname;
 		if(hostname && req.account.isValidDomain(hostname))
 			return next()
 		else
 			return next(new wompt.errors.NotAuthorized(referer + " needs to be added to the list of authorized domains for this account."));
-	} else
-		// blank referer means the page was visited directly, which is allowed
+	} else { 
+		// All rooms are accessible in regular layout mode
 		next()
-	
+	} 
 }
 
 
