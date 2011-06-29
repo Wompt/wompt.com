@@ -29,7 +29,7 @@ function AccountsController(app){
 	
 	// url: /accounts/:id
 	this.show = stack(loadAccountOwners, allowOwnersAndAdmins, function show(req, res, next){
-		var namespace = app.namespaceController.getNamespaceForAccount(req.account.name);
+		var namespace = app.namespacesController.getNamespaceForAccount(req.account.name);
 
 		res.render('accounts/show', locals(req, {
 			jquery: true,

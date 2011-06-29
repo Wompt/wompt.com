@@ -17,23 +17,23 @@ function App(options){
 	this.accountManager = new wompt.AccountManager();
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
-	this.namespaceController = new wompt.controllers.Namespace(this);
+	this.namespacesController = new wompt.controllers.Namespace(this);
 
 	// default namespace
-	this.channels =	this.namespaceController.createPublicNamespace('chat', {
+	this.channels =	this.namespacesController.createPublicNamespace('chat', {
 		logged: true,
 		allowIframe: true,
 		allowAnonymous: true
 	}).manager;
 
 	// other namespaces
-	this.namespaceController.createPublicNamespace('unlisted', {
+	this.namespacesController.createPublicNamespace('unlisted', {
 		logged: true,
 		allowAnonymous: false,
 		allowOps: true
 	});
 
-	this.namespaceController.createPublicNamespace('mod', {
+	this.namespacesController.createPublicNamespace('mod', {
 		logged: true,
 		allowAnonymous: true,
 		allowOps: true
@@ -54,7 +54,7 @@ function App(options){
 	this.accountsController = new wompt.controllers.Accounts(this);
 	this.accountsController.register();
 	this.adminController    = new wompt.controllers.Admin(this);
-	this.namespaceController.register();
+	this.namespacesController.register();
 	this.profileController  = new wompt.controllers.Profile(this);
 	this.profileController.register();
 
@@ -171,7 +171,7 @@ App.prototype = {
 
 			var connector = me.client_connectors.add({
 				meta_user:meta_user,
-				namespace:me.namespaceController.getPublicNamespace('chat').manager,
+				namespace:me.namespacesController.getPublicNamespace('chat').manager,
 				token: token
 			});
 			
