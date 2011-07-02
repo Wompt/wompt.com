@@ -67,6 +67,10 @@ function AccountsController(app){
 		}
 		
 		req.account.role = body.role.toString();
+		if(req.account.hasFeature('sso')){
+			// TODO add some validation here
+			req.account.profile_url_template = body.profile_url_template;
+		}
 		
 		req.account.save(function(){
 			res.redirect(redirect_to);

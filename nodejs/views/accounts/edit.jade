@@ -8,16 +8,27 @@ form(action='/accounts/' + w.account.name, method='POST')
 		a.button.minimal(href='/accounts/' + w.account.name) Cancel
 	table#account_info.vertical.top_aligned
 		tr
-			th.top_aligned
+			th
 				label(for='name') Name
 			td
 				input#name(name='name', disabled, value=w.account.name)
 		tr
-			th.top_aligned
+			th
 				label(for='domains') Domains
 				.note one per line
 			td
 				textarea#domains(name='domains')= w.account.domains.join("\n")
+		- if(w.account.hasFeature('sso'))
+			tr
+				th
+					label(for='profile_url_template') User Profile URL template
+				td
+					input#profile_url_template(name='profile_url_template', value=w.account.profile_url_template)
+					span.note &nbsp;Example:&nbsp;
+						span.code http://example.com/users/[name]
+					.note A Url template for users profile pages. "[name]" will be 
+						| replaced by the users name from the URL parameters of the
+						| embedded iframe.
 		- if(w.user.doc.is_admin())
 			tr.admin
 				th.top_aligned
@@ -32,4 +43,4 @@ form(action='/accounts/' + w.account.name, method='POST')
 					br
 					| '#{w.account.role}' role
 				td
-					#features.code(name='features', style='width:500px;height:200px;')!= JSON.stringify(w.account.featureSet())
+					#features.code(name='features')!= JSON.stringify(w.account.featureSet())

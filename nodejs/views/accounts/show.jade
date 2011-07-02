@@ -22,6 +22,10 @@ table#account_info.vertical
 		td
 			- each domain in w.account.domains
 				.domain= domain
+	- if(w.account.hasFeature('sso'))
+		tr
+			th User Profile URL template
+			td.code= w.account.profile_url_template
 	tr
 		th Owners
 		td
