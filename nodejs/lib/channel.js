@@ -12,7 +12,8 @@ function Channel(config, callback){
 	this.namespace = config.namespace;
 	this.config = config;
 	this.messages = new wompt.MessageList(this);
-	this.clients = new wompt.ClientPool();
+	// Passing in the parent ClientPool that events will get bubbled to
+	this.clients = new wompt.ClientPool(config.channelManager.clients);
 	this.opsUsers = {};
 	
 	// Called from the context of the client

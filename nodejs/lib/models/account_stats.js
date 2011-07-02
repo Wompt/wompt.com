@@ -8,6 +8,8 @@ var AccountStats = new mongoose.Schema({
 	,t                 : Date
 	,peak_connections  : Number
 	,connections       : Number
+	,msgs_in           : Number
+	,msgs_out          : Number
 });
 
 AccountStats.index({t: -1, frequency: 1});

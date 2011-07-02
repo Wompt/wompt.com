@@ -11,6 +11,8 @@ function NamespaceStatsPreparer(channelManager){
 		connections        : connections
 		,peak_connections  : peakConnections
 		,t                 : timeStamp
+		,msgs_in           : messagesIn
+		,msgs_out          : messagesOut
 	};
 
 	this.prepare = function(done){
@@ -31,7 +33,15 @@ function NamespaceStatsPreparer(channelManager){
 	
 	function timeStamp(done){
 		done(null, new Date());
-	}	
+	}
+	
+	function messagesOut(done){
+		done(null, stats.msgs_out);
+	}
+
+	function messagesIn(done){
+		done(null, stats.msgs_in);
+	}
 }
 
 // Emits "stats" events at regular intervals and passes an object with statistics
