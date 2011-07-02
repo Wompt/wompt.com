@@ -54,9 +54,13 @@ function AccountsController(app){
 		var redirect_to = base_url + '/' + req.account.name,
 		body = req.body;
 		
-		if(req.user.is_admin() && body.add_owner_id)
-			req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
-
+		if(req.user.is_admin()){
+			if(body.add_owner_id)
+				req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
+			
+			req.account.role = body.role.toString();
+		}
+		
 		if(body.domains){
 			var domains = body.domains.split(/[\n\r]+/).filter(function(domain){
 				// just test for *.*
@@ -66,7 +70,6 @@ function AccountsController(app){
 			req.account.domains = domains;
 		}
 		
-		req.account.role = body.role.toString();
 		if(req.account.hasFeature('sso')){
 			// TODO add some validation here
 			req.account.profile_url_template = body.profile_url_template;
