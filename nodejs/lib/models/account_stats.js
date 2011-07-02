@@ -10,6 +10,7 @@ var AccountStats = new mongoose.Schema({
 	,connections       : Number
 	,msgs_in           : Number
 	,msgs_out          : Number
+	,new_conn          : Number
 });
 
 AccountStats.index({t: -1, frequency: 1});

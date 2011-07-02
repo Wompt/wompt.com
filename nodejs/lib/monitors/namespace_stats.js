@@ -13,6 +13,7 @@ function NamespaceStatsPreparer(channelManager){
 		,t                 : timeStamp
 		,msgs_in           : messagesIn
 		,msgs_out          : messagesOut
+		,new_conn          : newConnections
 	};
 
 	this.prepare = function(done){
@@ -41,6 +42,10 @@ function NamespaceStatsPreparer(channelManager){
 
 	function messagesIn(done){
 		done(null, stats.msgs_in);
+	}
+	
+	function newConnections(done){
+		done(null, stats.new_connections);
 	}
 }
 

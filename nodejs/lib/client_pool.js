@@ -122,6 +122,7 @@ function ClientPoolStats(clientPool){
 	clientPool.on('added', function(){
 		if(clientPool.count > self.max)
 			self.max = clientPool.count;
+		self.new_connections++;
 	})
 	
 	clientPool.on('msgs_out', function(count){
@@ -137,6 +138,7 @@ ClientPoolStats.prototype.reset = function(){
 	this.max = this.clients.count;
 	this.msgs_in = 0;
 	this.msgs_out = 0;
+	this.new_connections = 0;
 }
 
 exports.ClientPool = ClientPool;
