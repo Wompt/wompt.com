@@ -34,7 +34,9 @@
 			data.addColumn('number', 'Peak Connections');
 			
 			for(var i=0;i<stats.t.length; i++){
-				var t = new Date(stats.t[i]);
+				// our timestamps are likely +- 10ms away from dead-on
+				// add 5 seconds to ensure times don't round DOWN to the next minute (2:59:59 pm)
+				var t = new Date(stats.t[i] + 5000); 
 				data.addRow([
 					Util[time_format || 'time'](t),
 					stats.peak_connections[i]
