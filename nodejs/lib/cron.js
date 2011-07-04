@@ -147,23 +147,27 @@ Cron.time = {
 	},
 	
 	roundToNext: function roundToNext(period, start, round_func){
+		return this.roundTo(period, start, round_func, true);
+	},
+	
+	roundTo: function roundTo(period, start, round_func, next){
 		var t = start || new Date();
 		round_func = Cron.math[round_func || 'round'];
 		
 		switch(period){
 			case 'second':
-				t.setUTCMilliseconds(round_func(t.getUTCMilliseconds(), 1000) + 1000);
+				t.setUTCMilliseconds(round_func(t.getUTCMilliseconds(), 1000) + (next ? 1000 : 0));
 				break;
 			case 'minute':
-				t.setUTCSeconds(round_func(t.getUTCSeconds(), 60) + 60);
+				t.setUTCSeconds(round_func(t.getUTCSeconds(), 60) + (next ? 1000 : 0));
 				this.beginningOf(t, 'minute');
 				break;
 			case 'hour':
-				t.setUTCMinutes(round_func(t.getUTCMinutes(), 60) + 60);
+				t.setUTCMinutes(round_func(t.getUTCMinutes(), 60) + (next ? 1000 : 0));
 				this.beginningOf(t, 'hour');
 				break;
 			case 'day':
-				t.setUTCHours(round_func(t.getUTCHours(), 24) + 24);
+				t.setUTCHours(round_func(t.getUTCHours(), 24) + (next ? 1000 : 0));
 				this.beginningOf(t, 'day');
 				break;			
 		}

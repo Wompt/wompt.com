@@ -1,0 +1,7 @@
+- each provider in w.config.auth.providers
+	- var auth = w.profileUser.authentication_for(provider.code)
+	- if(!auth)
+		.provider.missing
+			a.link(href='/auth/' + provider.code, class='popup', title="Link your " + provider.name + " account")
+				.title= provider.name
+				div(class="logo missing " + provider.code) ?
