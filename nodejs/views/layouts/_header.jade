@@ -4,7 +4,7 @@
 			span.connection_status
 			&nbsp;|
 		- if(w.authenticated)
-			a(href=w.user.profile_url()) #{w.user.doc.email || w.user.doc.name}
+			a(href="/profile") #{w.user.doc.email || w.user.doc.name}
 			| &nbsp;|&nbsp;
 			a(href="/user/sign_out", title="Sign out of Wompt", class='same_window') sign out
 		- else

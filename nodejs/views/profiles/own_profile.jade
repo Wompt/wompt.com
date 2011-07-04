@@ -1,0 +1,9 @@
+link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", type="text/css", media="screen")
+.buffer
+	.profile.plainpage
+		#name= w.profileUser.name
+		a(href='/users/' + w.profileUser._id) public version
+		.providers
+			!=partial('_public_profiles', {locals:{isOwnProfile:true}})
+			!=partial('_missing_profiles')
+			.clear

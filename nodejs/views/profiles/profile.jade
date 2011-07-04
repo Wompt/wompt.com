@@ -1,0 +1,7 @@
+link(href="/css/profile_"+cacheTimeStamps.profile_css+".css", rel="stylesheet", type="text/css", media="screen")
+.buffer
+	.profile.plainpage
+		#name= w.profileUser.name
+		.providers
+			!=partial('_public_profiles', {locals:{isOwnProfile:false}})
+			.clear
