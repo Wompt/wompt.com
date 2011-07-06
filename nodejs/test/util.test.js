@@ -1,7 +1,7 @@
-var Util = require('../lib/util'),
-node_util = require('util'),
-assert = require('assert'),
-vows = require('wompt_dependencies').vows;
+var W = require('./test_helper'),
+Util = require('../lib/util'),
+assert = W.assert,
+vows = W.vows;
 
 var suite = vows.describe('Util module');
 
