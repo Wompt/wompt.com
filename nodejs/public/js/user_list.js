@@ -114,7 +114,7 @@ function UserListUI(ul, container, top){
 			return template.replace(/\[([^\]]+)\]/, function(str, prop){
 				return user[prop];
 			})
-		} else return '/users/';
+		} else return '/users/' + user.id;
 	}
 	
 	function addAnonymous(user){
