@@ -28,6 +28,7 @@ Util.mergeCopy = function(A, B, depth) {
 }
 
 Util.chop = function(str){
+	if(!str) return str;
 	str = str.toString();
 	if(str.length == 0) return str;
 	return str.substr(0, str.length - 1);
