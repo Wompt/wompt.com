@@ -1,20 +1,23 @@
 var Util = require("./util");
 
-function RateLimiter(count, span){
+function RateLimiter(allowed, within){
 	var events = [];
 	
 	return {
 		another: function(){
 			var now = Date.now();
-			if(events.length > 0 && (now - events[0]) < span)
+			if(events.length == allowed && (now - events[0]) < within)
 				return false;
 			
 			events.push(now);
-			if(events.length > count)
-				events.pop();
+			if(events.length > allowed)
+				events.shift();
 				
 			return true;
-		}
+		},
+		
+		allowed: allowed,
+		within: within
 	}
 }
 
