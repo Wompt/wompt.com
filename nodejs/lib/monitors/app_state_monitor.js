@@ -43,15 +43,14 @@ function AppStatePreparer(app){
 	function channelCounts(done){
 		var inuse=0, loaded=0;
 		
-		var namespaces = app.namespaces;
+		var namespaces = app.namespacesController;
 		
-		for(var namespace in namespaces){
-			var channels = namespaces[namespace];
+		namespaces.eachNamespace(function(channels){
 			loaded += channels.count;
 			channels.each(function(chan){
 				if(chan.clients.count > 0) inuse++;
 			});
-		}
+		});
 
 		var result = {
 			loaded: loaded

@@ -41,7 +41,9 @@ h1, h2, h3, h4 {
 	font-weight: bold; 	
 }
 
-b { font-weight:bold; }
+b, th{
+	font-weight:bold;
+}
 
 p {
 	margin-top: .5em;
@@ -69,4 +71,16 @@ tt{
 }
 strong{
 	font-weight:bold;
+}
+
+td.top_aligned{
+	vertical-align:top;
+}
+
+.note{
+	color:#aaa;
+	font-size:14px;
+}
+.admin{
+	background-color:rgba(239, 111, 47, .2);
 }

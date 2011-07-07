@@ -12,11 +12,15 @@ function Channel(config, callback){
 	this.namespace = config.namespace;
 	this.config = config;
 	this.messages = new wompt.MessageList(this);
-	this.clients = new wompt.ClientPool();
+	// Passing in the parent ClientPool that events will get bubbled to
+	this.clients = new wompt.ClientPool(config.channelManager.clients);
 	this.opsUsers = {};
 	
 	// Called from the context of the client
 	this._message_from_client = function(msg){
+		// It's less memory expensive to listen for this event here than in the
+		// client pool, since we have one client-pool per user
+		channel.clients.onMessageIn(this, msg);
 		msg.from_client = this;
 		channel.receive_message(msg);
 	}
@@ -80,10 +84,10 @@ var proto = {
 	send_initial_data: function(client, joinMsg){
 		client.bufferSends(function(){
 			if(!this.messages.is_empty())
-				client.send({action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
+				this.clients.sendToOne(client,{action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
 				
 			this.send_ops(client);
-			client.send({action: 'who',	users: this.get_user_list(client)});
+			this.clients.sendToOne(client,{action: 'who',	users: this.get_user_list(client)});
 		}, this);
 	},
 	
@@ -94,9 +98,9 @@ var proto = {
 		if(ops){
 			// If a user comes back before the delayed ops release, clear the timer
 			if(ops && ops.timer) clearTimeout(ops.timer);
-			client.send({action: 'ops', kick: true});
+			this.clients.sendToOne(client,{action: 'ops', kick: true});
 		}else{
-			client.send({action: 'ops', kick: false});
+			this.clients.sendToOne(client,{action: 'ops', kick: false});
 		}
 	},
 	

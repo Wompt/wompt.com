@@ -28,6 +28,7 @@ Util.mergeCopy = function(A, B, depth) {
 }
 
 Util.chop = function(str){
+	if(!str) return str;
 	str = str.toString();
 	if(str.length == 0) return str;
 	return str.substr(0, str.length - 1);
@@ -64,7 +65,24 @@ Util.fs = {
 			var exists = !!err;
 			callback(data, exists);
 		});
- 	}
+ 	},
+	
+	makeDirs: function(sure_part, unsure_part, mode, callback){
+		var dirs = unsure_part.split('/');
+		var currentDir = sure_part;
+		
+		function makeNextDir(){
+			currentDir += '/' + dirs.shift();
+			fs.mkdir(currentDir, mode, function(err){
+				if(err) return callback(err);
+				if(dirs.length > 0)
+					makeNextDir();
+				else
+					callback();
+			});
+		}
+		makeNextDir();
+	}
 };
 
 // Allows easy setup of a chain of connect-style middlewares
@@ -115,13 +133,10 @@ Util.curry = function(fn, args){
 	}
 }
 
-// extracts the first part of the URL before the second slash
-// "/chat/room_name" -> "chat"
-// stores it in req._first_url_part
-Util.extractFirstUrlPart = function (req){
-	if(req._first_url_part) return req._first_url_part;
+// Splits the url by '/'
+// stores it in req._url_parts
+Util.urlParts = function (req){
+	if(req._url_parts) return req._url_parts;
 	
-	var slash_index = req.url.indexOf('/', 1);
-	if(slash_index < 0) slash_index = req.url.length;
-	return req._first_url_part = slash_index && req.url.substr(1, slash_index-1);
+	return req._url_parts = req.url.split('/');
 }

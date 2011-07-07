@@ -91,7 +91,35 @@ var assetManagerGroups = {
 			, '/public/js/sign_in.js'
 			, '/public/js/search.js'
 		]
-	}), 'all_css': mc(defaultOptions,{
+	}),
+	
+	'accounts_js': mc(defaultOptions,{
+		'route': /\/js\/accounts_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/public/external/bootstrap.js'
+			, '/public/external/events.js'			
+			, '/public/js/ui.js'
+			, '/public/js/header_tools.js'
+			, '/public/js/account.js'
+		]
+	}),
+	
+	'analytics_js': mc(defaultOptions,{
+		'route': /\/js\/analytics_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/public/js/util.js',
+			'/public/js/analytics.js'
+		]
+	}),
+	
+
+/* ======  CSS Files  ======= */
+	
+	'all_css': mc(defaultOptions,{
 		'route': /\/css\/all_[0-9]+\.css/
 		, 'path': pub + '/css/'
 		, 'dataType': 'css'
@@ -100,6 +128,7 @@ var assetManagerGroups = {
 			, 'base.css'
 			, 'black_fade.css'
 			, 'buttons.css'
+			, 'embed_form.css'
 			, 'landing.css'
 			, 'header.css'
 			, 'footer.css'

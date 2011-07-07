@@ -17,23 +17,23 @@ function App(options){
 	this.accountManager = new wompt.AccountManager();
 	this.clients = new wompt.ClientPool();
 	this.express = this.create_express_server();
-	this.namespaceController = new wompt.controllers.Namespace(this);
+	this.namespacesController = new wompt.controllers.Namespace(this);
 
 	// default namespace
-	this.channels =	this.namespaceController.createNamespace('chat', {
+	this.channels =	this.namespacesController.createPublicNamespace('chat', {
 		logged: true,
 		allowIframe: true,
 		allowAnonymous: true
-	});
+	}).manager;
 
 	// other namespaces
-	this.namespaceController.createNamespace('unlisted', {
+	this.namespacesController.createPublicNamespace('unlisted', {
 		logged: true,
 		allowAnonymous: false,
 		allowOps: true
 	});
 
-	this.namespaceController.createNamespace('mod', {
+	this.namespacesController.createPublicNamespace('mod', {
 		logged: true,
 		allowAnonymous: true,
 		allowOps: true
@@ -49,16 +49,12 @@ function App(options){
 		monitor: this.appStateMonitor
 	}));
 	
-	this.accountManager.loadEach(function(account){
-		self.namespaceController.createNamespaceForAccount(account);
-	});
-
 	this.searchController    = new wompt.controllers.Search(this);
 	this.searchController.register();
 	this.accountsController = new wompt.controllers.Accounts(this);
 	this.accountsController.register();
 	this.adminController    = new wompt.controllers.Admin(this);
-	this.namespaceController.register();
+	this.namespacesController.register();
 	this.profileController  = new wompt.controllers.Profile(this);
 	this.profileController.register();
 
@@ -94,7 +90,6 @@ App.prototype = {
 				,'/google8a88ebb03a6df8aa.html': true
 				,'/robots.txt':true
 				,'/google5099d06e90a418ce.html': true
-				,'/fb_cross_domain.html': true
 			}
 			exp.use(function checkStaticAndStrip(req,res,next){
 				var url = req.url;
@@ -138,20 +133,8 @@ App.prototype = {
 			,'/contact_us'
 		]);
 		
-		exp.get("/re-authenticate", function(req, res, next){
-			if(req.meta_user){
-				var token = wompt.Auth.get_or_set_token(req, res);
-				var connector = me.client_connectors.add({
-					meta_user:req.meta_user,
-					token: token
-				});
-				res.send({connector_id:connector.id, version_hash:wompt.env.constants.version_hash});
-			}else next();
-		});
-		
 		exp.get("/", landingPage);
 
-		
 
 		exp.post("/", function(req, res){
 			wompt.Auth.get_or_set_token(req, res);
@@ -188,7 +171,7 @@ App.prototype = {
 
 			var connector = me.client_connectors.add({
 				meta_user:meta_user,
-				namespace:me.channels,
+				namespace:me.namespacesController.getPublicNamespace('chat').manager,
 				token: token
 			});
 			
@@ -196,7 +179,6 @@ App.prototype = {
 				locals: me.standard_page_vars(req, {
 					app:me,
 					channel: 'general',
-					namespace: 'chat',
 					connector_id: connector.id,
 					ui:{},
 					popout: '/chat/general',
@@ -262,7 +244,7 @@ App.prototype = {
 					return client._onDisconnect();
 				}
 				
-				var namespace = connector.namespace || app.namespaces[data.namespace],
+				var namespace = connector.namespace,
 				    user      = connector.meta_user || new wompt.MetaUser();
 						
 				client.user = user;

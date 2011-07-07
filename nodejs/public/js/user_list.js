@@ -82,7 +82,7 @@ function UserListUI(ul, container, top){
 			link = $('<span>');
 		}else{
 			link = $('<a>');
-			link.attr('href','/users/' + user.id);		
+			link.attr('href', profileUrl(user));		
 		}
 		
 		name_div.attr({
@@ -106,6 +106,15 @@ function UserListUI(ul, container, top){
 		user_divs[user.id] = name_div;
 		
 		self.emit('new_user', user, name_div);
+	}
+	
+	function profileUrl(user){
+		var template = UI.profileUrlTemplate;
+		if(template){
+			return template.replace(/\[([^\]]+)\]/, function(str, prop){
+				return user[prop];
+			})
+		} else return '/users/' + user.id;
 	}
 	
 	function addAnonymous(user){

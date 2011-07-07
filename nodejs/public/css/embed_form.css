@@ -1,0 +1,69 @@
+#embed_form{
+	margin:0 15px;
+	font-size:12px;
+}
+
+#embed_form #code{
+	position:relative;
+	margin:5px;
+	padding:10px;
+	text-align:left;
+	color:#444;
+	background:white;
+}
+
+#embed_form input,
+#embed_form .output{
+	margin-right:10px;
+	padding:2px 4px;
+	font-size:12px;
+	font-family:Consolas, "Courier New", monospace;
+}
+
+#embed_form > #height,
+#embed_form > #width{
+	width:40px;	
+}
+
+#embed_form > #color{
+	width:50px;
+}
+
+#embed_form > #room_name{
+	width:140px;
+}
+
+
+/* The table-ized version of the embed form */
+
+table#embed_form {
+	table-layout: fixed;
+	margin:0;
+}
+
+table#embed_form td,
+table#embed_form th{
+	vertical-align:middle;
+	padding:1px;
+}
+
+table#embed_form .label{
+	text-align:right;
+	width:100px;
+	padding:.45em 2px;
+	border:0;
+}
+
+table#embed_form input {
+	width:150px;
+}
+
+table#embed_form #code {
+	margin:0;
+	word-break:break-all;	
+}
+
+table#embed_form h4{
+	margin-bottom:.3em;
+}
+

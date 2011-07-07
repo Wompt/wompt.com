@@ -8,12 +8,12 @@ function ProfileController(app){
 	this.register = function(){
 		express.get("/users/:id", renderProfile);
 		express.post("/profile", changeSettings);
-		express.get("/profile", redirectToPublicProfile);		
+		express.get("/profile", ownProfilePage);		
 	}
 	
 	function renderProfile(req, res){
 		if(req.params.id && req.user && req.meta_user.id() == req.params.id){
-			//User record is already loaded but auth middleware, no need to load again
+			//User record is already loaded by auth middleware, no need to load again
 			profilePage(req, res, req.user);
 		}
 		else{
@@ -45,10 +45,23 @@ function ProfileController(app){
 	function profilePage(req, res, user){
 		if(!user) return res.send("", 404);
 		
-		res.render('profile', {
+		res.render('profiles/profile', {
 			locals: app.standard_page_vars(req, {
 				app:app,
 				profileUser: user,
+				jquery: true,
+				page_js: 'profile'
+			})
+		});
+	}
+	
+	function ownProfilePage(req, res){
+		if(!req.user) return res.send("", 404);
+		
+		res.render('profiles/own_profile', {
+			locals: app.standard_page_vars(req, {
+				app:app,
+				profileUser: req.user,
 				jquery: true,
 				page_js: 'profile'
 			})

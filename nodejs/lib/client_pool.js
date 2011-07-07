@@ -1,7 +1,8 @@
 var EventEmitter = require('events').EventEmitter;
 
-function ClientPool(){
+function ClientPool(parentPool){
 	var client_pool = this;
+	if(parentPool) this.parent = parentPool;
 	this.list = {};
 	this.users = {};
 	this.userCount = 0;
@@ -74,7 +75,7 @@ proto.other_clients_from_same_user = function(except){
 }
 
 proto.broadcast = function(msg, options){
-	var except_client, only;
+	var except_client, only, msg_count=0;
 	if(options){
 		if(options.meta_data) // options is a Client to except
 			except_client = options;
@@ -82,6 +83,7 @@ proto.broadcast = function(msg, options){
 			only = options.only;
 			if(options.first){
 				options.first.send(msg);
+				msg_count++;
 				except_client = options.first;
 			}
 		}
@@ -92,22 +94,51 @@ proto.broadcast = function(msg, options){
 		if(except_client && (except_client == client)) continue;
 		if(only && !only(client)) continue;
 		client.send(msg);
+		msg_count++;
 	}
+	this.bubbleEmit('msgs_out', msg_count);
 };
+
+proto.sendToOne = function sendToOne(client, msg){
+	client.send(msg);
+	this.bubbleEmit('msgs_out', 1);
+}
+
+proto.onMessageIn = function onMessageIn(client, msg){
+	this.bubbleEmit('msgs_in', 1);
+}
+
+proto.bubbleEmit = function bubbleEmit(){
+	this.emit.apply(this, arguments);
+	if(this.parent) this.parent.emit.apply(this.parent, arguments);
+}
+
 
 function ClientPoolStats(clientPool){
 	var self = this;
-	this.max = clientPool.count;
 	this.clients = clientPool;
+	this.reset();
 	
 	clientPool.on('added', function(){
 		if(clientPool.count > self.max)
 			self.max = clientPool.count;
+		self.new_connections++;
+	})
+	
+	clientPool.on('msgs_out', function(count){
+		self.msgs_out += count;
+	})
+
+	clientPool.on('msgs_in', function(count){
+		self.msgs_in += count;
 	})
 }
 
 ClientPoolStats.prototype.reset = function(){
 	this.max = this.clients.count;
+	this.msgs_in = 0;
+	this.msgs_out = 0;
+	this.new_connections = 0;
 }
 
 exports.ClientPool = ClientPool;

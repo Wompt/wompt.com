@@ -1,16 +1,31 @@
+script(type='text/javascript')
+	var baseUrl = "#{w.account.baseUrl()}";
 .title
 	h2 #{w.account.name}
-table.vertical
+.right
+	a.button.minimal(href='/accounts/' + w.account.name + '/edit') Edit
+table#account_info.vertical
 	tr
 		th Current Connections
-		td #{w.namespace.clients.count}
-	tr
-		th Secret
-		td
-			span.code #{w.account.secret}
+		td #{w.namespace ? w.namespace.clients.count : 0} - 
+			a(href='/accounts/' + w.account.name + '/analytics') analytics
+	- if(w.account.hasFeature('sso'))
+		tr
+			th Secret
+			td
+				span.code #{w.account.secret}
 	tr
 		th Base Url
-		td.code http://wompt.com/#{w.account.name}/
+		td.code= w.account.baseUrl()
+	tr
+		th Domains
+		td
+			- each domain in w.account.domains
+				.domain= domain
+	- if(w.account.hasFeature('sso'))
+		tr
+			th User Profile URL template
+			td.code= w.account.profile_url_template
 	tr
 		th Owners
 		td
@@ -18,6 +33,18 @@ table.vertical
 				a(href='/users/' + owner.id)= owner.name
 				br
 			- if(w.user.doc.is_admin())
-				form(action='/accounts/' + w.account.name, method="POST")
+				form(action='/accounts/' + w.account.name, method="POST").admin
 					label(for='add_owner') Add by ID:
 					input(type='text', id='add_owner', name='add_owner_id')
+	- if(!w.account.hasFeature('sso'))
+		tr.spacer
+			th
+		tr
+			th Embedded Rooms
+			td
+				h4 As many rooms as you like on any number of pages, no rules.
+				!=partial('shared/_embed_code_form_table')
+	- if(w.user.doc.is_admin())
+		tr.admin
+			th Role
+			td= w.account.role

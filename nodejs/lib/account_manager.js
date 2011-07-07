@@ -19,8 +19,10 @@ var proto = {
 	get: function(name, callback){
 		var account = this.peek(name);
 		
-		if(account)
+		if(account){
+			account.touch();
 			callback(null, account);
+		}
 		else
 			this.load(name, callback);
 	},
@@ -39,6 +41,7 @@ var proto = {
 	
 	_put: function(account){
 		this.accounts[account.name] = account;
+		account.touch();
 		this.count++;
 	},
 	

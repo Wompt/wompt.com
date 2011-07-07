@@ -196,43 +196,6 @@
 	margin-top:15px;
 }
 
-#embed_form #code{
-	position:relative;
-	margin:5px;
-	padding:10px;
-	text-align:left;
-	color:#444;
-	background:white;
-}
-
-#embed_form{
-	margin:0 15px;
-	font-size:12px;
-}
-
-#embed_form input,
-#embed_form .output{
-	margin-right:10px;
-	border-radius:4px;
-	border:none;
-	border:1px solid #aaa;
-	padding:2px 4px;
-	font-family:Consolas, "Courier New", monospace;
-}
-
-#embed_form > #height,
-#embed_form > #width{
-	width:40px;	
-}
-
-#embed_form > #color{
-	width:50px;
-}
-
-#embed_form > #room_name{
-	width:140px;
-}
-
 #landing .embed{
 	position:relative;
 	height:250px;

@@ -1,0 +1,19 @@
+.title
+	.left
+		h3 Analytics
+	h2 #{w.account.name}
+h3 Peak Connections
+script(type="text/javascript", src="https://www.google.com/jsapi")
+script(type="text/javascript")
+	google.load("visualization", "1", {packages:["corechart", "table"]});
+	var callbacks=2;
+	function waitForBoth(){
+		if(--callbacks == 0) initCharts();
+	}
+	google.setOnLoadCallback(waitForBoth());
+	var stats = !{JSON.stringify(w.stats)};
+h4 Per Hour - Last 24 Hours
+#chart_hourly (no data)
+h4 Per Day - Last 30 Days
+#chart_daily (no data)
+!{assetHelpers.assetGroupTag('analytics', w.user && w.user.doc)}

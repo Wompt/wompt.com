@@ -16,6 +16,7 @@ e.ParameterAuthentication = require("./parameter_authentication");
 e.mongoose       = require('./db');
 e.MetaUser       = require("./meta_user");
 e.MetaUserManager= require("./meta_user_manager");
+e.roles          = require("./roles");
 e.Account        = require("./models/account");
 e.AccountManager = require("./account_manager");
 e.User           = require("./models/user");
@@ -29,15 +30,17 @@ e.Helpers        = {
 e.App            = require("./app");
 e.middleware     = {
 };
-// The above model references should be phased out
+// TODO: The above model references should be phased out in preference of these
 e.models         = {
 	 Account:         require("./models/account")
 	,User:            require("./models/user")
 	,Room:            require("./models/room")
+	,AccountStats:    require("./models/account_stats")
 }
 e.monitors       = {
 	 PopularChannels: require('./monitors/popular_channels.js')
 	,AppState:        require('./monitors/app_state_monitor.js')
+	,NamespaceStats:  require('./monitors/namespace_stats.js')
 }
 e.loggers        = {
 	 ChannelLogger:   require('./loggers/channel_logger.js')

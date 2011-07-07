@@ -1,5 +1,16 @@
-h3 New Account
 form(action='/accounts', method='POST')
-	label(for='name') Name
-	input#name(name='name')
-	button(type='submit') Create Account
+	h3 New Account &nbsp;
+		button.minimal(type='submit') Create
+	table.top_aligned
+		tr
+			td.top_aligned
+				label(for='name') Name
+			td
+				input#name(name='name')
+		tr
+			td.top_aligned
+				label(for='role') Role
+			td
+				select#role(name='role')
+					- for(var role in w.roles)
+						option(value=role)= role

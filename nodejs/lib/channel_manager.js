@@ -38,6 +38,7 @@ var proto = {
 		var channel = new wompt.Channel({
 				name: name,
 				namespace: this.options.namespace,
+				channelManager: this,
 				ops: this.options.allowOps
 			}, function(channel){
 			callback(channel);

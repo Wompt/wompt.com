@@ -20,8 +20,9 @@ UI.once('init',function(){
 	
 	function updateCode(){
 		var code = [
-		'<iframe src="http://wompt.com/chat/',
-			encodeURIComponent(form.find('#room_name').val() || channel),
+		'<iframe src="',
+			window.baseUrl || 'http://wompt.com/chat/',
+			encodeURIComponent(form.find('#room_name').val() || window.channel || ''),
 		'?iframe=1#c=',
 			form.find('#color').val(),
 		'" style="width:',
