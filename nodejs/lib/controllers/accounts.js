@@ -57,8 +57,9 @@ function AccountsController(app){
 		if(req.user.is_admin()){
 			if(body.add_owner_id)
 				req.account.owner_ids.push(wompt.mongoose.Types.ObjectId.fromString(body.add_owner_id));
-			
-			req.account.role = body.role.toString();
+		
+			if(body.role)
+				req.account.role = body.role.toString();
 		}
 		
 		if(body.domains){
