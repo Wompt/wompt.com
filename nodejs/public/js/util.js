@@ -1,3 +1,6 @@
+// To support using nodejs modules that do module.exports = ...
+var module = {};
+
 var Util = {
 Text: (function Text(){
 	var http_matcher = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
