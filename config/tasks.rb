@@ -21,7 +21,7 @@ namespace :deploy do
   end
   
   def apps
-    ["#{env_prefix}wompt", "#{env_prefix}wompt_auth"]
+    ["#{env_prefix}wompt_auth", "#{env_prefix}wompt"]
   end
   
   def env_prefix
