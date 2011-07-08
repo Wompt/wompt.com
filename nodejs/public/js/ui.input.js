@@ -2,7 +2,9 @@ UI.once('init', function(){
 	var previousLines
 	,max_input_height = 6
 	,min_input_height = 1
+	,hit_limit = false
 	,input = $('#message');
+	var limiter = new RateLimiter(3, 8000);
 	
 	function keyDown(e){
 		if(!e.shiftKey && e.which == 13) e.preventDefault();
@@ -11,6 +13,15 @@ UI.once('init', function(){
 	function keyUp(e){
 		if(IO.socket.connected && e.which == 13 && !e.shiftKey && !e.stop){
 			var message = $.trim(input.val());
+
+			if(!limiter.another()){
+				if(!hit_limit)
+					UI.Messages.system("Too fast, slow down.");
+				hit_limit = true;
+				return;
+			}else{
+				hit_limit = false;
+			}
 			
 			if(message.length > WOMPT.messages.max_length){
 				alert("Messages are limited to "+ WOMPT.messages.max_length + " characters.");
