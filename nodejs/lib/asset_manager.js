@@ -67,6 +67,7 @@ var assetManagerGroups = {
 			, '/public/js/links_in_new_tab.js'
 			, '/public/js/landing.js'
 			, '/public/js/header_tools.js'
+			, '/public/js/rate_limit.js'
 		]
 	}), 'profile_js': mc(defaultOptions,{
 		'route': /\/js\/profile_[\d]+.js/
