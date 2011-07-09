@@ -26,6 +26,8 @@ UI.once('init', function(){
 			.forEach(function(line){
 				var wrap = $('<div class="wrap">');
 				first = first || wrap; 
+				//todo check for user element that enables or disables profanity
+				line = Util.Text.filterProfanity(line);
 				el.append(linkifyAndInsert(wrap, line));
 			});
 		
