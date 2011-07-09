@@ -4,7 +4,7 @@ UI.once('init', function(){
 	,min_input_height = 1
 	,hit_limit = false
 	,input = $('#message');
-	var limiter = new RateLimiter(3, 8000);
+	var limiter = new RateLimiter(5, 15000);
 	
 	function keyDown(e){
 		if(!e.shiftKey && e.which == 13) e.preventDefault();
