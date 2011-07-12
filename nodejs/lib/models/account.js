@@ -10,6 +10,9 @@ var Account = new mongoose.Schema({
 	,'secret'         : {type: String, 'default': generateSecret}
 	,'role'           : String
 	,'profile_url_template': String
+	
+	,'useWordFilter'  : Boolean
+	,'wordFilter'     : [String]
 });
 
 // number defines index sort order (1=asc)

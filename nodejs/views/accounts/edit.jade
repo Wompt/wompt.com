@@ -44,3 +44,10 @@ form(action='/accounts/' + w.account.name, method='POST')
 					| '#{w.account.role}' role
 				td
 					#features.code(name='features')!= JSON.stringify(w.account.featureSet())
+		th
+			label(for='word_filter') Word filter
+		td
+			input#use_word_filter(type='checkbox', name='use_word_filter', value='true', checked=w.account.useWordFilter)
+			label(for='use_word_filter') Use word filter
+			.note each word or partial word that should appear filtered, separated by spaces.
+			textarea#word_filter(name='word_filter')= w.account.wordFilter.join(" ");

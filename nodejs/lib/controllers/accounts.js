@@ -76,6 +76,9 @@ function AccountsController(app){
 			req.account.profile_url_template = body.profile_url_template;
 		}
 		
+		req.account.useWordFilter = (body.use_word_filter == 'true');
+		req.account.wordFilter = (body.word_filter || '').replace(/[^\w\s]+/g, '').split(/\s+/);
+		
 		req.account.save(function(){
 			res.redirect(redirect_to);
 		});

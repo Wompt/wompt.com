@@ -48,3 +48,8 @@ table#account_info.vertical
 		tr.admin
 			th Role
 			td= w.account.role
+	tr
+		th
+			Word Filter
+		td= (w.account.useWordFilter ? "Using a" : "No") + " word filter"
+			
