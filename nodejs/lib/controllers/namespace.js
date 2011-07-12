@@ -140,7 +140,8 @@ function NamespaceController(app){
 						hidePopout: features.sso,
 						hideSocialLinks: features.sso,
 						hideProfileLinks: !!(!req.account.profile_url_template && features.sso),
-						profileUrlTemplate: features.sso && req.account.profile_url_template
+						profileUrlTemplate: features.sso && req.account.profile_url_template,
+						wordFilter: req.account.useWordFilter && req.account.wordFilter
 					}
 				};
 			}

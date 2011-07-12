@@ -2,6 +2,7 @@ script(type='text/javascript')
 	var channel = '#{w.channel}',
 	connector_id  = '#{w.connector_id}',
 	WOMPT = !{w.config.constantsJSON},
+	UiOptions = !{JSON.stringify(w.ui)},
 	Me = {name: '#{w.user.doc ? w.user.doc.name || w.user.doc.email : ''}', id:'#{w.user.id()}'};
 #content
 	#messages
