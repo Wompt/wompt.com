@@ -31,6 +31,11 @@ form(action='/accounts/' + w.account.name, method='POST')
 						| embedded iframe.
 		- if(w.user.doc.is_admin())
 			tr.admin
+				th
+					label(for='add_owner') Add Owner by ID:
+				td
+					input(type='text', id='add_owner', name='add_owner_id')
+			tr.admin
 				th.top_aligned
 					label(for='role') Role
 				td

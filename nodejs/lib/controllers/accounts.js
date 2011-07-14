@@ -50,7 +50,7 @@ function AccountsController(app){
 	})
 	
 	// url: PUT or POST /accounts/:id
-	this.update = m(function update(req, res, next){
+	this.update = stack(allowOwnersAndAdmins, function update(req, res, next){
 		var redirect_to = base_url + '/' + req.account.name,
 		body = req.body;
 		
@@ -82,7 +82,8 @@ function AccountsController(app){
 		req.account.save(function(){
 			res.redirect(redirect_to);
 		});
-	})	
+	})
+
 	
 	// url: POST /accounts
 	this.create = m(function create(req, res, next){
