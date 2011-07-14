@@ -8,8 +8,8 @@ Text: (function Text(){
 	var mail_to_matcher = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
 	var my_name = (window.Me && Me.name && Me.name.toLowerCase()) || '';
 	var filter = (function(){
-		var f = UiOptions.wordFilter;
-		return  f && new RegExp(f.join('|'));
+		var f = window.UiOptions && UiOptions.wordFilter;
+		return f && new RegExp(f.join('|'));
 	})();
 	
 	return {
