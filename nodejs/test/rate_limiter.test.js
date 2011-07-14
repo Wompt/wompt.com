@@ -1,5 +1,5 @@
 var W = require('./test_helper'),
-Limiter = require('../lib/rate_limit.js'),
+Limiter = require('../public/js/rate_limit.js'),
 assert = W.assert,
 vows = W.vows;
 
@@ -15,7 +15,7 @@ suite.addBatch({
 	},
 	
 	'Limiting to n events':{
-		topic: limiterFactory(100, 1000),
+		topic: limiterFactory(10, 100),
 		
 		'should deny too many sequential events': testSequential,
 		'should deny': testOverLimit(),
