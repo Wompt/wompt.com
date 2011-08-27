@@ -9,7 +9,7 @@ Text: (function Text(){
 	var my_name = (window.Me && Me.name && Me.name.toLowerCase()) || '';
 	var filter = (function(){
 		var f = window.UiOptions && UiOptions.wordFilter;
-		return f && new RegExp(f.join('|'));
+		return f && new RegExp(f.join('|'), 'gi');
 	})();
 	
 	return {
