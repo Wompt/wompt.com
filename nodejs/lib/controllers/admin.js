@@ -9,6 +9,27 @@ function Admin(app){
 		res.render('admin/stats', locals(req, {app:app}))
 	}));
 	
+	express.get("/admin/embed_test", m(function(req, res){
+		app.accountManager.get('testing_paid', function(err, account){
+			var crypto = require('crypto');
+			function sha1(str){
+				return crypto.createHash('sha1').update(str).digest("hex");
+			}
+			
+			base_url = "/a/" + account.name + '/';
+			query = [
+				"room1?",
+				"user_id=______" + (req.query.user_id || "test_user"),
+				"user_name=" + encodeURIComponent(req.query.user_name || "Test User"),
+				"ts=" + Math.floor(Date.now()/1000)
+				].join('&');
+			secret = account.secret;
+			url = base_url + query + "&secure=" + sha1(query + secret);
+			
+			res.render('admin/embed_test', locals(req, {app:app, url_for_embed: url}));
+		})
+	}));
+	
 	function locals(req, opt){
 		opt = opt || {};
 		opt.page_name = 'admin';
