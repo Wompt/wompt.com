@@ -124,7 +124,13 @@ function NamespaceController(app){
 		var	channelManager = new wompt.ChannelManager(options);
 		
 		if(options.logged){
-			new wompt.loggers.LoggerCreator(channelManager, options.logDirectory);
+			require('fs').mkdir(
+				wompt.env.logs.channels.root + "/" + options.logDirectory, 0755,
+				function(err){
+					if(!err)
+						new wompt.loggers.LoggerCreator(channelManager, options.logDirectory);
+				}
+			);
 		}
 		
 		function handleChatRoomGet(req, res){
