@@ -40,9 +40,9 @@ function AccountsController(app){
 	})
 	
 	// url: /accounts/new
-	this.new = m(function _new(req, res, next){
+	this.new = function _new(req, res, next){
 		res.render('accounts/new', locals(req));
-	})
+	}
 	
 	// url: /accounts/edit/:id
 	this.edit = stack(loadAccountOwners, allowOwnersAndAdmins, function edit(req, res, next){
@@ -87,20 +87,27 @@ function AccountsController(app){
 
 	
 	// url: POST /accounts
-	this.create = m(function create(req, res, next){
-		var account = new wompt.Account();
-		['name'].forEach(function(key){
-			account[key] = req.body[key];
+	this.create = function create(req, res, next){
+		app.accountManager.get(req.body.name, function(err, account){
+			if(account) return res.redirect(base_url + '/new');
+			
+			account = new wompt.Account();
+			['name'].forEach(function(key){
+				account[key] = req.body[key];
+			});
+			
+			account.owner_ids.push(req.user.id);
+
+			account.save(function(err){
+				if(err)
+					next(err);
+				else{
+					res.redirect(base_url + '/' + account.name);
+					app.accountManager._put(account);
+				}
+			})
 		});
-		account.save(function(err){
-			if(err)
-				next(err);
-			else{
-				res.redirect(base_url);
-				app.accountManager._put(account);
-			}
-		})
-	})
+	}
 	
 	this.analytics = stack(allowOwnersAndAdmins, function analytics(req, res, next){
 		async.parallel({

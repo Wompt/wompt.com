@@ -67,3 +67,16 @@
 #accounts #embed_form .label{
 	border:0;
 }
+
+#new_account .break {
+   margin-top: 1em;
+}
+
+#new_account label {
+   padding-right: 0.3em;
+   color: #888;
+}
+
+#new_account button {
+   margin: 0.2em 1em;
+}

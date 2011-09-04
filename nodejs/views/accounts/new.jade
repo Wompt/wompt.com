@@ -1,16 +1,11 @@
-form(action='/accounts', method='POST')
-	h3 New Account &nbsp;
-		button.minimal(type='submit') Create
-	table.top_aligned
-		tr
-			td.top_aligned
-				label(for='name') Name
-			td
-				input#name(name='name')
-		tr
-			td.top_aligned
-				label(for='role') Role
-			td
-				select#role(name='role')
-					- for(var role in w.roles)
-						option(value=role)= role
+form#new_account(action='/accounts', method='POST')
+   h2 Create an Account &nbsp;
+   p Create a private chat namespace with as many chat rooms as you need.
+   p
+      | With secure SSO, your visitors don't even have to sign in, you can use
+      | your own login authentication.
+
+   h2.break Lets do this!
+   label(for='name') http://wompt.com/accounts/
+   input#name(name='name')
+   button.minimal(type='submit') Create Account
