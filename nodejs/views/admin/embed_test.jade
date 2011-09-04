@@ -1,5 +1,10 @@
 iframe(src=w.url_for_embed, style='width:50%;height:600px;')
 form(method='get')
 	input(type='text', name='user_name', value='Test User')
+	br
 	input(type='text', name='user_id', value='test_user')
+	br
+	label Anonymous
+		input(type='checkbox', name='anonymous', value='1')
+	br
 	input(type='submit', value='Submit')
