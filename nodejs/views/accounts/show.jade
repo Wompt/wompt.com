@@ -18,7 +18,7 @@ table#account_info.vertical
 		th Base Url
 		td.code= w.account.baseUrl()
 	tr
-		th Domains
+		th Allowed Domains
 		td
 			- each domain in w.account.domains
 				.domain= domain
@@ -36,7 +36,7 @@ table#account_info.vertical
 		tr.spacer
 			th
 		tr
-			th Embedded Rooms
+			th How To Embed Rooms
 			td
 				h4 As many rooms as you like on any number of pages, no rules.
 				!=partial('shared/_embed_code_form_table')

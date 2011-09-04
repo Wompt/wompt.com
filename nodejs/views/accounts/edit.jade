@@ -14,7 +14,7 @@ form(action='/accounts/' + w.account.name, method='POST')
 				input#name(name='name', disabled, value=w.account.name)
 		tr
 			th
-				label(for='domains') Domains
+				label(for='domains') Allowed Domains
 				.note one per line
 			td
 				textarea#domains(name='domains')= w.account.domains.join("\n")
