@@ -105,6 +105,7 @@ App.prototype = {
 			exp.use(wompt.Auth.one_time_token_middleware());
 			exp.use(wompt.ParameterAuthentication.middleware(me.accountManager));
 			exp.use(wompt.Auth.lookup_user_middleware());
+			exp.use(wompt.Auth.anonymous_user_middleware(me.meta_users));
 			exp.use(wompt.Auth.meta_user_middleware(me.meta_users));
 			
 			// User-level error handler (404, 406, ...)
