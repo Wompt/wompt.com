@@ -74,7 +74,7 @@ Util.fs = {
 		function makeNextDir(){
 			currentDir += '/' + dirs.shift();
 			fs.mkdir(currentDir, mode, function(err){
-				if(err) return callback(err);
+				if(err && err.code != 'EEXIST') return callback(err);
 				if(dirs.length > 0)
 					makeNextDir();
 				else
