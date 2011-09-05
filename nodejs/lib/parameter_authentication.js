@@ -78,18 +78,26 @@ function verifyTimeliness(req){
 
 // Loads req.user based on req.account and the user_id query param
 function loadUserBasedOnQueryParam(req, res, next){
-	if(req.account && req.query.user_id){
-		wompt.User.findOne({account_id: req.account.id, account_user_id: req.query.user_id}, function(err, user){
-			if(user){
-				req.user = user;
-				next();
-			}else{
-				createUserFromQueryParams(req, function(err, user){
-					if(user) req.user = user;
-					next(err);				
-				});
-			}
-		})
+	if(req.account){
+		if(req.query.user_id){
+			wompt.User.findOne({account_id: req.account.id, account_user_id: req.query.user_id},
+			function(err, user){
+				if(user){
+					req.user = user;
+					next();
+				}else{
+					createUserFromQueryParams(req, function(err, user){
+						if(user)
+							req.user = user;
+						return next(err);				
+					});
+				}
+			})
+		} else if(req.query.anonymous === '1') { // no user_id parameter, check for anonymous=
+			req.sso_anonymous = true;
+			req.meta_user = new wompt.MetaUser();
+			return next();
+		}
 	}
 	// if there is no user_id or no account, bail out of the rest of the stack
 	// see Util.preStackMiddleware

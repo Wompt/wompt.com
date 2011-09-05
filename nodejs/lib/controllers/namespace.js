@@ -86,7 +86,8 @@ function NamespaceController(app){
 	
 	this.createNamespaceForAccount = function(account){
 		var namespace = createNamespace(account.name, {
-			logDirectory: 'accounts/' + account.name
+			logDirectory: 'accounts/' + account.name,
+			allowAnonymous: true
 		});
 		
 		var stats = new wompt.monitors.NamespaceStats(namespace.manager, {intervals: ['hour', 'day']});

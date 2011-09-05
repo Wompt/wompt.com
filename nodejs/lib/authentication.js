@@ -44,10 +44,11 @@ function Auth(config){
 		}
 	}
 	
+	// Loads the user record by the session token stored in a cookie
 	this.lookup_user_middleware = function(){
-		var token;
 		return function(req, res, next){
-			if(req.user) next();
+			var token;
+			if(req.user || req.sso_anonymous) next();
 			else if(token = me.get_token(req)){
 				me.get_user_from_token(token, function(err, user){
 					if(user && !err) req.user = user;
@@ -56,30 +57,46 @@ function Auth(config){
 			} else next();
 		}
 	}
-	
-	this.meta_user_middleware = function(collection){
+
+	// Creates a temporary MU if the user is anonymous
+	this.anonymous_user_middleware = function anonymous_user_middleware(metaUserCollection){
 		return function(req, res, next){
-			var mu;
-			if(req.meta_user)
-				mu = req.meta_user;
-			else if(req.user){
-				var lookup = collection.get(req.user._id.toJSON());
-				if(lookup){
-					mu = lookup;
-				} else {
-					mu = req.user.wrap();
-					collection.set(req.user._id.toJSON(), mu);
-				}
-			}	else {
-				var token = me.get_token(req),
-				    lookup = collection.get(token);
-				if(lookup){
-					mu = lookup;
-				} else {
-					mu = new wompt.MetaUser();
-					collection.set(token, mu);
-				}
-			}
+			// If there is a user record or an MU we don't need this middleware
+			if(req.user || req.meta_user)
+				return next();
+			
+			var token = me.get_token(req), mu;
+			
+			// If there is a MU for the token, use that, otherwise create one
+			mu = metaUserCollection.getOrCreate(token, function(set){
+				token = me.set_token(res);
+				set(token, new wompt.MetaUser());
+			});
+			
+			mu.touch();
+			if(res.new_session) mu.new_session(res.new_session);
+			req.meta_user = mu;
+
+			next();
+		}
+	}
+	
+	// Loads or creates the MetaUser for authenticated users
+	this.meta_user_middleware = function meta_user_middleware(metaUserCollection){
+		return function(req, res, next){
+			// If there is no user record or the meta user has already been set
+			// bail out and don't try to load another MU 
+			if(!req.user || req.meta_user)
+				return next();
+			
+			var mu, user_id = req.user._id.toJSON();
+	
+			// If there is a MU for the user_id, use that, otherwise create one
+			// from the user record
+			mu = metaUserCollection.getOrCreate(user_id, function(set){
+				set(user_id, req.user.wrap());
+			});
+
 			mu.touch();
 			if(res.new_session) mu.new_session(res.new_session);
 			req.meta_user = mu;
@@ -88,13 +105,14 @@ function Auth(config){
 		}
 	}
 	
+	// Gives 404 errors for non admins
 	this.blockNonAdmins = function(req, res, next){
 		if(req.user && req.user.is_admin())
 			next();
 		else
 			next(new wompt.errors.NotFound());
 	}
-		
+	
 	this.start_session = function(res, user){
 		var token = this.set_token(res),
 		new_session = {
