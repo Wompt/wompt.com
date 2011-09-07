@@ -141,7 +141,8 @@ function NamespaceController(app){
 						hidePopout: features.sso,
 						hideSocialLinks: features.sso,
 						hideProfileLinks: !!(!req.account.profile_url_template && features.sso),
-						profileUrlTemplate: features.sso && req.account.profile_url_template,
+						profileUrlTemplate : features.sso && req.account.profile_url_template,
+						signInUrl          : features.sso && req.account.sign_in_url,
 						wordFilter: req.account.useWordFilter && req.account.wordFilter
 					}
 				};

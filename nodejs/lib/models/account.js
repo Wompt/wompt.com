@@ -10,6 +10,7 @@ var Account = new mongoose.Schema({
 	,'secret'         : {type: String, 'default': generateSecret}
 	,'role'           : String
 	,'profile_url_template': String
+	,'sign_in_url'    : String
 	
 	,'useWordFilter'  : Boolean
 	,'wordFilter'     : [String]

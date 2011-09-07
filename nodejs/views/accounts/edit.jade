@@ -26,9 +26,16 @@ form(action='/accounts/' + w.account.name, method='POST')
 					input#profile_url_template(name='profile_url_template', value=w.account.profile_url_template)
 					span.note &nbsp;Example:&nbsp;
 						span.code http://example.com/users/[name]
-					.note A Url template for users profile pages. "[name]" will be 
-						| replaced by the users name from the URL parameters of the
+					.note A URL template for users profile pages. "[name]" or "[id]" will
+						| be replaced by the users name from the URL parameters of the
 						| embedded iframe.
+			tr
+				th
+					label(for='sign_in_url') Sign in URL
+				td
+					input#sign_in_url(name='sign_in_url', value=w.account.sign_in_url)
+					.note The URL a of your sign-in page.  This is used to provide a
+						| link in the chat window like "Sign in to participate"
 		- if(w.user.doc.is_admin())
 			tr.admin
 				th
