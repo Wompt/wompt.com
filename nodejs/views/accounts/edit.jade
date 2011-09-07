@@ -26,9 +26,10 @@ form(action='/accounts/' + w.account.name, method='POST')
 					input#profile_url_template(name='profile_url_template', value=w.account.profile_url_template)
 					span.note &nbsp;Example:&nbsp;
 						span.code http://example.com/users/[name]
-					.note A Url template for users profile pages. "[name]" will be 
-						| replaced by the users name from the URL parameters of the
-						| embedded iframe.
+					.note A Url template for users profile pages. [name] will be 
+						| replaced by the user_name= query parameter of the
+						| embedded iframe, [id] will be replaced by the user_id
+						| query parameter.  Possible values are [name] and [id].
 		- if(w.user.doc.is_admin())
 			tr.admin
 				th

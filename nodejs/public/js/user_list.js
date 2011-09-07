@@ -112,7 +112,11 @@ function UserListUI(ul, container, top){
 		var template = UI.profileUrlTemplate;
 		if(template){
 			return template.replace(/\[([^\]]+)\]/, function(str, prop){
-				return user[prop];
+				switch(prop) {
+					case 'name' : return user.name;
+					case 'id'   : return user.user_id;
+					default     : return "invalid_property";
+				}
 			})
 		} else return '/users/' + user.id;
 	}

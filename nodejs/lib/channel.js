@@ -205,10 +205,12 @@ var proto = {
 			
 			if(cl.user.visible && doc){
 				if(!users[uid]){
-					users[uid]={
+					var user_info = users[uid] = {
 						name: doc.name || 'anonymous'
 					};
-					
+					if(doc.account_user_id)
+						user_info['user_id'] = doc.account_user_id;
+						
 					var ops = this.opsUsers[uid];
 					if(ops)
 						users[uid].ops = true;
@@ -235,6 +237,9 @@ var proto = {
 			user_info = users[uid] = {
 				'name': user.doc.name || user.doc.email
 			}
+			if(user.doc.account_user_id)
+				user_info['user_id'] = user.doc.account_user_id;
+
 			if(opt.join && ops && this.get_ops(uid)){
 				user_info.ops = true;
 			}
