@@ -74,6 +74,7 @@ function AccountsController(app){
 		if(req.account.hasFeature('sso')){
 			// TODO add some validation here
 			req.account.profile_url_template = body.profile_url_template;
+			req.account.sign_in_url = body.sign_in_url;
 		}
 		
 		req.account.useWordFilter = (body.use_word_filter == 'true');

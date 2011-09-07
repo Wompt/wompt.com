@@ -37,8 +37,12 @@ script(type='text/javascript')
 		.name#own_name Just Observing
 		.container
 			#message
-				| sign in to participate:
-				- each provider in w.config.auth.providers
-					<a href="/auth/#{provider.code}" class='popup ico #{provider.code.substr(0,2)}' title="Sign in using #{provider.name}"></a>
+				- if(w.ui.signInUrl)
+					a(href=w.ui.signInUrl) Sign in
+					| &nbsp;to participate
+				- else
+					| sign in to participate:
+					- each provider in w.config.auth.providers
+						<a href="/auth/#{provider.code}" class='popup ico #{provider.code.substr(0,2)}' title="Sign in using #{provider.name}"></a>
 	- if(!w.ui.hideSocialLinks)
 		!=partial('partials/_share_links.jade')
