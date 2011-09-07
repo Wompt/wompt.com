@@ -23,7 +23,7 @@ e.User           = require("./models/user");
 e.ClientConnectors=require("./client_connectors");
 e.ChannelManager = require('./channel_manager');
 e.Expirer        = require('./expirer');
-e.socketIO       = require("Socket.IO-node/index");
+e.socketIO       = e.dependencies.socketio; //require("Socket.IO-node/index");
 e.Helpers        = {
 	Assets:          require('./helpers/assets')
 };

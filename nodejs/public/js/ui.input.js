@@ -11,7 +11,7 @@ UI.once('init', function(){
 	}
 	
 	function keyUp(e){
-		if(IO.socket.connected && e.which == 13 && !e.shiftKey && !e.stop){
+		if(IO.socket.socket.connected && e.which == 13 && !e.shiftKey && !e.stop){
 			var message = $.trim(input.val());
 
 			if(!limiter.another()){
@@ -26,7 +26,7 @@ UI.once('init', function(){
 			if(message.length > WOMPT.messages.max_length){
 				alert("Messages are limited to "+ WOMPT.messages.max_length + " characters.");
 			}else	if(message.length > 0){
-				IO.socket.send({action:'post', msg:message});
+				IO.socket.json.send({action:'post', msg:message});
 				input.val('');
 			}
 		}

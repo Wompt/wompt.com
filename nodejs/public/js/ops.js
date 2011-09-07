@@ -22,7 +22,7 @@ function Ops(uli){
 		if(self.permissions.kick && target.hasClass('kick') && (uid = target.data('uid'))){
 			e.stopPropagation();
 			e.preventDefault();
-			IO.socket.send({action:'kick', id:uid});
+			IO.socket.json.send({action:'kick', id:uid});
 		}
 	});	
 }

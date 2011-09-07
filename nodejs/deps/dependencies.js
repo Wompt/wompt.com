@@ -6,5 +6,6 @@ module.exports = {
 	step: require('step'),
 	async: require('async'),
 	lingo: require('lingo'),
-	vows: require('vows')
+	vows: require('vows'),
+	socketio: require('socket.io')
 }

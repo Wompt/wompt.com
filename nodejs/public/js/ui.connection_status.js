@@ -1,5 +1,5 @@
 UI.once('init', function(){
-	var socket = IO.socket,
+	var socket = IO.socket.socket,
 	    authenticating = false,
 	    try_now_link = $('.try_now');
 			
@@ -58,7 +58,7 @@ UI.once('init', function(){
 					// Spread out reconnection just a bit, so as to not overload the server.
 					setTimeout(function(){window.location.reload();}, Math.random()*5000.0 + 2000.0);
 				}else if(data.connector_id){
-					socket.send({
+					socket.json.send({
 						channel: channel
 						,action: 'join'
 						,connector_id: data.connector_id

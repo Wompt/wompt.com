@@ -44,7 +44,6 @@ var assetManagerGroups = {
 		, 'files': [
 			'/public/external/bootstrap.js'
 			, '/public/external/events.js'
-			, '/vendor/Socket.IO/socket.io.js'
 			, '/public/external/json2.js'
 			, '/public/js/util.js'			
 			, '/public/js/main.js'
@@ -154,7 +153,7 @@ var assetManagerGroups = {
 			'profile.css'
 		]
 		, 'preManipulate': cssPreManipulators
-	}),	
+	}) /*,	
 	'admin_socket_io': { // to support multiple
 		'route': /\/Socket.IO\/socket\.io\.js/
 		, 'path': root
@@ -164,7 +163,7 @@ var assetManagerGroups = {
 		, 'files': [
 			, '/vendor/Socket.IO/socket.io.js'
 		]
-	}
+	}*/
 };
 
 var exporting = {
