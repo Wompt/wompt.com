@@ -32,9 +32,10 @@ Ops.prototype = {
 		var a = data.action;
 		if(a == 'kick'){
 			UI.Messages.system(data.from.name +  " has temporarily kicked you out of this room, Wompt will automatically reconnect in "+WOMPT.ops.kick_time+" seconds.");
-			IO.socket.disconnect();
+			//IO.socket.disconnect();
 			setTimeout(function(){
-				IO.socket.reconnect();
+				// TODO re-enable this once we recreated similar functionality
+				//IO.socket.reconnect();
 			},WOMPT.ops.kick_time*1000)
 			return true;
 		} else if (a == 'ops'){

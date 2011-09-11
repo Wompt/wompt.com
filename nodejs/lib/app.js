@@ -29,14 +29,12 @@ function App(options){
 	// other namespaces
 	this.namespacesController.createPublicNamespace('unlisted', {
 		logged: true,
-		allowAnonymous: false,
-		allowOps: true
+		allowAnonymous: false
 	});
 
 	this.namespacesController.createPublicNamespace('mod', {
 		logged: true,
-		allowAnonymous: true,
-		allowOps: true
+		allowAnonymous: true
 	});
 	
 	this.client_connectors = new wompt.ClientConnectors();

@@ -19,8 +19,9 @@ jQuery(function(){
 	[
 		UI.Messages.list,
 		UI.Messages,
-		userList,
-		new Ops(UI.userList)
+		userList
+		// TODO: renable this when we finish Ops
+		// new Ops(UI.userList)
 	].forEach(IO.addMessageHandler)
 
 	IO.connect();
