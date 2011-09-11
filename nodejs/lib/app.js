@@ -3,7 +3,7 @@ var http   = require("http"),
     wompt  = require("./includes"),
     util   = require('util'),
     logger = wompt.logger,
-    SocketIO= wompt.socketIO,
+    SocketIO= wompt.SocketIO,
     assetManager = require('./asset_manager'),
     Hoptoad = require('./hoptoad'),
     express = wompt.dependencies.express;
@@ -221,11 +221,11 @@ App.prototype = {
 	},
 	
 	start_socket_io: function(){
-		if(this.socket) return;
+		if(this.io) return;
 		var app = this;
 		
-		this.socket = SocketIO.listen(this.express, this.config.socketIO.serverOptions);
-		this.socket.sockets.on('connection', function(client){
+		this.io = SocketIO.listen(this.express, this.config.socketio.serverOptions);
+		this.io.sockets.on('connection', function(client){
 			app.new_connection(client);
 		}); 		
 	},

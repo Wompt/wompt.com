@@ -20,7 +20,6 @@ function IO(){
 	}
 	
 	this.connect = function(){
-		//socket.connect();
 		socket.json.send({channel: channel, action: 'join', connector_id: connector_id});
 	}
 	

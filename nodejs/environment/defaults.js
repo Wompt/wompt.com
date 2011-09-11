@@ -55,7 +55,7 @@ module.exports = {
 		use: true
 	}
 	
-	, socketIO: {
+	, socketio: {
 		serverOptions: {
 		}
 	}

@@ -153,17 +153,7 @@ var assetManagerGroups = {
 			'profile.css'
 		]
 		, 'preManipulate': cssPreManipulators
-	}) /*,	
-	'admin_socket_io': { // to support multiple
-		'route': /\/Socket.IO\/socket\.io\.js/
-		, 'path': root
-		, 'dataType': 'javascript'
-		, 'debug': true
-		, 'stale': wompt.env.perform_caching		
-		, 'files': [
-			, '/vendor/Socket.IO/socket.io.js'
-		]
-	}*/
+	})
 };
 
 var exporting = {
