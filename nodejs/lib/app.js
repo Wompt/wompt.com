@@ -166,13 +166,18 @@ App.prototype = {
 		});
 		
 		
-		function landingPage(req, res){
+		function landingPage(req, res, next){
+			var channelManager = me.namespacesController.getPublicNamespace('chat').manager;
+			if(req.headers.reauthenticate){
+				return me.namespacesController.reAuthenticateUser(req, res, next, channelManager);
+			}
+			
 			var meta_user = req.meta_user,
 			token = wompt.Auth.get_or_set_token(req, res);
 
 			var connector = me.client_connectors.add({
 				meta_user:meta_user,
-				namespace:me.namespacesController.getPublicNamespace('chat').manager,
+				namespace:channelManager,
 				token: token
 			});
 			

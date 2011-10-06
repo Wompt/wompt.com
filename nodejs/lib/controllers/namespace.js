@@ -22,25 +22,13 @@ function NamespaceController(app){
 				if(namespace){
 					var room_name = req.params[0];
 					if(req.headers.reauthenticate){
-						return reAuthenticate(req, res, next, namespace.manager);
+						return self.reAuthenticateUser(req, res, next, namespace.manager);
 					}
 					req.params.room_name = room_name;
 					namespace.handler.apply(this, arguments);
 				}else
 					next();
 			}
-		}
-		
-		function reAuthenticate(req, res, next, channelManager){
-			if(req.meta_user){
-				var token = wompt.Auth.get_or_set_token(req, res);
-				var connector = app.client_connectors.add({
-					namespace:channelManager,
-					meta_user:req.meta_user,
-					token: token
-				});
-				res.send({connector_id:connector.id, version_hash:wompt.env.constants.version_hash});
-			}else next();
 		}
 		
 		// Public namespaces are accesible at /namespace
@@ -50,6 +38,17 @@ function NamespaceController(app){
 		express.get("/a/:namespace/*", createNamespaceFilter('account')); 
 	}
 
+	this.reAuthenticateUser = function reAuthenticateUser(req, res, next, channelManager){
+		if(req.meta_user){
+			var token = wompt.Auth.get_or_set_token(req, res);
+			var connector = app.client_connectors.add({
+				namespace:channelManager,
+				meta_user:req.meta_user,
+				token: token
+			});
+			res.send({connector_id:connector.id, version_hash:wompt.env.constants.version_hash});
+		}else next();
+	}
 
 	this.getPublicNamespace =
 	function getPublicNamespace(namespace_id){
