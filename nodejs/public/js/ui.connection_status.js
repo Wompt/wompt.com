@@ -78,11 +78,12 @@ UI.once('init', function(){
 	}
 	
 	function authFailed(text){
-		authenticating = false;
+		if(!updateStatus) return;
 		connectionStatus(text || "Can't Reconnect, please refresh the page", true);
+		authenticating = false;
 		socket.options.reconnect = false;
-		socket.disconnect();		
 		updateStatus = false;
+		socket.disconnect();
 	}
 	
 	var was_disabled = true,
