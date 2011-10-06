@@ -82,13 +82,13 @@ var proto = {
 	},
 	
 	send_initial_data: function(client, joinMsg){
-		client.bufferSends(function(){
+		//client.bufferSends(function(){
 			if(!this.messages.is_empty())
 				this.clients.sendToOne(client,{action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
 				
 			this.send_ops(client);
 			this.clients.sendToOne(client,{action: 'who',	users: this.get_user_list(client)});
-		}, this);
+		//}, this);
 	},
 	
 	send_ops: function(client){
@@ -182,7 +182,7 @@ var proto = {
 			this.clients.each(function(client){
 				if(client == kick.from_client) return;
 				if(client.uid != kick.id) return;
-				client.send({
+				client.json.send({
 					action:'kick'
 					,from:{
 						name: kick.from_client.user.doc.name,

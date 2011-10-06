@@ -82,7 +82,7 @@ proto.broadcast = function(msg, options){
 		else{
 			only = options.only;
 			if(options.first){
-				options.first.send(msg);
+				options.first.json.send(msg);
 				msg_count++;
 				except_client = options.first;
 			}
@@ -93,14 +93,14 @@ proto.broadcast = function(msg, options){
 		var client = list[id];
 		if(except_client && (except_client == client)) continue;
 		if(only && !only(client)) continue;
-		client.send(msg);
+		client.json.send(msg);
 		msg_count++;
 	}
 	this.bubbleEmit('msgs_out', msg_count);
 };
 
 proto.sendToOne = function sendToOne(client, msg){
-	client.send(msg);
+	client.json.send(msg);
 	this.bubbleEmit('msgs_out', 1);
 }
 

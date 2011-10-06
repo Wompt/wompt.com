@@ -1,6 +1,6 @@
 {
 	"name": "wompt_dependencies",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"engines": {
 		"node": "0.4.1"
 	},
@@ -16,7 +16,9 @@
 		"step": "~0.0.4",
 		"http-proxy": "~0.3.0",
 		"async": "~0.1.9",
-		"lingo": "0.0.4"
+		"lingo": "0.0.4",
+		"socket.io" : "~0.8.4",
+		"socket.io-client" : "~0.8.4"
 	},
 	"devDependencies": {
 		"vows": "~0.5.8"

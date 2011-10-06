@@ -44,7 +44,6 @@ var assetManagerGroups = {
 		, 'files': [
 			'/public/external/bootstrap.js'
 			, '/public/external/events.js'
-			, '/vendor/Socket.IO/socket.io.js'
 			, '/public/external/json2.js'
 			, '/public/js/util.js'			
 			, '/public/js/main.js'
@@ -58,7 +57,8 @@ var assetManagerGroups = {
 			, '/public/js/color_dispensor.js'
 			, '/public/js/message_list.js'
 			, '/public/js/user_list.js'
-			, '/public/js/ops.js'
+// TODO Finish Ops, update it for the new socket.IO and re-enable this
+//			, '/public/js/ops.js'
 			, '/public/js/ui.connection_status.js'
 			, '/public/js/ui.layout.js'
 			, '/public/js/ui.fb.share.js'
@@ -117,7 +117,14 @@ var assetManagerGroups = {
 		]
 	}),
 	
-
+	'socket_io_js': mc(defaultOptions,{
+		'route': /\/js\/socket_io_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/vendor/Socket.IO/dist/socket.io.js'
+		]
+	}),
 /* ======  CSS Files  ======= */
 	
 	'all_css': mc(defaultOptions,{
@@ -154,17 +161,7 @@ var assetManagerGroups = {
 			'profile.css'
 		]
 		, 'preManipulate': cssPreManipulators
-	}),	
-	'admin_socket_io': { // to support multiple
-		'route': /\/Socket.IO\/socket\.io\.js/
-		, 'path': root
-		, 'dataType': 'javascript'
-		, 'debug': true
-		, 'stale': wompt.env.perform_caching		
-		, 'files': [
-			, '/vendor/Socket.IO/socket.io.js'
-		]
-	}
+	})
 };
 
 var exporting = {

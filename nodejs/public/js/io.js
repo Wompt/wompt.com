@@ -1,6 +1,6 @@
 function IO(){
 	var secure = window.location.protocol.match(/https/);
-	var socket = this.socket = new io.Socket(window.location.hostname, {
+	var socket = this.socket = io.connect(window.location.hostname, {
 			secure: secure,
 			transports:['websocket', 'flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling'],
 			reconnectionDelay: 2000 + Math.random() * 2000
@@ -20,8 +20,7 @@ function IO(){
 	}
 	
 	this.connect = function(){
-		socket.connect();
-		socket.send({channel: channel, action: 'join', connector_id: connector_id});
+		socket.json.send({channel: channel, action: 'join', connector_id: connector_id});
 	}
 	
 	socket.on('message', this.processMessage);

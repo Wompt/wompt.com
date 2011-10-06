@@ -3,7 +3,7 @@ var http   = require("http"),
     wompt  = require("./includes"),
     util   = require('util'),
     logger = wompt.logger,
-    SocketIO= wompt.socketIO,
+    SocketIO= wompt.SocketIO,
     assetManager = require('./asset_manager'),
     Hoptoad = require('./hoptoad'),
     express = wompt.dependencies.express;
@@ -29,14 +29,12 @@ function App(options){
 	// other namespaces
 	this.namespacesController.createPublicNamespace('unlisted', {
 		logged: true,
-		allowAnonymous: false,
-		allowOps: true
+		allowAnonymous: false
 	});
 
 	this.namespacesController.createPublicNamespace('mod', {
 		logged: true,
-		allowAnonymous: true,
-		allowOps: true
+		allowAnonymous: true
 	});
 	
 	this.client_connectors = new wompt.ClientConnectors();
@@ -98,8 +96,10 @@ App.prototype = {
 					return staticServer(req, res, next);
 				}else if(exceptions[req.url])
 					return staticServer(req, res, next);
-				else next();
-			}); 
+				else
+					next();
+			});
+			
 			exp.use(express.cookieParser());
 			exp.use(express.bodyParser());
 			exp.use(wompt.Auth.one_time_token_middleware());
@@ -221,11 +221,11 @@ App.prototype = {
 	},
 	
 	start_socket_io: function(){
-		if(this.socket) return;
+		if(this.io) return;
 		var app = this;
 		
-		this.socket = SocketIO.listen(this.express, this.config.socketIO.serverOptions);
-		this.socket.on('connection', function(client){
+		this.io = SocketIO.listen(this.express, this.config.socketio.serverOptions);
+		this.io.sockets.on('connection', function(client){
 			app.new_connection(client);
 		}); 		
 	},
