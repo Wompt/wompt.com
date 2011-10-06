@@ -22,5 +22,5 @@
 	},
 	"devDependencies": {
 		"vows": "~0.5.8"
-	},	
+	}
 }
