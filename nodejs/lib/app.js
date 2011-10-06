@@ -96,8 +96,10 @@ App.prototype = {
 					return staticServer(req, res, next);
 				}else if(exceptions[req.url])
 					return staticServer(req, res, next);
-				else next();
-			}); 
+				else
+					next();
+			});
+			
 			exp.use(express.cookieParser());
 			exp.use(express.bodyParser());
 			exp.use(wompt.Auth.one_time_token_middleware());
