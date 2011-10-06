@@ -122,7 +122,7 @@ var assetManagerGroups = {
 		, 'path': root
 		, 'dataType': 'javascript'
 		, 'files': [
-			'/vendor/Socket.IO/dist/socket.io.js'
+			'/vendor/Socket.IO/dist/socket.io' + (wompt.env.minify_assets ? '.min' : '') + '.js'
 		]
 	}),
 /* ======  CSS Files  ======= */
