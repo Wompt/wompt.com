@@ -17,7 +17,7 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 			script(src="/s/external/jquery-ui-1.8.12.custom.min.js", type="text/javascript")
 		- if(w.page_js)
 			- if(w.page_js == 'channel')
-				script(type='text/javascript', src='/socket.io/socket.io.js')
+				!{assetHelpers.assetGroupTag('socket_io')}
 			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
 		- if(w.channel && !w.config.flags.noFacebook)
 			script(type='text/javascript', src='http://connect.facebook.net/en_US/all.js#appId=181725458505189&xfbml=1',async='true')

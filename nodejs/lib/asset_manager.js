@@ -117,7 +117,14 @@ var assetManagerGroups = {
 		]
 	}),
 	
-
+	'socket_io_js': mc(defaultOptions,{
+		'route': /\/js\/socket_io_[\d]+.js/
+		, 'path': root
+		, 'dataType': 'javascript'
+		, 'files': [
+			'/vendor/Socket.IO/dist/socket.io.js'
+		]
+	}),
 /* ======  CSS Files  ======= */
 	
 	'all_css': mc(defaultOptions,{

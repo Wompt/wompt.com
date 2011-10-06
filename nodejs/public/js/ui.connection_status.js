@@ -1,5 +1,8 @@
 UI.once('init', function(){
-	var socket = IO.socket.socket,
+			// This is a socket.io namespace
+	var namespace = IO.socket,
+	    // This is the socket.io Socket class behind the namespace
+	    socket = namespace.socket,
 	    authenticating = false,
 	    try_now_link = $('.try_now');
 			
@@ -7,7 +10,7 @@ UI.once('init', function(){
 	
 	try_now_link.click(function(e){
 		if(!socket.connected && !socket.connecting){
-			socket.reconnect();
+			socket.reconnect(true);
 		}
 		e.preventDefault();
 	});
@@ -58,7 +61,7 @@ UI.once('init', function(){
 					// Spread out reconnection just a bit, so as to not overload the server.
 					setTimeout(function(){window.location.reload();}, Math.random()*5000.0 + 2000.0);
 				}else if(data.connector_id){
-					socket.json.send({
+					namespace.json.send({
 						channel: channel
 						,action: 'join'
 						,connector_id: data.connector_id
