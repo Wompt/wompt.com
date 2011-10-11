@@ -45,7 +45,7 @@ proto.inc_user_count = function(client){
 }
 
 proto.add = function(client){
-	this.list[client.sessionId] = client;
+	this.list[client.id] = client;
 	this.inc_user_count(client)
 	this.count++;
 	this.emit('added', client);
@@ -53,7 +53,7 @@ proto.add = function(client){
 };
 	
 proto.remove = function(client){
-	delete this.list[client.sessionId];
+	delete this.list[client.id];
 	this.dec_user_count(client);
 	this.count--;
 };

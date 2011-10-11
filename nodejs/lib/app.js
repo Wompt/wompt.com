@@ -236,7 +236,7 @@ App.prototype = {
 	},
 	
 	new_connection: function(client){
-		logger.log("Connection from: " + client.sessionId);
+		logger.log("Connection from: " + client.id);
 		var app = this;
 		
 		this.clients.add(client);
@@ -262,7 +262,7 @@ App.prototype = {
 					app.clients.inc_user_count(client);
 				}
 				
-				logger.log('Handing off client:' + client.sessionId + ' to Channel: ' + data.channel)
+				logger.log('Handing off client:' + client.id + ' to Channel: ' + data.channel)
 				namespace.get(data.channel, function(channel){
 					if(channel && (user.authenticated() || namespace.options.allowAnonymous)){
 						channel.add_client(client, connector && connector.token, data);
