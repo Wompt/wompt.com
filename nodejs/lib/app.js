@@ -247,7 +247,7 @@ App.prototype = {
 				
 				if(!connector) {
 					client.send("You must pass your connector_id with the join message");
-					return client._onDisconnect();
+					return client.disconnect();
 				}
 				
 				var namespace = connector.namespace,
