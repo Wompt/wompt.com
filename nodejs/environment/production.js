@@ -18,10 +18,12 @@ module.exports = {
 		}
 	}
 	
-	, socketIO: {
+	, socketio: {
 		serverOptions: {
 			// Port to serve the flash policy doc from, iptables maps port 843 -> 16843
-			flashPolicyPort: 16843
+			'flash policy port': 16843,
+			// level = warn, leave out: info and debug
+			'log level': 1
 		}
 	}
 	, redirectWww	: true
