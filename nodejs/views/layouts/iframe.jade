@@ -20,8 +20,6 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 			script(type='text/javascript')
 				UI.input = UI.input || {};
 				UI.input.disableAutoExpand = true;
-				UI.hideProfileLinks = #{w.ui.hideProfileLinks};
-				UI.profileUrlTemplate = !{JSON.stringify(w.ui.profileUrlTemplate)};
 		- if(w.channel && !w.ui.hideSocialLinks && !w.config.flags.noFacebook)
 			script(type='text/javascript', src='http://connect.facebook.net/en_US/all.js#appId=181725458505189&xfbml=1',async='true')
 		!=partial('shared/_ga')

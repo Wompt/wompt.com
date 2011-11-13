@@ -78,7 +78,7 @@ function UserListUI(ul, container, top){
 		
 		var name_div = user.el = $('<div>'),
 		link;
-		if(UI.hideProfileLinks){
+		if(UiOptions.hideProfileLinks){
 			link = $('<span>');
 		}else{
 			link = $('<a>');
@@ -109,7 +109,7 @@ function UserListUI(ul, container, top){
 	}
 	
 	function profileUrl(user){
-		var template = UI.profileUrlTemplate;
+		var template = UiOptions.profileUrlTemplate;
 		if(template){
 			return template.replace(/\[([^\]]+)\]/, function(str, prop){
 				switch(prop) {
