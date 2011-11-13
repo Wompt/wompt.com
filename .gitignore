@@ -1,3 +1,7 @@
 *.komodoproject
 */tmp/*
 /nodejs/logs/*
+# dot files
+.*
+# All tilde ~ files (most vim temp files)
+*~
