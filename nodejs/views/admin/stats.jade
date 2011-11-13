@@ -18,9 +18,10 @@ table
 						tt.namespace_details= JSON.stringify(namespace.options)
 						table.roomlist
 							- namespace.each(function (channel) {
-								tr
-									td.count=channel.clients.count
-									td=channel.name
+								- if (channel.clients.count > 0)
+									tr
+										td.count=channel.clients.count
+										td=channel.name
 							- });
 				- });
 	tr
