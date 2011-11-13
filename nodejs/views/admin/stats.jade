@@ -9,11 +9,20 @@ table
 		th Unique Users
 		td #{w.app.clients.userCount}		
 	tr
-		th Popular Channels
+		th Namespaces and Channels
 		td
-			- w.app.popular_channels.rebuildPopularList()
-			- each chan in w.app.popular_channels.sorted_list
-				div (#{chan.clients.userCount}) - #{chan.name}
+			ul
+				- w.app.namespacesController.eachNamespace(function(namespace) {
+					li
+						h4= namespace.options.namespace + " - " + namespace.clients.count
+						tt.namespace_details= JSON.stringify(namespace.options)
+						table.roomlist
+							- namespace.each(function (channel) {
+								tr
+									td.count=channel.clients.count
+									td=channel.name
+							- });
+				- });
 	tr
 		th App State
 		td
