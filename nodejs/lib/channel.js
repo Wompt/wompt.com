@@ -82,13 +82,17 @@ var proto = {
 	},
 	
 	send_initial_data: function(client, joinMsg){
-		//client.bufferSends(function(){
-			if(!this.messages.is_empty())
-				this.clients.sendToOne(client,{action: 'batch', messages: this.messages.since(joinMsg.last_timestamp)});
-				
-			this.send_ops(client);
-			this.clients.sendToOne(client,{action: 'who',	users: this.get_user_list(client)});
-		//}, this);
+		var msgs = [];
+		if(!this.messages.is_empty())
+			msgs.push({
+				action: 'batch',
+			  	messages: this.messages.since(joinMsg.last_timestamp)
+			});
+
+		// Disabled, when enabling, add sent messages to msgs somehow
+		//this.send_ops(client);
+		msgs.push({action: 'who',	users: this.get_user_list(client)});
+		this.clients.sendToOne(client, msgs);
 	},
 	
 	send_ops: function(client){
