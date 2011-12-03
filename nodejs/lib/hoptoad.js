@@ -1,11 +1,10 @@
-var Hoptoad = require('hoptoad-notifier').Hoptoad
+var Hoptoad = require('airbrake')
   ,	env = require('../environment')
   , shouldReport = env.hoptoad && env.hoptoad.reportErrors;
 	
 	
-if(shouldReport)
-	Hoptoad.key = env.hoptoad.apiKey;
-	
+Hoptoad = Hoptoad.createClient(env.hoptoad.apiKey);
+
 process.addListener('uncaughtException', function(err) {
 	if(shouldReport)
 		Hoptoad.notify(err, function(){});

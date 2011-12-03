@@ -6,6 +6,7 @@ module.exports = {
 	step: require('step'),
 	async: require('async'),
 	lingo: require('lingo'),
-	vows: require('vows'),
-	socketio: require('socket.io')
+	socketio: require('socket.io'),
+	expressResource: require("./vendor/express-resource"),
+	connectAssetManager: require('./vendor/connect-assetmanager')
 }
