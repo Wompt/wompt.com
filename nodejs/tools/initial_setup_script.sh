@@ -25,10 +25,6 @@ cd ~
 #npm
 curl http://npmjs.org/install.sh | sudo sh
 
-sudo npm install express
-sudo npm install jade
-sudo npm install http-proxy
-
 #MongoDB (see: http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages )
 sudo apt-add-repository 'deb http://downloads.mongodb.org/distros/ubuntu 10.4 10gen'
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
@@ -57,12 +53,6 @@ sudo gem install bundler
 
 # Some packages needed by some of the gems in our Auth app
 sudo apt-get install libxslt-dev libxml2-dev
-
-
-# Install our own special version of Socket.IO
-cd ~
-git clone git://github.com/danielbeardsley/Socket.IO-node.git
-npm link Socket.IO-node
 
 #todo add wompt to... upstart?
 #todo nginx?
