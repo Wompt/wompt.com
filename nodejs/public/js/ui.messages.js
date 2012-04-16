@@ -52,7 +52,8 @@ UI.once('init', function(){
 		if(!data.t) return;
 		
 		var ts = $('<div>'),
-		    time = Util.time(new Date(data.t));
+		    date = new Date(data.t),
+		    time = Util.date(date) + " " + Util.time(date);
 		
 		ts.addClass('ts');
 		ts.text(time);
