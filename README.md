@@ -1,10 +1,12 @@
-# Wompt Readme #
+# Wompt.com Readme #
+NOTE: This documentation is a bit outdated.
 
 ## Installation ##
 
 ### Install node.js ###
 		git clone https://github.com/ry/node.git
 		cd node
+		git checkout v0.4.9
 		./configure
 		./make
 		./make install
