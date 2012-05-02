@@ -15,7 +15,7 @@ html("xmlns\u003Afb"="http://www.facebook.com/2008/fbml", xmlns="http://www.w3.o
 				script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js", type="text/javascript")
 			!=partial('layouts/_style_iframe')
 		- if(w.page_js)
-			!{assetHelpers.assetGroupTag('socket_io')}
+			script(src="/socket.io/socket.io.js")
 			!{assetHelpers.assetGroupTag(w.page_js, w.user && w.user.doc)}
 			script(type='text/javascript')
 				UI.input = UI.input || {};
