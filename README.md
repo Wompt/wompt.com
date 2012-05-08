@@ -1,21 +1,37 @@
 # Wompt.com Readme #
-NOTE: This documentation is a bit outdated.
 
 ## Installation ##
+### Node 0.6 ###
+      git clone https://github.com/ry/node.git
+      cd node
+      git checkout v0.6.5
+      ./configure
+      make
+      make install
 
-### Install node.js ###
-		git clone https://github.com/ry/node.git
-		cd node
-		git checkout v0.4.9
-		./configure
-		./make
-		./make install
-		
-### Install npm ###
-		curl http://npmjs.org/install.sh | sh
+### MongoDB ###
+      wget http://fastdl.mongodb.org/linux/mongodb-linux-i686-2.0.4.tgz
+      tar -xzf mongodb-linux-i686-2.0.4.tgz
+      mv mongodb-linux-i686-2.0.4.tgz /someplace/in/your/path
 
-### Install packages ###
-		npm install hoptoad-notifier
+### Wompt ###
+      git clone git@github.com:Wompt/wompt.com.git
+      cd wompt.com
+      git submodule update --init
+
+### Wompt authentication server ###
+      cd wompt.com/authentication
+      gem install bundler
+      bundle
+
+### Start in dev mode ###
+#### MongoDB ####
+      mongod
+#### Wompt authentication server ####
+      cd authentication
+      bundle exec rackup
+#### Wompt ####
+      node nodejs/server.js
 
 ### Local Development ###
 #### Offline mode ####
