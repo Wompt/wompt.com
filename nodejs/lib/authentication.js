@@ -14,10 +14,13 @@ function Auth(config){
 	}
 	
 	this.forward_to_auth_app_middleware = function(){
+		var proxy = new httpProxy.RoutingProxy();
 		return function(req,res,next){
 			if (req.url.match(/^\/auth/)) {
-				var proxy = new httpProxy.HttpProxy(req, res);
-				proxy.proxyRequest(9292, wompt.env.auth_host);
+				proxy.proxyRequest(req, res, {
+					host: wompt.env.auth_host,
+					port: 9292
+				});
 			}else{
 				next();
 			}

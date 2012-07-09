@@ -1,8 +1,8 @@
 require 'sinatra/base'
 require 'openid/store/filesystem'
-require 'lib/models/user'
-require 'lib/config'
-require 'lib/referer_saver'
+require './lib/models/user'
+require './lib/config'
+require './lib/referer_saver'
 require 'hoptoad_notifier'
 
 HoptoadNotifier.configure do |config|
