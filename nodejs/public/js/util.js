@@ -16,10 +16,14 @@ Text: (function Text(){
 		newlineMatcher: /\n|\r\n/gim,
 		
 		linkify: function(text){
-			text = text.replace(http_matcher, '<a href="$1" target="_blank">$1</a>');
-			text = text.replace(www_matcher, '$1<a href="http://$2" target="_blank">$2</a>');
-			text = text.replace(mail_to_matcher, '<a href="mailto:$1">$1</a>');
-			return text
+			linktext = text.replace(http_matcher, '<a href="$1" target="_blank">$1</a>');
+			if(linktext == text) {
+				linktext = text.replace(www_matcher, '$1<a href="http://$2" target="_blank">$2</a>');
+				if(linktext == text) {
+					linktext = text.replace(mail_to_matcher, '<a href="mailto:$1">$1</a>');
+				}
+			}
+			return linktext
 		},
 		
 		linkifyTest: function(text){
