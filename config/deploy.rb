@@ -5,7 +5,7 @@ set :user, "ubuntu"
 set :host, "wompt.com"
 
 set :scm, :git
-set :repository, "git@github.com:abtinf/wompt.git"
+set :repository, "git@github.com:Wompt/wompt.com.git"
 set :git_enable_submodules, true
 set :deploy_via, :remote_cache
 
