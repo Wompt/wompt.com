@@ -44,6 +44,7 @@ function logStream(filename, options){
 	
 	function onMessage(msg){
 		if(msg.action != 'message') return;
+		msg.msg = '' + msg.msg;
 		
 		var line_count = Math.ceil(msg.msg.length / options.charsPerLine);
 		

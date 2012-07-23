@@ -101,7 +101,13 @@ proto._onExistingFile = function(size){
 			lines.shift();
 			msgs = lines.map(function(line){
 				var p = line.indexOf(':');
-				if(p > 0) return JSON.parse(line.substr(p+1));
+				if(p > 0) {
+					var msg = JSON.parse(line.substr(p+1));
+					if (msg.msg) {
+						msg.msg = '' + msg.msg;
+					}
+					return msg;
+				}
 				else return null;
 			}).filter(function(m){return m != null});
 		}
