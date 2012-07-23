@@ -20,7 +20,7 @@ UI.once('init', function(){
 	})
 
 	function prepareMessageElement(el, data){
-		var text = data.msg, first;
+		var text = '' + data.msg, first;
 		text
 			.split(newline)
 			.forEach(function(line){
